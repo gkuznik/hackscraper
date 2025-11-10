@@ -1,0 +1,16 @@
+<.header>
+  Series {@series.id}
+  <:subtitle>This is a series record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/series/#{@series}/edit"}>
+      <.button>Edit series</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@series.name}</:item>
+  <:item title="Description">{@series.description}</:item>
+</.list>
+
+<.back navigate={~p"/series"}>Back to series</.back>

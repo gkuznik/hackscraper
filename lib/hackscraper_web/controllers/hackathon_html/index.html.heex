@@ -1,0 +1,29 @@
+<.header>
+  Listing Hackathons
+  <:actions>
+    <.link href={~p"/hackathons/new"}>
+      <.button>New Hackathon</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="hackathons" rows={@hackathons} row_click={&JS.navigate(~p"/hackathons/#{&1}")}>
+  <:col :let={hackathon} label="Name">{hackathon.name}</:col>
+  <:col :let={hackathon} label="Url">{hackathon.url}</:col>
+  <:col :let={hackathon} label="Image">{hackathon.image}</:col>
+  <:col :let={hackathon} label="Description">{hackathon.description}</:col>
+  <:col :let={hackathon} label="Location">{hackathon.location}</:col>
+  <:col :let={hackathon} label="Start date">{hackathon.start_date}</:col>
+  <:col :let={hackathon} label="End date">{hackathon.end_date}</:col>
+  <:action :let={hackathon}>
+    <div class="sr-only">
+      <.link navigate={~p"/hackathons/#{hackathon}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/hackathons/#{hackathon}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={hackathon}>
+    <.link href={~p"/hackathons/#{hackathon}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

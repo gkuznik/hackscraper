@@ -1,0 +1,127 @@
+defmodule HackScraper.EventsTest do
+  use HackScraper.DataCase
+
+  alias HackScraper.Events
+
+  describe "series" do
+    alias HackScraper.Events.Series
+
+    import HackScraper.EventsFixtures
+
+    @invalid_attrs %{name: nil, description: nil}
+
+    test "list_series/0 returns all series" do
+      series = series_fixture()
+      assert Events.list_series() == [series]
+    end
+
+    test "get_series!/1 returns the series with given id" do
+      series = series_fixture()
+      assert Events.get_series!(series.id) == series
+    end
+
+    test "create_series/1 with valid data creates a series" do
+      valid_attrs = %{name: "some name", description: "some description"}
+
+      assert {:ok, %Series{} = series} = Events.create_series(valid_attrs)
+      assert series.name == "some name"
+      assert series.description == "some description"
+    end
+
+    test "create_series/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Events.create_series(@invalid_attrs)
+    end
+
+    test "update_series/2 with valid data updates the series" do
+      series = series_fixture()
+      update_attrs = %{name: "some updated name", description: "some updated description"}
+
+      assert {:ok, %Series{} = series} = Events.update_series(series, update_attrs)
+      assert series.name == "some updated name"
+      assert series.description == "some updated description"
+    end
+
+    test "update_series/2 with invalid data returns error changeset" do
+      series = series_fixture()
+      assert {:error, %Ecto.Changeset{}} = Events.update_series(series, @invalid_attrs)
+      assert series == Events.get_series!(series.id)
+    end
+
+    test "delete_series/1 deletes the series" do
+      series = series_fixture()
+      assert {:ok, %Series{}} = Events.delete_series(series)
+      assert_raise Ecto.NoResultsError, fn -> Events.get_series!(series.id) end
+    end
+
+    test "change_series/1 returns a series changeset" do
+      series = series_fixture()
+      assert %Ecto.Changeset{} = Events.change_series(series)
+    end
+  end
+
+  describe "hackathons" do
+    alias HackScraper.Events.Hackathon
+
+    import HackScraper.EventsFixtures
+
+    @invalid_attrs %{name: nil, description: nil, location: nil, image: nil, url: nil, start_date: nil, end_date: nil}
+
+    test "list_hackathons/0 returns all hackathons" do
+      hackathon = hackathon_fixture()
+      assert Events.list_hackathons() == [hackathon]
+    end
+
+    test "get_hackathon!/1 returns the hackathon with given id" do
+      hackathon = hackathon_fixture()
+      assert Events.get_hackathon!(hackathon.id) == hackathon
+    end
+
+    test "create_hackathon/1 with valid data creates a hackathon" do
+      valid_attrs = %{name: "some name", description: "some description", location: "some location", image: "some image", url: "some url", start_date: ~U[2025-11-09 15:56:00Z], end_date: ~U[2025-11-09 15:56:00Z]}
+
+      assert {:ok, %Hackathon{} = hackathon} = Events.create_hackathon(valid_attrs)
+      assert hackathon.name == "some name"
+      assert hackathon.description == "some description"
+      assert hackathon.location == "some location"
+      assert hackathon.image == "some image"
+      assert hackathon.url == "some url"
+      assert hackathon.start_date == ~U[2025-11-09 15:56:00Z]
+      assert hackathon.end_date == ~U[2025-11-09 15:56:00Z]
+    end
+
+    test "create_hackathon/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Events.create_hackathon(@invalid_attrs)
+    end
+
+    test "update_hackathon/2 with valid data updates the hackathon" do
+      hackathon = hackathon_fixture()
+      update_attrs = %{name: "some updated name", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: ~U[2025-11-10 15:56:00Z], end_date: ~U[2025-11-10 15:56:00Z]}
+
+      assert {:ok, %Hackathon{} = hackathon} = Events.update_hackathon(hackathon, update_attrs)
+      assert hackathon.name == "some updated name"
+      assert hackathon.description == "some updated description"
+      assert hackathon.location == "some updated location"
+      assert hackathon.image == "some updated image"
+      assert hackathon.url == "some updated url"
+      assert hackathon.start_date == ~U[2025-11-10 15:56:00Z]
+      assert hackathon.end_date == ~U[2025-11-10 15:56:00Z]
+    end
+
+    test "update_hackathon/2 with invalid data returns error changeset" do
+      hackathon = hackathon_fixture()
+      assert {:error, %Ecto.Changeset{}} = Events.update_hackathon(hackathon, @invalid_attrs)
+      assert hackathon == Events.get_hackathon!(hackathon.id)
+    end
+
+    test "delete_hackathon/1 deletes the hackathon" do
+      hackathon = hackathon_fixture()
+      assert {:ok, %Hackathon{}} = Events.delete_hackathon(hackathon)
+      assert_raise Ecto.NoResultsError, fn -> Events.get_hackathon!(hackathon.id) end
+    end
+
+    test "change_hackathon/1 returns a hackathon changeset" do
+      hackathon = hackathon_fixture()
+      assert %Ecto.Changeset{} = Events.change_hackathon(hackathon)
+    end
+  end
+end

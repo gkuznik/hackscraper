@@ -58,10 +58,7 @@ defmodule HackScraper.Accounts.User do
     changeset
     |> validate_required([:password])
     |> validate_length(:password, min: 12, max: 72)
-    # additional password validation:
-    |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
-    |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
-    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
+    |> validate_password_complexity()
     |> maybe_hash_password(opts)
   end
 
@@ -70,6 +67,21 @@ defmodule HackScraper.Accounts.User do
     |> validate_required([:name])
     |> validate_length(:name, min: 1, max: 100)
     |> maybe_validate_unique_name()
+  end
+
+  if Application.compile_env(:hackscraper, :dev_routes) do
+    defp validate_password_complexity(changeset) do
+      changeset
+    end
+  else
+    defp validate_password_complexity(changeset) do
+      changeset
+      |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
+      |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
+      |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/,
+        message: "at least one digit or punctuation character"
+      )
+    end
   end
 
   defp maybe_hash_password(changeset, opts) do
@@ -100,9 +112,9 @@ defmodule HackScraper.Accounts.User do
   end
 
   defp maybe_validate_unique_name(changeset) do
-      changeset
-      |> unsafe_validate_unique(:name, HackScraper.Repo)
-      |> unique_constraint(:name)
+    changeset
+    |> unsafe_validate_unique(:name, HackScraper.Repo)
+    |> unique_constraint(:name)
   end
 
   @doc """
