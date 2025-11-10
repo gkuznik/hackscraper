@@ -1,14 +1,14 @@
-defmodule HackscraperWeb.Layouts do
+defmodule HackScraperWeb.Layouts do
   @moduledoc """
   This module holds different layouts used by your application.
 
   See the `layouts` directory for all templates available.
   The "root" layout is a skeleton rendered as part of the
   application router. The "app" layout is set as the default
-  layout on both `use HackscraperWeb, :controller` and
-  `use HackscraperWeb, :live_view`.
+  layout on both `use HackScraperWeb, :controller` and
+  `use HackScraperWeb, :live_view`.
   """
-  use HackscraperWeb, :html
+  use HackScraperWeb, :html
 
   embed_templates "layouts/*"
 end

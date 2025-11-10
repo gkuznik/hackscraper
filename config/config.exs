@@ -8,18 +8,20 @@
 import Config
 
 config :hackscraper,
-  ecto_repos: [Hackscraper.Repo],
+  ecto_repos: [HackScraper.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :flop, repo: HackScraper.Repo
+
 # Configures the endpoint
-config :hackscraper, HackscraperWeb.Endpoint,
+config :hackscraper, HackScraperWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: HackscraperWeb.ErrorHTML, json: HackscraperWeb.ErrorJSON],
+    formats: [html: HackScraperWeb.ErrorHTML, json: HackScraperWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Hackscraper.PubSub,
+  pubsub_server: HackScraper.PubSub,
   live_view: [signing_salt: "XtRhmVEa"]
 
 # Configures the mailer
@@ -29,7 +31,7 @@ config :hackscraper, HackscraperWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :hackscraper, Hackscraper.Mailer, adapter: Swoosh.Adapters.Local
+config :hackscraper, HackScraper.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,

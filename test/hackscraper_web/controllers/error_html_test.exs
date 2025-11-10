@@ -1,14 +1,14 @@
-defmodule HackscraperWeb.ErrorHTMLTest do
-  use HackscraperWeb.ConnCase, async: true
+defmodule HackScraperWeb.ErrorHTMLTest do
+  use HackScraperWeb.ConnCase, async: true
 
   # Bring render_to_string/4 for testing custom views
   import Phoenix.Template
 
   test "renders 404.html" do
-    assert render_to_string(HackscraperWeb.ErrorHTML, "404", "html", []) == "Not Found"
+    assert render_to_string(HackScraperWeb.ErrorHTML, "404", "html", []) == "Not Found"
   end
 
   test "renders 500.html" do
-    assert render_to_string(HackscraperWeb.ErrorHTML, "500", "html", []) == "Internal Server Error"
+    assert render_to_string(HackScraperWeb.ErrorHTML, "500", "html", []) == "Internal Server Error"
   end
 end

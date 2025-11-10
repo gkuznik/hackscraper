@@ -1,4 +1,4 @@
-defmodule Hackscraper.Application do
+defmodule HackScraper.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,21 +8,21 @@ defmodule Hackscraper.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      HackscraperWeb.Telemetry,
-      Hackscraper.Repo,
+      HackScraperWeb.Telemetry,
+      HackScraper.Repo,
       {DNSCluster, query: Application.get_env(:hackscraper, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: Hackscraper.PubSub},
+      {Phoenix.PubSub, name: HackScraper.PubSub},
       # Start the Finch HTTP client for sending emails
-      {Finch, name: Hackscraper.Finch},
-      # Start a worker by calling: Hackscraper.Worker.start_link(arg)
-      # {Hackscraper.Worker, arg},
+      {Finch, name: HackScraper.Finch},
+      # Start a worker by calling: HackScraper.Worker.start_link(arg)
+      # {HackScraper.Worker, arg},
       # Start to serve requests, typically the last entry
-      HackscraperWeb.Endpoint
+      HackScraperWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Hackscraper.Supervisor]
+    opts = [strategy: :one_for_one, name: HackScraper.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -30,7 +30,7 @@ defmodule Hackscraper.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    HackscraperWeb.Endpoint.config_change(changed, removed)
+    HackScraperWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

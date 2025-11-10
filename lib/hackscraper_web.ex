@@ -1,12 +1,12 @@
-defmodule HackscraperWeb do
+defmodule HackScraperWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use HackscraperWeb, :controller
-      use HackscraperWeb, :html
+      use HackScraperWeb, :controller
+      use HackScraperWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,7 +40,7 @@ defmodule HackscraperWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: HackscraperWeb.Layouts]
+        layouts: [html: HackScraperWeb.Layouts]
 
       import Plug.Conn
 
@@ -51,7 +51,7 @@ defmodule HackscraperWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {HackscraperWeb.Layouts, :app}
+        layout: {HackScraperWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -83,7 +83,7 @@ defmodule HackscraperWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components
-      import HackscraperWeb.CoreComponents
+      import HackScraperWeb.CoreComponents
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -96,9 +96,9 @@ defmodule HackscraperWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: HackscraperWeb.Endpoint,
-        router: HackscraperWeb.Router,
-        statics: HackscraperWeb.static_paths()
+        endpoint: HackScraperWeb.Endpoint,
+        router: HackScraperWeb.Router,
+        statics: HackScraperWeb.static_paths()
     end
   end
 

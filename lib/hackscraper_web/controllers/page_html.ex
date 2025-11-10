@@ -1,10 +1,10 @@
-defmodule HackscraperWeb.PageHTML do
+defmodule HackScraperWeb.PageHTML do
   @moduledoc """
   This module contains pages rendered by PageController.
 
   See the `page_html` directory for all templates available.
   """
-  use HackscraperWeb, :html
+  use HackScraperWeb, :html
 
   embed_templates "page_html/*"
 end

@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(Hackscraper.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(HackScraper.Repo, :manual)

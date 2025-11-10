@@ -1,5 +1,5 @@
-defmodule HackscraperWeb.PageController do
-  use HackscraperWeb, :controller
+defmodule HackScraperWeb.PageController do
+  use HackScraperWeb, :controller
 
   def home(conn, _params) do
     # The home page is often custom made,

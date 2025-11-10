@@ -1,4 +1,4 @@
-defmodule Hackscraper.Repo do
+defmodule HackScraper.Repo do
   use Ecto.Repo,
     otp_app: :hackscraper,
     adapter: Ecto.Adapters.Postgres

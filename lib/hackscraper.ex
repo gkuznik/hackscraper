@@ -1,6 +1,6 @@
-defmodule Hackscraper do
+defmodule HackScraper do
   @moduledoc """
-  Hackscraper keeps the contexts that define your domain
+  HackScraper keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

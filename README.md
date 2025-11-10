@@ -1,4 +1,4 @@
-# Hackscraper
+# HackScraper
 
 To start your Phoenix server:
 

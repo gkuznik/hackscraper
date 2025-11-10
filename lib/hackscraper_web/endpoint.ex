@@ -1,4 +1,4 @@
-defmodule HackscraperWeb.Endpoint do
+defmodule HackScraperWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :hackscraper
 
   # The session will be stored in the cookie and signed,
@@ -23,7 +23,7 @@ defmodule HackscraperWeb.Endpoint do
     at: "/",
     from: :hackscraper,
     gzip: false,
-    only: HackscraperWeb.static_paths()
+    only: HackScraperWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -49,5 +49,5 @@ defmodule HackscraperWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug HackscraperWeb.Router
+  plug HackScraperWeb.Router
 end

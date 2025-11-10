@@ -1,4 +1,4 @@
-defmodule HackscraperWeb.Telemetry do
+defmodule HackScraperWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -87,7 +87,7 @@ defmodule HackscraperWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {HackscraperWeb, :count_users, []}
+      # {HackScraperWeb, :count_users, []}
     ]
   end
 end

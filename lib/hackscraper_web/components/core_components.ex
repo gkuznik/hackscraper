@@ -1,4 +1,4 @@
-defmodule HackscraperWeb.CoreComponents do
+defmodule HackScraperWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -653,9 +653,9 @@ defmodule HackscraperWeb.CoreComponents do
     # uncommenting and adjusting the following code:
 
     # if count = opts[:count] do
-    #   Gettext.dngettext(HackscraperWeb.Gettext, "errors", msg, msg, count, opts)
+    #   Gettext.dngettext(HackScraperWeb.Gettext, "errors", msg, msg, count, opts)
     # else
-    #   Gettext.dgettext(HackscraperWeb.Gettext, "errors", msg, opts)
+    #   Gettext.dgettext(HackScraperWeb.Gettext, "errors", msg, opts)
     # end
 
     Enum.reduce(opts, msg, fn {key, value}, acc ->

@@ -1,4 +1,4 @@
-defmodule Hackscraper.MixProject do
+defmodule HackScraper.MixProject do
   use Mix.Project
 
   def project do
@@ -18,7 +18,7 @@ defmodule Hackscraper.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Hackscraper.Application, []},
+      mod: {HackScraper.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -32,6 +32,7 @@ defmodule Hackscraper.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.7.21"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
@@ -56,7 +57,8 @@ defmodule Hackscraper.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:flop, "~> 0.26.3"}
     ]
   end
 

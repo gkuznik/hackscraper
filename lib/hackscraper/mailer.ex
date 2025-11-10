@@ -1,3 +1,3 @@
-defmodule Hackscraper.Mailer do
+defmodule HackScraper.Mailer do
   use Swoosh.Mailer, otp_app: :hackscraper
 end

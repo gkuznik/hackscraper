@@ -1,5 +1,5 @@
-defmodule HackscraperWeb.PageControllerTest do
-  use HackscraperWeb.ConnCase
+defmodule HackScraperWeb.PageControllerTest do
+  use HackScraperWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

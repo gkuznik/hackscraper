@@ -17,7 +17,7 @@ import Config
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
-  config :hackscraper, HackscraperWeb.Endpoint, server: true
+  config :hackscraper, HackScraperWeb.Endpoint, server: true
 end
 
 if config_env() == :prod do
@@ -30,7 +30,7 @@ if config_env() == :prod do
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
-  config :hackscraper, Hackscraper.Repo,
+  config :hackscraper, HackScraper.Repo,
     # ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
@@ -53,7 +53,7 @@ if config_env() == :prod do
 
   config :hackscraper, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
-  config :hackscraper, HackscraperWeb.Endpoint,
+  config :hackscraper, HackScraperWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
@@ -70,7 +70,7 @@ if config_env() == :prod do
   # To get SSL working, you will need to add the `https` key
   # to your endpoint configuration:
   #
-  #     config :hackscraper, HackscraperWeb.Endpoint,
+  #     config :hackscraper, HackScraperWeb.Endpoint,
   #       https: [
   #         ...,
   #         port: 443,
@@ -92,7 +92,7 @@ if config_env() == :prod do
   # We also recommend setting `force_ssl` in your config/prod.exs,
   # ensuring no data is ever sent via http, always redirecting to https:
   #
-  #     config :hackscraper, HackscraperWeb.Endpoint,
+  #     config :hackscraper, HackScraperWeb.Endpoint,
   #       force_ssl: [hsts: true]
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
@@ -103,7 +103,7 @@ if config_env() == :prod do
   # Also, you may need to configure the Swoosh API client of your choice if you
   # are not using SMTP. Here is an example of the configuration:
   #
-  #     config :hackscraper, Hackscraper.Mailer,
+  #     config :hackscraper, HackScraper.Mailer,
   #       adapter: Swoosh.Adapters.Mailgun,
   #       api_key: System.get_env("MAILGUN_API_KEY"),
   #       domain: System.get_env("MAILGUN_DOMAIN")
