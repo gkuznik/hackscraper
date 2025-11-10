@@ -4,6 +4,9 @@ defmodule HackScraper.Accounts.User do
 
   schema "users" do
     field :email, :string
+    field :name, :string
+    field :score, :integer, default: 0
+    field :is_admin, :boolean, default: false
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :current_password, :string, virtual: true, redact: true
@@ -37,9 +40,10 @@ defmodule HackScraper.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :name])
     |> validate_email(opts)
     |> validate_password(opts)
+    |> validate_name()
   end
 
   defp validate_email(changeset, opts) do
@@ -54,11 +58,18 @@ defmodule HackScraper.Accounts.User do
     changeset
     |> validate_required([:password])
     |> validate_length(:password, min: 12, max: 72)
-    # Examples of additional password validation:
-    # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
-    # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
-    # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
+    # additional password validation:
+    |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
+    |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
+    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
     |> maybe_hash_password(opts)
+  end
+
+  defp validate_name(changeset) do
+    changeset
+    |> validate_required([:name])
+    |> validate_length(:name, min: 1, max: 100)
+    |> maybe_validate_unique_name()
   end
 
   defp maybe_hash_password(changeset, opts) do
@@ -86,6 +97,12 @@ defmodule HackScraper.Accounts.User do
     else
       changeset
     end
+  end
+
+  defp maybe_validate_unique_name(changeset) do
+      changeset
+      |> unsafe_validate_unique(:name, HackScraper.Repo)
+      |> unique_constraint(:name)
   end
 
   @doc """
@@ -128,6 +145,16 @@ defmodule HackScraper.Accounts.User do
   def confirm_changeset(user) do
     now = DateTime.utc_now() |> DateTime.truncate(:second)
     change(user, confirmed_at: now)
+  end
+
+  @doc """
+  Update admin status, score or name.
+  """
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:is_admin, :score, :name])
+    |> validate_number(:score, greater_than_or_equal_to: 0)
+    |> validate_name()
   end
 
   @doc """

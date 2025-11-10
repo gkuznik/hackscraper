@@ -6,6 +6,9 @@ defmodule HackScraper.Repo.Migrations.CreateUsersAuthTables do
 
     create table(:users) do
       add :email, :citext, null: false
+      add :name, :string, null: false
+      add :score, :integer, default: 0, null: false
+      add :is_admin, :boolean, default: false, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :utc_datetime
 
@@ -13,6 +16,7 @@ defmodule HackScraper.Repo.Migrations.CreateUsersAuthTables do
     end
 
     create unique_index(:users, [:email])
+    create unique_index(:users, [:name])
 
     create table(:users_tokens) do
       add :user_id, references(:users, on_delete: :delete_all), null: false
