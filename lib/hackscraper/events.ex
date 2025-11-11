@@ -195,6 +195,6 @@ defmodule HackScraper.Events do
 
   """
   def change_hackathon(%Hackathon{} = hackathon, attrs \\ %{}) do
-    Hackathon.changeset(hackathon, attrs) |> Ecto.Changeset.put_assoc(:series, attrs["series"] || [])
+    Hackathon.changeset(hackathon, attrs)
   end
 end

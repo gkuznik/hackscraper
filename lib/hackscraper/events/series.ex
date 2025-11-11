@@ -2,6 +2,11 @@ defmodule HackScraper.Events.Series do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {
+    Flop.Schema,
+    filterable: [:name, :description], sortable: [:name]
+  }
+
   schema "series" do
     field :name, :string
     field :description, :string

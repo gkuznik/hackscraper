@@ -4,9 +4,11 @@ defmodule HackScraperWeb.SeriesController do
   alias HackScraper.Events
   alias HackScraper.Events.Series
 
-  def index(conn, _params) do
-    series = Events.list_series()
-    render(conn, :index, series_collection: series, page_title: "All Series"))
+  def index(conn, params) do
+    {series, meta} =
+      Flop.validate_and_run!(Series, params, for: Series, replace_invalid_params: true)
+
+    render(conn, :index, series: series, meta: meta, page_title: "All Series")
   end
 
   def new(conn, _params) do
@@ -27,14 +29,14 @@ defmodule HackScraperWeb.SeriesController do
   end
 
   def show(conn, %{"id" => id}) do
-    series = Events.get_series!(id)
-    render(conn, :show, series: series, page_title: series.name))
+    series = Events.get_series!(id) |> HackScraper.Repo.preload(:hackathons)
+    render(conn, :show, series: series, page_title: series.name)
   end
 
   def edit(conn, %{"id" => id}) do
     series = Events.get_series!(id)
     changeset = Events.change_series(series)
-    render(conn, :edit, series: series, page_title: "Edit " <> series.name,, changeset: changeset)
+    render(conn, :edit, series: series, page_title: "Edit " <> series.name, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "series" => series_params}) do

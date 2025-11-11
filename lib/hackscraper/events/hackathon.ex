@@ -2,6 +2,12 @@ defmodule HackScraper.Events.Hackathon do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {
+    Flop.Schema,
+    filterable: [:name, :url, :description, :location],
+    sortable: [:name, :url, :start_date, :end_date]
+  }
+
   schema "hackathons" do
     field :name, :string
     field :description, :string
@@ -18,7 +24,7 @@ defmodule HackScraper.Events.Hackathon do
   @doc false
   def changeset(hackathon, attrs) do
     hackathon
-    |> cast(attrs, [:name, :url, :image, :description, :location, :start_date, :end_date])
+    |> cast(attrs, [:name, :url, :image, :description, :location, :start_date, :end_date, :series_id])
     |> validate_required([:name, :url, :location, :start_date, :end_date])
   end
 end

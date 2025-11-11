@@ -2,6 +2,11 @@ defmodule HackScraper.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {
+    Flop.Schema,
+    filterable: [:email, :name, :is_admin], sortable: [:email, :name, :score, :confirmed_at]
+  }
+
   schema "users" do
     field :email, :string
     field :name, :string

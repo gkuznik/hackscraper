@@ -18,6 +18,19 @@ defmodule HackScraperWeb.CoreComponents do
 
   alias Phoenix.LiveView.JS
 
+  attr :date, DateTime
+  attr :format, :string, values: ~w(long short), default: "long"
+  attr :class, :string, default: nil
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
+
+  def date(assigns) do
+    ~H"""
+    <span data-format={@format} class={["format-date", @class]} {@rest}>
+      {Calendar.strftime(@date, "%Y-%m-%d %H:%M UTC")}
+    </span>
+    """
+  end
+
   @doc """
   Renders a modal.
 
@@ -156,8 +169,7 @@ defmodule HackScraperWeb.CoreComponents do
         phx-connected={hide("#client-error")}
         hidden
       >
-        Attempting to reconnect
-        <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
+        Attempting to reconnect <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
 
       <.flash
@@ -516,6 +528,21 @@ defmodule HackScraperWeb.CoreComponents do
       </table>
     </div>
     """
+  end
+
+  def flopTable(assigns) do
+    assigns =
+      assign(
+        assigns,
+        :opts,
+        symbol_asc: Phoenix.HTML.raw(~s(<span class="hero-arrow-up w-5" />)),
+        symbol_desc: Phoenix.HTML.raw(~s(<span class="hero-arrow-down w-5" />)),
+        symbol_unsorted: Phoenix.HTML.raw(~s(<span class="hero-chevron-up-down w-5" />)),
+        thead_th_attrs: [class: "whitespace-nowrap"],
+        table_attrs: [class: "w-full table-fixed"]
+      )
+
+    Flop.Phoenix.table(assigns)
   end
 
   @doc """

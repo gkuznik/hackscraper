@@ -7,18 +7,39 @@
   </:actions>
 </.header>
 
-<.table id="series" rows={@series_collection} row_click={&JS.navigate(~p"/series/#{&1}")}>
-  <:col :let={series} label="Name">{series.name}</:col>
+<style>
+  th, td {
+      padding: 5px;
+  }
+</style>
+
+<.flopTable
+  items={@series}
+  meta={@meta}
+  path={~p"/series"}
+  row_click={&JS.navigate(~p"/series/#{&1}")}
+>
+  <:col :let={series} label="Name" field={:name}>
+    <.link class="font-bold" navigate={~p"/series/#{series}"}>{series.name}</.link>
+  </:col>
   <:col :let={series} label="Description">{series.description}</:col>
   <:action :let={series}>
-    <div class="sr-only">
-      <.link navigate={~p"/series/#{series}"}>Show</.link>
-    </div>
-    <.link navigate={~p"/series/#{series}/edit"}>Edit</.link>
+    <.link class="font-bold" navigate={~p"/series/#{series}/edit"}>Edit</.link>
   </:action>
   <:action :let={series}>
-    <.link href={~p"/series/#{series}"} method="delete" data-confirm="Are you sure?">
+    <.link
+      class="font-bold"
+      href={~p"/series/#{series}"}
+      method="delete"
+      data-confirm="Are you sure?"
+    >
       Delete
     </.link>
   </:action>
-</.table>
+</.flopTable>
+
+<Flop.Phoenix.pagination
+  meta={@meta}
+  path={~p"/series"}
+  page_list_attrs={[class: "flex gap-2"]}
+/>

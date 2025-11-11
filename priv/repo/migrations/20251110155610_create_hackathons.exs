@@ -10,7 +10,7 @@ defmodule HackScraper.Repo.Migrations.CreateHackathons do
       add :location, :string
       add :start_date, :utc_datetime
       add :end_date, :utc_datetime
-      add :series_id, references(:series, on_delete: :nothing)
+      add :series_id, references(:series, on_delete: :nilify_all)
 
       timestamps(type: :utc_datetime)
     end

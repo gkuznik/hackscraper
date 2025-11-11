@@ -4,9 +4,11 @@ defmodule HackScraperWeb.HackathonController do
   alias HackScraper.Events
   alias HackScraper.Events.Hackathon
 
-  def index(conn, _params) do
-    hackathons = Events.list_hackathons()
-    render(conn, :index, hackathons: hackathons, page_title: "All Hackathons")
+  def index(conn, params) do
+    {hackathons, meta} =
+      Flop.validate_and_run!(Hackathon, params, for: Hackathon, replace_invalid_params: true)
+
+    render(conn, :index, hackathons: hackathons, meta: meta, page_title: "All Hackathons")
   end
 
   def new(conn, _params) do
@@ -34,7 +36,12 @@ defmodule HackScraperWeb.HackathonController do
   def edit(conn, %{"id" => id}) do
     hackathon = Events.get_hackathon!(id)
     changeset = Events.change_hackathon(hackathon)
-    render(conn, :edit, hackathon: hackathon, page_title: "Edit " <> hackathon.name, changeset: changeset)
+
+    render(conn, :edit,
+      hackathon: hackathon,
+      page_title: "Edit " <> hackathon.name,
+      changeset: changeset
+    )
   end
 
   def update(conn, %{"id" => id, "hackathon" => hackathon_params}) do
@@ -58,14 +65,5 @@ defmodule HackScraperWeb.HackathonController do
     conn
     |> put_flash(:info, "Hackathon deleted successfully.")
     |> redirect(to: ~p"/hackathons")
-  end
-
-  def series_opts(changeset) do
-    existing_series = Ecto.Changeset.get_change(changeset, :series)
-    existing_id = if existing_series, do: existing_series.data.id, else: nil
-
-    for cat <- HackScraper.Events.list_series() do
-      [key: cat.name, value: cat.id, selected: cat.id == existing_id]
-    end
   end
 end

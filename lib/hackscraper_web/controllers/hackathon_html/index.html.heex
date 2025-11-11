@@ -7,23 +7,70 @@
   </:actions>
 </.header>
 
-<.table id="hackathons" rows={@hackathons} row_click={&JS.navigate(~p"/hackathons/#{&1}")}>
-  <:col :let={hackathon} label="Name">{hackathon.name}</:col>
-  <:col :let={hackathon} label="Url">{hackathon.url}</:col>
-  <:col :let={hackathon} label="Image">{hackathon.image}</:col>
-  <:col :let={hackathon} label="Description">{hackathon.description}</:col>
+<style>
+  img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  th, td {
+      padding: 5px;
+  }
+
+  .description-cell {
+    max-height: 100px;
+    overflow-y: auto;
+    line-height: 1.4;
+  }
+</style>
+
+<.flopTable
+  items={@hackathons}
+  meta={@meta}
+  path={~p"/hackathons"}
+>
+  <:col :let={hackathon} label="Name" field={:name}>
+    <.link class="font-bold" navigate={~p"/hackathons/#{hackathon}"}>{hackathon.name}</.link>
+  </:col>
+  <:col :let={hackathon} label="Url" field={:url}>
+    <.link target="_blank" navigate={hackathon.url}>{hackathon.url}</.link>
+  </:col>
+  <:col :let={hackathon} label="Image"><img src={hackathon.image} /></:col>
+  <:col :let={hackathon} label="Description">
+    <div class="description-cell">{hackathon.description}</div>
+  </:col>
   <:col :let={hackathon} label="Location">{hackathon.location}</:col>
-  <:col :let={hackathon} label="Start date">{hackathon.start_date}</:col>
-  <:col :let={hackathon} label="End date">{hackathon.end_date}</:col>
+  <:col
+    :let={hackathon}
+    label="Start date"
+    field={:start_date}
+  >
+    <.date format="short" date={hackathon.start_date} />
+  </:col>
+  <:col
+    :let={hackathon}
+    label="End date"
+    field={:end_date}
+  >
+    <.date format="short" date={hackathon.end_date} />
+  </:col>
   <:action :let={hackathon}>
-    <div class="sr-only">
-      <.link navigate={~p"/hackathons/#{hackathon}"}>Show</.link>
-    </div>
-    <.link navigate={~p"/hackathons/#{hackathon}/edit"}>Edit</.link>
+    <.link class="font-bold" navigate={~p"/hackathons/#{hackathon}/edit"}>Edit</.link>
   </:action>
   <:action :let={hackathon}>
-    <.link href={~p"/hackathons/#{hackathon}"} method="delete" data-confirm="Are you sure?">
+    <.link
+      class="font-bold"
+      href={~p"/hackathons/#{hackathon}"}
+      method="delete"
+      data-confirm="Are you sure?"
+    >
       Delete
     </.link>
   </:action>
-</.table>
+</.flopTable>
+
+<Flop.Phoenix.pagination
+  meta={@meta}
+  path={~p"/hackathons"}
+  page_list_attrs={[class: "flex gap-2"]}
+/>

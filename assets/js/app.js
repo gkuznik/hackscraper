@@ -42,3 +42,27 @@ import "phoenix_html"
 // >> liveSocket.disableLatencySim()
 // window.liveSocket = liveSocket
 
+function formatDate(element) {
+    const dateString = element.textContent.trim();
+    const date = new Date(dateString);
+    if (element.getAttribute('data-format') === "short") {
+        element.textContent = date.toLocaleDateString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    } else {
+        element.textContent = date.toLocaleDateString([], {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const formatDateElements = document.querySelectorAll('.format-date');
+    formatDateElements.forEach(element => formatDate(element));
+});
