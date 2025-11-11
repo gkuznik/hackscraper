@@ -6,7 +6,7 @@ defmodule HackScraperWeb.SeriesController do
 
   def index(conn, _params) do
     series = Events.list_series()
-    render(conn, :index, series_collection: series)
+    render(conn, :index, series_collection: series, page_title: "All Series"))
   end
 
   def new(conn, _params) do
@@ -28,13 +28,13 @@ defmodule HackScraperWeb.SeriesController do
 
   def show(conn, %{"id" => id}) do
     series = Events.get_series!(id)
-    render(conn, :show, series: series)
+    render(conn, :show, series: series, page_title: series.name))
   end
 
   def edit(conn, %{"id" => id}) do
     series = Events.get_series!(id)
     changeset = Events.change_series(series)
-    render(conn, :edit, series: series, changeset: changeset)
+    render(conn, :edit, series: series, page_title: "Edit " <> series.name,, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "series" => series_params}) do

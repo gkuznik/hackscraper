@@ -10,7 +10,7 @@ defmodule HackScraper.Events.Hackathon do
     field :url, :string
     field :start_date, :utc_datetime
     field :end_date, :utc_datetime
-    field :series_id, :id
+    belongs_to :series, HackScraper.Events.Series
 
     timestamps(type: :utc_datetime)
   end

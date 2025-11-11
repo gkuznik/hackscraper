@@ -114,7 +114,7 @@ defmodule HackScraper.Events do
 
   """
   def list_hackathons do
-    Repo.all(Hackathon)
+    Repo.all(Hackathon) |> Repo.preload(:series)
   end
 
   @doc """
@@ -131,7 +131,7 @@ defmodule HackScraper.Events do
       ** (Ecto.NoResultsError)
 
   """
-  def get_hackathon!(id), do: Repo.get!(Hackathon, id)
+  def get_hackathon!(id), do: Repo.get!(Hackathon, id) |> Repo.preload(:series)
 
   @doc """
   Creates a hackathon.
@@ -147,7 +147,7 @@ defmodule HackScraper.Events do
   """
   def create_hackathon(attrs \\ %{}) do
     %Hackathon{}
-    |> Hackathon.changeset(attrs)
+    |> change_hackathon(attrs)
     |> Repo.insert()
   end
 
@@ -165,7 +165,7 @@ defmodule HackScraper.Events do
   """
   def update_hackathon(%Hackathon{} = hackathon, attrs) do
     hackathon
-    |> Hackathon.changeset(attrs)
+    |> change_hackathon(attrs)
     |> Repo.update()
   end
 
@@ -195,6 +195,6 @@ defmodule HackScraper.Events do
 
   """
   def change_hackathon(%Hackathon{} = hackathon, attrs \\ %{}) do
-    Hackathon.changeset(hackathon, attrs)
+    Hackathon.changeset(hackathon, attrs) |> Ecto.Changeset.put_assoc(:series, attrs["series"] || [])
   end
 end

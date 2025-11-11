@@ -9,6 +9,7 @@
   <.input field={f[:location]} type="text" label="Location" />
   <.input field={f[:start_date]} type="datetime-local" label="Start date" />
   <.input field={f[:end_date]} type="datetime-local" label="End date" />
+  <.input field={f[:category_ids]} type="select" label="Series" multiple options={series_opts(@changeset)} />
   <:actions>
     <.button>Save Hackathon</.button>
   </:actions>
