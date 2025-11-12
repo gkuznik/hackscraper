@@ -11,6 +11,11 @@ config :hackscraper,
   ecto_repos: [HackScraper.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :hackscraper, Oban,
+  engine: Oban.Engines.Basic,
+  queues: [default: 10],
+  repo: HackScraper.Repo
+
 config :flop, repo: HackScraper.Repo
 
 # Configures the endpoint

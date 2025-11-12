@@ -10,6 +10,7 @@ defmodule HackScraper.Application do
     children = [
       HackScraperWeb.Telemetry,
       HackScraper.Repo,
+      {Oban, Application.fetch_env!(:hackscraper, Oban)},
       {DNSCluster, query: Application.get_env(:hackscraper, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: HackScraper.PubSub},
       # Start the Finch HTTP client for sending emails

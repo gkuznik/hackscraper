@@ -16,6 +16,8 @@ config :hackscraper, HackScraper.Repo,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 
+config :hackscraper, Oban, testing: :manual
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :hackscraper, HackScraperWeb.Endpoint,

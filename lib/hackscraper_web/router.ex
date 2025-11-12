@@ -3,6 +3,7 @@ defmodule HackScraperWeb.Router do
 
   import HackScraperWeb.UserAuth
   import Phoenix.LiveDashboard.Router
+import Oban.Web.Router
 
   def admin_only(conn, _opts) do
     if conn.assigns[:user].is_admin do
@@ -44,7 +45,7 @@ defmodule HackScraperWeb.Router do
   end
 
 
-  scope "/admin" do
+  scope "/" do
     if Application.compile_env(:hackscraper, :dev_routes) do
       pipe_through [:browser]
     else
@@ -52,6 +53,7 @@ defmodule HackScraperWeb.Router do
     end
 
     live_dashboard "/dashboard", metrics: HackScraperWeb.Telemetry
+    oban_dashboard "/oban"
 
     if Application.compile_env(:hackscraper, :dev_routes) do
       forward "/mailbox", Plug.Swoosh.MailboxPreview

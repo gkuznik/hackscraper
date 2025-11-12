@@ -79,7 +79,15 @@ defmodule HackScraperWeb.Telemetry do
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
       summary("vm.total_run_queue_lengths.total"),
       summary("vm.total_run_queue_lengths.cpu"),
-      summary("vm.total_run_queue_lengths.io")
+      summary("vm.total_run_queue_lengths.io"),
+
+      # Oban Metrics
+      summary("oban.job.stop.duration", unit: {:native, :millisecond}),
+      summary("oban.job.stop.memory", unit: {:byte, :kilobyte}),
+      summary("oban.job.stop.queue_time", unit: {:native, :millisecond}),
+      summary("oban.job.exception.duration", unit: {:native, :millisecond}),
+      summary("oban.job.exception.memory", unit: {:byte, :kilobyte}),
+      summary("oban.job.exception.queue_time", unit: {:native, :millisecond})
     ]
   end
 
