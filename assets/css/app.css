@@ -3,16 +3,3 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
-
-a {
-  color: #031b43;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  color: #3b82f6;
-  text-decoration: underline;
-  transition: all 0.3s ease;
-}

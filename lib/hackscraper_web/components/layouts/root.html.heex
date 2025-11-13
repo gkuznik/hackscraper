@@ -7,15 +7,20 @@
     <.live_title default="Find your next Hackathon" suffix=" · HackScraper">
       {assigns[:page_title]}
     </.live_title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="bg-white antialiased">
+  <body class="bg-white antialiased flex flex-col min-h-screen">
     <ul class="relative z-10 flex items-center gap-4 py-4 px-4 sm:px-6 lg:px-8 justify-between">
       <li class="flex items-center gap-4">
         <a href="/">
-          <img src={~p"/images/logo.svg"} width="36" />
+          <img src={~p"/images/logo.png"} width="36" />
         </a>
         <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
           v{Application.spec(:phoenix, :vsn)}
@@ -65,24 +70,23 @@
     </ul>
     {@inner_content}
 
-    <footer class="bg-gray-900 text-white py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h3 class="text-2xl font-bold mb-4">HackScraper</h3>
-          <p class="text-gray-400 mb-6">
-            Your ultimate destination for discovering hackathons worldwide
-          </p>
-          <div class="flex justify-center space-x-6">
-            <.link
-              navigate={~p"/hackathons"}
-              class="text-gray-400 hover:text-white transition-colors"
-            >
-              Hackathons
-            </.link>
-            <.link navigate={~p"/series"} class="text-gray-400 hover:text-white transition-colors">
-              Series
-            </.link>
-          </div>
+    <div class="grow"></div>
+    <footer class="bg-gray-900 py-12 w-full">
+      <div class="text-center mx-auto px-4 sm:px-6 lg:px-8">
+        <h3 class="text-2xl text-white font-bold mb-4">HackScraper</h3>
+        <p class="text-gray-400 mb-6">
+          Your ultimate destination for discovering hackathons worldwide
+        </p>
+        <div class="flex justify-center space-x-6">
+          <.link
+            navigate={~p"/hackathons"}
+            class="text-gray-400 hover:text-white transition-colors"
+          >
+            Hackathons
+          </.link>
+          <.link navigate={~p"/series"} class="text-gray-400 hover:text-white transition-colors">
+            Series
+          </.link>
         </div>
       </div>
     </footer>

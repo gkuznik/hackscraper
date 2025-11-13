@@ -11,9 +11,12 @@ config :hackscraper,
   ecto_repos: [HackScraper.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+one_day = 24 * 60 * 60
+
 config :hackscraper, Oban,
   engine: Oban.Engines.Basic,
-  queues: [default: 10],
+  queues: [default: 5, scraper: 10],
+  plugins: [{Oban.Plugins.Pruner, max_age: 14 * one_day, interval: one_day * 1000}],
   repo: HackScraper.Repo
 
 config :flop, repo: HackScraper.Repo

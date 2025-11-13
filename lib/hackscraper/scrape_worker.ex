@@ -1,5 +1,5 @@
 defmodule HackScraper.InspectWorker do
-  use Oban.Worker
+  use Oban.Worker, queue: :scraper, max_attempts: 3
 
   @impl Oban.Worker
   def perform(job) do

@@ -87,7 +87,10 @@ defmodule HackScraperWeb.Telemetry do
       summary("oban.job.stop.queue_time", unit: {:native, :millisecond}),
       summary("oban.job.exception.duration", unit: {:native, :millisecond}),
       summary("oban.job.exception.memory", unit: {:byte, :kilobyte}),
-      summary("oban.job.exception.queue_time", unit: {:native, :millisecond})
+      summary("oban.job.exception.queue_time", unit: {:native, :millisecond}),
+      summary("oban.plugin.stop.pruned_jobs",
+        description: "Number of jobs pruned by Oban.Plugins.Pruner"
+      )
     ]
   end
 
