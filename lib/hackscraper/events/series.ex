@@ -4,12 +4,14 @@ defmodule HackScraper.Events.Series do
 
   @derive {
     Flop.Schema,
-    filterable: [:name, :description], sortable: [:name]
+    filterable: [:name, :url, :description], sortable: [:name, :url]
   }
 
   schema "series" do
     field :name, :string
     field :description, :string
+    field :image, :string
+    field :url, :string
 
     has_many :hackathons, HackScraper.Events.Hackathon
 
@@ -19,7 +21,7 @@ defmodule HackScraper.Events.Series do
   @doc false
   def changeset(series, attrs) do
     series
-    |> cast(attrs, [:name, :description])
+    |> cast(attrs, [:name, :url, :image, :description])
     |> validate_required([:name, :description])
   end
 end

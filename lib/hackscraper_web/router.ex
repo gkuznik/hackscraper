@@ -3,7 +3,7 @@ defmodule HackScraperWeb.Router do
 
   import HackScraperWeb.UserAuth
   import Phoenix.LiveDashboard.Router
-import Oban.Web.Router
+  import Oban.Web.Router
 
   def admin_only(conn, _opts) do
     if conn.assigns[:user].is_admin do
@@ -31,19 +31,26 @@ import Oban.Web.Router
   end
 
   scope "/", HackScraperWeb do
-    pipe_through [:browser, :require_authenticated_user]
-
-    resources "/hackathons", HackathonController, except: [:index, :show]
-    resources "/series", SeriesController, except: [:index, :show]
-  end
-  scope "/", HackScraperWeb do
     pipe_through :browser
 
     get "/", PageController, :home
-    resources "/hackathons", HackathonController, only: [:index, :show]
-    resources "/series", SeriesController, only: [:index, :show]
+
+    live "/hackathons", HackathonLive.Index, :index
+    live "/hackathons/new", HackathonLive.Index, :new
+    live "/hackathons/:id/edit", HackathonLive.Index, :edit
+    live "/hackathons/:id", HackathonLive.Show, :show
+    live "/hackathons/:id/show/edit", HackathonLive.Show, :edit
+
+    live "/series", SeriesLive.Index, :index
+    live "/series/new", SeriesLive.Index, :new
+    live "/series/:id/edit", SeriesLive.Index, :edit
+    live "/series/:id", SeriesLive.Show, :show
+    live "/series/:id/show/edit", SeriesLive.Show, :edit
   end
 
+  scope "/", HackScraperWeb do
+    pipe_through [:browser, :require_authenticated_user]
+  end
 
   scope "/" do
     if Application.compile_env(:hackscraper, :dev_routes) do
@@ -52,12 +59,21 @@ import Oban.Web.Router
       pipe_through [:browser, :require_authenticated_user, :admin_only]
     end
 
-    live_dashboard "/dashboard", metrics: HackScraperWeb.Telemetry
-    oban_dashboard "/oban"
-
     if Application.compile_env(:hackscraper, :dev_routes) do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+
+    alias HackScraperWeb.UserLive
+
+    live_dashboard "/dashboard", metrics: HackScraperWeb.Telemetry
+    oban_dashboard("/oban")
+
+    live "/users", UserLive.Index, :index
+    live "/users/new", UserLive.Index, :new
+    live "/users/:id/edit", UserLive.Index, :edit
+
+    live "/users/:id", UserLive.Show, :show
+    live "/users/:id/show/edit", UserLive.Show, :edit
   end
 
   ## Authentication routes
@@ -65,31 +81,36 @@ import Oban.Web.Router
   scope "/", HackScraperWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
-    get "/users/log_in", UserSessionController, :new
+    live_session :redirect_if_user_is_authenticated,
+      on_mount: [{HackScraperWeb.UserAuth, :redirect_if_user_is_authenticated}] do
+      live "/users/register", UserRegistrationLive, :new
+      live "/users/log_in", UserLoginLive, :new
+      live "/users/reset_password", UserForgotPasswordLive, :new
+      live "/users/reset_password/:token", UserResetPasswordLive, :edit
+    end
+
     post "/users/log_in", UserSessionController, :create
-    get "/users/reset_password", UserResetPasswordController, :new
-    post "/users/reset_password", UserResetPasswordController, :create
-    get "/users/reset_password/:token", UserResetPasswordController, :edit
-    put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
   scope "/", HackScraperWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+    live_session :require_authenticated_user,
+      on_mount: [{HackScraperWeb.UserAuth, :ensure_authenticated}] do
+      live "/users/settings", UserSettingsLive, :edit
+      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+    end
   end
 
   scope "/", HackScraperWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete
-    get "/users/confirm", UserConfirmationController, :new
-    post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :edit
-    post "/users/confirm/:token", UserConfirmationController, :update
+
+    live_session :current_user,
+      on_mount: [{HackScraperWeb.UserAuth, :mount_current_user}] do
+      live "/users/confirm/:token", UserConfirmationLive, :edit
+      live "/users/confirm", UserConfirmationInstructionsLive, :new
+    end
   end
 end

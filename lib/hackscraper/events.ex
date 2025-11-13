@@ -113,8 +113,13 @@ defmodule HackScraper.Events do
       [%Hackathon{}, ...]
 
   """
-  def list_hackathons do
+  def list_hackathons() do
     Repo.all(Hackathon) |> Repo.preload(:series)
+  end
+
+  def list_hackathons_for_home_page(limit) do
+    Repo.all(from h in Hackathon, order_by: [desc: h.end_date], limit: ^limit)
+    |> Repo.preload(:series)
   end
 
   @doc """
@@ -147,7 +152,7 @@ defmodule HackScraper.Events do
   """
   def create_hackathon(attrs \\ %{}) do
     %Hackathon{}
-    |> change_hackathon(attrs)
+    |> Hackathon.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -165,7 +170,7 @@ defmodule HackScraper.Events do
   """
   def update_hackathon(%Hackathon{} = hackathon, attrs) do
     hackathon
-    |> change_hackathon(attrs)
+    |> Hackathon.changeset(attrs)
     |> Repo.update()
   end
 

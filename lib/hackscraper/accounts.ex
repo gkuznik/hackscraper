@@ -10,6 +10,32 @@ defmodule HackScraper.Accounts do
 
   ## Database getters
 
+  def list_user, do: Repo.all(User)
+
+  def create_user(attrs \\ %{}) do
+    %User{}
+    |> User.admin_changeset_with_passsword(attrs)
+    |> Repo.insert()
+  end
+
+  def update_user(%User{} = user, attrs) do
+    user
+    |> admin_change_user(attrs)
+    |> Repo.update()
+  end
+
+  def admin_change_user(%User{} = user, attrs \\ %{}) do
+    if Map.has_key?(attrs, :password) do
+      User.admin_changeset_with_passsword(user, attrs)
+    else
+      User.admin_changeset(user, attrs)
+    end
+  end
+
+  def delete_user(%User{} = user) do
+    Repo.delete(user)
+  end
+
   @doc """
   Gets a user by email.
 
@@ -94,6 +120,17 @@ defmodule HackScraper.Accounts do
   end
 
   ## Settings
+
+  def change_user_name(user, attrs \\ %{}) do
+    User.name_changeset(user, attrs)
+  end
+
+  def update_user_name(user, password, attrs) do
+    user
+    |> User.name_changeset(attrs)
+    |> User.validate_current_password(password)
+    |> Repo.update()
+  end
 
   @doc """
   Returns an `%Ecto.Changeset{}` for changing the user email.

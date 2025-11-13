@@ -4,6 +4,8 @@ defmodule HackScraper.Repo.Migrations.CreateSeries do
   def change do
     create table(:series) do
       add :name, :string
+      add :url, :string
+      add :image, :string
       add :description, :text
 
       timestamps(type: :utc_datetime)

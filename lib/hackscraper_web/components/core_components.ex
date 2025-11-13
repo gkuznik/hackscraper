@@ -539,7 +539,7 @@ defmodule HackScraperWeb.CoreComponents do
         symbol_desc: Phoenix.HTML.raw(~s(<span class="hero-arrow-down w-5" />)),
         symbol_unsorted: Phoenix.HTML.raw(~s(<span class="hero-chevron-up-down w-5" />)),
         thead_th_attrs: [class: "whitespace-nowrap"],
-        table_attrs: [class: "w-full table-fixed"]
+        table_attrs: [class: "w-full"]
       )
 
     Flop.Phoenix.table(assigns)

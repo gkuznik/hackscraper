@@ -32,7 +32,7 @@ config :hackscraper, HackScraperWeb.Endpoint,
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
+# locally. You can see the emails in your browser, at "/mailbox".
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.

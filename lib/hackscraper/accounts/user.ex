@@ -122,6 +122,18 @@ defmodule HackScraper.Accounts.User do
     |> unique_constraint(:name)
   end
 
+  def name_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
+    |> validate_length(:name, min: 1, max: 100)
+    |> unsafe_validate_unique(:name, HackScraper.Repo)
+    |> case do
+      %{changes: %{name: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :name, "did not change")
+    end
+  end
+
   @doc """
   A user changeset for changing the email.
 
@@ -165,11 +177,24 @@ defmodule HackScraper.Accounts.User do
   end
 
   @doc """
-  Update admin status, score or name.
+  Admin only UI
   """
-  def changeset(user, attrs) do
+  def admin_changeset(user, attrs) do
     user
-    |> cast(attrs, [:is_admin, :score, :name])
+    |> cast(attrs, [:is_admin, :score, :name, :email])
+    |> validate_email([])
+    |> validate_number(:score, greater_than_or_equal_to: 0)
+    |> validate_name()
+  end
+
+  @doc """
+  Admin only UI, also sets the password
+  """
+  def admin_changeset_with_passsword(user, attrs) do
+    user
+    |> cast(attrs, [:name, :email, :password, :score, :is_admin])
+    |> validate_email([])
+    |> validate_password([])
     |> validate_number(:score, greater_than_or_equal_to: 0)
     |> validate_name()
   end

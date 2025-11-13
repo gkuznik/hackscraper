@@ -1,0 +1,84 @@
+<.header>
+  Listing Hackathons
+  <:actions>
+    <.link patch={~p"/hackathons/new"}>
+      <.button>New Hackathon</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<style>
+  img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  th, td {
+      padding: 5px;
+  }
+
+  .description-cell {
+    max-height: 100px;
+    overflow-y: auto;
+    line-height: 1.4;
+  }
+</style>
+
+<.flopTable
+  items={@streams.hackathons}
+  meta={@meta}
+  path={~p"/hackathons"}
+  row_click={fn {_id, hackathon} -> JS.navigate(~p"/hackathons/#{hackathon}") end}
+>
+  <:col :let={{_id, hackathon}} label="Name" field={:name}>{hackathon.name}</:col>
+  <:col :let={{_id, hackathon}} label="Url" field={:url}>
+    <.link target="_blank" navigate={hackathon.url}>{hackathon.url}</.link>
+  </:col>
+  <:col :let={{_id, hackathon}} label="Image"><img src={hackathon.image} /></:col>
+  <:col :let={{_id, hackathon}} label="Description">
+    <div class="description-cell">{hackathon.description}</div>
+  </:col>
+  <:col :let={{_id, hackathon}} label="Location">{hackathon.location}</:col>
+  <:col :let={{_id, hackathon}} label="Start date" field={:start_date}>
+    <.date format="short" date={hackathon.start_date} />
+  </:col>
+  <:col :let={{_id, hackathon}} label="End date" field={:end_date}>
+    <.date format="short" date={hackathon.end_date} />
+  </:col>
+  <:action :let={{_id, hackathon}}>
+    <div class="sr-only">
+      <.link navigate={~p"/hackathons/#{hackathon}"}>Show</.link>
+    </div>
+    <.link patch={~p"/hackathons/#{hackathon}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, hackathon}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: hackathon.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.flopTable>
+
+<Flop.Phoenix.pagination
+  meta={@meta}
+  path={~p"/hackathons"}
+  page_list_attrs={[class: "flex gap-2"]}
+/>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="hackathon-modal"
+  show
+  on_cancel={JS.patch(~p"/hackathons")}
+>
+  <.live_component
+    module={HackScraperWeb.HackathonLive.FormComponent}
+    id={@hackathon.id || :new}
+    title={@page_title}
+    action={@live_action}
+    hackathon={@hackathon}
+    patch={~p"/hackathons"}
+  />
+</.modal>

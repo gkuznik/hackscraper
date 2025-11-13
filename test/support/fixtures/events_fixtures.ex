@@ -12,7 +12,9 @@ defmodule HackScraper.EventsFixtures do
       attrs
       |> Enum.into(%{
         description: "some description",
-        name: "some name"
+        image: "some image",
+        name: "some name",
+        url: "some url"
       })
       |> HackScraper.Events.create_series()
 
@@ -27,11 +29,11 @@ defmodule HackScraper.EventsFixtures do
       attrs
       |> Enum.into(%{
         description: "some description",
-        end_date: ~U[2025-11-09 15:56:00Z],
+        end_date: ~U[2025-11-11 22:55:00Z],
         image: "some image",
         location: "some location",
         name: "some name",
-        start_date: ~U[2025-11-09 15:56:00Z],
+        start_date: ~U[2025-11-11 22:55:00Z],
         url: "some url"
       })
       |> HackScraper.Events.create_hackathon()

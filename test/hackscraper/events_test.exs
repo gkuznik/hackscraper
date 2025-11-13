@@ -8,7 +8,7 @@ defmodule HackScraper.EventsTest do
 
     import HackScraper.EventsFixtures
 
-    @invalid_attrs %{name: nil, description: nil}
+    @invalid_attrs %{name: nil, description: nil, image: nil, url: nil}
 
     test "list_series/0 returns all series" do
       series = series_fixture()
@@ -21,11 +21,13 @@ defmodule HackScraper.EventsTest do
     end
 
     test "create_series/1 with valid data creates a series" do
-      valid_attrs = %{name: "some name", description: "some description"}
+      valid_attrs = %{name: "some name", description: "some description", image: "some image", url: "some url"}
 
       assert {:ok, %Series{} = series} = Events.create_series(valid_attrs)
       assert series.name == "some name"
       assert series.description == "some description"
+      assert series.image == "some image"
+      assert series.url == "some url"
     end
 
     test "create_series/1 with invalid data returns error changeset" do
@@ -34,11 +36,13 @@ defmodule HackScraper.EventsTest do
 
     test "update_series/2 with valid data updates the series" do
       series = series_fixture()
-      update_attrs = %{name: "some updated name", description: "some updated description"}
+      update_attrs = %{name: "some updated name", description: "some updated description", image: "some updated image", url: "some updated url"}
 
       assert {:ok, %Series{} = series} = Events.update_series(series, update_attrs)
       assert series.name == "some updated name"
       assert series.description == "some updated description"
+      assert series.image == "some updated image"
+      assert series.url == "some updated url"
     end
 
     test "update_series/2 with invalid data returns error changeset" do
@@ -77,7 +81,7 @@ defmodule HackScraper.EventsTest do
     end
 
     test "create_hackathon/1 with valid data creates a hackathon" do
-      valid_attrs = %{name: "some name", description: "some description", location: "some location", image: "some image", url: "some url", start_date: ~U[2025-11-09 15:56:00Z], end_date: ~U[2025-11-09 15:56:00Z]}
+      valid_attrs = %{name: "some name", description: "some description", location: "some location", image: "some image", url: "some url", start_date: ~U[2025-11-11 22:55:00Z], end_date: ~U[2025-11-11 22:55:00Z]}
 
       assert {:ok, %Hackathon{} = hackathon} = Events.create_hackathon(valid_attrs)
       assert hackathon.name == "some name"
@@ -85,8 +89,8 @@ defmodule HackScraper.EventsTest do
       assert hackathon.location == "some location"
       assert hackathon.image == "some image"
       assert hackathon.url == "some url"
-      assert hackathon.start_date == ~U[2025-11-09 15:56:00Z]
-      assert hackathon.end_date == ~U[2025-11-09 15:56:00Z]
+      assert hackathon.start_date == ~U[2025-11-11 22:55:00Z]
+      assert hackathon.end_date == ~U[2025-11-11 22:55:00Z]
     end
 
     test "create_hackathon/1 with invalid data returns error changeset" do
@@ -95,7 +99,7 @@ defmodule HackScraper.EventsTest do
 
     test "update_hackathon/2 with valid data updates the hackathon" do
       hackathon = hackathon_fixture()
-      update_attrs = %{name: "some updated name", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: ~U[2025-11-10 15:56:00Z], end_date: ~U[2025-11-10 15:56:00Z]}
+      update_attrs = %{name: "some updated name", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: ~U[2025-11-12 22:55:00Z], end_date: ~U[2025-11-12 22:55:00Z]}
 
       assert {:ok, %Hackathon{} = hackathon} = Events.update_hackathon(hackathon, update_attrs)
       assert hackathon.name == "some updated name"
@@ -103,8 +107,8 @@ defmodule HackScraper.EventsTest do
       assert hackathon.location == "some updated location"
       assert hackathon.image == "some updated image"
       assert hackathon.url == "some updated url"
-      assert hackathon.start_date == ~U[2025-11-10 15:56:00Z]
-      assert hackathon.end_date == ~U[2025-11-10 15:56:00Z]
+      assert hackathon.start_date == ~U[2025-11-12 22:55:00Z]
+      assert hackathon.end_date == ~U[2025-11-12 22:55:00Z]
     end
 
     test "update_hackathon/2 with invalid data returns error changeset" do
