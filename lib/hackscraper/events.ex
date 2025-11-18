@@ -202,4 +202,69 @@ defmodule HackScraper.Events do
   def change_hackathon(%Hackathon{} = hackathon, attrs \\ %{}) do
     Hackathon.changeset(hackathon, attrs)
   end
+
+  alias HackScraper.Events.Suggestion
+
+  @doc """
+  Returns the list of suggestions.
+
+  ## Examples
+
+      iex> list_suggestions()
+      [%Suggestion{}, ...]
+
+  """
+  def list_suggestions do
+    Repo.all(Suggestion)
+  end
+
+  @doc """
+  Gets a single suggestion.
+
+  Raises `Ecto.NoResultsError` if the Suggestion does not exist.
+
+  ## Examples
+
+      iex> get_suggestion!(123)
+      %Suggestion{}
+
+      iex> get_suggestion!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_suggestion!(id), do: Repo.get!(Suggestion, id)
+
+  @doc """
+  Creates a suggestion.
+
+  ## Examples
+
+      iex> create_suggestion(%{field: value})
+      {:ok, %Suggestion{}}
+
+      iex> create_suggestion(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_suggestion(attrs \\ %{}) do
+    %Suggestion{}
+    |> Suggestion.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Deletes a suggestion.
+
+  ## Examples
+
+      iex> delete_suggestion(suggestion)
+      {:ok, %Suggestion{}}
+
+      iex> delete_suggestion(suggestion)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_suggestion(%Suggestion{} = suggestion) do
+    Repo.delete(suggestion)
+  end
 end

@@ -61,7 +61,8 @@ defmodule HackScraper.MixProject do
       {:flop, "~> 0.26.3"},
       {:flop_phoenix, "~> 0.25.3"},
       {:oban, "~> 2.19"},
-      {:oban_web, "~> 2.11"}
+      {:oban_web, "~> 2.11"},
+      {:req, "~> 0.5.0"}
     ]
   end
 

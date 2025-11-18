@@ -40,4 +40,25 @@ defmodule HackScraper.EventsFixtures do
 
     hackathon
   end
+
+  @doc """
+  Generate a suggestion.
+  """
+  def suggestion_fixture(attrs \\ %{}) do
+    {:ok, suggestion} =
+      attrs
+      |> Enum.into(%{
+        date: "some date",
+        description: "some description",
+        end_date: ~U[2025-11-16 16:50:00Z],
+        image: "some image",
+        location: "some location",
+        name: "some name",
+        start_date: ~U[2025-11-16 16:50:00Z],
+        url: "some url"
+      })
+      |> HackScraper.Events.create_suggestion()
+
+    suggestion
+  end
 end

@@ -46,6 +46,12 @@ defmodule HackScraperWeb.Router do
     live "/series/:id/edit", SeriesLive.Index, :edit
     live "/series/:id", SeriesLive.Show, :show
     live "/series/:id/show/edit", SeriesLive.Show, :edit
+
+    live "/suggestions", SuggestionLive.Index, :index
+    live "/suggestions/:id/review", SuggestionLive.Index, :review
+
+    live "/suggestions/:id", SuggestionLive.Show, :show
+    live "/suggestions/:id/show/review", SuggestionLive.Show, :review
   end
 
   scope "/", HackScraperWeb do

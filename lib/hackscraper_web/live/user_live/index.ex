@@ -35,7 +35,7 @@ defmodule HackScraperWeb.UserLive.Index do
 
   @impl true
   def handle_info({HackScraperWeb.UserLive.FormComponent, {:saved, user}}, socket) do
-    {:noreply, stream_insert(socket, :user_collection, user)}
+    {:noreply, stream_insert(socket, :users, user)}
   end
 
   @impl true
@@ -43,6 +43,6 @@ defmodule HackScraperWeb.UserLive.Index do
     user = Accounts.get_user!(id)
     {:ok, _} = Accounts.delete_user(user)
 
-    {:noreply, stream_delete(socket, :user_collection, user)}
+    {:noreply, stream_delete(socket, :users, user)}
   end
 end

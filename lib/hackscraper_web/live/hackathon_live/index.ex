@@ -6,7 +6,16 @@ defmodule HackScraperWeb.HackathonLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+    {hackathons, meta} =
+      Flop.validate_and_run!(Hackathon, params, for: Hackathon, replace_invalid_params: true)
+
+    socket =
+      socket
+      |> assign(:meta, meta)
+      |> stream(:hackathons, hackathons, reset: true)
+      |> apply_action(socket.assigns.live_action, params)
+
+    {:noreply, socket}
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
@@ -23,13 +32,8 @@ defmodule HackScraperWeb.HackathonLive.Index do
     |> assign(:hackathon, %Hackathon{})
   end
 
-  defp apply_action(socket, :index, params) do
-    {hackathons, meta} =
-      Flop.validate_and_run!(Hackathon, params, for: Hackathon, replace_invalid_params: true)
-
+  defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:meta, meta)
-    |> stream(:hackathons, hackathons, reset: true)
     |> assign(:page_title, "Listing Hackathons")
     |> assign(:hackathon, nil)
   end

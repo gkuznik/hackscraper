@@ -69,7 +69,7 @@
               </div>
             </div>
           </div>
-          <div>
+          <div :if={@hackathon.location}>
             <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">
               Location
             </h3>
@@ -86,17 +86,15 @@
             </.link>
           </div>
 
-          <%= if @hackathon.series do %>
-            <div>
-              <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">
-                Series
-              </h3>
-              <.link navigate={~p"/series/#{@hackathon.series}"}>
-                <.icon name="hero-photo" class="mr-1 h-4 w-4" />
-                {@hackathon.series.name}
-              </.link>
-            </div>
-          <% end %>
+          <div :if={@hackathon.series}>
+            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">
+              Series
+            </h3>
+            <.link navigate={~p"/series/#{@hackathon.series}"}>
+              <.icon name="hero-photo" class="mr-1 h-4 w-4" />
+              {@hackathon.series.name}
+            </.link>
+          </div>
         </div>
       </div>
     </div>

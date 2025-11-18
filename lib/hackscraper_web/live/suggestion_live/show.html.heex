@@ -1,0 +1,38 @@
+<.header>
+  Suggestion for {@suggestion.name}
+  <:actions>
+    <.link patch={~p"/suggestions/#{@suggestion}/show/review"} phx-click={JS.push_focus()}>
+      <.button>Review hackathon</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@suggestion.name}</:item>
+  <:item title="Url">{@suggestion.url}</:item>
+  <:item title="Image">{@suggestion.image}</:item>
+  <:item title="Description">{@suggestion.description}</:item>
+  <:item title="Location">{@suggestion.location}</:item>
+  <:item title="Date hint">{@suggestion.date}</:item>
+  <:item title="Start date">{@suggestion.start_date}</:item>
+  <:item title="End date">{@suggestion.end_date}</:item>
+</.list>
+
+<.back navigate={~p"/suggestions"}>Back to suggestions</.back>
+
+<.modal
+  :if={@live_action == :review}
+  id="suggestion-modal"
+  show
+  on_cancel={JS.patch(~p"/suggestions/#{@suggestion}")}
+>
+  <.live_component
+    module={HackScraperWeb.HackathonLive.FormComponent}
+    id={:new}
+    title={@page_title}
+    action={:new}
+    hackathon={struct(HackScraper.Events.Hackathon, Map.from_struct(@suggestion))}
+    patch={~p"/suggestions"}
+    date_hint={@suggestion.date}
+  />
+</.modal>

@@ -28,6 +28,10 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
           Note: the server expects the dates in UTC. Enable JavaScript to convert them automatically from your local timezone.
         </noscript>
 
+        <div :if={assigns[:date_hint]} class="block p-3 text-sm bg-blue-50 rounded border">
+          <span class="font-bold">Date information found:</span> {@date_hint}
+        </div>
+
         <.input field={@form[:start_date]} type="datetime-local" label="Start date" />
         <.input field={@form[:end_date]} type="datetime-local" label="End date" />
 

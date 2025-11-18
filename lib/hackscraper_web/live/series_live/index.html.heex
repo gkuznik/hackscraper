@@ -31,8 +31,13 @@
   row_click={fn {_id, series} -> JS.navigate(~p"/series/#{series}") end}
 >
   <:col :let={{_id, series}} label="Name" field={:name}>{series.name}</:col>
-  <:col :let={{_id, series}} label="Url" field={:url}>{series.url}</:col>
-  <:col :let={{_id, series}} label="Image">{series.image}</:col>
+
+  <:col :let={{_id, series}} label="Url" field={:url}>
+    <.link target="_blank" navigate={series.url} phx-click={JS.exec("event.stopPropagation()")}>
+      {series.url}
+    </.link>
+  </:col>
+  <:col :let={{_id, series}} label="Image"><img src={series.image} /></:col>
   <:col :let={{_id, series}} label="Description">{series.description}</:col>
   <:action :let={{_id, series}}>
     <div class="sr-only">

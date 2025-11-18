@@ -24,7 +24,18 @@ defmodule HackScraper.Events.Hackathon do
   @doc false
   def changeset(hackathon, attrs) do
     hackathon
-    |> cast(attrs, [:name, :url, :image, :description, :location, :start_date, :end_date, :series_id])
-    |> validate_required([:name, :url, :location, :start_date, :end_date])
+    |> cast(attrs, [
+      :name,
+      :url,
+      :image,
+      :description,
+      :location,
+      :start_date,
+      :end_date,
+      :series_id
+    ])
+    |> validate_required([:name, :url, :start_date, :end_date])
+    |> unsafe_validate_unique([:url, :start_date], HackScraper.Repo)
+    |> unique_constraint([:url, :start_date])
   end
 end

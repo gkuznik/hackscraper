@@ -16,7 +16,13 @@ one_day = 24 * 60 * 60
 config :hackscraper, Oban,
   engine: Oban.Engines.Basic,
   queues: [default: 5, scraper: 10],
-  plugins: [{Oban.Plugins.Pruner, max_age: 14 * one_day, interval: one_day * 1000}],
+  plugins: [
+    {Oban.Plugins.Pruner, max_age: 14 * one_day, interval: one_day * 1000},
+    {Oban.Plugins.Cron,
+     crontab: [
+       {"@weekly", HackScraper.Scraper.Devpost}
+     ]}
+  ],
   repo: HackScraper.Repo
 
 config :flop, repo: HackScraper.Repo

@@ -6,7 +6,16 @@ defmodule HackScraperWeb.SeriesLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+    {series, meta} =
+      Flop.validate_and_run!(Series, params, for: Series, replace_invalid_params: true)
+
+    socket =
+      socket
+      |> assign(:meta, meta)
+      |> stream(:series, series, reset: true)
+      |> apply_action(socket.assigns.live_action, params)
+
+    {:noreply, socket}
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
@@ -23,20 +32,15 @@ defmodule HackScraperWeb.SeriesLive.Index do
     |> assign(:series, %Series{})
   end
 
-  defp apply_action(socket, :index, params) do
-    {series, meta} =
-      Flop.validate_and_run!(Series, params, for: Series, replace_invalid_params: true)
-
+  defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:meta, meta)
-    |> stream(:series, series, reset: true)
     |> assign(:page_title, "Listing Series")
     |> assign(:series, nil)
   end
 
   @impl true
   def handle_info({HackScraperWeb.SeriesLive.FormComponent, {:saved, series}}, socket) do
-    {:noreply, stream_insert(socket, :series_collection, series)}
+    {:noreply, stream_insert(socket, :series, series)}
   end
 
   @impl true
@@ -44,6 +48,6 @@ defmodule HackScraperWeb.SeriesLive.Index do
     series = Events.get_series!(id)
     {:ok, _} = Events.delete_series(series)
 
-    {:noreply, stream_delete(socket, :series_collection, series)}
+    {:noreply, stream_delete(socket, :series, series)}
   end
 end
