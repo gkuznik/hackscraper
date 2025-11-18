@@ -22,6 +22,8 @@ config :hackscraper, Oban,
      crontab: [
        {"@weekly", HackScraper.Scraper.Devpost}
      ]}
+    # Uncomment to enable dynamic cron schedules (requires running migration first):
+    # {HackScraper.Oban.Plugins.DynamicCron, interval: 60_000, timezone: "Etc/UTC"}
   ],
   repo: HackScraper.Repo
 
