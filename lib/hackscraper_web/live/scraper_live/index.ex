@@ -50,4 +50,20 @@ defmodule HackScraperWeb.ScraperLive.Index do
 
     {:noreply, stream_delete(socket, :scrapers, scraper)}
   end
+
+  @impl true
+  def handle_event("pause", %{"id" => id}, socket) do
+    scraper = Worker.get_scraper!(id)
+    {:ok, scraper} = Worker.update_scraper(scraper, %{paused: !scraper.paused})
+
+    {:noreply, stream_insert(socket, :scrapers, scraper, update_only: true)}
+  end
+
+  @impl true
+  def handle_event("run", %{"id" => id}, socket) do
+    scraper = Worker.get_scraper!(id)
+    {:ok, job} = HackScraper.Scraper.Scheduler.schedule_job(scraper)
+
+    {:noreply, push_navigate(socket, to: ~p"/oban/jobs/#{job.id}")}
+  end
 end

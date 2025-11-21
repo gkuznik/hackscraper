@@ -1,16 +1,11 @@
-defmodule HackScraper.Scraper do
+defmodule HackScraper.Scraper.Common do
   alias HackScraper.Events.Suggestion
   alias HackScraper.Events.Hackathon
 
   @oban_opts [queue: :scraper, max_attempts: 1]
   @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:mensaplan, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
 
-  defmacro __using__(_opts) do
-    quote do
-      use Oban.Worker, unquote(@oban_opts)
-      import HackScraper.Scraper
-    end
-  end
+  def oban_opts, do: @oban_opts
 
   def get!(api_url) do
     Req.get!(api_url, http_errors: :raise, user_agent: @user_agent)
@@ -19,13 +14,16 @@ defmodule HackScraper.Scraper do
   def upsert_suggestions([]), do: 0
 
   def upsert_suggestions(suggestions) do
+    # Filter out suggestions where both URL and name already exist in hackathons
+    filtered_suggestions = filter_existing_hackathons(suggestions)
+
     timestamp = DateTime.utc_now(:second)
 
     placeholders = %{timestamp: timestamp}
 
     maps =
       Enum.map(
-        suggestions,
+        filtered_suggestions,
         fn s -> Map.put(s, :inserted_at, {:placeholder, :timestamp}) end
       )
 
@@ -39,6 +37,25 @@ defmodule HackScraper.Scraper do
       )
 
     num
+  end
+
+  defp filter_existing_hackathons(suggestions) do
+    import Ecto.Query
+
+    existing_hackathons =
+      HackScraper.Repo.all(
+        from h in Hackathon,
+        select: %{url: h.url, name: h.name}
+      )
+
+    existing_set =
+      existing_hackathons
+      |> Enum.map(fn h -> {h.url, h.name} end)
+      |> MapSet.new()
+
+    Enum.reject(suggestions, fn suggestion ->
+      MapSet.member?(existing_set, {suggestion[:url], suggestion[:name]})
+    end)
   end
 
   def upsert_hackathons([]), do: 0

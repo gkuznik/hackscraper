@@ -21,6 +21,10 @@ defmodule HackScraper.Worker do
     Repo.all(Scraper)
   end
 
+  def list_scrapers_for_scheduling do
+    Repo.all(Scraper |> where([s], s.paused == false))
+  end
+
   @doc """
   Gets a single scraper.
 

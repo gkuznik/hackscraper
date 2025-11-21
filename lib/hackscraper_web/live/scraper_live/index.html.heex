@@ -26,6 +26,14 @@
   </:col>
   <:col :let={{_id, scraper}} label="Paused">{scraper.paused}</:col>
   <:action :let={{_id, scraper}}>
+    <.button phx-click={JS.push("pause", value: %{id: scraper.id})}>
+      {if scraper.paused, do: "Unpause", else: "Pause"}
+    </.button>
+  </:action>
+  <:action :let={{_id, scraper}}>
+    <.button phx-click={JS.push("run", value: %{id: scraper.id})}>Run</.button>
+  </:action>
+  <:action :let={{_id, scraper}}>
     <div class="sr-only">
       <.link navigate={~p"/scrapers/#{scraper}"}>Show</.link>
     </div>

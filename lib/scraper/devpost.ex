@@ -1,5 +1,7 @@
 defmodule HackScraper.Scraper.Devpost do
-  use HackScraper.Scraper
+  use Oban.Worker
+
+  import HackScraper.Scraper.Common
 
   require Logger
 

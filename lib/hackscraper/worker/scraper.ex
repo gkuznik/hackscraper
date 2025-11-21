@@ -21,6 +21,38 @@ defmodule HackScraper.Worker.Scraper do
     scraper
     |> cast(attrs, [:name, :schedule, :url, :paused])
     |> validate_required([:name, :schedule])
+    |> validate_name()
+    |> validate_schedule()
     |> unique_constraint(:name)
+  end
+
+  defp validate_name(changeset) do
+    changeset
+    |> update_change(:name, &String.downcase/1)
+    |> validate_change(:name, fn :name, name ->
+      name_prefix = name |> String.split("-", parts: 2) |> List.first()
+
+      if name_prefix in ["devpost", "direct", "dummy"] do
+        []
+      else
+        [name: "must start with one of: devpost, direct, dummy"]
+      end
+    end)
+  end
+
+  defp validate_schedule(changeset) do
+    case get_field(changeset, :schedule) do
+      nil ->
+        changeset
+
+      schedule ->
+        case Oban.Plugins.Cron.parse(schedule) do
+          {:ok, _cron_expression} ->
+            changeset
+
+          {:error, error} ->
+            add_error(changeset, :schedule, error.message)
+        end
+    end
   end
 end
