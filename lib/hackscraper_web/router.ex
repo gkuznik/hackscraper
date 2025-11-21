@@ -70,6 +70,7 @@ defmodule HackScraperWeb.Router do
     end
 
     alias HackScraperWeb.UserLive
+    alias HackScraperWeb.ScraperLive
 
     live_dashboard "/dashboard", metrics: HackScraperWeb.Telemetry
     oban_dashboard("/oban")
@@ -80,6 +81,13 @@ defmodule HackScraperWeb.Router do
 
     live "/users/:id", UserLive.Show, :show
     live "/users/:id/show/edit", UserLive.Show, :edit
+
+    live "/scrapers", ScraperLive.Index, :index
+    live "/scrapers/new", ScraperLive.Index, :new
+    live "/scrapers/:id/edit", ScraperLive.Index, :edit
+
+    live "/scrapers/:id", ScraperLive.Show, :show
+    live "/scrapers/:id/show/edit", ScraperLive.Show, :edit
   end
 
   ## Authentication routes

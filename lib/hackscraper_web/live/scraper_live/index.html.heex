@@ -1,0 +1,64 @@
+<.header>
+  Listing Scrapers
+  <:actions>
+    <.link patch={~p"/scrapers/new"}>
+      <.button>New Scraper</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.flopTable
+  items={@streams.scrapers}
+  meta={@meta}
+  path={~p"/scrapers"}
+  row_click={fn {_id, scraper} -> JS.navigate(~p"/scrapers/#{scraper}") end}
+>
+  <:col :let={{_id, scraper}} label="Name" field={:name}>{scraper.name}</:col>
+  <:col :let={{_id, scraper}} label="Schedule" field={:schedule}>{scraper.schedule}</:col>
+  <:col :let={{_id, scraper}} label="Url" field={:url}>
+    <.link
+      target="_blank"
+      navigate={scraper.url}
+      phx-click={JS.exec("event.stopPropagation()")}
+    >
+      {scraper.url}
+    </.link>
+  </:col>
+  <:col :let={{_id, scraper}} label="Paused">{scraper.paused}</:col>
+  <:action :let={{_id, scraper}}>
+    <div class="sr-only">
+      <.link navigate={~p"/scrapers/#{scraper}"}>Show</.link>
+    </div>
+    <.link patch={~p"/scrapers/#{scraper}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, scraper}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: scraper.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.flopTable>
+
+<Flop.Phoenix.pagination
+  meta={@meta}
+  path={~p"/suggestions"}
+  page_list_attrs={[class: "flex gap-2"]}
+/>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="scraper-modal"
+  show
+  on_cancel={JS.patch(~p"/scrapers")}
+>
+  <.live_component
+    module={HackScraperWeb.ScraperLive.FormComponent}
+    id={@scraper.id || :new}
+    title={@page_title}
+    action={@live_action}
+    scraper={@scraper}
+    patch={~p"/scrapers"}
+  />
+</.modal>

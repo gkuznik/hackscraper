@@ -1,0 +1,28 @@
+<.header>
+  Scraper {@scraper.name}
+  <:actions>
+    <.link patch={~p"/scrapers/#{@scraper}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit scraper</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@scraper.name}</:item>
+  <:item title="Schedule">{@scraper.schedule}</:item>
+  <:item title="Url">{@scraper.url}</:item>
+  <:item title="Paused">{@scraper.paused}</:item>
+</.list>
+
+<.back navigate={~p"/scrapers"}>Back to scrapers</.back>
+
+<.modal :if={@live_action == :edit} id="scraper-modal" show on_cancel={JS.patch(~p"/scrapers/#{@scraper}")}>
+  <.live_component
+    module={HackScraperWeb.ScraperLive.FormComponent}
+    id={@scraper.id}
+    title={@page_title}
+    action={@live_action}
+    scraper={@scraper}
+    patch={~p"/scrapers/#{@scraper}"}
+  />
+</.modal>
