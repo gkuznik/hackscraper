@@ -97,13 +97,13 @@ defmodule HackScraperWeb.Router do
 
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{HackScraperWeb.UserAuth, :redirect_if_user_is_authenticated}] do
-      live "/users/register", UserRegistrationLive, :new
-      live "/users/log_in", UserLoginLive, :new
-      live "/users/reset_password", UserForgotPasswordLive, :new
-      live "/users/reset_password/:token", UserResetPasswordLive, :edit
+      live "/user/register", UserRegistrationLive, :new
+      live "/user/log_in", UserLoginLive, :new
+      live "/user/reset_password", UserForgotPasswordLive, :new
+      live "/user/reset_password/:token", UserResetPasswordLive, :edit
     end
 
-    post "/users/log_in", UserSessionController, :create
+    post "/user/log_in", UserSessionController, :create
   end
 
   scope "/", HackScraperWeb do
@@ -111,20 +111,20 @@ defmodule HackScraperWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{HackScraperWeb.UserAuth, :ensure_authenticated}] do
-      live "/users/settings", UserSettingsLive, :edit
-      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+      live "/user/settings", UserSettingsLive, :edit
+      live "/user/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end
   end
 
   scope "/", HackScraperWeb do
     pipe_through [:browser]
 
-    delete "/users/log_out", UserSessionController, :delete
+    delete "/user/log_out", UserSessionController, :delete
 
     live_session :current_user,
       on_mount: [{HackScraperWeb.UserAuth, :mount_current_user}] do
-      live "/users/confirm/:token", UserConfirmationLive, :edit
-      live "/users/confirm", UserConfirmationInstructionsLive, :new
+      live "/user/confirm/:token", UserConfirmationLive, :edit
+      live "/user/confirm", UserConfirmationInstructionsLive, :new
     end
   end
 end

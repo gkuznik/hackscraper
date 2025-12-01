@@ -58,7 +58,7 @@ defmodule HackScraperWeb.UserSettingsLive do
         <.simple_form
           for={@password_form}
           id="password_form"
-          action={~p"/users/log_in?_action=password_updated"}
+          action={~p"/user/log_in?_action=password_updated"}
           method="post"
           phx-change="validate_password"
           phx-submit="update_password"
@@ -104,7 +104,7 @@ defmodule HackScraperWeb.UserSettingsLive do
           put_flash(socket, :error, "Email change link is invalid or it has expired.")
       end
 
-    {:ok, push_navigate(socket, to: ~p"/users/settings")}
+    {:ok, push_navigate(socket, to: ~p"/user/settings")}
   end
 
   def mount(_params, _session, socket) do
@@ -179,7 +179,7 @@ defmodule HackScraperWeb.UserSettingsLive do
         Accounts.deliver_user_update_email_instructions(
           applied_user,
           user.email,
-          &url(~p"/users/settings/confirm_email/#{&1}")
+          &url(~p"/user/settings/confirm_email/#{&1}")
         )
 
         info = "A link to confirm your email change has been sent to the new address."
