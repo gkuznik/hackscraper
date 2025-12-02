@@ -4,6 +4,8 @@ defmodule HackScraperWeb.SeriesLive.Index do
   alias HackScraper.Events
   alias HackScraper.Events.Series
 
+  on_mount {HackScraperWeb.UserAuth, :mount_current_user}
+
   @impl true
   def handle_params(params, _url, socket) do
     {series, meta} =

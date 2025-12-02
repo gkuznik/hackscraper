@@ -4,9 +4,19 @@ defmodule HackScraperWeb.UserLive.Index do
   alias HackScraper.Accounts
   alias HackScraper.Accounts.User
 
+  on_mount {HackScraperWeb.UserAuth, :mount_current_user}
+
   @impl true
   def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+    {users, meta} = Flop.validate_and_run!(User, params, for: User, replace_invalid_params: true)
+
+    socket =
+      socket
+      |> assign(:meta, meta)
+      |> stream(:users, users, reset: true)
+      |> apply_action(socket.assigns.live_action, params)
+
+    {:noreply, socket}
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do

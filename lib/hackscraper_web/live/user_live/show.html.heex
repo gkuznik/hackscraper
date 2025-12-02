@@ -10,8 +10,7 @@
 <.list>
   <:item title="Name">{@user.name}</:item>
   <:item title="Email">{@user.email}</:item>
-  <:item title="Score">{@user.score}</:item>
-  <:item title="Is admin">{@user.is_admin}</:item>
+  <:item title="Role">{HackScraper.Accounts.role_name(@user.role)}</:item>
 </.list>
 
 <.back navigate={~p"/users"}>Back to user</.back>

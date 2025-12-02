@@ -15,8 +15,7 @@
 >
   <:col :let={{_id, user}} label="Name" field={:name}>{user.name}</:col>
   <:col :let={{_id, user}} label="Email" field={:email}>{user.email}</:col>
-  <:col :let={{_id, user}} label="Score" field={:score}>{user.score}</:col>
-  <:col :let={{_id, user}} label="Is admin">{user.is_admin}</:col>
+  <:col :let={{_id, user}} label="Role" field={:role}>{HackScraper.Accounts.role_name(user.role)}</:col>
   <:action :let={{_id, user}}>
     <div class="sr-only">
       <.link navigate={~p"/users/#{user}"}>Show</.link>

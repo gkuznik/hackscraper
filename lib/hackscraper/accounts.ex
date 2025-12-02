@@ -8,6 +8,32 @@ defmodule HackScraper.Accounts do
 
   alias HackScraper.Accounts.{User, UserToken, UserNotifier}
 
+  @roles %{
+    user: 0,
+    editor: 1,
+    mod: 2,
+    admin: 3
+  }
+
+  @inv_roles Map.new(@roles, fn {key, val} -> {val, key} end)
+
+  def roles, do: @roles
+
+  def role_name(level) when is_integer(level) do
+    case Map.fetch(@inv_roles, level) do
+      {:ok, role_atom} -> Atom.to_string(role_atom) |> String.capitalize()
+      :error -> "Unknown (#{level})"
+    end
+  end
+
+  def can_do?(nil, _) do
+    false
+  end
+
+  def can_do?(%User{role: role}, required) do
+    role >= @roles[required]
+  end
+
   ## Database getters
 
   def list_user, do: Repo.all(User)

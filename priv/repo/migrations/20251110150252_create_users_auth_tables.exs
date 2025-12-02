@@ -7,8 +7,7 @@ defmodule HackScraper.Repo.Migrations.CreateUsersAuthTables do
     create table(:users) do
       add :email, :citext, null: false
       add :name, :string, null: false
-      add :score, :integer, default: 0, null: false
-      add :is_admin, :boolean, default: false, null: false
+      add :role, :integer, default: 0, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :utc_datetime
 

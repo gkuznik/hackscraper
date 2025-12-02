@@ -3,10 +3,7 @@ defmodule HackScraperWeb.SuggestionLive.Show do
 
   alias HackScraper.Events
 
-  @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
-  end
+  on_mount {HackScraperWeb.UserAuth, :mount_current_user}
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do

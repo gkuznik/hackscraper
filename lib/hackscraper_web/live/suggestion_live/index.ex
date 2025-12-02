@@ -4,6 +4,8 @@ defmodule HackScraperWeb.SuggestionLive.Index do
 
   alias HackScraper.Events
 
+  on_mount {HackScraperWeb.UserAuth, :mount_current_user}
+
   @impl true
   def handle_params(params, _url, socket) do
     {suggestions, meta} =

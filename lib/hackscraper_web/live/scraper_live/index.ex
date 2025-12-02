@@ -4,6 +4,8 @@ defmodule HackScraperWeb.ScraperLive.Index do
   alias HackScraper.Worker
   alias HackScraper.Worker.Scraper
 
+  on_mount {HackScraperWeb.UserAuth, :mount_current_user}
+
   @impl true
   def handle_params(params, _url, socket) do
     {scrapers, meta} =

@@ -4,14 +4,13 @@ defmodule HackScraper.Accounts.User do
 
   @derive {
     Flop.Schema,
-    filterable: [:email, :name, :is_admin], sortable: [:email, :name, :score, :confirmed_at]
+    filterable: [:email, :name, :role], sortable: [:email, :name, :confirmed_at]
   }
 
   schema "users" do
     field :email, :string
     field :name, :string
-    field :score, :integer, default: 0
-    field :is_admin, :boolean, default: false
+    field :role, :integer, default: 0
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :current_password, :string, virtual: true, redact: true
@@ -72,6 +71,12 @@ defmodule HackScraper.Accounts.User do
     |> validate_required([:name])
     |> validate_length(:name, min: 1, max: 100)
     |> maybe_validate_unique_name()
+  end
+
+  def validate_role(changeset) do
+    changeset
+    |> validate_required([:role])
+    |> validate_inclusion(:role, 0..3)
   end
 
   if Application.compile_env(:hackscraper, :dev_routes) do
@@ -181,10 +186,10 @@ defmodule HackScraper.Accounts.User do
   """
   def admin_changeset(user, attrs) do
     user
-    |> cast(attrs, [:is_admin, :score, :name, :email])
-    |> validate_email([])
-    |> validate_number(:score, greater_than_or_equal_to: 0)
+    |> cast(attrs, [:role, :name, :email])
+    |> validate_role()
     |> validate_name()
+    |> validate_email([])
   end
 
   @doc """
@@ -192,10 +197,10 @@ defmodule HackScraper.Accounts.User do
   """
   def admin_changeset_with_passsword(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password, :score, :is_admin])
+    |> cast(attrs, [:name, :email, :password, :role])
     |> validate_email([])
     |> validate_password([])
-    |> validate_number(:score, greater_than_or_equal_to: 0)
+    |> validate_role()
     |> validate_name()
   end
 

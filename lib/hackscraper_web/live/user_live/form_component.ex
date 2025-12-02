@@ -21,14 +21,17 @@ defmodule HackScraperWeb.UserLive.FormComponent do
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:email]} type="text" label="Email" />
         <.input field={@form[:password]} type="password" label="Password" />
-        <.input field={@form[:score]} type="number" label="Score" />
-        <.input field={@form[:is_admin]} type="checkbox" label="Is admin" />
+        <.input field={@form[:role]} type="select" label="Role" options={role_options()} />
         <:actions>
           <.button phx-disable-with="Saving...">Save User</.button>
         </:actions>
       </.simple_form>
     </div>
     """
+  end
+
+  defp role_options do
+    Enum.map(Accounts.roles(), fn {_, value} -> {Accounts.role_name(value), value} end)
   end
 
   @impl true
