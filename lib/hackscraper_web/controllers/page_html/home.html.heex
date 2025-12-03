@@ -2,6 +2,54 @@
 
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
   <div class="bg-gradient-to-br from-blue-700 to-purple-700 text-white">
+    <nav class="px-4 py-2 flex items-center justify-between">
+      <.link navigate={~p"/"} class="flex items-center gap-2">
+        <img
+          src={~p"/images/logo.png"}
+          width="32"
+          height="32"
+          class="rounded-full"
+          alt="HackScraper"
+        />
+        <span class="text-xl font-semibold">HackScraper</span>
+      </.link>
+
+      <div class="flex items-center gap-3">
+        <%= if @current_user do %>
+          <.link
+            href={~p"/user/settings"}
+            class="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-md transition-colors"
+          >
+            <.icon name="hero-cog-6-tooth" class="w-5 h-5" />
+            <span class="hidden sm:inline">{@current_user.name}</span>
+          </.link>
+          <.link
+            href={~p"/user/log_out"}
+            method="delete"
+            class="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-md transition-colors"
+          >
+            <.icon name="hero-arrow-right-on-rectangle" class="w-5 h-5" />
+            <span class="hidden sm:inline">Log out</span>
+          </.link>
+        <% else %>
+          <.link
+            navigate={~p"/user/log_in"}
+            class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+          >
+            <.icon name="hero-arrow-left-on-rectangle" class="w-5 h-5" />
+            <span>Log in</span>
+          </.link>
+          <.link
+            navigate={~p"/user/register"}
+            class="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md transition-colors"
+          >
+            <.icon name="hero-user-plus" class="w-5 h-5" />
+            <span class="hidden sm:inline">Register</span>
+          </.link>
+        <% end %>
+      </div>
+    </nav>
+
     <div class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <div class="text-center">
         <h1 class="text-4xl md:text-6xl font-bold mb-6">
