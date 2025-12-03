@@ -8,14 +8,16 @@
 </.header>
 
 <.flopTable
-  items={@streams.hackathons}
   meta={@meta}
   path={~p"/hackathons"}
+  rows={@streams.hackathons}
   row_click={fn {_id, hackathon} -> JS.navigate(~p"/hackathons/#{hackathon}") end}
 >
   <:col :let={{_id, hackathon}} label="Name" field={:name}>{hackathon.name}</:col>
   <:col :let={{_id, hackathon}} label="Url" field={:url}>
-    <.link target="_blank" navigate={hackathon.url} phx-click={JS.exec("event.stopPropagation()")}>{hackathon.url}</.link>
+    <.link target="_blank" navigate={hackathon.url} phx-click={JS.exec("event.stopPropagation()")}>
+      {hackathon.url}
+    </.link>
   </:col>
   <:col :let={{_id, hackathon}} label="Image"><img src={hackathon.image} /></:col>
   <:col :let={{_id, hackathon}} label="Description">
@@ -43,12 +45,6 @@
     </.link>
   </:action>
 </.flopTable>
-
-<Flop.Phoenix.pagination
-  meta={@meta}
-  path={~p"/hackathons"}
-  page_list_attrs={[class: "flex gap-2"]}
-/>
 
 <.modal
   :if={@live_action in [:new, :edit]}

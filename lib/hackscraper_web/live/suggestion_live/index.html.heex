@@ -3,14 +3,20 @@
 </.header>
 
 <.flopTable
-  items={@streams.suggestions}
   meta={@meta}
   path={~p"/suggestions"}
+  rows={@streams.suggestions}
   row_click={fn {_id, suggestion} -> JS.navigate(~p"/suggestions/#{suggestion}") end}
 >
   <:col :let={{_id, suggestion}} label="Name" field={:name}>{suggestion.name}</:col>
   <:col :let={{_id, suggestion}} label="Url" field={:url}>
-    <.link target="_blank" navigate={suggestion.url} phx-click={JS.exec("event.stopPropagation()")}>{suggestion.url}</.link>
+    <.link
+      target="_blank"
+      navigate={suggestion.url}
+      phx-click={JS.exec("event.stopPropagation()")}
+    >
+      {suggestion.url}
+    </.link>
   </:col>
   <:col :let={{_id, suggestion}} label="Image"><img src={suggestion.image} /></:col>
   <:col :let={{_id, suggestion}} label="Description">
@@ -39,12 +45,6 @@
     </.link>
   </:action>
 </.flopTable>
-
-<Flop.Phoenix.pagination
-  meta={@meta}
-  path={~p"/suggestions"}
-  page_list_attrs={[class: "flex gap-2"]}
-/>
 
 <.modal
   :if={@live_action == :review}

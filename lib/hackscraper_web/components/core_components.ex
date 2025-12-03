@@ -530,6 +530,18 @@ defmodule HackScraperWeb.CoreComponents do
     """
   end
 
+  attr :rows, :list, required: true
+  attr :row_click, :any, default: nil, doc: "the function for handling phx-click on each row"
+  attr :meta, Flop.Meta, required: true
+  attr :path, :any, default: nil
+
+  slot :col, required: true do
+    attr :label, :string
+    attr :field, :atom
+  end
+
+  slot :action, doc: "the slot for showing user actions in the last table column"
+
   def flopTable(assigns) do
     assigns =
       assign(
@@ -542,7 +554,53 @@ defmodule HackScraperWeb.CoreComponents do
         table_attrs: [class: "w-full"]
       )
 
-    Flop.Phoenix.table(assigns)
+    ~H"""
+    <Flop.Phoenix.table
+      meta={@meta}
+      path={@path}
+      items={@rows}
+      row_click={@row_click}
+      col={@col}
+      action={@action}
+      opts={@opts}
+    />
+    <.pagination meta={@meta} path={@path} />
+    """
+  end
+
+  attr :meta, Flop.Meta, required: true
+  attr :path, :any, default: nil
+  attr :target, :string, default: nil
+
+  defp pagination(assigns) do
+    ~H"""
+    <Flop.Phoenix.pagination
+      meta={@meta}
+      path={@path}
+      target={@target}
+      aria-label="Pagination"
+      page_link_aria_label_fun={&"#{&1}ページ目へ"}
+      class="flex gap-2 items-center justify-center mt-10"
+      page_list_attrs={[class: "flex gap-1"]}
+      page_list_item_attrs={[
+        class: "relative px-4 py-2 rounded-lg hover:bg-zinc-100 hover:text-zinc-900"
+      ]}
+      page_link_attrs={[class: "after:absolute after:inset-0"]}
+      current_page_link_attrs={[class: "after:absolute after:inset-0 font-semibold text-zinc-900"]}
+      disabled_link_attrs={[class: "text-zinc-400"]}
+    >
+      <:previous attrs={[class: "relative"]}>
+        <div class="after:absolute after:inset-0 p-2 rounded-lg hover:bg-zinc-100">
+          <.icon name="hero-chevron-left" class="w-5 h-5" />
+        </div>
+      </:previous>
+      <:next attrs={[class: "relative order-last"]}>
+        <div class="after:absolute after:inset-0 p-2 rounded-lg hover:bg-zinc-100">
+          <.icon name="hero-chevron-right" class="w-5 h-5" />
+        </div>
+      </:next>
+    </Flop.Phoenix.pagination>
+    """
   end
 
   @doc """

@@ -8,9 +8,9 @@
 </.header>
 
 <.flopTable
-  items={@streams.scrapers}
   meta={@meta}
   path={~p"/scrapers"}
+  rows={@streams.scrapers}
   row_click={fn {_id, scraper} -> JS.navigate(~p"/scrapers/#{scraper}") end}
 >
   <:col :let={{_id, scraper}} label="Name" field={:name}>{scraper.name}</:col>
@@ -48,12 +48,6 @@
     </.link>
   </:action>
 </.flopTable>
-
-<Flop.Phoenix.pagination
-  meta={@meta}
-  path={~p"/suggestions"}
-  page_list_attrs={[class: "flex gap-2"]}
-/>
 
 <.modal
   :if={@live_action in [:new, :edit]}

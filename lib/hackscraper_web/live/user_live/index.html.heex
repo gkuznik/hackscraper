@@ -8,14 +8,16 @@
 </.header>
 
 <.flopTable
-  items={@streams.users}
   meta={@meta}
   path={~p"/users"}
+  rows={@streams.users}
   row_click={fn {_id, user} -> JS.navigate(~p"/users/#{user}") end}
 >
   <:col :let={{_id, user}} label="Name" field={:name}>{user.name}</:col>
   <:col :let={{_id, user}} label="Email" field={:email}>{user.email}</:col>
-  <:col :let={{_id, user}} label="Role" field={:role}>{HackScraper.Accounts.role_name(user.role)}</:col>
+  <:col :let={{_id, user}} label="Role" field={:role}>
+    {HackScraper.Accounts.role_name(user.role)}
+  </:col>
   <:action :let={{_id, user}}>
     <div class="sr-only">
       <.link navigate={~p"/users/#{user}"}>Show</.link>
@@ -31,12 +33,6 @@
     </.link>
   </:action>
 </.flopTable>
-
-<Flop.Phoenix.pagination
-  meta={@meta}
-  path={~p"/users"}
-  page_list_attrs={[class: "flex gap-2"]}
-/>
 
 <.modal :if={@live_action in [:new, :edit]} id="user-modal" show on_cancel={JS.patch(~p"/users")}>
   <.live_component
