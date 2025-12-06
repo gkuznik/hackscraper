@@ -92,7 +92,7 @@ defmodule HackScraperWeb.Router do
     end
 
     live_dashboard "/dashboard", metrics: HackScraperWeb.Telemetry
-    oban_dashboard("/oban")
+    oban_dashboard("/oban", logo_path: "/")
 
     alias HackScraperWeb.ScraperLive
     live "/scrapers", ScraperLive.Index, :index
