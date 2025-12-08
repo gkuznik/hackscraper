@@ -11,6 +11,6 @@ defmodule HackScraper.Repo.Migrations.CreateSeries do
       timestamps(type: :utc_datetime)
     end
 
-    create unique_index(:series, [:url])
+    create unique_index(:series, [:name])
   end
 end

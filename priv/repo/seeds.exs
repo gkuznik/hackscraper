@@ -14,12 +14,12 @@ require Logger
 admin_mail = System.get_env("ADMIN_MAIL")
 admin_pwd = System.get_env("ADMIN_PWD")
 
-if admin_mail and admin_pwd do
+if admin_mail && admin_pwd do
   case HackScraper.Accounts.register_user(%{
          email: admin_mail,
          name: "admin",
          password: admin_pwd,
-         is_admin: true
+         role: HackScraper.Accounts.roles()[:admin]
        }) do
     {:ok, _user} ->
       Logger.info("Created superuser: #{admin_mail}")

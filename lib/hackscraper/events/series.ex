@@ -23,5 +23,7 @@ defmodule HackScraper.Events.Series do
     series
     |> cast(attrs, [:name, :url, :image, :description])
     |> validate_required([:name, :description])
+    |> unsafe_validate_unique(:name, HackScraper.Repo)
+    |> unique_constraint(:name)
   end
 end

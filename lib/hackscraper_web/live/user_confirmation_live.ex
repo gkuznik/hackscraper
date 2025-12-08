@@ -1,11 +1,11 @@
 defmodule HackScraperWeb.UserConfirmationLive do
-  use HackScraperWeb, :live_view
+  use HackScraperWeb, :live_view_root_layout
 
   alias HackScraper.Accounts
 
   def render(%{live_action: :edit} = assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
+    <div class="mx-auto max-w-sm p-4">
       <.header class="text-center">Confirm Account</.header>
 
       <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_account">

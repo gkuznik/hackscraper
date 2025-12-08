@@ -1,13 +1,10 @@
 <main class="min-h-screen lg:flex">
-  <!-- Import the new sidebar component -->
   <HackScraperWeb.Components.Sidebar.sidebar current_user={@current_user} />
 
-  <!-- Mobile menu toggle button -->
   <div class="lg:hidden fixed top-4 left-4 z-50">
     <HackScraperWeb.Components.Sidebar.mobile_menu_button class="bg-white shadow-lg" />
   </div>
 
-  <!-- Main content area -->
   <div class="flex-1 lg:ml-0">
     <div class="p-4 sm:p-6 lg:p-8 pt-16 lg:pt-4">
       <.flash_group flash={@flash} />

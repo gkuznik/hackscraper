@@ -1,9 +1,9 @@
 defmodule HackScraperWeb.UserLoginLive do
-  use HackScraperWeb, :live_view
+  use HackScraperWeb, :live_view_root_layout
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
+    <div class="mx-auto max-w-sm p-4">
       <.header class="text-center">
         Log in to account
         <:subtitle>

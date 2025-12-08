@@ -1,11 +1,11 @@
 defmodule HackScraperWeb.UserResetPasswordLive do
-  use HackScraperWeb, :live_view
+  use HackScraperWeb, :live_view_root_layout
 
   alias HackScraper.Accounts
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
+    <div class="mx-auto max-w-sm p-4">
       <.header class="text-center">Reset Password</.header>
 
       <.simple_form

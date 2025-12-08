@@ -46,6 +46,24 @@ defmodule HackScraperWeb.Router do
   end
 
   scope "/", HackScraperWeb do
+    pipe_through [:browser, :editor]
+
+    live "/series/new", SeriesLive.Index, :new
+    live "/series/:id/edit", SeriesLive.Index, :edit
+    live "/series/:id/show/edit", SeriesLive.Show, :edit
+
+    live "/suggestions/:id/review", SuggestionLive.Index, :review
+    live "/suggestions/:id/show/review", SuggestionLive.Show, :review
+  end
+
+  scope "/", HackScraperWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live "/suggestions", SuggestionLive.Index, :index
+    live "/suggestions/:id", SuggestionLive.Show, :show
+  end
+
+  scope "/", HackScraperWeb do
     pipe_through :browser
 
     get "/", PageController, :home
@@ -58,20 +76,6 @@ defmodule HackScraperWeb.Router do
 
     live "/series", SeriesLive.Index, :index
     live "/series/:id", SeriesLive.Show, :show
-
-    live "/suggestions", SuggestionLive.Index, :index
-    live "/suggestions/:id", SuggestionLive.Show, :show
-  end
-
-  scope "/", HackScraperWeb do
-    pipe_through [:browser, :editor]
-
-    live "/series/new", SeriesLive.Index, :new
-    live "/series/:id/edit", SeriesLive.Index, :edit
-    live "/series/:id/show/edit", SeriesLive.Show, :edit
-
-    live "/suggestions/:id/review", SuggestionLive.Index, :review
-    live "/suggestions/:id/show/review", SuggestionLive.Show, :review
   end
 
   scope "/", HackScraperWeb do

@@ -1,12 +1,12 @@
 defmodule HackScraperWeb.UserRegistrationLive do
-  use HackScraperWeb, :live_view
+  use HackScraperWeb, :live_view_root_layout
 
   alias HackScraper.Accounts
   alias HackScraper.Accounts.User
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
+    <div class="mx-auto max-w-sm p-4">
       <.header class="text-center">
         Register for an account
         <:subtitle>
