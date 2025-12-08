@@ -1,14 +1,14 @@
-defmodule HackScraper.Worker.Scraper do
+defmodule HackScraper.Scrapers.Scraper do
   use Ecto.Schema
   import Ecto.Changeset
 
   @derive {
     Flop.Schema,
-    filterable: [:name, :url, :paused], sortable: [:name, :url, :schedule]
+    filterable: [:worker, :url, :paused], sortable: [:worker, :url, :schedule]
   }
 
   schema "scrapers" do
-    field :name, :string
+    field :worker, :string
     field :url, :string
     field :schedule, :string
     field :paused, :boolean, default: false
@@ -19,25 +19,18 @@ defmodule HackScraper.Worker.Scraper do
   @doc false
   def changeset(scraper, attrs) do
     scraper
-    |> cast(attrs, [:name, :schedule, :url, :paused])
-    |> validate_required([:name, :schedule])
-    |> validate_name()
+    |> cast(attrs, [:worker, :schedule, :url, :paused])
+    |> validate_required([:worker, :schedule])
+    |> validate_worker()
     |> validate_schedule()
-    |> unique_constraint(:name)
   end
 
-  defp validate_name(changeset) do
+  defp validate_worker(changeset) do
     changeset
-    |> update_change(:name, &String.downcase/1)
-    |> validate_change(:name, fn :name, name ->
-      name_prefix = name |> String.split("-", parts: 2) |> List.first()
-
-      if name_prefix in ["devpost", "direct", "dummy"] do
-        []
-      else
-        [name: "must start with one of: devpost, direct, dummy"]
-      end
-    end)
+    |> validate_inclusion(
+      :worker,
+      HackScraper.Worker.Common.workers() |> Map.keys()
+    )
   end
 
   defp validate_schedule(changeset) do

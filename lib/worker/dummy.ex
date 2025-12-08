@@ -1,4 +1,4 @@
-defmodule HackScraper.Scraper.Dummy do
+defmodule HackScraper.Worker.Dummy do
   use Oban.Worker
 
   require Logger

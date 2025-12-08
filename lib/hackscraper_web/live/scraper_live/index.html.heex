@@ -13,7 +13,7 @@
   rows={@streams.scrapers}
   row_click={fn {_id, scraper} -> JS.navigate(~p"/scrapers/#{scraper}") end}
 >
-  <:col :let={{_id, scraper}} label="Name" field={:name}>{scraper.name}</:col>
+  <:col :let={{_id, scraper}} label="Worker" field={:worker}>{scraper.worker}</:col>
   <:col :let={{_id, scraper}} label="Schedule" field={:schedule}>{scraper.schedule}</:col>
   <:col :let={{_id, scraper}} label="Url" field={:url}>
     <.link

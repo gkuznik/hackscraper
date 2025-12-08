@@ -2,11 +2,11 @@ defmodule HackScraperWeb.ScraperLiveTest do
   use HackScraperWeb.ConnCase
 
   import Phoenix.LiveViewTest
-  import HackScraper.WorkerFixtures
+  import HackScraper.ScrapersFixtures
 
-  @create_attrs %{name: "some name", url: "some url", schedule: "some schedule", paused: true}
-  @update_attrs %{name: "some updated name", url: "some updated url", schedule: "some updated schedule", paused: false}
-  @invalid_attrs %{name: nil, url: nil, schedule: nil, paused: false}
+  @create_attrs %{worker: "some worker", url: "some url", schedule: "some schedule", paused: true}
+  @update_attrs %{worker: "some updated worker", url: "some updated url", schedule: "some updated schedule", paused: false}
+  @invalid_attrs %{worker: nil, url: nil, schedule: nil, paused: false}
 
   defp create_scraper(_) do
     scraper = scraper_fixture()
@@ -20,7 +20,7 @@ defmodule HackScraperWeb.ScraperLiveTest do
       {:ok, _index_live, html} = live(conn, ~p"/scrapers")
 
       assert html =~ "Listing Scrapers"
-      assert html =~ scraper.name
+      assert html =~ scraper.worker
     end
 
     test "saves new scraper", %{conn: conn} do
@@ -43,7 +43,7 @@ defmodule HackScraperWeb.ScraperLiveTest do
 
       html = render(index_live)
       assert html =~ "Scraper created successfully"
-      assert html =~ "some name"
+      assert html =~ "some worker"
     end
 
     test "updates scraper in listing", %{conn: conn, scraper: scraper} do
@@ -66,7 +66,7 @@ defmodule HackScraperWeb.ScraperLiveTest do
 
       html = render(index_live)
       assert html =~ "Scraper updated successfully"
-      assert html =~ "some updated name"
+      assert html =~ "some updated worker"
     end
 
     test "deletes scraper in listing", %{conn: conn, scraper: scraper} do
@@ -84,7 +84,7 @@ defmodule HackScraperWeb.ScraperLiveTest do
       {:ok, _show_live, html} = live(conn, ~p"/scrapers/#{scraper}")
 
       assert html =~ "Show Scraper"
-      assert html =~ scraper.name
+      assert html =~ scraper.worker
     end
 
     test "updates scraper within modal", %{conn: conn, scraper: scraper} do
@@ -107,7 +107,7 @@ defmodule HackScraperWeb.ScraperLiveTest do
 
       html = render(show_live)
       assert html =~ "Scraper updated successfully"
-      assert html =~ "some updated name"
+      assert html =~ "some updated worker"
     end
   end
 end

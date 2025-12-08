@@ -1,7 +1,7 @@
 defmodule HackScraperWeb.ScraperLive.FormComponent do
   use HackScraperWeb, :live_component
 
-  alias HackScraper.Worker
+  alias HackScraper.Scrapers
 
   @impl true
   def render(assigns) do
@@ -19,7 +19,7 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
+        <.input field={@form[:worker]} type="select" label="Worker" options={worker_options()} />
         <.input field={@form[:schedule]} type="text" label="Schedule" />
         <.input field={@form[:url]} type="text" label="Url" />
         <.input field={@form[:paused]} type="checkbox" label="Paused" />
@@ -31,19 +31,25 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
     """
   end
 
+  defp worker_options do
+    HackScraper.Worker.Common.workers()
+    |> Map.keys()
+    |> Enum.map(fn name -> {String.capitalize(name), name} end)
+  end
+
   @impl true
   def update(%{scraper: scraper} = assigns, socket) do
     {:ok,
      socket
      |> assign(assigns)
      |> assign_new(:form, fn ->
-       to_form(Worker.change_scraper(scraper))
+       to_form(Scrapers.change_scraper(scraper))
      end)}
   end
 
   @impl true
   def handle_event("validate", %{"scraper" => scraper_params}, socket) do
-    changeset = Worker.change_scraper(socket.assigns.scraper, scraper_params)
+    changeset = Scrapers.change_scraper(socket.assigns.scraper, scraper_params)
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
@@ -52,7 +58,7 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
   end
 
   defp save_scraper(socket, :edit, scraper_params) do
-    case Worker.update_scraper(socket.assigns.scraper, scraper_params) do
+    case Scrapers.update_scraper(socket.assigns.scraper, scraper_params) do
       {:ok, scraper} ->
         notify_parent({:saved, scraper})
 
@@ -67,7 +73,7 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
   end
 
   defp save_scraper(socket, :new, scraper_params) do
-    case Worker.create_scraper(scraper_params) do
+    case Scrapers.create_scraper(scraper_params) do
       {:ok, scraper} ->
         notify_parent({:saved, scraper})
 

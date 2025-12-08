@@ -1,7 +1,7 @@
-defmodule HackScraper.Scraper.Direct do
+defmodule HackScraper.Worker.Direct do
   use Oban.Worker
 
-  import HackScraper.Scraper.Common
+  import HackScraper.Worker.Common
 
   require Logger
 

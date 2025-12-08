@@ -1,12 +1,13 @@
-defmodule HackScraper.Worker do
+defmodule HackScraper.Scrapers do
   @moduledoc """
-  The Worker context.
+  The Scraper context.
   """
 
   import Ecto.Query, warn: false
+  alias HackScraper.Worker.Scheduler
   alias HackScraper.Repo
 
-  alias HackScraper.Worker.Scraper
+  alias HackScraper.Scrapers.Scraper
 
   @doc """
   Returns the list of scrapers.
@@ -54,9 +55,18 @@ defmodule HackScraper.Worker do
 
   """
   def create_scraper(attrs \\ %{}) do
-    %Scraper{}
-    |> Scraper.changeset(attrs)
-    |> Repo.insert()
+    Repo.transaction(fn ->
+      with {:ok, scraper} <-
+             %Scraper{}
+             |> Scraper.changeset(attrs)
+             |> Repo.insert(),
+           {:ok, _} <-
+             Scheduler.schedule_executions_for_period(scraper) do
+        scraper
+      else
+        {:error, value} -> Repo.rollback(value)
+      end
+    end)
   end
 
   @doc """
@@ -72,9 +82,18 @@ defmodule HackScraper.Worker do
 
   """
   def update_scraper(%Scraper{} = scraper, attrs) do
-    scraper
-    |> Scraper.changeset(attrs)
-    |> Repo.update()
+    Repo.transaction(fn ->
+      with {:ok, updated_scraper} <-
+             scraper
+             |> Scraper.changeset(attrs)
+             |> Repo.update(),
+           {:ok, _count} <- delete_jobs(scraper),
+           {:ok, _} <- Scheduler.schedule_executions_for_period(updated_scraper) do
+        updated_scraper
+      else
+        {:error, value} -> Repo.rollback(value)
+      end
+    end)
   end
 
   @doc """
@@ -90,7 +109,14 @@ defmodule HackScraper.Worker do
 
   """
   def delete_scraper(%Scraper{} = scraper) do
-    Repo.delete(scraper)
+    Repo.transaction(fn ->
+      with {:ok, deleted_scraper} <- Repo.delete(scraper),
+           {:ok, _count} <- delete_jobs(scraper) do
+        deleted_scraper
+      else
+        {:error, value} -> Repo.rollback(value)
+      end
+    end)
   end
 
   @doc """
@@ -104,5 +130,15 @@ defmodule HackScraper.Worker do
   """
   def change_scraper(%Scraper{} = scraper, attrs \\ %{}) do
     Scraper.changeset(scraper, attrs)
+  end
+
+  def delete_jobs(%Scraper{id: id}) when is_integer(id) do
+    Oban.Job
+    |> Ecto.Query.where(state: "scheduled")
+    |> Ecto.Query.where(
+      [j],
+      fragment("?->>'scraper_id' = ?", j.meta, ^to_string(id))
+    )
+    |> Oban.delete_all_jobs()
   end
 end

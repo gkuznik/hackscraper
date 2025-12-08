@@ -1,7 +1,7 @@
-defmodule HackScraper.WorkerFixtures do
+defmodule HackScraper.ScrapersFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `HackScraper.Worker` context.
+  entities via the `HackScraper.Scrapers` context.
   """
 
   @doc """
@@ -11,12 +11,12 @@ defmodule HackScraper.WorkerFixtures do
     {:ok, scraper} =
       attrs
       |> Enum.into(%{
-        name: "some name",
+        worker: "some worker",
         paused: true,
         schedule: "some schedule",
         url: "some url"
       })
-      |> HackScraper.Worker.create_scraper()
+      |> HackScraper.Scrapers.create_scraper()
 
     scraper
   end

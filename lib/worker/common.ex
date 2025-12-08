@@ -1,11 +1,22 @@
-defmodule HackScraper.Scraper.Common do
+defmodule HackScraper.Worker.Common do
   alias HackScraper.Events.Suggestion
   alias HackScraper.Events.Hackathon
 
   @oban_opts [queue: :scraper, max_attempts: 1]
+  def oban_opts, do: @oban_opts
+
   @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:mensaplan, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
 
-  def oban_opts, do: @oban_opts
+  @workers %{
+    "devpost" => HackScraper.Worker.Devpost,
+    "direct" => HackScraper.Worker.Direct,
+    "dummy" => HackScraper.Worker.Dummy
+  }
+  def workers, do: @workers
+
+  def worker_module(name) when is_binary(name) do
+    @workers[name]
+  end
 
   def get!(api_url) do
     Req.get!(api_url, http_errors: :raise, user_agent: @user_agent)
@@ -45,7 +56,7 @@ defmodule HackScraper.Scraper.Common do
     existing_hackathons =
       HackScraper.Repo.all(
         from h in Hackathon,
-        select: %{url: h.url, name: h.name}
+          select: %{url: h.url, name: h.name}
       )
 
     existing_set =

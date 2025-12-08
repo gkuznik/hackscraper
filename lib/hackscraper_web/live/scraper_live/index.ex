@@ -1,8 +1,8 @@
 defmodule HackScraperWeb.ScraperLive.Index do
   use HackScraperWeb, :live_view
 
-  alias HackScraper.Worker
-  alias HackScraper.Worker.Scraper
+  alias HackScraper.Scrapers
+  alias HackScraper.Scrapers.Scraper
 
   on_mount {HackScraperWeb.UserAuth, :mount_current_user}
 
@@ -21,10 +21,10 @@ defmodule HackScraperWeb.ScraperLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
-    scraper = Worker.get_scraper!(id)
+    scraper = Scrapers.get_scraper!(id)
 
     socket
-    |> assign(:page_title, "Edit Scraper " <> scraper.name)
+    |> assign(:page_title, "Edit Scraper #{scraper.id}")
     |> assign(:scraper, scraper)
   end
 
@@ -47,24 +47,24 @@ defmodule HackScraperWeb.ScraperLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    scraper = Worker.get_scraper!(id)
-    {:ok, _} = Worker.delete_scraper(scraper)
+    scraper = Scrapers.get_scraper!(id)
+    {:ok, _} = Scrapers.delete_scraper(scraper)
 
     {:noreply, stream_delete(socket, :scrapers, scraper)}
   end
 
   @impl true
   def handle_event("pause", %{"id" => id}, socket) do
-    scraper = Worker.get_scraper!(id)
-    {:ok, scraper} = Worker.update_scraper(scraper, %{paused: !scraper.paused})
+    scraper = Scrapers.get_scraper!(id)
+    {:ok, scraper} = Scrapers.update_scraper(scraper, %{paused: !scraper.paused})
 
     {:noreply, stream_insert(socket, :scrapers, scraper, update_only: true)}
   end
 
   @impl true
   def handle_event("run", %{"id" => id}, socket) do
-    scraper = Worker.get_scraper!(id)
-    {:ok, job} = HackScraper.Scraper.Scheduler.schedule_job(scraper)
+    scraper = Scrapers.get_scraper!(id)
+    {:ok, job} = HackScraper.Worker.Scheduler.schedule_job(scraper)
 
     {:noreply, push_navigate(socket, to: ~p"/oban/jobs/#{job.id}")}
   end
