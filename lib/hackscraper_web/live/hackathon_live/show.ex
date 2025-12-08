@@ -15,6 +15,6 @@ defmodule HackScraperWeb.HackathonLive.Show do
      |> assign(:hackathon, hackathon)}
   end
 
-  defp page_title(:show, hackathon), do: "Show Hackathon " <> hackathon.name
-  defp page_title(:edit, hackathon), do: "Edit Hackathon " <> hackathon.name
+  defp page_title(:show, hackathon), do: "Hackathon: " <> hackathon.name
+  defp page_title(:edit, hackathon), do: "Edit " <> hackathon.name
 end

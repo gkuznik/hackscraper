@@ -9,7 +9,7 @@ defmodule HackScraperWeb.UserLoginLiveTest do
       {:ok, _lv, html} = live(conn, ~p"/user/log_in")
 
       assert html =~ "Log in"
-      assert html =~ "Register"
+      assert html =~ "Sign up"
       assert html =~ "Forgot your password?"
     end
 
@@ -26,7 +26,7 @@ defmodule HackScraperWeb.UserLoginLiveTest do
 
   describe "user login" do
     test "redirects if user login with valid credentials", %{conn: conn} do
-      password = "123456789abcd"
+      password = "123456789abcD"
       user = user_fixture(%{password: password})
 
       {:ok, lv, _html} = live(conn, ~p"/user/log_in")
@@ -63,7 +63,7 @@ defmodule HackScraperWeb.UserLoginLiveTest do
 
       {:ok, _login_live, login_html} =
         lv
-        |> element(~s|main a:fl-contains("Sign up")|)
+        |> element("a", "Sign up")
         |> render_click()
         |> follow_redirect(conn, ~p"/user/register")
 
@@ -77,7 +77,7 @@ defmodule HackScraperWeb.UserLoginLiveTest do
 
       {:ok, conn} =
         lv
-        |> element(~s|main a:fl-contains("Forgot your password?")|)
+        |> element("a", "Forgot your password?")
         |> render_click()
         |> follow_redirect(conn, ~p"/user/reset_password")
 

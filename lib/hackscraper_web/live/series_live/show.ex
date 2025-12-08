@@ -7,12 +7,14 @@ defmodule HackScraperWeb.SeriesLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
+    series = Events.get_series!(id) |> HackScraper.Repo.preload(:hackathons)
+
     {:noreply,
      socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:series, Events.get_series!(id) |> HackScraper.Repo.preload(:hackathons))}
+     |> assign(:page_title, page_title(socket.assigns.live_action, series))
+     |> assign(:series, series)}
   end
 
-  defp page_title(:show), do: "Show Series"
-  defp page_title(:edit), do: "Edit Series"
+  defp page_title(:show, series), do: "Series: " <> series.name
+  defp page_title(:edit, series), do: "Edit " <> series.name
 end

@@ -15,6 +15,6 @@ defmodule HackScraperWeb.ScraperLive.Show do
      |> assign(:scraper, scraper)}
   end
 
-  defp page_title(:show, scraper), do: "Show Scraper #{scraper.id}"
+  defp page_title(:show, scraper), do: "Scraper: #{scraper.id}"
   defp page_title(:edit, scraper), do: "Edit Scraper #{scraper.id}"
 end

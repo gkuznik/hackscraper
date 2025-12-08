@@ -3,10 +3,7 @@ defmodule HackScraperWeb.SuggestionLiveTest do
 
   import Phoenix.LiveViewTest
   import HackScraper.EventsFixtures
-
-  @create_attrs %{name: "some name", date: "some date", description: "some description", location: "some location", image: "some image", url: "some url", start_date: "2025-11-16T16:50:00Z", end_date: "2025-11-16T16:50:00Z"}
-  @update_attrs %{name: "some updated name", date: "some updated date", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: "2025-11-17T16:50:00Z", end_date: "2025-11-17T16:50:00Z"}
-  @invalid_attrs %{name: nil, date: nil, description: nil, location: nil, image: nil, url: nil, start_date: nil, end_date: nil}
+  import HackScraper.AccountsFixtures
 
   defp create_suggestion(_) do
     suggestion = suggestion_fixture()
@@ -17,15 +14,17 @@ defmodule HackScraperWeb.SuggestionLiveTest do
     setup [:create_suggestion]
 
     test "lists all suggestions", %{conn: conn, suggestion: suggestion} do
-      {:ok, _index_live, html} = live(conn, ~p"/suggestions")
+      {:ok, _index_live, html} = log_in_user(conn, user_fixture()) |> live(~p"/suggestions")
 
       assert html =~ "Listing Suggestions"
       assert html =~ suggestion.name
     end
 
-
-    test "review suggestion in listing", %{conn: conn, suggestion: suggestion} do
-      {:ok, index_live, _html} = live(conn, ~p"/suggestions")
+    test "review suggestion in listing and create hackathon", %{
+      conn: conn,
+      suggestion: suggestion
+    } do
+      {:ok, index_live, _html} = log_in_user(conn, user_fixture()) |> live(~p"/suggestions")
 
       assert index_live |> element("#suggestions-#{suggestion.id} a", "Review") |> render_click() =~
                "Review Suggestion"
@@ -33,22 +32,19 @@ defmodule HackScraperWeb.SuggestionLiveTest do
       assert_patch(index_live, ~p"/suggestions/#{suggestion}/review")
 
       assert index_live
-             |> form("#hackathon-form", suggestion: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      assert index_live
-             |> form("#hackathon-form", suggestion: @update_attrs)
+             |> form("#hackathon-form")
              |> render_submit()
 
-      assert_patch(index_live, ~p"/hackathons")
+      assert_patch(index_live, ~p"/suggestions")
 
       html = render(index_live)
       assert html =~ "Hackathon created successfully"
-      assert html =~ "some updated name"
+
+      refute has_element?(index_live, "#suggestions-#{suggestion.id}")
     end
 
     test "deletes suggestion in listing", %{conn: conn, suggestion: suggestion} do
-      {:ok, index_live, _html} = live(conn, ~p"/suggestions")
+      {:ok, index_live, _html} = log_in_user(conn, user_fixture()) |> live(~p"/suggestions")
 
       assert index_live |> element("#suggestions-#{suggestion.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#suggestions-#{suggestion.id}")
@@ -59,33 +55,35 @@ defmodule HackScraperWeb.SuggestionLiveTest do
     setup [:create_suggestion]
 
     test "displays suggestion", %{conn: conn, suggestion: suggestion} do
-      {:ok, _show_live, html} = live(conn, ~p"/suggestions/#{suggestion}")
+      {:ok, _show_live, html} =
+        log_in_user(conn, user_fixture()) |> live(~p"/suggestions/#{suggestion}")
 
-      assert html =~ "Show Suggestion"
+      assert html =~ "Suggestion: "
       assert html =~ suggestion.name
     end
 
-    test "updates suggestion within modal", %{conn: conn, suggestion: suggestion} do
-      {:ok, show_live, _html} = live(conn, ~p"/suggestions/#{suggestion}")
+    test "review suggestion within modal and create hackathon", %{
+      conn: conn,
+      suggestion: suggestion
+    } do
+      {:ok, show_live, _html} =
+        log_in_user(conn, user_fixture()) |> live(~p"/suggestions/#{suggestion}")
 
-      assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Suggestion"
+      assert show_live |> element("a", "Review") |> render_click() =~
+               "Review some name"
 
-      assert_patch(show_live, ~p"/suggestions/#{suggestion}/show/edit")
+      assert_patch(show_live, ~p"/suggestions/#{suggestion}/show/review")
 
       assert show_live
-             |> form("#suggestion-form", suggestion: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      assert show_live
-             |> form("#suggestion-form", suggestion: @update_attrs)
+             |> form("#hackathon-form")
              |> render_submit()
 
-      assert_patch(show_live, ~p"/suggestions/#{suggestion}")
+      {path, flash} = assert_redirect(show_live)
+      assert flash["info"] == "Suggestion published as Hackathon"
+      assert path =~ ~r/hackathons\/\d+/
 
-      html = render(show_live)
-      assert html =~ "Suggestion updated successfully"
-      assert html =~ "some updated name"
+      {:ok, show_live, _html} = log_in_user(conn, user_fixture()) |> live(~p"/suggestions/")
+      refute has_element?(show_live, "#suggestions-#{suggestion.id}")
     end
   end
 end

@@ -83,7 +83,7 @@ defmodule HackScraperWeb.SeriesLiveTest do
     test "displays series", %{conn: conn, series: series} do
       {:ok, _show_live, html} = live(conn, ~p"/series/#{series}")
 
-      assert html =~ "Show Series"
+      assert html =~ "Series: "
       assert html =~ series.name
     end
 
@@ -91,7 +91,7 @@ defmodule HackScraperWeb.SeriesLiveTest do
       {:ok, show_live, _html} = live(conn, ~p"/series/#{series}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Series"
+               "Edit"
 
       assert_patch(show_live, ~p"/series/#{series}/show/edit")
 

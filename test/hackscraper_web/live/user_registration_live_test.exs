@@ -40,17 +40,17 @@ defmodule HackScraperWeb.UserRegistrationLiveTest do
     test "creates account and logs the user in", %{conn: conn} do
       {:ok, lv, _html} = live(conn, ~p"/user/register")
 
-      email = unique_user_email()
-      form = form(lv, "#registration_form", user: valid_user_attributes(email: email))
+      name = unique_user_name()
+      form = form(lv, "#registration_form", user: valid_user_attributes(name: name))
       render_submit(form)
       conn = follow_trigger_action(form, conn)
 
       assert redirected_to(conn) == ~p"/"
 
       # Now do a logged in request and assert on the menu
-      conn = get(conn, "/")
+      conn = get(conn, "/user/settings")
       response = html_response(conn, 200)
-      assert response =~ email
+      assert response =~ name
       assert response =~ "Settings"
       assert response =~ "Log out"
     end
@@ -77,7 +77,7 @@ defmodule HackScraperWeb.UserRegistrationLiveTest do
 
       {:ok, _login_live, login_html} =
         lv
-        |> element(~s|main a:fl-contains("Log in")|)
+        |> element("a", "Log in")
         |> render_click()
         |> follow_redirect(conn, ~p"/user/log_in")
 

@@ -3,6 +3,7 @@ defmodule HackScraperWeb.HackathonLiveTest do
 
   import Phoenix.LiveViewTest
   import HackScraper.EventsFixtures
+  import HackScraper.AccountsFixtures
 
   @create_attrs %{name: "some name", description: "some description", location: "some location", image: "some image", url: "some url", start_date: "2025-11-11T23:07:00Z", end_date: "2025-11-11T23:07:00Z"}
   @update_attrs %{name: "some updated name", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: "2025-11-12T23:07:00Z", end_date: "2025-11-12T23:07:00Z"}
@@ -23,8 +24,8 @@ defmodule HackScraperWeb.HackathonLiveTest do
       assert html =~ hackathon.name
     end
 
-    test "saves new hackathon", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, ~p"/hackathons")
+    test "saves new hackathon with privileges", %{conn: conn} do
+      {:ok, index_live, _html} = log_in_user(conn, admin_user_fixture()) |> live(~p"/hackathons")
 
       assert index_live |> element("a", "New Hackathon") |> render_click() =~
                "New Hackathon"
@@ -44,6 +45,17 @@ defmodule HackScraperWeb.HackathonLiveTest do
       html = render(index_live)
       assert html =~ "Hackathon created successfully"
       assert html =~ "some name"
+    end
+
+    test "saves new hackathon without privileges creates suggestion instead", %{conn: conn} do
+      {:ok, new_live, _html} = log_in_user(conn, user_fixture()) |> live(~p"/hackathons/new")
+
+      assert new_live
+             |> form("#hackathon-form", hackathon: @update_attrs)
+             |> render_submit()
+
+      assert_redirect(new_live, ~p"/suggestions")
+      assert HackScraper.Events.list_suggestions() != []
     end
 
     test "updates hackathon in listing", %{conn: conn, hackathon: hackathon} do
@@ -83,7 +95,7 @@ defmodule HackScraperWeb.HackathonLiveTest do
     test "displays hackathon", %{conn: conn, hackathon: hackathon} do
       {:ok, _show_live, html} = live(conn, ~p"/hackathons/#{hackathon}")
 
-      assert html =~ "Show Hackathon"
+      assert html =~ "Hackathon: "
       assert html =~ hackathon.name
     end
 
@@ -91,7 +103,7 @@ defmodule HackScraperWeb.HackathonLiveTest do
       {:ok, show_live, _html} = live(conn, ~p"/hackathons/#{hackathon}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Hackathon"
+               "Edit"
 
       assert_patch(show_live, ~p"/hackathons/#{hackathon}/show/edit")
 

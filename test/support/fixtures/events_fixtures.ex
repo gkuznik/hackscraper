@@ -4,6 +4,8 @@ defmodule HackScraper.EventsFixtures do
   entities via the `HackScraper.Events` context.
   """
 
+  def unique_series_name, do: "series#{System.unique_integer()}"
+
   @doc """
   Generate a series.
   """
@@ -13,7 +15,7 @@ defmodule HackScraper.EventsFixtures do
       |> Enum.into(%{
         description: "some description",
         image: "some image",
-        name: "some name",
+        name: unique_series_name(),
         url: "some url"
       })
       |> HackScraper.Events.create_series()
@@ -38,7 +40,8 @@ defmodule HackScraper.EventsFixtures do
       })
       |> HackScraper.Events.create_hackathon()
 
-    hackathon
+    # preload the series
+    Map.put(hackathon, :series, nil)
   end
 
   @doc """

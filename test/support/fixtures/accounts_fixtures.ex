@@ -6,7 +6,8 @@ defmodule HackScraper.AccountsFixtures do
 
   def unique_user_name, do: "user#{System.unique_integer()}"
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
-  def valid_user_password, do: "hello world!"
+  def valid_user_password, do: "Hello world!"
+  def new_valid_user_password, do: "new valid Password!"
 
   def valid_user_attributes(attrs \\ %{}) do
     Enum.into(attrs, %{
@@ -21,6 +22,17 @@ defmodule HackScraper.AccountsFixtures do
       attrs
       |> valid_user_attributes()
       |> HackScraper.Accounts.register_user()
+
+    user
+  end
+
+  def admin_user_fixture(attrs \\ %{}) do
+    {:ok, user} =
+      attrs
+      |> valid_user_attributes()
+      |> HackScraper.Accounts.register_user()
+
+    {:ok, user} = HackScraper.Accounts.update_user(user, %{role: 3})
 
     user
   end

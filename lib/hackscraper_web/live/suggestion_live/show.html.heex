@@ -1,8 +1,8 @@
 <.header>
-  Suggestion for {@suggestion.name}
+  Suggestion: {@suggestion.name}
   <:actions>
     <.link patch={~p"/suggestions/#{@suggestion}/show/review"} phx-click={JS.push_focus()}>
-      <.button>Review hackathon</.button>
+      <.button>Review</.button>
     </.link>
   </:actions>
 </.header>
@@ -32,7 +32,7 @@
     title={@page_title}
     action={:new}
     hackathon={struct(HackScraper.Events.Hackathon, Map.from_struct(@suggestion))}
-    patch={~p"/suggestions"}
+    patch={~p"/suggestions/#{@suggestion}"}
     date_hint={@suggestion.date}
   />
 </.modal>

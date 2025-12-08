@@ -15,6 +15,6 @@ defmodule HackScraperWeb.UserLive.Show do
      |> assign(:page_title, page_title(socket.assigns.live_action, user))}
   end
 
-  defp page_title(:show, user), do: "User " <> user.name
+  defp page_title(:show, user), do: "User: " <> user.name
   defp page_title(:edit, user), do: "Edit User " <> user.name
 end

@@ -56,8 +56,8 @@ defmodule HackScraperWeb.UserResetPasswordLiveTest do
         lv
         |> form("#reset_password_form",
           user: %{
-            "password" => "new valid password",
-            "password_confirmation" => "new valid password"
+            "password" => new_valid_user_password(),
+            "password_confirmation" => new_valid_user_password()
           }
         )
         |> render_submit()
@@ -65,7 +65,7 @@ defmodule HackScraperWeb.UserResetPasswordLiveTest do
 
       refute get_session(conn, :user_token)
       assert Phoenix.Flash.get(conn.assigns.flash, :info) =~ "Password reset successfully"
-      assert Accounts.get_user_by_email_and_password(user.email, "new valid password")
+      assert Accounts.get_user_by_email_and_password(user.email, new_valid_user_password())
     end
 
     test "does not reset password on invalid data", %{conn: conn, token: token} do
@@ -93,7 +93,7 @@ defmodule HackScraperWeb.UserResetPasswordLiveTest do
 
       {:ok, conn} =
         lv
-        |> element(~s|main a:fl-contains("Log in")|)
+        |> element("a", "Log in")
         |> render_click()
         |> follow_redirect(conn, ~p"/user/log_in")
 
@@ -108,7 +108,7 @@ defmodule HackScraperWeb.UserResetPasswordLiveTest do
 
       {:ok, conn} =
         lv
-        |> element(~s|main a:fl-contains("Register")|)
+        |> element("a", "Register")
         |> render_click()
         |> follow_redirect(conn, ~p"/user/register")
 
