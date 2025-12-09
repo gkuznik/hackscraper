@@ -15,22 +15,21 @@ admin_mail = System.get_env("ADMIN_MAIL")
 admin_pwd = System.get_env("ADMIN_PWD")
 
 if admin_mail && admin_pwd do
-  case HackScraper.Accounts.register_user(%{
-         email: admin_mail,
-         name: "admin",
-         password: admin_pwd,
-         role: HackScraper.Accounts.roles()[:admin]
-       }) do
-    {:ok, _user} ->
-      Logger.info("Created superuser: #{admin_mail}")
+  with {:ok, user} <-
+         HackScraper.Accounts.register_user(%{
+           name: "admin",
+           email: admin_mail,
+           password: admin_pwd
+         }),
+       {:ok, _user} <-
+         HackScraper.Accounts.update_user(user, %{role: HackScraper.Accounts.roles()[:admin]}) do
+    Logger.info("Created superuser: #{admin_mail}")
+  else
+    {:error, %{errors: [name: {"has already been taken", _}] ++ _}} ->
+      Logger.info("User admin already exists")
 
-    {:error,
-     %{errors: [email: {"has already been taken", [constraint: :unique, constraint_name: _]}]} =
-         _changeset} ->
-      Logger.info("Superuser already exists: #{admin_mail}")
-
-    {:error, changeset} ->
-      Logger.error("Error creating superuser: #{inspect(changeset.errors)}")
+    {:error, %{errors: errors}} ->
+      Logger.error("Error creating superuser: #{inspect(errors)}")
   end
 else
   Logger.warning("ADMIN_MAIL or ADMIN_PWD environment variable not set")
