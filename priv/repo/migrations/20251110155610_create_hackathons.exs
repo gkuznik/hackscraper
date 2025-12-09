@@ -15,7 +15,8 @@ defmodule HackScraper.Repo.Migrations.CreateHackathons do
       timestamps(type: :utc_datetime)
     end
 
-    create index(:hackathons, [:series_id])
+    create index(:hackathons, :url)
+    create index(:hackathons, :series_id)
     create unique_index(:hackathons, [:url, :start_date])
   end
 end

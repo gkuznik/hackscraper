@@ -2,10 +2,12 @@ defmodule HackScraper.Worker.Common do
   alias HackScraper.Events.Suggestion
   alias HackScraper.Events.Hackathon
 
-  @oban_opts [queue: :scraper, max_attempts: 1]
-  def oban_opts, do: @oban_opts
+  # TODO setup bot accounts, use admin for now
+  def user_id, do: 1
 
-  @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:mensaplan, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
+  def oban_opts, do: [queue: :scraper, max_attempts: 1]
+
+  @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:hackscraper, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
 
   @workers %{
     "devpost" => HackScraper.Worker.Devpost,
@@ -22,19 +24,28 @@ defmodule HackScraper.Worker.Common do
     Req.get!(api_url, http_errors: :raise, user_agent: @user_agent)
   end
 
+  @doc """
+  hackathon with same URL -> human already checked it out -> no suggestion
+  suggestion with same URL created by us -> update fields
+
+  returns number of inserted/updated suggestions
+  """
   def upsert_suggestions([]), do: 0
 
   def upsert_suggestions(suggestions) do
-    # Filter out suggestions where both URL and name already exist in hackathons
-    filtered_suggestions = filter_existing_hackathons(suggestions)
+    import Ecto.Query
+
+    new_suggestions =
+      Enum.reject(suggestions, fn %{url: url} ->
+        HackScraper.Repo.exists?(from h in Hackathon, where: h.url == ^url)
+      end)
 
     timestamp = DateTime.utc_now(:second)
-
     placeholders = %{timestamp: timestamp}
 
     maps =
       Enum.map(
-        filtered_suggestions,
+        new_suggestions,
         fn s -> Map.put(s, :inserted_at, {:placeholder, :timestamp}) end
       )
 
@@ -43,37 +54,22 @@ defmodule HackScraper.Worker.Common do
         Suggestion,
         maps,
         placeholders: placeholders,
-        on_conflict: {:replace_all_except, [:id, :url]},
-        conflict_target: [:url]
+        on_conflict: {:replace_all_except, [:id, :creator_id, :url, :start_date]},
+        conflict_target: [:creator_id, :url, :start_date]
       )
 
     num
   end
 
-  defp filter_existing_hackathons(suggestions) do
-    import Ecto.Query
+  @doc """
+  hackathon with same URL and start date -> human already checked it out -> don't insert/update
 
-    existing_hackathons =
-      HackScraper.Repo.all(
-        from h in Hackathon,
-          select: %{url: h.url, name: h.name}
-      )
-
-    existing_set =
-      existing_hackathons
-      |> Enum.map(fn h -> {h.url, h.name} end)
-      |> MapSet.new()
-
-    Enum.reject(suggestions, fn suggestion ->
-      MapSet.member?(existing_set, {suggestion[:url], suggestion[:name]})
-    end)
-  end
-
+  returns number of inserted/updated hackathons
+  """
   def upsert_hackathons([]), do: 0
 
   def upsert_hackathons(hackathons) do
     timestamp = DateTime.utc_now(:second)
-
     placeholders = %{timestamp: timestamp}
 
     maps =
@@ -91,7 +87,7 @@ defmodule HackScraper.Worker.Common do
         Hackathon,
         maps,
         placeholders: placeholders,
-        on_conflict: {:replace_all_except, [:id, :url, :start_date, :series, :inserted_at]},
+        on_conflict: :nothing,
         conflict_target: [:url, :start_date]
       )
 

@@ -30,7 +30,7 @@ defmodule HackScraper.Worker.Scheduler do
     module = worker_module(scraper.worker)
 
     %{url: scraper.url}
-    |> module.new(oban_opts() ++ [schedule_in: 1, unique: true])
+    |> module.new(oban_opts() ++ [schedule_in: 1, unique: false])
     |> Oban.insert()
   end
 
@@ -40,6 +40,11 @@ defmodule HackScraper.Worker.Scheduler do
     fields: [:queue, :meta],
     keys: [:scraper_id, :scheduled_at]
   ]
+
+  def schedule_executions_for_period(%Scraper{paused: true} = scraper) do
+    Logger.debug("Skipping scheduling for paused scraper #{scraper.id} #{scraper.worker}")
+    {:ok, nil}
+  end
 
   def schedule_executions_for_period(%Scraper{} = scraper) do
     case Oban.Plugins.Cron.parse(scraper.schedule) do

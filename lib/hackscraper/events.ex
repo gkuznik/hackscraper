@@ -233,6 +233,7 @@ defmodule HackScraper.Events do
 
   """
   def get_suggestion!(id), do: Repo.get!(Suggestion, id)
+  def get_suggestion_with_creator!(id), do: Repo.get!(Suggestion, id) |> Repo.preload(:creator)
 
   @doc """
   Creates a suggestion.

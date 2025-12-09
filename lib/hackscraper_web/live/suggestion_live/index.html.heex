@@ -22,8 +22,8 @@
   <:col :let={{_id, suggestion}} label="Description">
     <div class="description-cell">{suggestion.description}</div>
   </:col>
-  <:col :let={{_id, suggestion}} label="Date">{suggestion.date}</:col>
   <:col :let={{_id, suggestion}} label="Location">{suggestion.location}</:col>
+  <:col :let={{_id, suggestion}} label="Date hint">{suggestion.date_hint}</:col>
   <:col :let={{_id, suggestion}} label="Start date" field={:start_date}>
     <.date :if={suggestion.start_date} format="short" date={suggestion.start_date} />
   </:col>
@@ -59,6 +59,6 @@
     action={:new}
     hackathon={struct(HackScraper.Events.Hackathon, Map.from_struct(@suggestion))}
     patch={~p"/suggestions"}
-    date_hint={@suggestion.date}
+    date_hint={@suggestion.date_hint}
   />
 </.modal>

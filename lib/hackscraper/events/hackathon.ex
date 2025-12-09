@@ -18,6 +18,8 @@ defmodule HackScraper.Events.Hackathon do
     field :end_date, :utc_datetime
     belongs_to :series, HackScraper.Events.Series
 
+    has_many :suggestions, HackScraper.Events.Suggestion
+
     timestamps(type: :utc_datetime)
   end
 

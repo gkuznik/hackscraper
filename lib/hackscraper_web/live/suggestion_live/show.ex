@@ -7,7 +7,7 @@ defmodule HackScraperWeb.SuggestionLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    suggestion = Events.get_suggestion!(id)
+    suggestion = Events.get_suggestion_with_creator!(id)
 
     {:noreply,
      socket

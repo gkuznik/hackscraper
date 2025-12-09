@@ -66,6 +66,6 @@ defmodule HackScraperWeb.ScraperLive.Index do
     scraper = Scrapers.get_scraper!(id)
     {:ok, job} = HackScraper.Worker.Scheduler.schedule_job(scraper)
 
-    {:noreply, push_navigate(socket, to: ~p"/oban/jobs/#{job.id}")}
+    {:noreply, redirect(socket, to: ~p"/oban/jobs/#{job.id}")}
   end
 end

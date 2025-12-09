@@ -151,7 +151,7 @@ defmodule HackScraper.EventsTest do
 
       assert {:ok, %Suggestion{} = suggestion} = Events.create_suggestion(valid_attrs)
       assert suggestion.name == "some name"
-      assert suggestion.date == "some date"
+      assert suggestion.date_hint == "some date"
       assert suggestion.description == "some description"
       assert suggestion.location == "some location"
       assert suggestion.image == "some image"

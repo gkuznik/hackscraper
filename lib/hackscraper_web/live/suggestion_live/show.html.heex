@@ -13,9 +13,10 @@
   <:item title="Image">{@suggestion.image}</:item>
   <:item title="Description">{@suggestion.description}</:item>
   <:item title="Location">{@suggestion.location}</:item>
-  <:item title="Date hint">{@suggestion.date}</:item>
+  <:item title="Date hint">{@suggestion.date_hint}</:item>
   <:item title="Start date">{@suggestion.start_date}</:item>
   <:item title="End date">{@suggestion.end_date}</:item>
+  <:item title="Suggested by">{@suggestion.creator.name}</:item>
 </.list>
 
 <.back navigate={~p"/suggestions"}>Back to suggestions</.back>
@@ -33,6 +34,6 @@
     action={:new}
     hackathon={struct(HackScraper.Events.Hackathon, Map.from_struct(@suggestion))}
     patch={~p"/suggestions/#{@suggestion}"}
-    date_hint={@suggestion.date}
+    date_hint={@suggestion.date_hint}
   />
 </.modal>
