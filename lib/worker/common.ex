@@ -12,7 +12,11 @@ defmodule HackScraper.Worker.Common do
   @workers %{
     "devpost" => HackScraper.Worker.Devpost,
     "direct" => HackScraper.Worker.Direct,
-    "dummy" => HackScraper.Worker.Dummy
+    "dummy" => HackScraper.Worker.Dummy,
+    "huawei" => HackScraper.Worker.Huawei,
+    "n3xtcoder" => HackScraper.Worker.N3xtcoder,
+    "taikai" => HackScraper.Worker.Taikai,
+    "unternehmertum" => HackScraper.Worker.Unternehmertum
   }
   def workers, do: @workers
 
@@ -22,6 +26,27 @@ defmodule HackScraper.Worker.Common do
 
   def get!(api_url) do
     Req.get!(api_url, http_errors: :raise, user_agent: @user_agent)
+  end
+
+  def post_json!(api_url, json) do
+    Req.post!(api_url, json: json, http_errors: :raise, user_agent: @user_agent)
+  end
+
+  def split_title(title) do
+    parts =
+      title
+      |> String.replace("–", "-")
+      |> String.split(" - ", parts: 2)
+
+    name = parts |> List.first() |> String.trim()
+    description = if length(parts) > 1, do: parts |> List.last() |> String.trim(), else: nil
+
+    {name, description}
+  end
+
+  def parse_date(date_string) do
+    {:ok, date, _} = DateTime.from_iso8601(date_string)
+    DateTime.truncate(date, :second)
   end
 
   @doc """
@@ -75,11 +100,10 @@ defmodule HackScraper.Worker.Common do
     maps =
       Enum.map(
         hackathons,
-        &%{
-          hackathon: &1,
-          inserted_at: {:placeholder, :timestamp},
-          updated_at: {:placeholder, :timestamp}
-        }
+        fn h ->
+          Map.put(h, :inserted_at, {:placeholder, :timestamp})
+          |> Map.put(:updated_at, {:placeholder, :timestamp})
+        end
       )
 
     {num, _} =

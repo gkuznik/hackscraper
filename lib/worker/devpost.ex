@@ -9,7 +9,7 @@ defmodule HackScraper.Worker.Devpost do
 
   @impl Oban.Worker
   def perform(%Oban.Job{} = _job) do
-    Logger.info("Running Devpost scraper")
+    Logger.info("Running Devpost scraper...")
 
     data = get!(@api_url).body["hackathons"]
     Logger.info("Found #{length(data)} hackathons")

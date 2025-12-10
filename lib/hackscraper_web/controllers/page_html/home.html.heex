@@ -135,7 +135,7 @@
                       </span>
                     </div>
                   </div>
-                  <div class="flex items-center text-gray-600">
+                  <div :if={hackathon.location} class="flex items-center text-gray-600">
                     <.icon name="hero-map-pin" class="h-5 w-5 mr-2 text-purple-500" />
                     <span class="text-sm">{hackathon.location}</span>
                   </div>

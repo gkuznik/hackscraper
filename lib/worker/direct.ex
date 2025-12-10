@@ -31,14 +31,14 @@ defmodule HackScraper.Worker.Direct do
 
   @impl Oban.Worker
   def perform(%Oban.Job{args: %{"url" => url}}) do
-    Logger.info("Running direct scraper", url: url)
+    Logger.info("Running direct scraper: #{url}...")
 
     html = get!(url).body
 
     {_result, globals} =
       Pythonx.eval(
         """
-        # Elixir has only bytes
+        # Elixir strings are bytes
         url = url.decode("utf-8")
 
         from urllib.parse import urljoin
@@ -47,12 +47,10 @@ defmodule HackScraper.Worker.Direct do
         # use wrong outputformat type to skip date parsing
         date_config = {"outputformat": 1, "original_date": True, "extensive_search": False, "max_date": "2024-12-10"}
         meta = extract_metadata(html, url, date_config=date_config)
-        url = meta.url or url
+        url = meta.url
         image = urljoin(url, meta.image) if meta.image else None
-
-        _parts = meta.title.replace("–", "-").split(" - ", 1)
-        name = _parts[0].strip()
-        description = meta.description or (_parts[1].strip() if len(_parts) > 1 else None)
+        title = meta.title
+        description = meta.description
         """,
         %{"html" => html, "url" => url}
       )
@@ -62,12 +60,14 @@ defmodule HackScraper.Worker.Direct do
       |> Floki.parse_document!()
       |> Floki.text(sep: " ")
 
+    {name, description} = split_title(Pythonx.decode(globals["title"]))
+
     suggestion = %{
       creator_id: user_id(),
-      url: Pythonx.decode(globals["url"]),
+      url: Pythonx.decode(globals["url"]) || url,
       image: Pythonx.decode(globals["image"]),
-      name: Pythonx.decode(globals["name"]),
-      description: Pythonx.decode(globals["description"]),
+      name: name,
+      description: Pythonx.decode(globals["description"]) || description,
       date_hint: extract_dates(text)
     }
 
