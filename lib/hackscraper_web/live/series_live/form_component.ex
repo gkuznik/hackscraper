@@ -7,10 +7,7 @@ defmodule HackScraperWeb.SeriesLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.header>
-        {@title}
-        <:subtitle>Use this form to manage series records in your database.</:subtitle>
-      </.header>
+      <.header>{@title}</.header>
 
       <.simple_form
         for={@form}

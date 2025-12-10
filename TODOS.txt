@@ -1,4 +1,6 @@
 port/integrate all scrapers
+✅ direct
+aggregator
 -> setup all scraper schedules
 
 export series, hackathons
@@ -21,3 +23,5 @@ about page
 
 allow image upload next to url
 set url to uploaded image
+
+maybe add https://tumthinktank.de again, website was reworked

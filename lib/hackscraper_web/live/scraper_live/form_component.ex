@@ -7,10 +7,7 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.header>
-        {@title}
-        <:subtitle>Use this form to manage scraper records in your database.</:subtitle>
-      </.header>
+      <.header>{@title}</.header>
 
       <.simple_form
         for={@form}
@@ -32,9 +29,7 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
   end
 
   defp worker_options do
-    HackScraper.Worker.Common.workers()
-    |> Map.keys()
-    |> Enum.map(fn name -> {String.capitalize(name), name} end)
+    HackScraper.Worker.Common.workers() |> Map.keys()
   end
 
   @impl true

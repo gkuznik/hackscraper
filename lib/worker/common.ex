@@ -10,13 +10,15 @@ defmodule HackScraper.Worker.Common do
   @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:hackscraper, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
 
   @workers %{
-    "devpost" => HackScraper.Worker.Devpost,
-    "direct" => HackScraper.Worker.Direct,
-    "dummy" => HackScraper.Worker.Dummy,
-    "huawei" => HackScraper.Worker.Huawei,
-    "n3xtcoder" => HackScraper.Worker.N3xtcoder,
-    "taikai" => HackScraper.Worker.Taikai,
-    "unternehmertum" => HackScraper.Worker.Unternehmertum
+    "Devpost" => HackScraper.Worker.Devpost,
+    "Direct" => HackScraper.Worker.Direct,
+    "Dummy" => HackScraper.Worker.Dummy,
+    "Get Links" => HackScraper.Worker.GetLinks,
+    "Huawei" => HackScraper.Worker.Huawei,
+    "N3xtcoder" => HackScraper.Worker.N3xtcoder,
+    "Taikai" => HackScraper.Worker.Taikai,
+    "TUM Venture Labs" => HackScraper.Worker.TUMVentureLabs,
+    "Unternehmertum" => HackScraper.Worker.Unternehmertum
   }
   def workers, do: @workers
 
