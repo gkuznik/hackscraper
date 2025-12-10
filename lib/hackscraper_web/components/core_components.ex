@@ -551,6 +551,7 @@ defmodule HackScraperWeb.CoreComponents do
         symbol_desc: Phoenix.HTML.raw(~s(<span class="hero-arrow-down w-5" />)),
         symbol_unsorted: Phoenix.HTML.raw(~s(<span class="hero-chevron-up-down w-5" />)),
         thead_th_attrs: [class: "whitespace-nowrap"],
+        tbody_tr_attrs: [class: "group hover:bg-zinc-50"],
         table_attrs: [class: "w-full"]
       )
 
@@ -560,10 +561,15 @@ defmodule HackScraperWeb.CoreComponents do
       path={@path}
       items={@rows}
       row_click={@row_click}
-      col={@col}
-      action={@action}
       opts={@opts}
-    />
+    >
+      <:col :let={item} :for={col <- @col} {col}>
+        {render_slot(col, item)}
+      </:col>
+      <:action :let={item} :for={action <- @action} {action}>
+        {render_slot(action, item)}
+      </:action>
+    </Flop.Phoenix.table>
     <.pagination meta={@meta} path={@path} />
     """
   end
