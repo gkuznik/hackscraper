@@ -38,14 +38,16 @@ defmodule HackScraper.Worker.Direct do
     {_result, globals} =
       Pythonx.eval(
         """
+        # Elixir has only bytes
+        url = url.decode("utf-8")
+
         from urllib.parse import urljoin
         from trafilatura import extract_metadata
 
         # use wrong outputformat type to skip date parsing
         date_config = {"outputformat": 1, "original_date": True, "extensive_search": False, "max_date": "2024-12-10"}
-        # fix Elixir to Python type issues
-        meta = extract_metadata(html, str(url), date_config=date_config)
-        url = meta.url or str(url)
+        meta = extract_metadata(html, url, date_config=date_config)
+        url = meta.url or url
         image = urljoin(url, meta.image) if meta.image else None
 
         _parts = meta.title.replace("–", "-").split(" - ", 1)
@@ -54,9 +56,6 @@ defmodule HackScraper.Worker.Direct do
         """,
         %{"html" => html, "url" => url}
       )
-
-    # todo ask cuz of Elixir to Python type issues
-    # fix b'<string>' being added
 
     text =
       html
