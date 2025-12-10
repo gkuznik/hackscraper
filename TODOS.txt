@@ -1,0 +1,23 @@
+port/integrate all scrapers
+-> setup all scraper schedules
+
+export series, hackathons
+-> import series, then hackathons
+
+✅ suggestions have a hackathon and creator
+✅ ensure one suggestion per creator
+redirect hackathon edit to suggestion review
+review becomes edit
+display "suggestion pending"
+add updating suggestions back (+test)
+
+gate actions behind roles
+disable/hide buttons
+new hackathon -> suggestion
+
+forgot password with name? 
+
+about page
+
+allow image upload next to url
+set url to uploaded image

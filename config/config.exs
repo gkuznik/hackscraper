@@ -27,6 +27,18 @@ config :hackscraper, Oban,
 
 config :flop, repo: HackScraper.Repo
 
+config :pythonx, :uv_init,
+  pyproject_toml: """
+  [project]
+  name = "scrapers"
+  version = "0.0.1"
+  requires-python = ">=3.10"
+  dependencies = [
+    "beautifulsoup4>=4.14",
+    "trafilatura>=2.0"
+  ]
+  """
+
 # Configures the endpoint
 config :hackscraper, HackScraperWeb.Endpoint,
   url: [host: "localhost"],
