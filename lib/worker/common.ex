@@ -5,7 +5,8 @@ defmodule HackScraper.Worker.Common do
   # TODO setup bot accounts, use admin for now
   def user_id, do: 1
 
-  def oban_opts, do: [queue: :scraper, max_attempts: 1]
+  # TODO retry attempts to 3 for prod
+  def oban_opts, do: [queue: :scraper, priority: 2, max_attempts: 1]
 
   @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:hackscraper, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
 
@@ -15,6 +16,7 @@ defmodule HackScraper.Worker.Common do
     "Dummy" => HackScraper.Worker.Dummy,
     "Get Links" => HackScraper.Worker.GetLinks,
     "Huawei" => HackScraper.Worker.Huawei,
+    "Luma" => HackScraper.Worker.Luma,
     "N3xtcoder" => HackScraper.Worker.N3xtcoder,
     "Taikai" => HackScraper.Worker.Taikai,
     "TUM Venture Labs" => HackScraper.Worker.TUMVentureLabs,
@@ -70,16 +72,19 @@ defmodule HackScraper.Worker.Common do
     timestamp = DateTime.utc_now(:second)
     placeholders = %{timestamp: timestamp}
 
-    maps =
+    with_placeholder =
       Enum.map(
         new_suggestions,
-        fn s -> Map.put(s, :inserted_at, {:placeholder, :timestamp}) end
+        fn s ->
+          Map.put(s, :inserted_at, {:placeholder, :timestamp})
+          |> Map.put(:creator_id, user_id())
+        end
       )
 
     {num, _} =
       HackScraper.Repo.insert_all(
         Suggestion,
-        maps,
+        with_placeholder,
         placeholders: placeholders,
         on_conflict: {:replace_all_except, [:id, :creator_id, :url, :start_date]},
         conflict_target: [:creator_id, :url, :start_date]
@@ -99,7 +104,7 @@ defmodule HackScraper.Worker.Common do
     timestamp = DateTime.utc_now(:second)
     placeholders = %{timestamp: timestamp}
 
-    maps =
+    with_placeholder =
       Enum.map(
         hackathons,
         fn h ->
@@ -111,7 +116,7 @@ defmodule HackScraper.Worker.Common do
     {num, _} =
       HackScraper.Repo.insert_all(
         Hackathon,
-        maps,
+        with_placeholder,
         placeholders: placeholders,
         on_conflict: :nothing,
         conflict_target: [:url, :start_date]

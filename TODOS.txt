@@ -1,6 +1,4 @@
-port/integrate all scrapers
-✅ direct
-aggregator
+✅ port/integrate all scrapers
 -> setup all scraper schedules
 
 export series, hackathons

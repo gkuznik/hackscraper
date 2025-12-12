@@ -52,29 +52,23 @@ defmodule HackScraper.Worker.Scheduler do
         now = DateTime.utc_now()
         end_time = DateTime.add(now, @schedule_days_ahead, :day)
 
-        execution_times = get_execution_times(cron_expression, now, end_time, [])
-
-        Logger.info(
-          "Found #{length(execution_times)} execution times for #{scraper.id} #{scraper.worker}"
-        )
+        executions = get_execution_times(cron_expression, now, end_time, [])
+        Logger.info("Found #{length(executions)} executions for #{scraper.id} #{scraper.worker}")
 
         module = worker_module(scraper.worker)
 
-        for scheduled_at <- execution_times do
-          {:ok, _job} =
+        Enum.reduce(executions, Ecto.Multi.new(), fn scheduled_at, multi ->
+          meta = %{scraper_id: scraper.id, scheduled_at: scheduled_at}
+
+          job =
             %{url: scraper.url}
             |> module.new(
-              oban_opts() ++
-                [
-                  unique: @unique,
-                  scheduled_at: scheduled_at,
-                  meta: %{scraper_id: scraper.id, scheduled_at: scheduled_at}
-                ]
+              oban_opts() ++ [unique: @unique, scheduled_at: scheduled_at, meta: meta]
             )
-            |> Oban.insert()
-        end
 
-        {:ok, nil}
+          Oban.insert(multi, "#{scraper.id}-#{DateTime.to_unix(scheduled_at)}", job)
+        end)
+        |> HackScraper.Repo.transaction()
 
       {:error, error} ->
         Logger.error(

@@ -26,19 +26,42 @@ defmodule HackScraper.Worker.TUMVentureLabs do
           |> Floki.text()
           |> String.trim()
 
-        %{creator_id: user_id(), url: url, name: name, date_hint: date}
+        %{url: url, name: name, date_hint: date}
       end
 
     Logger.info("Found #{length(events)} events")
 
-    suggestions = Enum.map(events, &extra_info/1)
+    events
+    |> Enum.with_index()
+    |> Enum.reduce(Ecto.Multi.new(), fn {event, index}, multi ->
+      scheduled_at = DateTime.add(DateTime.utc_now(), 8_000_000 + index * 60, :second)
 
-    num = upsert_suggestions(suggestions)
-    Logger.info("Created #{num} suggestion")
+      job =
+        %{event: event}
+        |> HackScraper.Worker.TUMVentureLabs.AddInfo.new(scheduled_at: scheduled_at)
+
+      Oban.insert(multi, "addinfo-#{index}", job)
+    end)
+    |> HackScraper.Repo.transaction()
+
+    Logger.info("Queued AddInfo jobs")
   end
+end
 
-  defp extra_info(%{url: url} = event) do
-    html = get!(url).body |> Floki.parse_document!()
+defmodule HackScraper.Worker.TUMVentureLabs.AddInfo do
+  use Oban.Worker,
+    priority: 3,
+    unique: [period: {60, :days}, states: :all, fields: [:queue, :args], keys: [:url]]
+
+  require Logger
+  import HackScraper.Worker.Common
+
+  @impl Oban.Worker
+  def perform(%Oban.Job{args: %{"event" => event}}) do
+    event = for {key, val} <- event, into: %{}, do: {String.to_existing_atom(key), val}
+    Logger.info("Running TUMVentureLabs AddInfo scraper: #{event.url}...")
+
+    html = get!(event.url).body |> Floki.parse_document!()
 
     description =
       html
@@ -58,7 +81,7 @@ defmodule HackScraper.Worker.TUMVentureLabs do
         end
       end)
 
-    url =
+    actual_url =
       html
       |> Floki.find(".header-split-content-footer a")
       |> Floki.attribute("href")
@@ -70,7 +93,10 @@ defmodule HackScraper.Worker.TUMVentureLabs do
       |> Map.put(:location, location)
       |> Map.put(:image, extract_best_image(html))
 
-    if url, do: Map.put(map, :url, url), else: map
+    suggestion = if actual_url, do: Map.put(map, :url, actual_url), else: map
+
+    num = upsert_suggestions([suggestion])
+    Logger.info("Created/updated #{num} suggestion")
   end
 
   defp extract_best_image(html) do

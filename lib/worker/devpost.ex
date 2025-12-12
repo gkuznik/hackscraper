@@ -17,7 +17,6 @@ defmodule HackScraper.Worker.Devpost do
     suggestions =
       for hack <- data do
         %{
-          creator_id: user_id(),
           url: hack["url"],
           image: "https:" <> hack["thumbnail_url"],
           name: hack["title"],

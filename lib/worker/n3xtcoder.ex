@@ -28,7 +28,7 @@ defmodule HackScraper.Worker.N3xtcoder do
         }
       end
 
-    Logger.info("Found #{length(hackathons)} hackathons")
+    Logger.info("Found #{length(hackathons)}/#{length(cards)} hackathons")
     num = upsert_hackathons(hackathons)
     Logger.info("Created/updated #{num} hackathons")
   end

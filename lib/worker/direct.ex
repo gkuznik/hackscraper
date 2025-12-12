@@ -63,7 +63,6 @@ defmodule HackScraper.Worker.Direct do
     {name, description} = split_title(Pythonx.decode(globals["title"]))
 
     suggestion = %{
-      creator_id: user_id(),
       url: Pythonx.decode(globals["url"]) || url,
       image: Pythonx.decode(globals["image"]),
       name: name,
@@ -72,6 +71,6 @@ defmodule HackScraper.Worker.Direct do
     }
 
     num = upsert_suggestions([suggestion])
-    Logger.info("Created #{num} suggestion")
+    Logger.info("Created/updated #{num} suggestion")
   end
 end

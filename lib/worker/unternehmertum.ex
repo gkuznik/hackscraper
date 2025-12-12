@@ -26,13 +26,7 @@ defmodule HackScraper.Worker.Unternehmertum do
         name = event |> Floki.find("h3") |> Floki.text() |> String.trim()
         description = event |> Floki.find("div.mb-20.sm\\:mb-30") |> Floki.text() |> String.trim()
 
-        %{
-          creator_id: user_id(),
-          url: url,
-          name: name,
-          description: description,
-          date_hint: date_hint
-        }
+        %{url: url, name: name, description: description, date_hint: date_hint}
       end
 
     num = upsert_suggestions(suggestions)
