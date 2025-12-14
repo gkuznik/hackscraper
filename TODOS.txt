@@ -1,5 +1,5 @@
 ✅ port/integrate all scrapers
--> setup all scraper schedules
+-> ✅ setup all scraper schedules
 
 export series, hackathons
 -> import series, then hackathons

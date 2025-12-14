@@ -122,6 +122,10 @@ defmodule HackScraper.Events do
     |> Repo.preload(:series)
   end
 
+  def count_hackathons do
+    Repo.aggregate(Hackathon, :count, :id)
+  end
+
   @doc """
   Gets a single hackathon.
 
