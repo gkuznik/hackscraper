@@ -17,7 +17,7 @@ config :hackscraper, Oban,
   engine: Oban.Engines.Basic,
   queues: [default: 5, scraper: 10],
   plugins: [
-    {Oban.Plugins.Pruner, max_age: 30 * one_day, interval: one_day * 1000},
+    {Oban.Plugins.Pruner, max_age: 365 * one_day, interval: one_day * 1000},
     {Oban.Plugins.Cron,
      crontab: [
        {"@weekly", HackScraper.Worker.Scheduler}

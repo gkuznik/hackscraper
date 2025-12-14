@@ -16,6 +16,7 @@ defmodule HackScraper.Worker.Common do
     "Dummy" => HackScraper.Worker.Dummy,
     "Get Links" => HackScraper.Worker.GetLinks,
     "Huawei" => HackScraper.Worker.Huawei,
+    "LabLab" => HackScraper.Worker.LabLab,
     "Luma" => HackScraper.Worker.Luma,
     "N3xtcoder" => HackScraper.Worker.N3xtcoder,
     "Taikai" => HackScraper.Worker.Taikai,

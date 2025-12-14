@@ -18,25 +18,27 @@ defmodule HackScraper.Worker.Luma do
     hackathons =
       for entry <- hackathons do
         event = entry["event"]
-        url = "https://luma.com/#{event["url"]}"
 
-        # TODO schedule extra job to get actual description and easy location from event page
         %{
-          url: url,
-          image: event["cover_url"],
+          url: "https://luma.com/#{event["url"]}",
           name: event["name"],
-          description: build_description(event),
           start_date: parse_date(event["start_at"]),
-          end_date: parse_date(event["end_at"]),
-          location: format_location(event["geo_address_info"])
+          end_date: parse_date(event["end_at"])
         }
       end
 
-    num = upsert_hackathons(hackathons)
-    Logger.info("Created/updated #{num} hackathons")
+    hackathons
+    |> Enum.with_index()
+    |> Enum.reduce(Ecto.Multi.new(), fn {event, index}, multi ->
+      job = HackScraper.Worker.Luma.AddInfo.new(%{event: event}, schedule_in: index * 60)
+
+      Oban.insert(multi, "addinfo-#{index}", job)
+    end)
+    |> HackScraper.Repo.transaction()
+
+    Logger.info("Queued AddInfo jobs")
   end
 
-  # Filter events that are likely hackathons
   defp filter_hackathons(entries) do
     Enum.filter(entries, fn entry ->
       event = entry["event"]
@@ -44,93 +46,71 @@ defmodule HackScraper.Worker.Luma do
       String.contains?(name, ["hackathon", "hack ", "coding ", "hackfest", "tech challenge"])
     end)
   end
+end
 
-  defp build_description(event) do
-    parts = []
+defmodule HackScraper.Worker.Luma.AddInfo do
+  use Oban.Worker,
+    priority: 3,
+    unique: [period: {60, :days}, states: :all, fields: [:queue, :args], keys: [:url]]
 
-    # Add calendar/organizer info if available
-    parts =
-      if calendar = event["calendar"] do
-        org_name = calendar["name"]
+  require Logger
+  import HackScraper.Worker.Common
 
-        if org_name && org_name != "Personal" do
-          [org_name | parts]
-        else
-          parts
-        end
-      else
-        parts
+  @impl Oban.Worker
+  def perform(%Oban.Job{args: %{"event" => event}}) do
+    event =
+      for({key, val} <- event, into: %{}, do: {String.to_existing_atom(key), val})
+
+    event =
+      Map.put(event, :start_date, parse_date(event[:start_date]))
+      |> Map.put(:end_date, parse_date(event[:end_date]))
+
+    Logger.info("Running Luma AddInfo scraper: #{event.url}...")
+
+    html = get!(event.url).body |> Floki.parse_document!()
+
+    json_ld =
+      html
+      |> Floki.find("script[type='application/ld+json']")
+      |> List.first()
+      |> case do
+        {"script", _, [json_str]} -> Jason.decode!(json_str)
+        _ -> %{}
       end
 
-    # Add host information
-    parts =
-      if hosts = event["hosts"] do
-        host_names =
-          hosts
-          |> Enum.map(& &1["name"])
-          |> Enum.reject(&is_nil/1)
-          |> Enum.take(3)
-          |> Enum.join(", ")
+    description =
+      case json_ld["description"] do
+        desc when is_binary(desc) ->
+          desc
+          |> String.split("\n")
+          |> Enum.take(5)
+          |> Enum.join("\n")
+          |> String.trim()
 
-        if host_names != "" do
-          ["Hosted by: #{host_names}" | parts]
-        else
-          parts
-        end
-      else
-        parts
+        _ ->
+          ""
       end
 
-    # Add guest count if available
-    parts =
-      if guest_count = event["guest_count"] do
-        if guest_count > 0 do
-          ["#{guest_count} participants" | parts]
-        else
-          parts
-        end
-      else
-        parts
+    location =
+      case json_ld["location"] do
+        %{"name" => name} when is_binary(name) -> name
+        _ -> nil
       end
 
-    # Add ticket info
-    parts =
-      if ticket_info = event["ticket_info"] do
-        cond do
-          ticket_info["is_free"] ->
-            ["Free event" | parts]
-
-          price = ticket_info["price"] ->
-            amount = price["cents"] / 100
-            currency = String.upcase(price["currency"] || "EUR")
-            ["Price: #{amount} #{currency}" | parts]
-
-          true ->
-            parts
-        end
-      else
-        parts
+    image =
+      case json_ld["image"] do
+        [first | _] when is_binary(first) -> first
+        img when is_binary(img) -> img
+        _ -> nil
       end
 
-    Enum.reverse(parts) |> Enum.join("\\n")
-  end
+    hackathon =
+      event
+      |> Map.put(:description, description)
+      |> Map.put(:location, location)
+      |> Map.put(:image, image)
 
-  defp format_location(geo_info) do
-    case geo_info do
-      %{"mode" => "obfuscated", "city_state" => city_state} ->
-        city_state || "Munich, Germany"
-
-      %{"full_address" => address} when is_binary(address) ->
-        address
-
-      %{"city" => city, "country" => country} ->
-        "#{city}, #{country}"
-
-      %{"city" => city} ->
-        city
-
-      _ ->
-        "Munich, Germany"
-    end
+    num = upsert_hackathons([hackathon])
+    Logger.info("Created/updated #{num} hackathon")
   end
 end

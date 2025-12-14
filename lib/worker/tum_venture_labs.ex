@@ -34,11 +34,8 @@ defmodule HackScraper.Worker.TUMVentureLabs do
     events
     |> Enum.with_index()
     |> Enum.reduce(Ecto.Multi.new(), fn {event, index}, multi ->
-      scheduled_at = DateTime.add(DateTime.utc_now(), 8_000_000 + index * 60, :second)
-
       job =
-        %{event: event}
-        |> HackScraper.Worker.TUMVentureLabs.AddInfo.new(scheduled_at: scheduled_at)
+        HackScraper.Worker.TUMVentureLabs.AddInfo.new(%{event: event}, schedule_in: index * 60)
 
       Oban.insert(multi, "addinfo-#{index}", job)
     end)
