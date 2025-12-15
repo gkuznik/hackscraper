@@ -21,11 +21,11 @@ defmodule HackScraperWeb.CoreComponents do
   attr :date, DateTime
   attr :format, :string, values: ~w(long short), default: "long"
   attr :class, :string, default: nil
-  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the span"
 
   def date(assigns) do
     ~H"""
-    <span data-format={@format} class={["format-date", @class]} {@rest}>
+    <span phx-update="ignore" data-format={@format} class={["format-date", @class]} {@rest}>
       {Calendar.strftime(@date, "%Y-%m-%d %H:%M UTC")}
     </span>
     """

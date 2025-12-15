@@ -41,7 +41,7 @@ defmodule HackScraperWeb.Components.Sidebar do
           <.icon name="hero-bars-3" class="w-5 h-5" />
         </button>
 
-        <!-- Mobile close button -->
+    <!-- Mobile close button -->
         <button
           class="lg:hidden text-gray-400 hover:text-white relative"
           phx-click={
@@ -76,7 +76,7 @@ defmodule HackScraperWeb.Components.Sidebar do
             <span class="sidebar-text">Series</span>
           </.nav_link>
 
-          <%= if HackScraper.Accounts.can_do?(@current_user, :editor) do %>
+          <%= if  @current_user do %>
             <.nav_link navigate={~p"/suggestions"} icon="hero-pencil-square">
               <span class="sidebar-text">Suggestions</span>
             </.nav_link>

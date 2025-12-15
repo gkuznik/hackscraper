@@ -118,7 +118,7 @@ defmodule HackScraper.Events do
   end
 
   def list_hackathons_for_home_page(limit) do
-    Repo.all(from h in Hackathon, order_by: [desc: h.end_date], limit: ^limit)
+    Repo.all(from h in Hackathon, order_by: [desc: h.start_date], limit: ^limit)
     |> Repo.preload(:series)
   end
 
@@ -255,6 +255,45 @@ defmodule HackScraper.Events do
     %Suggestion{}
     |> Suggestion.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Gets a suggestion by user and hackathon.
+  Returns nil if not found.
+  """
+  def get_suggestion_by_user_and_hackathon(user_id, hackathon_id) do
+    Repo.get_by(Suggestion, creator_id: user_id, hackathon_id: hackathon_id)
+  end
+
+  @doc """
+  Updates a suggestion.
+
+  ## Examples
+
+      iex> update_suggestion(suggestion, %{field: new_value})
+      {:ok, %Suggestion{}}
+
+      iex> update_suggestion(suggestion, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_suggestion(%Suggestion{} = suggestion, attrs) do
+    suggestion
+    |> Suggestion.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking suggestion changes.
+
+  ## Examples
+
+      iex> change_suggestion(suggestion)
+      %Ecto.Changeset{data: %Suggestion{}}
+
+  """
+  def change_suggestion(%Suggestion{} = suggestion, attrs \\ %{}) do
+    Suggestion.changeset(suggestion, attrs)
   end
 
   @doc """
