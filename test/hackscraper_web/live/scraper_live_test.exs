@@ -5,14 +5,14 @@ defmodule HackScraperWeb.ScraperLiveTest do
   import HackScraper.ScrapersFixtures
   import HackScraper.AccountsFixtures
 
-  @create_attrs %{worker: "dummy", url: "some url", schedule: "@daily", paused: true}
+  @create_attrs %{worker: "Dummy", url: "some url", schedule: "@daily", paused: true}
   @update_attrs %{
-    worker: "devpost",
+    worker: "Devpost",
     url: "some updated url",
     schedule: "@hourly",
     paused: false
   }
-  @invalid_attrs %{worker: "dummy", url: nil, schedule: nil, paused: false}
+  @invalid_attrs %{worker: "Dummy", url: nil, schedule: nil, paused: false}
 
   defp create_scraper(_) do
     scraper = scraper_fixture()
@@ -23,14 +23,14 @@ defmodule HackScraperWeb.ScraperLiveTest do
     setup [:create_scraper]
 
     test "lists all scrapers", %{conn: conn, scraper: scraper} do
-      {:ok, _index_live, html} = conn |> log_in_user(admin_user_fixture()) |> live(~p"/scrapers")
+      {:ok, _index_live, html} = conn |> log_in_user(user_fixture(%{role: :admin})) |> live(~p"/scrapers")
 
       assert html =~ "Listing Scrapers"
       assert html =~ scraper.worker
     end
 
     test "saves new scraper", %{conn: conn} do
-      {:ok, index_live, _html} = conn |> log_in_user(admin_user_fixture()) |> live(~p"/scrapers")
+      {:ok, index_live, _html} = conn |> log_in_user(user_fixture(%{role: :admin})) |> live(~p"/scrapers")
 
       assert index_live |> element("a", "New Scraper") |> render_click() =~
                "New Scraper"
@@ -49,11 +49,11 @@ defmodule HackScraperWeb.ScraperLiveTest do
 
       html = render(index_live)
       assert html =~ "Scraper created successfully"
-      assert html =~ "dummy"
+      assert html =~ "Dummy"
     end
 
     test "updates scraper in listing", %{conn: conn, scraper: scraper} do
-      {:ok, index_live, _html} = conn |> log_in_user(admin_user_fixture()) |> live(~p"/scrapers")
+      {:ok, index_live, _html} = conn |> log_in_user(user_fixture(%{role: :admin})) |> live(~p"/scrapers")
 
       assert index_live |> element("#scrapers-#{scraper.id} a", "Edit") |> render_click() =~
                "Edit Scraper"
@@ -72,11 +72,11 @@ defmodule HackScraperWeb.ScraperLiveTest do
 
       html = render(index_live)
       assert html =~ "Scraper updated successfully"
-      assert html =~ "devpost"
+      assert html =~ "Devpost"
     end
 
     test "deletes scraper in listing", %{conn: conn, scraper: scraper} do
-      {:ok, index_live, _html} = conn |> log_in_user(admin_user_fixture()) |> live(~p"/scrapers")
+      {:ok, index_live, _html} = conn |> log_in_user(user_fixture(%{role: :admin})) |> live(~p"/scrapers")
 
       assert index_live |> element("#scrapers-#{scraper.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#scrapers-#{scraper.id}")
@@ -87,14 +87,14 @@ defmodule HackScraperWeb.ScraperLiveTest do
     setup [:create_scraper]
 
     test "displays scraper", %{conn: conn, scraper: scraper} do
-      {:ok, _show_live, html} = conn |> log_in_user(admin_user_fixture()) |> live(~p"/scrapers/#{scraper}")
+      {:ok, _show_live, html} = conn |> log_in_user(user_fixture(%{role: :admin})) |> live(~p"/scrapers/#{scraper}")
 
       assert html =~ "Scraper: "
       assert html =~ scraper.worker
     end
 
     test "updates scraper within modal", %{conn: conn, scraper: scraper} do
-      {:ok, show_live, _html} = conn |> log_in_user(admin_user_fixture()) |> live(~p"/scrapers/#{scraper}")
+      {:ok, show_live, _html} = conn |> log_in_user(user_fixture(%{role: :admin})) |> live(~p"/scrapers/#{scraper}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit "
@@ -113,7 +113,7 @@ defmodule HackScraperWeb.ScraperLiveTest do
 
       html = render(show_live)
       assert html =~ "Scraper updated successfully"
-      assert html =~ "devpost"
+      assert html =~ "Devpost"
     end
   end
 end

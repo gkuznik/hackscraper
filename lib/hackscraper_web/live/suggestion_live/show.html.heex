@@ -29,11 +29,12 @@
 >
   <.live_component
     module={HackScraperWeb.HackathonLive.FormComponent}
-    id={:new}
+    id={@suggestion.hackathon_id || :new}
     title={@page_title}
-    action={:new}
-    hackathon={struct(HackScraper.Events.Hackathon, Map.from_struct(@suggestion))}
-    patch={~p"/suggestions/#{@suggestion}"}
+    action={if HackScraper.Accounts.can_do?(@current_user, :editor) && !@suggestion.hackathon_id, do: :new, else: :edit}
+    suggestion={@suggestion}
     date_hint={@suggestion.date_hint}
+    current_user={@current_user}
+    patch={~p"/suggestions/#{@suggestion}"}
   />
 </.modal>

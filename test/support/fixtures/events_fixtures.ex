@@ -44,6 +44,8 @@ defmodule HackScraper.EventsFixtures do
     Map.put(hackathon, :series, nil)
   end
 
+  import HackScraper.AccountsFixtures, only: [user_fixture: 0]
+
   @doc """
   Generate a suggestion.
   """
@@ -51,14 +53,15 @@ defmodule HackScraper.EventsFixtures do
     {:ok, suggestion} =
       attrs
       |> Enum.into(%{
-        date: "some date",
+        creator_id: user_fixture().id,
+        name: "some name",
+        url: "some url",
         description: "some description",
-        end_date: ~U[2025-11-16 16:50:00Z],
         image: "some image",
         location: "some location",
-        name: "some name",
+        date_hint: "some date_hint",
         start_date: ~U[2025-11-16 16:50:00Z],
-        url: "some url"
+        end_date: ~U[2025-11-16 16:50:00Z]
       })
       |> HackScraper.Events.create_suggestion()
 

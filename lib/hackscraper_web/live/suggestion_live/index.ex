@@ -2,14 +2,24 @@ defmodule HackScraperWeb.SuggestionLive.Index do
   alias HackScraper.Events.Suggestion
   use HackScraperWeb, :live_view
 
+  import Ecto.Query
   alias HackScraper.Events
 
   on_mount {HackScraperWeb.UserAuth, :mount_current_user}
 
   @impl true
   def handle_params(params, _url, socket) do
+    user = socket.assigns.current_user
+
+    query =
+      if HackScraper.Accounts.can_do?(user, :editor) do
+        Suggestion
+      else
+        from s in Suggestion, where: s.creator_id == ^user.id
+      end
+
     {suggestions, meta} =
-      Flop.validate_and_run!(Suggestion, params,
+      Flop.validate_and_run!(query, params,
         for: Suggestion,
         replace_invalid_params: true
       )
@@ -46,9 +56,15 @@ defmodule HackScraperWeb.SuggestionLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
+    user = socket.assigns.current_user
     suggestion = Events.get_suggestion!(id)
-    {:ok, _} = Events.delete_suggestion(suggestion)
 
-    {:noreply, stream_delete(socket, :suggestions, suggestion)}
+    if (user && user.id == suggestion.creator_id) || HackScraper.Accounts.can_do?(user, :editor) do
+      {:ok, _} = Events.delete_suggestion(suggestion)
+
+      {:noreply, stream_delete(socket, :suggestions, suggestion)}
+    else
+      {:noreply, put_flash(socket, :error, "You are not authorized to delete this suggestion.")}
+    end
   end
 end

@@ -20,12 +20,15 @@ defmodule HackScraperWeb.CoreComponents do
 
   attr :date, DateTime
   attr :format, :string, values: ~w(long short), default: "long"
+  attr :id, :string
   attr :class, :string, default: nil
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the span"
 
   def date(assigns) do
+    assigns = assign_new(assigns, :id, fn -> "date-#{System.unique_integer()}" end)
+
     ~H"""
-    <span phx-update="ignore" data-format={@format} class={["format-date", @class]} {@rest}>
+    <span id={@id} phx-update="ignore" data-format={@format} class={["format-date", @class]} {@rest}>
       {Calendar.strftime(@date, "%Y-%m-%d %H:%M UTC")}
     </span>
     """

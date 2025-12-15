@@ -23,19 +23,14 @@ defmodule HackScraper.AccountsFixtures do
       |> valid_user_attributes()
       |> HackScraper.Accounts.register_user()
 
-    user
-  end
+    if Map.has_key?(attrs, :role) do
+      {:ok, user} =
+        HackScraper.Accounts.update_user(user, %{role: HackScraper.Accounts.roles()[attrs[:role]]})
 
-  def admin_user_fixture(attrs \\ %{}) do
-    {:ok, user} =
-      attrs
-      |> valid_user_attributes()
-      |> HackScraper.Accounts.register_user()
-
-    {:ok, user} =
-      HackScraper.Accounts.update_user(user, %{role: HackScraper.Accounts.roles()[:admin]})
-
-    user
+      user
+    else
+      user
+    end
   end
 
   def extract_user_token(fun) do

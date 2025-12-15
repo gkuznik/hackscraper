@@ -132,9 +132,10 @@ defmodule HackScraper.EventsTest do
   describe "suggestions" do
     alias HackScraper.Events.Suggestion
 
+    import HackScraper.AccountsFixtures
     import HackScraper.EventsFixtures
 
-    @invalid_attrs %{name: nil, date: nil, description: nil, location: nil, image: nil, url: nil, start_date: nil, end_date: nil}
+    @invalid_attrs %{name: nil, date_hint: nil, description: nil, location: nil, image: nil, url: nil, start_date: nil, end_date: nil}
 
     test "list_suggestions/0 returns all suggestions" do
       suggestion = suggestion_fixture()
@@ -147,11 +148,12 @@ defmodule HackScraper.EventsTest do
     end
 
     test "create_suggestion/1 with valid data creates a suggestion" do
-      valid_attrs = %{name: "some name", date: "some date", description: "some description", location: "some location", image: "some image", url: "some url", start_date: ~U[2025-11-16 16:50:00Z], end_date: ~U[2025-11-16 16:50:00Z]}
+      user = user_fixture()
+      valid_attrs = %{name: "some name", date_hint: "some date_hint", description: "some description", location: "some location", image: "some image", url: "some url", start_date: ~U[2025-11-16 16:50:00Z], end_date: ~U[2025-11-16 16:50:00Z], creator_id: user.id}
 
       assert {:ok, %Suggestion{} = suggestion} = Events.create_suggestion(valid_attrs)
       assert suggestion.name == "some name"
-      assert suggestion.date_hint == "some date"
+      assert suggestion.date_hint == "some date_hint"
       assert suggestion.description == "some description"
       assert suggestion.location == "some location"
       assert suggestion.image == "some image"
@@ -164,10 +166,36 @@ defmodule HackScraper.EventsTest do
       assert {:error, %Ecto.Changeset{}} = Events.create_suggestion(@invalid_attrs)
     end
 
+    test "update_suggestion/2 with valid data updates the suggestion" do
+      suggestion = suggestion_fixture()
+      update_attrs = %{name: "some updated name", date_hint: "some updated date_hint", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: ~U[2025-11-17 16:50:00Z], end_date: ~U[2025-11-17 16:50:00Z]}
+
+      assert {:ok, %Suggestion{} = suggestion} = Events.update_suggestion(suggestion, update_attrs)
+      assert suggestion.name == "some updated name"
+      assert suggestion.date_hint == "some updated date_hint"
+      assert suggestion.description == "some updated description"
+      assert suggestion.location == "some updated location"
+      assert suggestion.image == "some updated image"
+      assert suggestion.url == "some updated url"
+      assert suggestion.start_date == ~U[2025-11-17 16:50:00Z]
+      assert suggestion.end_date == ~U[2025-11-17 16:50:00Z]
+    end
+
+    test "update_suggestion/2 with invalid data returns error changeset" do
+      suggestion = suggestion_fixture()
+      assert {:error, %Ecto.Changeset{}} = Events.update_suggestion(suggestion, @invalid_attrs)
+      assert suggestion == Events.get_suggestion!(suggestion.id)
+    end
+
     test "delete_suggestion/1 deletes the suggestion" do
       suggestion = suggestion_fixture()
       assert {:ok, %Suggestion{}} = Events.delete_suggestion(suggestion)
       assert_raise Ecto.NoResultsError, fn -> Events.get_suggestion!(suggestion.id) end
+    end
+
+    test "change_suggestion/1 returns a suggestion changeset" do
+      suggestion = suggestion_fixture()
+      assert %Ecto.Changeset{} = Events.change_suggestion(suggestion)
     end
   end
 end

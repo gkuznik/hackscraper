@@ -11,7 +11,7 @@ defmodule HackScraper.ScrapersFixtures do
     {:ok, scraper} =
       attrs
       |> Enum.into(%{
-        worker: "dummy",
+        worker: "Dummy",
         paused: true,
         schedule: "@weekly",
         url: "some url"
