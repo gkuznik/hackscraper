@@ -173,18 +173,13 @@
             <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">
               Website
             </h3>
-            <.link target="_blank" navigate={@hackathon.url}>
-              <.icon name="hero-arrow-top-right-on-square" class="mr-1 h-4 w-4" />
-              Visit {@hackathon.url}
-            </.link>
+            <.external url={@hackathon.url}>Visit {@hackathon.url}</.external>
             <div
               :if={assigns[:suggestion] && @suggestion.url && @suggestion.url != @hackathon.url}
               class="mt-2 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm"
             >
               <span class="text-xs font-semibold text-yellow-800">Suggested:</span>
-              <.link target="_blank" navigate={@suggestion.url}>
-                <.icon name="hero-arrow-top-right-on-square" class="mr-1 h-4 w-4" /> {@suggestion.url}
-              </.link>
+              <.external url={@suggestion.url}>{@suggestion.url}</.external>
             </div>
           </div>
 
@@ -192,8 +187,8 @@
             <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">
               Series
             </h3>
-            <.link navigate={~p"/series/#{@hackathon.series}"}>
-              <.icon name="hero-photo" class="mr-1 h-4 w-4" />
+            <.icon name="hero-photo" class="mr-1 h-4 w-4" />
+            <.link navigate={~p"/series/#{@hackathon.series}"} class="link">
               {@hackathon.series.name}
             </.link>
           </div>

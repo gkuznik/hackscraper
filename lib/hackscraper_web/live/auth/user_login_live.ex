@@ -8,7 +8,7 @@ defmodule HackScraperWeb.UserLoginLive do
         Log in to account
         <:subtitle>
           Don't have an account?
-          <.link navigate={~p"/user/register"} class="font-semibold text-brand hover:underline">
+          <.link navigate={~p"/user/register"} class="link font-semibold">
             Sign up
           </.link>
           for an account now.
@@ -21,7 +21,7 @@ defmodule HackScraperWeb.UserLoginLive do
 
         <:actions>
           <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
-          <.link href={~p"/user/reset_password"} class="text-sm font-semibold">
+          <.link href={~p"/user/reset_password"} class="link text-sm font-semibold">
             Forgot your password?
           </.link>
         </:actions>

@@ -70,9 +70,7 @@
             <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">
               Website
             </h3>
-            <.link target="_blank" navigate={@series.url}>
-              <.icon name="hero-arrow-top-right-on-square" class="mr-1 h-4 w-4" /> Visit Website
-            </.link>
+            <.external url={@series.url}>Visit {@series.url}</.external>
           </div>
         </div>
       </div>
@@ -85,38 +83,32 @@
         <h2 class="text-xl font-semibold text-gray-900">Hackathons in this Series</h2>
       </div>
 
-      <div class="p-6">
+      <div class="mt-[-3em] p-6">
         <%= if length(@series.hackathons) > 0 do %>
-          <div class="overflow-x-auto">
-            <.table id="hackathons" rows={@series.hackathons}>
-              <:col :let={hackathon} label="Name">
-                <.link
-                  navigate={~p"/hackathons/#{hackathon}"}
-                  class="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  {hackathon.name}
-                </.link>
-              </:col>
-              <:col :let={hackathon} label="Location">
-                <div class="flex items-center text-gray-600">
-                  <.icon name="hero-map-pin" class="mr-1 h-4 w-4" />
-                  {hackathon.location}
-                </div>
-              </:col>
-              <:col :let={hackathon} label="Start Date">
-                <div class="flex items-center">
-                  <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                  <.date date={hackathon.start_date} />
-                </div>
-              </:col>
-              <:col :let={hackathon} label="End Date">
-                <div class="flex items-center">
-                  <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-                  <.date date={hackathon.end_date} />
-                </div>
-              </:col>
-            </.table>
-          </div>
+          <.table id="hackathons" rows={@series.hackathons}>
+            <:col :let={hackathon} label="Name">
+              <.link navigate={~p"/hackathons/#{hackathon}"} class="link">
+                {hackathon.name}
+              </.link>
+            </:col>
+            <:col :let={hackathon} label="Location">
+              <div class="flex items-center text-gray-600">
+                {hackathon.location}
+              </div>
+            </:col>
+            <:col :let={hackathon} label="Start Date">
+              <div class="flex items-center">
+                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                <.date date={hackathon.start_date} format="short" />
+              </div>
+            </:col>
+            <:col :let={hackathon} label="End Date">
+              <div class="flex items-center">
+                <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+                <.date date={hackathon.end_date} format="short" />
+              </div>
+            </:col>
+          </.table>
         <% else %>
           <div class="text-center py-8">
             <div class="mx-auto h-12 w-12 text-gray-400 mb-4">

@@ -11,7 +11,7 @@ defmodule HackScraperWeb.UserRegistrationLive do
         Register for an account
         <:subtitle>
           Already registered?
-          <.link navigate={~p"/user/log_in"} class="font-semibold text-brand hover:underline">
+          <.link navigate={~p"/user/log_in"} class="link font-semibold">
             Log in
           </.link>
           to your account now.

@@ -16,13 +16,7 @@
   <:col :let={{_id, scraper}} label="Worker" field={:worker}>{scraper.worker}</:col>
   <:col :let={{_id, scraper}} label="Schedule" field={:schedule}>{scraper.schedule}</:col>
   <:col :let={{_id, scraper}} label="Url" field={:url}>
-    <.link
-      target="_blank"
-      navigate={scraper.url}
-      phx-click={JS.exec("event.stopPropagation()")}
-    >
-      {scraper.url}
-    </.link>
+    <.external url={scraper.url} phx-click={JS.exec("event.stopPropagation()")}>{scraper.url}</.external>
   </:col>
   <:col :let={{_id, scraper}} label="Paused">{scraper.paused}</:col>
   <:action :let={{_id, scraper}}>
@@ -35,9 +29,9 @@
   </:action>
   <:action :let={{_id, scraper}}>
     <div class="sr-only">
-      <.link navigate={~p"/scrapers/#{scraper}"}>Show</.link>
+      <.link navigate={~p"/scrapers/#{scraper}"} class="link">Show</.link>
     </div>
-    <.link patch={~p"/scrapers/#{scraper}/edit"}>Edit</.link>
+    <.link patch={~p"/scrapers/#{scraper}/edit"} class="link">Edit</.link>
   </:action>
   <:action :let={{id, scraper}}>
     <.link

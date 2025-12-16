@@ -10,13 +10,9 @@
 >
   <:col :let={{_id, suggestion}} label="Name" field={:name}>{suggestion.name}</:col>
   <:col :let={{_id, suggestion}} label="Url" field={:url}>
-    <.link
-      target="_blank"
-      navigate={suggestion.url}
-      phx-click={JS.exec("event.stopPropagation()")}
-    >
+    <.external url={suggestion.url} phx-click={JS.exec("event.stopPropagation()")}>
       {suggestion.url}
-    </.link>
+    </.external>
   </:col>
   <:col :let={{_id, suggestion}} label="Image"><img src={suggestion.image} /></:col>
   <:col :let={{_id, suggestion}} label="Description">
@@ -32,9 +28,9 @@
   </:col>
   <:action :let={{_id, suggestion}}>
     <div class="sr-only">
-      <.link navigate={~p"/suggestions/#{suggestion}"}>Show</.link>
+      <.link navigate={~p"/suggestions/#{suggestion}"} class="link">Show</.link>
     </div>
-    <.link patch={~p"/suggestions/#{suggestion}/review"}>Review</.link>
+    <.link patch={~p"/suggestions/#{suggestion}/review"} class="link">Review</.link>
   </:action>
   <:action :let={{id, suggestion}}>
     <.link
@@ -56,7 +52,11 @@
     module={HackScraperWeb.HackathonLive.FormComponent}
     id={@suggestion.hackathon_id || :new}
     title={@page_title}
-    action={if HackScraper.Accounts.can_do?(@current_user, :editor) && !@suggestion.hackathon_id, do: :new, else: :edit}
+    action={
+      if HackScraper.Accounts.can_do?(@current_user, :editor) && !@suggestion.hackathon_id,
+        do: :new,
+        else: :edit
+    }
     suggestion={@suggestion}
     date_hint={@suggestion.date_hint}
     current_user={@current_user}

@@ -21,8 +21,8 @@ defmodule HackScraperWeb.UserConfirmationInstructionsLive do
       </.simple_form>
 
       <p class="text-center mt-4">
-        <.link href={~p"/user/register"}>Register</.link>
-        | <.link href={~p"/user/log_in"}>Log in</.link>
+        <.link href={~p"/user/register"} class="link">Register</.link>
+        | <.link href={~p"/user/log_in"} class="link">Log in</.link>
       </p>
     </div>
     """

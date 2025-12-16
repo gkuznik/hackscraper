@@ -22,10 +22,34 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
+let Hooks = {}
+Hooks.formatDate = {
+  mounted() {
+    const dateString = this.el.textContent.trim();
+    const date = new Date(dateString);
+    if (this.el.getAttribute("data-format") === "short") {
+      this.el.textContent = date.toLocaleDateString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } else {
+      this.el.textContent = date.toLocaleDateString([], {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+  },
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
-  params: {_csrf_token: csrfToken}
+  params: {_csrf_token: csrfToken},
+  hooks: Hooks
 })
 
 // Show progress bar on live navigation and form submits
@@ -41,28 +65,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-
-function formatDate(element) {
-    const dateString = element.textContent.trim();
-    const date = new Date(dateString);
-    if (element.getAttribute('data-format') === "short") {
-        element.textContent = date.toLocaleDateString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-        });
-    } else {
-        element.textContent = date.toLocaleDateString([], {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        });
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const formatDateElements = document.querySelectorAll('.format-date');
-    formatDateElements.forEach(element => formatDate(element));
-});

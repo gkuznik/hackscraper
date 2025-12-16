@@ -18,17 +18,30 @@ defmodule HackScraperWeb.CoreComponents do
 
   alias Phoenix.LiveView.JS
 
+  attr :url, :string, required: true
+  attr :class, :string, default: nil
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the span"
+  slot :inner_block, required: true
+
+  def external(assigns) do
+    ~H"""
+    <.icon name="hero-arrow-top-right-on-square" class="mr-1 h-4 w-4" />
+    <.link target="_blank" navigate={@url} class={[@class, "link"]} {@rest}>
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
   attr :date, DateTime
   attr :format, :string, values: ~w(long short), default: "long"
   attr :id, :string
-  attr :class, :string, default: nil
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the span"
 
   def date(assigns) do
     assigns = assign_new(assigns, :id, fn -> "date-#{System.unique_integer()}" end)
 
     ~H"""
-    <span id={@id} phx-update="ignore" data-format={@format} class={["format-date", @class]} {@rest}>
+    <span id={@id} phx-hook="formatDate" data-format={@format} {@rest}>
       {Calendar.strftime(@date, "%Y-%m-%d %H:%M UTC")}
     </span>
     """
@@ -489,7 +502,7 @@ defmodule HackScraperWeb.CoreComponents do
     ~H"""
     <div class="overflow-y-auto px-4 sm:overflow-visible sm:px-0">
       <table class="w-[40rem] mt-11 sm:w-full">
-        <thead class="text-sm text-left leading-6 text-zinc-500">
+        <thead class="text-sm text-left leading-6 text-zinc-500 sticky top-0">
           <tr>
             <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal">{col[:label]}</th>
             <th :if={@action != []} class="relative p-0 pb-4">
