@@ -23,7 +23,7 @@
   <:col :let={{_id, hackathon}} label="Description">
     <div class="description-cell">{hackathon.description}</div>
   </:col>
-  <:col :let={{_id, hackathon}} label="Location">{hackathon.location}</:col>
+  <:col :let={{_id, hackathon}} label="Location" field={:location}>{hackathon.location}</:col>
   <:col :let={{_id, hackathon}} label="Start date" field={:start_date}>
     <.date format="short" date={hackathon.start_date} />
   </:col>

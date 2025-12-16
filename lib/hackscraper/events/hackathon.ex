@@ -5,7 +5,7 @@ defmodule HackScraper.Events.Hackathon do
   @derive {
     Flop.Schema,
     filterable: [:name, :url, :description, :location],
-    sortable: [:name, :url, :start_date, :end_date]
+    sortable: [:name, :url, :location, :start_date, :end_date]
   }
 
   schema "hackathons" do
