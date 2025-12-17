@@ -3,7 +3,7 @@ defmodule HackScraperWeb.ScraperLive.Show do
 
   alias HackScraper.Scrapers
 
-  on_mount {HackScraperWeb.UserAuth, :mount_current_user}
+  on_mount {HackScraperWeb.LiveAuth, :admin}
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do

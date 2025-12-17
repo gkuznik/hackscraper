@@ -5,17 +5,6 @@ defmodule HackScraperWeb.Router do
   import Phoenix.LiveDashboard.Router
   import Oban.Web.Router
 
-  def role_only(conn, %{role: role}) do
-    if HackScraper.Accounts.can_do?(conn.assigns[:current_user], role) do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You are not authorized to access this page.")
-      |> redirect(to: "/")
-      |> halt()
-    end
-  end
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -26,41 +15,45 @@ defmodule HackScraperWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :editor do
-    plug :require_authenticated_user
-    plug :role_only, %{role: :editor}
-  end
-
-  pipeline :mod do
-    plug :require_authenticated_user
-    plug :role_only, %{role: :mod}
-  end
-
-  pipeline :admin do
-    plug :require_authenticated_user
-    plug :role_only, %{role: :admin}
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", HackScraperWeb do
-    pipe_through [:browser, :editor]
-
-    live "/series/new", SeriesLive.Index, :new
-    live "/series/:id/edit", SeriesLive.Index, :edit
-    live "/series/:id/show/edit", SeriesLive.Show, :edit
-
-    live "/suggestions/:id/review", SuggestionLive.Index, :review
-    live "/suggestions/:id/show/review", SuggestionLive.Show, :review
-  end
-
-  scope "/", HackScraperWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    live "/suggestions", SuggestionLive.Index, :index
-    live "/suggestions/:id", SuggestionLive.Show, :show
+    live_session :require_authenticated,
+      on_mount: {HackScraperWeb.UserAuth, :mount_current_user} do
+      # user
+      live "/hackathons/new", HackathonLive.Index, :new
+      live "/hackathons/:id/edit", HackathonLive.Index, :edit
+      live "/hackathons/:id/show/edit", HackathonLive.Show, :edit
+
+      live "/suggestions", SuggestionLive.Index, :index
+      live "/suggestions/:id", SuggestionLive.Show, :show
+
+      # editor
+      live "/series/new", SeriesLive.Index, :new
+      live "/series/:id/edit", SeriesLive.Index, :edit
+      live "/series/:id/show/edit", SeriesLive.Show, :edit
+
+      live "/suggestions/:id/review", SuggestionLive.Index, :review
+      live "/suggestions/:id/show/review", SuggestionLive.Show, :review
+
+      # mod
+      live "/users", UserLive.Index, :index
+      live "/users/new", UserLive.Index, :new
+      live "/users/:id/edit", UserLive.Index, :edit
+      live "/users/:id", UserLive.Show, :show
+      live "/users/:id/show/edit", UserLive.Show, :edit
+
+      # admin
+      live "/scrapers", ScraperLive.Index, :index
+      live "/scrapers/new", ScraperLive.Index, :new
+      live "/scrapers/:id/edit", ScraperLive.Index, :edit
+      live "/scrapers/:id", ScraperLive.Show, :show
+      live "/scrapers/:id/show/edit", ScraperLive.Show, :edit
+    end
   end
 
   scope "/", HackScraperWeb do
@@ -68,42 +61,36 @@ defmodule HackScraperWeb.Router do
 
     get "/", PageController, :home
 
-    live "/hackathons", HackathonLive.Index, :index
-    live "/hackathons/new", HackathonLive.Index, :new
-    live "/hackathons/:id/edit", HackathonLive.Index, :edit
-    live "/hackathons/:id", HackathonLive.Show, :show
-    live "/hackathons/:id/show/edit", HackathonLive.Show, :edit
+    live_session :maybe_authenticated, on_mount: {HackScraperWeb.UserAuth, :mount_current_user} do
+      live "/hackathons", HackathonLive.Index, :index
+      live "/hackathons/:id", HackathonLive.Show, :show
 
-    live "/series", SeriesLive.Index, :index
-    live "/series/:id", SeriesLive.Show, :show
-  end
-
-  scope "/", HackScraperWeb do
-    pipe_through [:browser, :mod]
-
-    live "/users", UserLive.Index, :index
-    live "/users/new", UserLive.Index, :new
-    live "/users/:id/edit", UserLive.Index, :edit
-    live "/users/:id", UserLive.Show, :show
-    live "/users/:id/show/edit", UserLive.Show, :edit
+      live "/series", SeriesLive.Index, :index
+      live "/series/:id", SeriesLive.Show, :show
+    end
   end
 
   scope "/" do
-    pipe_through [:browser, :admin]
+    pipe_through [:browser]
 
     if Application.compile_env(:hackscraper, :dev_routes) do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
 
-    live_dashboard "/dashboard", metrics: HackScraperWeb.Telemetry
-    oban_dashboard("/oban", logo_path: "/")
+    live_dashboard "/dashboard",
+      metrics: HackScraperWeb.Telemetry,
+      on_mount: [
+        {HackScraperWeb.UserAuth, :mount_current_user},
+        {HackScraperWeb.LiveAuth, :admin}
+      ]
 
-    alias HackScraperWeb.ScraperLive
-    live "/scrapers", ScraperLive.Index, :index
-    live "/scrapers/new", ScraperLive.Index, :new
-    live "/scrapers/:id/edit", ScraperLive.Index, :edit
-    live "/scrapers/:id", ScraperLive.Show, :show
-    live "/scrapers/:id/show/edit", ScraperLive.Show, :edit
+    oban_dashboard("/oban",
+      logo_path: "/",
+      on_mount: [
+        {HackScraperWeb.UserAuth, :mount_current_user},
+        {HackScraperWeb.LiveAuth, :admin}
+      ]
+    )
   end
 
   ## Authentication routes

@@ -1,6 +1,7 @@
 defmodule HackScraperWeb.HackathonLive.Index do
   use HackScraperWeb, :live_view
 
+  import HackScraperWeb.LiveAuth
   alias HackScraper.Events
   alias HackScraper.Events.Hackathon
 
@@ -8,16 +9,18 @@ defmodule HackScraperWeb.HackathonLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {hackathons, meta} =
-      Flop.validate_and_run!(Hackathon, params, for: Hackathon, replace_invalid_params: true)
+    authorized socket, [:edit, :new], :user do
+      {hackathons, meta} =
+        Flop.validate_and_run!(Hackathon, params, for: Hackathon, replace_invalid_params: true)
 
-    socket =
-      socket
-      |> assign(:meta, meta)
-      |> stream(:hackathons, hackathons, reset: true)
-      |> apply_action(socket.assigns.live_action, params)
+      socket =
+        socket
+        |> assign(:meta, meta)
+        |> stream(:hackathons, hackathons, reset: true)
+        |> apply_action(socket.assigns.live_action, params)
 
-    {:noreply, socket}
+      {:noreply, socket}
+    end
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do

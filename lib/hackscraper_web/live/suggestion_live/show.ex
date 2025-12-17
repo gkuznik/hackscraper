@@ -1,18 +1,21 @@
 defmodule HackScraperWeb.SuggestionLive.Show do
   use HackScraperWeb, :live_view
 
+  import HackScraperWeb.LiveAuth
   alias HackScraper.Events
 
   on_mount {HackScraperWeb.UserAuth, :mount_current_user}
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    suggestion = Events.get_suggestion_with_creator!(id)
+    authorized socket, [:review], :editor do
+      suggestion = Events.get_suggestion_with_creator!(id)
 
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action, suggestion))
-     |> assign(:suggestion, suggestion)}
+      {:noreply,
+       socket
+       |> assign(:page_title, page_title(socket.assigns.live_action, suggestion))
+       |> assign(:suggestion, suggestion)}
+    end
   end
 
   @impl true

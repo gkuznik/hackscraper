@@ -1,6 +1,7 @@
 defmodule HackScraperWeb.SeriesLive.Index do
   use HackScraperWeb, :live_view
 
+  import HackScraperWeb.LiveAuth
   alias HackScraper.Events
   alias HackScraper.Events.Series
 
@@ -8,16 +9,18 @@ defmodule HackScraperWeb.SeriesLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {series, meta} =
-      Flop.validate_and_run!(Series, params, for: Series, replace_invalid_params: true)
+    authorized socket, [:edit, :new], :editor do
+      {series, meta} =
+        Flop.validate_and_run!(Series, params, for: Series, replace_invalid_params: true)
 
-    socket =
-      socket
-      |> assign(:meta, meta)
-      |> stream(:series, series, reset: true)
-      |> apply_action(socket.assigns.live_action, params)
+      socket =
+        socket
+        |> assign(:meta, meta)
+        |> stream(:series, series, reset: true)
+        |> apply_action(socket.assigns.live_action, params)
 
-    {:noreply, socket}
+      {:noreply, socket}
+    end
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do

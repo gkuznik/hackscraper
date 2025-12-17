@@ -3,34 +3,35 @@ defmodule HackScraperWeb.SuggestionLive.Index do
   use HackScraperWeb, :live_view
 
   import Ecto.Query
+  import HackScraperWeb.LiveAuth
   alias HackScraper.Events
-
-  on_mount {HackScraperWeb.UserAuth, :mount_current_user}
 
   @impl true
   def handle_params(params, _url, socket) do
-    user = socket.assigns.current_user
+    authorized socket, [:review], :editor do
+      user = socket.assigns.current_user
 
-    query =
-      if HackScraper.Accounts.can_do?(user, :editor) do
-        Suggestion
-      else
-        from s in Suggestion, where: s.creator_id == ^user.id
-      end
+      query =
+        if HackScraper.Accounts.can_do?(user, :editor) do
+          Suggestion
+        else
+          from s in Suggestion, where: s.creator_id == ^user.id
+        end
 
-    {suggestions, meta} =
-      Flop.validate_and_run!(query, params,
-        for: Suggestion,
-        replace_invalid_params: true
-      )
+      {suggestions, meta} =
+        Flop.validate_and_run!(query, params,
+          for: Suggestion,
+          replace_invalid_params: true
+        )
 
-    socket =
-      socket
-      |> assign(:meta, meta)
-      |> stream(:suggestions, suggestions, reset: true)
-      |> apply_action(socket.assigns.live_action, params)
+      socket =
+        socket
+        |> assign(:meta, meta)
+        |> stream(:suggestions, suggestions, reset: true)
+        |> apply_action(socket.assigns.live_action, params)
 
-    {:noreply, socket}
+      {:noreply, socket}
+    end
   end
 
   defp apply_action(socket, :review, %{"id" => id}) do
