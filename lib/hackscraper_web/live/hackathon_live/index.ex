@@ -9,14 +9,21 @@ defmodule HackScraperWeb.HackathonLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    authorized socket, [:edit, :new], :user do
+    current_user = socket.assigns.current_user
+
+    if socket.assigns.live_action in [:edit, :new] && !current_user do
+      deny(socket)
+    else
       {hackathons, meta} =
         Flop.validate_and_run!(Hackathon, params, for: Hackathon, replace_invalid_params: true)
+
+      is_editor = HackScraper.Accounts.can_do?(current_user, :editor)
 
       socket =
         socket
         |> assign(:meta, meta)
         |> stream(:hackathons, hackathons, reset: true)
+        |> assign(:is_editor, is_editor)
         |> apply_action(socket.assigns.live_action, params)
 
       {:noreply, socket}
@@ -38,7 +45,6 @@ defmodule HackScraperWeb.HackathonLive.Index do
     socket
     |> assign(:page_title, "Edit Hackathon " <> hackathon.name)
     |> assign(:hackathon, hackathon)
-    |> assign(:is_editor, is_editor)
     |> assign(:suggestion, suggestion)
   end
 
@@ -61,13 +67,13 @@ defmodule HackScraperWeb.HackathonLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    if HackScraper.Accounts.can_do?(socket.assigns.current_user, :editor) do
+    if !socket.assigns.is_editor do
+      deny(socket)
+    else
       hackathon = Events.get_hackathon!(id)
       {:ok, _} = Events.delete_hackathon(hackathon)
 
       {:noreply, stream_delete(socket, :hackathons, hackathon)}
-    else
-      {:noreply, put_flash(socket, :error, "You are not authorized to delete this hackathon.")}
     end
   end
 end

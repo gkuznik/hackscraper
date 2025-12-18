@@ -1,6 +1,6 @@
 <.header>
   Listing Series
-  <:actions>
+  <:actions :if={@is_editor}>
     <.link tabindex="-1" patch={~p"/series/new"}>
       <.button>New Series</.button>
     </.link>
@@ -24,9 +24,9 @@
     <div class="sr-only">
       <.link navigate={~p"/series/#{series}"}>Show</.link>
     </div>
-    <.link patch={~p"/series/#{series}/edit"} class="link">Edit</.link>
+    <.link :if={@is_editor} patch={~p"/series/#{series}/edit"} class="link">Edit</.link>
   </:action>
-  <:action :let={{id, series}}>
+  <:action :let={{id, series}} :if={@is_editor}>
     <.link
       phx-click={JS.push("delete", value: %{id: series.id}) |> hide("##{id}")}
       data-confirm="Are you sure?"

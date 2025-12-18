@@ -8,36 +8,43 @@ defmodule HackScraperWeb.SuggestionLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    authorized socket, [:review], :editor do
-      user = socket.assigns.current_user
+    current_user = socket.assigns.current_user
+    is_editor = HackScraper.Accounts.can_do?(current_user, :editor)
 
-      query =
-        if HackScraper.Accounts.can_do?(user, :editor) do
-          Suggestion
-        else
-          from s in Suggestion, where: s.creator_id == ^user.id
-        end
+    query =
+      if is_editor do
+        Suggestion
+      else
+        from s in Suggestion, where: s.creator_id == ^current_user.id
+      end
 
-      {suggestions, meta} =
-        Flop.validate_and_run!(query, params,
-          for: Suggestion,
-          replace_invalid_params: true
-        )
+    {suggestions, meta} =
+      Flop.validate_and_run!(query, params,
+        for: Suggestion,
+        replace_invalid_params: true
+      )
 
-      socket =
-        socket
-        |> assign(:meta, meta)
-        |> stream(:suggestions, suggestions, reset: true)
-        |> apply_action(socket.assigns.live_action, params)
+    socket =
+      socket
+      |> assign(:meta, meta)
+      |> stream(:suggestions, suggestions, reset: true)
+      |> assign(:is_editor, is_editor)
+      |> apply_action(socket.assigns.live_action, params)
 
-      {:noreply, socket}
-    end
+    {:noreply, socket}
   end
 
   defp apply_action(socket, :review, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Review Suggestion")
-    |> assign(:suggestion, Events.get_suggestion!(id))
+    suggestion = Events.get_suggestion!(id)
+    user = socket.assigns.current_user
+
+    if user.id != suggestion.creator_id && !socket.assigns.is_editor do
+      deny(socket) |> elem(1)
+    else
+      socket
+      |> assign(:page_title, "Review Suggestion")
+      |> assign(:suggestion, suggestion)
+    end
   end
 
   defp apply_action(socket, :index, _params) do
@@ -57,15 +64,15 @@ defmodule HackScraperWeb.SuggestionLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    user = socket.assigns.current_user
     suggestion = Events.get_suggestion!(id)
+    user = socket.assigns.current_user
 
-    if (user && user.id == suggestion.creator_id) || HackScraper.Accounts.can_do?(user, :editor) do
+    if user.id != suggestion.creator_id && !socket.assigns.is_editor do
+      deny(socket)
+    else
       {:ok, _} = Events.delete_suggestion(suggestion)
 
       {:noreply, stream_delete(socket, :suggestions, suggestion)}
-    else
-      {:noreply, put_flash(socket, :error, "You are not authorized to delete this suggestion.")}
     end
   end
 end

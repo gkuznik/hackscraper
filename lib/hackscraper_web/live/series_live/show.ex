@@ -8,13 +8,19 @@ defmodule HackScraperWeb.SeriesLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    authorized socket, [:edit], :editor do
+    current_user = socket.assigns.current_user
+    is_editor = HackScraper.Accounts.can_do?(current_user, :editor)
+
+    if socket.assigns.live_action == :edit && !is_editor do
+      deny(socket)
+    else
       series = Events.get_series!(id) |> HackScraper.Repo.preload(:hackathons)
 
       {:noreply,
        socket
        |> assign(:page_title, page_title(socket.assigns.live_action, series))
-       |> assign(:series, series)}
+       |> assign(:series, series)
+       |> assign(:is_editor, is_editor)}
     end
   end
 

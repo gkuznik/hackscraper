@@ -211,7 +211,7 @@
           <.icon name="hero-code-bracket" class="h-5 w-5" /> Code
         </.link>
         <.link
-          href="mailto:hello@hackscraper.com"
+          href={"mailto:#{Application.get_env(:hackscraper, HackScraperWeb)[:contact_mail]}"}
           class="inline-flex items-center gap-2 border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 rounded-full font-semibold transition-colors"
         >
           <.icon name="hero-envelope" class="h-5 w-5" /> Mail

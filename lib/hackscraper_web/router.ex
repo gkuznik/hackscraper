@@ -25,18 +25,10 @@ defmodule HackScraperWeb.Router do
     live_session :require_authenticated,
       on_mount: {HackScraperWeb.UserAuth, :mount_current_user} do
       # user
-      live "/hackathons/new", HackathonLive.Index, :new
-      live "/hackathons/:id/edit", HackathonLive.Index, :edit
-      live "/hackathons/:id/show/edit", HackathonLive.Show, :edit
-
       live "/suggestions", SuggestionLive.Index, :index
       live "/suggestions/:id", SuggestionLive.Show, :show
 
       # editor
-      live "/series/new", SeriesLive.Index, :new
-      live "/series/:id/edit", SeriesLive.Index, :edit
-      live "/series/:id/show/edit", SeriesLive.Show, :edit
-
       live "/suggestions/:id/review", SuggestionLive.Index, :review
       live "/suggestions/:id/show/review", SuggestionLive.Show, :review
 
@@ -64,10 +56,16 @@ defmodule HackScraperWeb.Router do
 
     live_session :maybe_authenticated, on_mount: {HackScraperWeb.UserAuth, :mount_current_user} do
       live "/hackathons", HackathonLive.Index, :index
+      live "/hackathons/new", HackathonLive.Index, :new
+      live "/hackathons/:id/edit", HackathonLive.Index, :edit
       live "/hackathons/:id", HackathonLive.Show, :show
+      live "/hackathons/:id/show/edit", HackathonLive.Show, :edit
 
       live "/series", SeriesLive.Index, :index
+      live "/series/new", SeriesLive.Index, :new
+      live "/series/:id/edit", SeriesLive.Index, :edit
       live "/series/:id", SeriesLive.Show, :show
+      live "/series/:id/show/edit", SeriesLive.Show, :edit
     end
   end
 

@@ -48,7 +48,7 @@
           </.button>
         </.link>
       </div>
-      <div class="absolute top-4 right-4">
+      <div :if={@current_user} class="absolute top-4 right-4">
         <.link tabindex="-1" patch={~p"/hackathons/#{@hackathon}/show/edit"} phx-click={JS.push_focus()}>
           <.button class="shadow-md">
             <.icon name="hero-pencil-square" class="h-5 w-5" /> Edit

@@ -2,10 +2,21 @@ defmodule HackScraperWeb.SeriesLiveTest do
   use HackScraperWeb.ConnCase
 
   import Phoenix.LiveViewTest
+  import HackScraper.AccountsFixtures
   import HackScraper.EventsFixtures
 
-  @create_attrs %{name: "some name", description: "some description", image: "some image", url: "some url"}
-  @update_attrs %{name: "some updated name", description: "some updated description", image: "some updated image", url: "some updated url"}
+  @create_attrs %{
+    name: "some name",
+    description: "some description",
+    image: "some image",
+    url: "some url"
+  }
+  @update_attrs %{
+    name: "some updated name",
+    description: "some updated description",
+    image: "some updated image",
+    url: "some updated url"
+  }
   @invalid_attrs %{name: nil, description: nil, image: nil, url: nil}
 
   defp create_series(_) do
@@ -24,7 +35,8 @@ defmodule HackScraperWeb.SeriesLiveTest do
     end
 
     test "saves new series", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, ~p"/series")
+      {:ok, index_live, _html} =
+        log_in_user(conn, user_fixture(%{role: :editor})) |> live(~p"/series")
 
       assert index_live |> element("a", "New Series") |> render_click() =~
                "New Series"
@@ -47,7 +59,8 @@ defmodule HackScraperWeb.SeriesLiveTest do
     end
 
     test "updates series in listing", %{conn: conn, series: series} do
-      {:ok, index_live, _html} = live(conn, ~p"/series")
+      {:ok, index_live, _html} =
+        log_in_user(conn, user_fixture(%{role: :editor})) |> live(~p"/series")
 
       assert index_live |> element("#series-#{series.id} a", "Edit") |> render_click() =~
                "Edit Series"
@@ -70,7 +83,8 @@ defmodule HackScraperWeb.SeriesLiveTest do
     end
 
     test "deletes series in listing", %{conn: conn, series: series} do
-      {:ok, index_live, _html} = live(conn, ~p"/series")
+      {:ok, index_live, _html} =
+        log_in_user(conn, user_fixture(%{role: :editor})) |> live(~p"/series")
 
       assert index_live |> element("#series-#{series.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#series-#{series.id}")
@@ -88,7 +102,8 @@ defmodule HackScraperWeb.SeriesLiveTest do
     end
 
     test "updates series within modal", %{conn: conn, series: series} do
-      {:ok, show_live, _html} = live(conn, ~p"/series/#{series}")
+      {:ok, show_live, _html} =
+        log_in_user(conn, user_fixture(%{role: :editor})) |> live(~p"/series/#{series}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit"

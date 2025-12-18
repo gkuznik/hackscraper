@@ -229,7 +229,7 @@ defmodule HackScraperWeb.Components.Sidebar do
     <button
       type="button"
       id="mobile-menu-button"
-      class={"#{@class} lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"}
+      class={"#{@class} lg:hidden inline-flex items-center justify-center p-2 rounded-md bg-zinc-900 hover:bg-zinc-700 text-white active:text-white/80 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"}
       phx-click={
         JS.remove_class("-translate-x-full", to: "#sidebar")
         |> JS.show(to: "#sidebar-backdrop")

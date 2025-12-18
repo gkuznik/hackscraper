@@ -9,7 +9,12 @@ defmodule HackScraperWeb.SeriesLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    authorized socket, [:edit, :new], :editor do
+    current_user = socket.assigns.current_user
+    is_editor = HackScraper.Accounts.can_do?(current_user, :editor)
+
+    if socket.assigns.live_action in [:edit, :new] && !is_editor do
+      deny(socket)
+    else
       {series, meta} =
         Flop.validate_and_run!(Series, params, for: Series, replace_invalid_params: true)
 
@@ -17,6 +22,7 @@ defmodule HackScraperWeb.SeriesLive.Index do
         socket
         |> assign(:meta, meta)
         |> stream(:series, series, reset: true)
+        |> assign(:is_editor, is_editor)
         |> apply_action(socket.assigns.live_action, params)
 
       {:noreply, socket}
@@ -50,9 +56,13 @@ defmodule HackScraperWeb.SeriesLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    series = Events.get_series!(id)
-    {:ok, _} = Events.delete_series(series)
+    if !socket.assigns.is_editor do
+      deny(socket)
+    else
+      series = Events.get_series!(id)
+      {:ok, _} = Events.delete_series(series)
 
-    {:noreply, stream_delete(socket, :series, series)}
+      {:noreply, stream_delete(socket, :series, series)}
+    end
   end
 end

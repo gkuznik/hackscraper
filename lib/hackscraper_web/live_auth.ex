@@ -17,20 +17,10 @@ defmodule HackScraperWeb.LiveAuth do
     end
   end
 
-  defmacro authorized(socket, actions, role, do: block) do
-    quote do
-      if unquote(socket).assigns.live_action in unquote(actions) and
-           !HackScraper.Accounts.can_do?(
-             unquote(socket).assigns[:current_user],
-             unquote(role)
-           ) do
-        {:noreply,
-         unquote(socket)
-         |> Phoenix.LiveView.put_flash(:error, "You are not authorized to access this page.")
-         |> Phoenix.LiveView.redirect(to: "/", status: 301)}
-      else
-        unquote(block)
-      end
-    end
+  def deny(socket) do
+    {:noreply,
+     socket
+     |> put_flash(:error, "You are not authorized to access this page.")
+     |> redirect(to: "/", status: 301)}
   end
 end

@@ -8,9 +8,13 @@ defmodule HackScraperWeb.SuggestionLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    authorized socket, [:review], :editor do
-      suggestion = Events.get_suggestion_with_creator!(id)
+    suggestion = Events.get_suggestion_with_creator!(id)
+    current_user = socket.assigns.current_user
+    is_editor = HackScraper.Accounts.can_do?(current_user, :editor)
 
+    if current_user.id != suggestion.creator_id && !is_editor do
+      deny(socket)
+    else
       {:noreply,
        socket
        |> assign(:page_title, page_title(socket.assigns.live_action, suggestion))

@@ -14,8 +14,8 @@ add tests for scraper
 ✅ add updating suggestions back (+test)
 ✅ new hackathon -> suggestion
 
-gate actions behind roles
-disable/hide buttons
+✅ gate actions behind roles
+✅ disable/hide buttons
 
 forgot password with name? 
 

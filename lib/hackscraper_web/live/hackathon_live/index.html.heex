@@ -1,7 +1,6 @@
 <.header>
   Listing Hackathons
-  <:actions>
-    <.link patch={~p"/hackathons/new"}>
+  <:actions :if={@current_user}>
     <.link tabindex="-1" patch={~p"/hackathons/new"}>
       <.button>New Hackathon</.button>
     </.link>
@@ -35,9 +34,9 @@
     <div class="sr-only">
       <.link navigate={~p"/hackathons/#{hackathon}"}>Show</.link>
     </div>
-    <.link patch={~p"/hackathons/#{hackathon}/edit"} class="link">Edit</.link>
+    <.link :if={@current_user} patch={~p"/hackathons/#{hackathon}/edit"} class="link">Edit</.link>
   </:action>
-  <:action :let={{id, hackathon}}>
+  <:action :let={{id, hackathon}} :if={@is_editor}>
     <.link
       phx-click={JS.push("delete", value: %{id: hackathon.id}) |> hide("##{id}")}
       data-confirm="Are you sure?"

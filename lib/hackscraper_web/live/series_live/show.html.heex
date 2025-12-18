@@ -15,7 +15,7 @@
             </.button>
           </.link>
         </div>
-        <div class="absolute top-4 right-4">
+        <div :if={@is_editor} class="absolute top-4 right-4">
           <.link tabindex="-1" patch={~p"/series/#{@series}/show/edit"} phx-click={JS.push_focus()}>
             <.button class="bg-white/90 hover:bg-white text-gray-700 shadow-md">
               <.icon name="hero-pencil-square" class="h-5 w-5" /> Edit
@@ -31,8 +31,8 @@
           </.button>
         </.link>
         <h1 class="text-3xl font-bold text-gray-900">{@series.name}</h1>
-        <.link tabindex="-1" patch={~p"/series/#{@series}/show/edit"} phx-click={JS.push_focus()}>
-          <.button>
+        <.link tabindex="-1" patch={@is_editor && ~p"/series/#{@series}/show/edit"} phx-click={JS.push_focus()}>
+          <.button disabled={!@is_editor}>
             <.icon name="hero-pencil-square" class="mr-1 h-4 w-4" /> Edit
           </.button>
         </.link>
