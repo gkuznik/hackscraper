@@ -16,9 +16,7 @@
   <:col :let={{_id, series}} label="Name" field={:name}>{series.name}</:col>
 
   <:col :let={{_id, series}} label="Url" field={:url}>
-    <.external url={series.url} phx-click={JS.exec("event.stopPropagation()")}>
-      {series.url}
-    </.external>
+    <.external url={series.url} phx-click={JS.exec("event.stopPropagation()")} class="block" />
   </:col>
   <:col :let={{_id, series}} label="Image"><img src={series.image} /></:col>
   <:col :let={{_id, series}} label="Description">{series.description}</:col>

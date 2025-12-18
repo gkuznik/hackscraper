@@ -19,16 +19,13 @@ defmodule HackScraperWeb.CoreComponents do
   alias Phoenix.LiveView.JS
 
   attr :url, :string, required: true
+  attr :text, :string
   attr :class, :string, default: nil
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the span"
-  slot :inner_block, required: true
 
   def external(assigns) do
     ~H"""
-    <.icon name="hero-arrow-top-right-on-square" class="mr-1 h-4 w-4" />
-    <.link target="_blank" navigate={@url} class={[@class, "link"]} {@rest}>
-      {render_slot(@inner_block)}
-    </.link>
+    <.link target="_blank" rel="noopener" href={@url} class={[@class, "link"]} {@rest} phx-no-format>{assigns[:text] || @url}</.link>
     """
   end
 

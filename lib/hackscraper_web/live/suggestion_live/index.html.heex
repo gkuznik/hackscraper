@@ -10,9 +10,7 @@
 >
   <:col :let={{_id, suggestion}} label="Name" field={:name}>{suggestion.name}</:col>
   <:col :let={{_id, suggestion}} label="Url" field={:url}>
-    <.external url={suggestion.url} phx-click={JS.exec("event.stopPropagation()")}>
-      {suggestion.url}
-    </.external>
+    <.external url={suggestion.url} phx-click={JS.exec("event.stopPropagation()")} class="block" />
   </:col>
   <:col :let={{_id, suggestion}} label="Image"><img src={suggestion.image} /></:col>
   <:col :let={{_id, suggestion}} label="Description">
