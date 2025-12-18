@@ -60,6 +60,7 @@ defmodule HackScraperWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/about", PageController, :about
 
     live_session :maybe_authenticated, on_mount: {HackScraperWeb.UserAuth, :mount_current_user} do
       live "/hackathons", HackathonLive.Index, :index

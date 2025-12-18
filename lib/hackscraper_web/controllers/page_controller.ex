@@ -9,4 +9,8 @@ defmodule HackScraperWeb.PageController do
 
     render(conn, :home, layout: false, hackathons: hackathons, count: count)
   end
+
+  def about(conn, _params) do
+    render(conn, :about, layout: false)
+  end
 end

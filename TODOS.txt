@@ -19,7 +19,7 @@ disable/hide buttons
 
 forgot password with name? 
 
-about page
+✅ about page
 
 allow image upload next to url
 set url to uploaded image
