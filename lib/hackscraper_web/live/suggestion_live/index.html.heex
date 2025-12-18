@@ -26,7 +26,7 @@
   </:col>
   <:action :let={{_id, suggestion}}>
     <div class="sr-only">
-      <.link navigate={~p"/suggestions/#{suggestion}"} class="link">Show</.link>
+      <.link navigate={~p"/suggestions/#{suggestion}"}>Show</.link>
     </div>
     <.link patch={~p"/suggestions/#{suggestion}/review"} class="link">Review</.link>
   </:action>

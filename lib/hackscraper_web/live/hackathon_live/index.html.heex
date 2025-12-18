@@ -2,6 +2,7 @@
   Listing Hackathons
   <:actions>
     <.link patch={~p"/hackathons/new"}>
+    <.link tabindex="-1" patch={~p"/hackathons/new"}>
       <.button>New Hackathon</.button>
     </.link>
   </:actions>
@@ -32,7 +33,7 @@
   </:col>
   <:action :let={{_id, hackathon}}>
     <div class="sr-only">
-      <.link navigate={~p"/hackathons/#{hackathon}"} class="link">Show</.link>
+      <.link navigate={~p"/hackathons/#{hackathon}"}>Show</.link>
     </div>
     <.link patch={~p"/hackathons/#{hackathon}/edit"} class="link">Edit</.link>
   </:action>

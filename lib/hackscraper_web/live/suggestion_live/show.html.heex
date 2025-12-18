@@ -1,7 +1,7 @@
 <.header>
   Suggestion: {@suggestion.name}
   <:actions>
-    <.link patch={~p"/suggestions/#{@suggestion}/show/review"} phx-click={JS.push_focus()}>
+    <.link tabindex="-1" patch={~p"/suggestions/#{@suggestion}/show/review"} phx-click={JS.push_focus()}>
       <.button>Review</.button>
     </.link>
   </:actions>

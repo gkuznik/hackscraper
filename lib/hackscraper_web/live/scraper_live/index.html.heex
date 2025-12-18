@@ -1,7 +1,7 @@
 <.header>
   Listing Scrapers
   <:actions>
-    <.link patch={~p"/scrapers/new"}>
+    <.link tabindex="-1" patch={~p"/scrapers/new"}>
       <.button>New Scraper</.button>
     </.link>
   </:actions>
@@ -29,7 +29,7 @@
   </:action>
   <:action :let={{_id, scraper}}>
     <div class="sr-only">
-      <.link navigate={~p"/scrapers/#{scraper}"} class="link">Show</.link>
+      <.link navigate={~p"/scrapers/#{scraper}"}>Show</.link>
     </div>
     <.link patch={~p"/scrapers/#{scraper}/edit"} class="link">Edit</.link>
   </:action>

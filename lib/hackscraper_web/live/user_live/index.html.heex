@@ -1,7 +1,7 @@
 <.header>
   Listing Users
   <:actions>
-    <.link patch={~p"/users/new"}>
+    <.link tabindex="-1" patch={~p"/users/new"}>
       <.button>New User</.button>
     </.link>
   </:actions>
@@ -20,7 +20,7 @@
   </:col>
   <:action :let={{_id, user}}>
     <div class="sr-only">
-      <.link navigate={~p"/users/#{user}"} class="link">Show</.link>
+      <.link navigate={~p"/users/#{user}"}>Show</.link>
     </div>
     <.link patch={~p"/users/#{user}/edit"} class="link">Edit</.link>
   </:action>

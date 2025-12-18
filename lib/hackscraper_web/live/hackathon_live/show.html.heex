@@ -42,15 +42,15 @@
         </h1>
       </div>
       <div class="absolute top-4 left-4">
-        <.link patch={~p"/hackathons"}>
-          <.button class="bg-white/90 hover:bg-white text-gray-700 shadow-md">
+        <.link tabindex="-1" patch={~p"/hackathons"}>
+          <.button class="shadow-md">
             <.icon name="hero-arrow-left" class="h-5 w-5" /> Back
           </.button>
         </.link>
       </div>
       <div class="absolute top-4 right-4">
-        <.link patch={~p"/hackathons/#{@hackathon}/show/edit"} phx-click={JS.push_focus()}>
-          <.button class="bg-white/90 hover:bg-white text-gray-700 shadow-md">
+        <.link tabindex="-1" patch={~p"/hackathons/#{@hackathon}/show/edit"} phx-click={JS.push_focus()}>
+          <.button class="shadow-md">
             <.icon name="hero-pencil-square" class="h-5 w-5" /> Edit
           </.button>
         </.link>

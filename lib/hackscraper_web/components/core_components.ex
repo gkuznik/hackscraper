@@ -565,7 +565,7 @@ defmodule HackScraperWeb.CoreComponents do
         symbol_unsorted: Phoenix.HTML.raw(~s(<span class="hero-chevron-up-down w-5" />)),
         thead_attrs: [class: "sticky top-0 bg-white"],
         thead_th_attrs: [class: "whitespace-nowrap"],
-        tbody_tr_attrs: [class: "group hover:bg-zinc-50"],
+        tbody_tr_attrs: [class: "group hover:bg-zinc-50 cursor-pointer"],
         table_attrs: [class: "w-full"]
       )
 

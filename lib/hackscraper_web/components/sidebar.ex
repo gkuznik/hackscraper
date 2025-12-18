@@ -55,7 +55,7 @@ defmodule HackScraperWeb.Components.Sidebar do
         </button>
 
         <div class="flex flex-1 justify-center">
-          <.link navigate={~p"/"} class="flex items-center space-x-2 sidebar-text">
+          <.link href={~p"/"} class="flex items-center space-x-2 sidebar-text">
             <img src={~p"/images/logo.png"} width="32" height="32" alt="HackScraper" />
             <span class="text-xl font-semibold">HackScraper</span>
           </.link>

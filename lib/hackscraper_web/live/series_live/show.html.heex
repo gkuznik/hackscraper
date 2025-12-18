@@ -9,14 +9,14 @@
           <h1 class="text-3xl font-bold text-white drop-shadow-lg">{@series.name}</h1>
         </div>
         <div class="absolute top-4 left-4">
-          <.link patch={~p"/series"}>
+          <.link tabindex="-1" patch={~p"/series"}>
             <.button class="bg-white/90 hover:bg-white text-gray-700 shadow-md">
               <.icon name="hero-arrow-left" class="h-5 w-5" /> Back
             </.button>
           </.link>
         </div>
         <div class="absolute top-4 right-4">
-          <.link patch={~p"/series/#{@series}/show/edit"} phx-click={JS.push_focus()}>
+          <.link tabindex="-1" patch={~p"/series/#{@series}/show/edit"} phx-click={JS.push_focus()}>
             <.button class="bg-white/90 hover:bg-white text-gray-700 shadow-md">
               <.icon name="hero-pencil-square" class="h-5 w-5" /> Edit
             </.button>
@@ -25,13 +25,13 @@
       </div>
     <% else %>
       <div class="p-6 border-b border-gray-200 flex justify-between items-center">
-        <.link patch={~p"/series"}>
+        <.link tabindex="-1" patch={~p"/series"}>
           <.button class="bg-white/90 hover:bg-white text-gray-700 shadow-md">
             <.icon name="hero-arrow-left" class="mr-1 h-4 w-4" /> Back
           </.button>
         </.link>
         <h1 class="text-3xl font-bold text-gray-900">{@series.name}</h1>
-        <.link patch={~p"/series/#{@series}/show/edit"} phx-click={JS.push_focus()}>
+        <.link tabindex="-1" patch={~p"/series/#{@series}/show/edit"} phx-click={JS.push_focus()}>
           <.button>
             <.icon name="hero-pencil-square" class="mr-1 h-4 w-4" /> Edit
           </.button>
@@ -86,7 +86,11 @@
 
       <div class="mt-[-3em] p-6">
         <%= if length(@series.hackathons) > 0 do %>
-          <.table id="hackathons" rows={@series.hackathons}>
+          <.table
+            id="hackathons"
+            rows={@series.hackathons}
+            row_click={fn hackathon -> JS.navigate(~p"/hackathons/#{hackathon}") end}
+          >
             <:col :let={hackathon} label="Name">
               <.link navigate={~p"/hackathons/#{hackathon}"} class="link">
                 {hackathon.name}

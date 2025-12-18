@@ -1,7 +1,7 @@
 <.header>
   User {@user.id}
   <:actions>
-    <.link patch={~p"/users/#{@user}/show/edit"} phx-click={JS.push_focus()}>
+    <.link tabindex="-1" patch={~p"/users/#{@user}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit user</.button>
     </.link>
   </:actions>
