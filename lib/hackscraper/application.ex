@@ -13,7 +13,7 @@ defmodule HackScraper.Application do
       {Oban, Application.fetch_env!(:hackscraper, Oban)},
       {DNSCluster, query: Application.get_env(:hackscraper, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: HackScraper.PubSub},
-      # Start the Finch HTTP client for sending emails
+      # Start the Finch HTTP client for sending emails and scraping
       {Finch, name: HackScraper.Finch},
       # Start a worker by calling: HackScraper.Worker.start_link(arg)
       # {HackScraper.Worker, arg},

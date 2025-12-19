@@ -15,7 +15,7 @@ one_day = 24 * 60 * 60
 
 config :hackscraper, Oban,
   engine: Oban.Engines.Basic,
-  queues: [default: 5, scraper: 10],
+  queues: [default: 5, scraper: 10, emails: 10],
   plugins: [
     {Oban.Plugins.Pruner, max_age: 365 * one_day, interval: one_day * 1000},
     {Oban.Plugins.Cron,
@@ -58,6 +58,9 @@ config :hackscraper, HackScraperWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :hackscraper, HackScraper.Mailer, adapter: Swoosh.Adapters.Local
+
+config :hackscraper, HackScraperWeb, sender_mail: "donotreply@example.com"
+config :hackscraper, HackScraperWeb, contact_mail: "contact@example.com"
 
 # Configure esbuild (the version is required)
 config :esbuild,

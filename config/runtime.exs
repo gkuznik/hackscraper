@@ -48,8 +48,8 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
-  port = String.to_integer(System.get_env("PORT") || "4000")
+  host = System.get_env("PHX_HOST", "example.com")
+  port = String.to_integer(System.get_env("PORT", "4000"))
 
   config :hackscraper, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
@@ -114,4 +114,22 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  config :hackscraper, HackScraper.Mailer,
+    adapter: Swoosh.Adapters.SMTP,
+    relay: System.get_env("SMTP_HOST"),
+    username: System.get_env("SMTP_USER"),
+    password: System.get_env("SMTP_PASSWORD"),
+    ssl: false,
+    tls: :always,
+    auth: :always,
+    port: 465,
+    retries: 0,
+    no_mx_lookups: true
+
+  config :swoosh,
+    api_client: Swoosh.ApiClient.Finch,
+    finch_name: HackScraper.Finch
+
+  config :hackscraper, HackScraperWeb, sender_mail: System.get_env("SENDER_MAIL")
+  config :hackscraper, HackScraperWeb, contact_mail: System.get_env("CONTACT_MAIL")
 end

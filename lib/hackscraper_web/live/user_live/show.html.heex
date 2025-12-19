@@ -11,6 +11,13 @@
   <:item title="Name">{@user.name}</:item>
   <:item title="Email">{@user.email}</:item>
   <:item title="Role">{HackScraper.Accounts.role_name(@user.role)}</:item>
+  <:item title="Confirmed At">
+    <%= if @user.confirmed_at do %>
+      <.date date={@user.confirmed_at} format="short" />
+    <% else %>
+      -
+    <% end %>
+  </:item>
 </.list>
 
 <.back navigate={~p"/users"}>Back to user</.back>

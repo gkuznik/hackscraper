@@ -21,6 +21,8 @@ forgot password with name?
 
 ✅ about page
 
+rate limit email changes?
+
 allow image upload next to url
 set url to uploaded image
 

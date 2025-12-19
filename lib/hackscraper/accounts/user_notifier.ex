@@ -1,79 +1,99 @@
 defmodule HackScraper.Accounts.UserNotifier do
-  import Swoosh.Email
+  use HackScraperWeb, :verified_routes
+  use Oban.Worker, queue: :emails, max_attempts: 3
 
+  import Swoosh.Email
   alias HackScraper.Mailer
 
   # Delivers the email using the application mailer.
-  defp deliver(recipient, subject, body) do
-    email =
-      new()
-      |> to(recipient)
-      |> from({"HackScraper", "contact@example.com"})
-      |> subject(subject)
-      |> text_body(body)
+  @impl Oban.Worker
+  def perform(%Oban.Job{
+        args: %{"type" => type, "user_id" => user_id, "recipient" => recipient, "url" => url}
+      }) do
+    user = HackScraper.Accounts.get_user(user_id)
 
-    with {:ok, _metadata} <- Mailer.deliver(email) do
-      {:ok, email}
+    if !user do
+      {:discard, "User not found"}
+    else
+      {subject, body} = message(type, user, url)
+
+      email =
+        new()
+        |> to(recipient)
+        |> from({"HackScraper", Application.get_env(:hackscraper, HackScraperWeb)[:sender_mail]})
+        |> reply_to(
+          {"HackScraper", Application.get_env(:hackscraper, HackScraperWeb)[:contact_mail]}
+        )
+        |> subject(subject)
+        |> text_body(body)
+
+      Mailer.deliver(email)
     end
   end
 
-  @doc """
-  Deliver instructions to confirm account.
-  """
+  # Queues a mail to be sent asynchronously via Oban
+  defp deliver(type, user, url) do
+    HackScraper.Accounts.UserNotifier.new(%{
+      type: type,
+      user_id: user.id,
+      recipient: user.email,
+      url: url
+    })
+    |> Oban.insert()
+  end
+
   def deliver_confirmation_instructions(user, url) do
-    deliver(user.email, "Confirmation instructions", """
-
-    ==============================
-
-    Hi #{user.email},
-
-    You can confirm your account by visiting the URL below:
-
-    #{url}
-
-    If you didn't create an account with us, please ignore this.
-
-    ==============================
-    """)
+    deliver("confirm_email", user, url)
   end
 
-  @doc """
-  Deliver instructions to reset a user password.
-  """
   def deliver_reset_password_instructions(user, url) do
-    deliver(user.email, "Reset password instructions", """
-
-    ==============================
-
-    Hi #{user.email},
-
-    You can reset your password by visiting the URL below:
-
-    #{url}
-
-    If you didn't request this change, please ignore this.
-
-    ==============================
-    """)
+    deliver("reset_password", user, url)
   end
 
-  @doc """
-  Deliver instructions to update a user email.
-  """
   def deliver_update_email_instructions(user, url) do
-    deliver(user.email, "Update email instructions", """
+    deliver("update_email", user, url)
+  end
 
-    ==============================
+  defp message("confirm_email", user, url) do
+    {"Welcome to HackScraper! Please confirm your email address",
+     """
+     Hi #{user.name},
 
-    Hi #{user.email},
+     Welcome to HackScraper!
+     Please confirm your email address by visiting the link below:
 
-    You can change your email by visiting the URL below:
+     #{url}
 
-    #{url}
+     Thank you!
 
-    If you didn't request this change, please ignore this.
+     The HackScraper Team
+     #{url(~p"/")}
+     """}
+  end
 
-    ==============================
-    """)
+  defp message("reset_password", user, url) do
+    {"Reset your HackScraper password",
+     """
+     Hi #{user.name},
+
+     You can reset your password by visiting the link below:
+
+     #{url}
+
+     Happy Hacking!
+     """}
+  end
+
+  defp message("update_email", user, url) do
+    {"Update your HackScraper email",
+     """
+     Hi #{user.name},
+
+     You can change your email by visiting the link below:
+
+     #{url}
+
+     Happy Hacking!
+     """}
   end
 end

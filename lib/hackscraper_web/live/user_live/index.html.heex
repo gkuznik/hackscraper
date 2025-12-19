@@ -18,6 +18,13 @@
   <:col :let={{_id, user}} label="Role" field={:role}>
     {HackScraper.Accounts.role_name(user.role)}
   </:col>
+  <:col :let={{_id, user}} label="Confirmed At" field={:confirmed_at}>
+    <%= if user.confirmed_at do %>
+      <.date date={user.confirmed_at} format="short" />
+    <% else %>
+      -
+    <% end %>
+  </:col>
   <:action :let={{_id, user}}>
     <div class="sr-only">
       <.link navigate={~p"/users/#{user}"}>Show</.link>
