@@ -21,7 +21,7 @@ defmodule HackScraperWeb.UserLive.FormComponent do
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:email]} type="text" label="Email" />
         <.input field={@form[:password]} type="password" label="Password" />
-        <.input field={@form[:role]} type="select" label="Role" options={role_options()} />
+        <.input field={@form[:role]} type="select" label="Role" options={role_options(@current_user)} />
         <:actions>
           <.button phx-disable-with="Saving...">Save User</.button>
         </:actions>
@@ -30,8 +30,10 @@ defmodule HackScraperWeb.UserLive.FormComponent do
     """
   end
 
-  defp role_options do
-    Enum.map(Accounts.roles(), fn {_, value} -> {Accounts.role_name(value), value} end)
+  defp role_options(current_user) do
+    Accounts.roles()
+    |> Enum.filter(fn {_, value} -> value <= current_user.role end)
+    |> Enum.map(fn {_, value} -> {Accounts.role_name(value), value} end)
   end
 
   @impl true
@@ -70,7 +72,7 @@ defmodule HackScraperWeb.UserLive.FormComponent do
   end
 
   defp save_user(socket, :new, user_params) do
-    case Accounts.register_user(user_params) do
+    case Accounts.register_user_with_role(user_params) do
       {:ok, user} ->
         notify_parent({:saved, user})
 

@@ -1,6 +1,7 @@
 defmodule HackScraperWeb.UserLive.Index do
   use HackScraperWeb, :live_view
 
+  import HackScraperWeb.LiveAuth
   alias HackScraper.Accounts
   alias HackScraper.Accounts.User
 
@@ -21,10 +22,15 @@ defmodule HackScraperWeb.UserLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     user = Accounts.get_user!(id)
+    current_user = socket.assigns.current_user
 
-    socket
-    |> assign(:page_title, "Edit User " <> user.name)
-    |> assign(:user, user)
+    if user.role > current_user.role do
+      deny(socket) |> elem(1)
+    else
+      socket
+      |> assign(:page_title, "Edit User " <> user.name)
+      |> assign(:user, user)
+    end
   end
 
   defp apply_action(socket, :new, _params) do
@@ -51,8 +57,14 @@ defmodule HackScraperWeb.UserLive.Index do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     user = Accounts.get_user!(id)
-    {:ok, _} = Accounts.delete_user(user)
+    current_user = socket.assigns.current_user
 
-    {:noreply, stream_delete(socket, :users, user)}
+    if user.role > current_user.role do
+      deny(socket)
+    else
+      {:ok, _} = Accounts.delete_user(user)
+
+      {:noreply, stream_delete(socket, :users, user)}
+    end
   end
 end

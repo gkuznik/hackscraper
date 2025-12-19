@@ -1,6 +1,6 @@
 <.header>
   User {@user.id}
-  <:actions>
+  <:actions :if={@current_user.role >= @user.role}>
     <.link tabindex="-1" patch={~p"/users/#{@user}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit user</.button>
     </.link>
@@ -29,6 +29,7 @@
     title={@page_title}
     action={@live_action}
     user={@user}
+    current_user={@current_user}
     patch={~p"/users/#{@user}"}
   />
 </.modal>

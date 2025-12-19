@@ -21,6 +21,8 @@ forgot password with name?
 
 ✅ about page
 
+is phoenix select validation good enough for roles?
+
 rate limit email changes?
 
 allow image upload next to url

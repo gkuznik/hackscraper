@@ -133,6 +133,12 @@ defmodule HackScraper.Accounts do
     |> Repo.insert()
   end
 
+  def register_user_with_role(attrs) do
+    %User{}
+    |> User.registration_with_role_changeset(attrs)
+    |> Repo.insert()
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 

@@ -17,25 +17,28 @@ defmodule HackScraper.AccountsFixtures do
     })
   end
 
-  def user_fixture(attrs \\ %{}) do
+  def user_fixture(attrs \\ %{})
+
+  def user_fixture(%{role: _role} = attrs) do
+    {:ok, user} =
+      attrs
+      |> valid_user_attributes()
+      |> HackScraper.Accounts.register_user_with_role()
+
+    user
+  end
+
+  def user_fixture(attrs) do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
       |> HackScraper.Accounts.register_user()
 
-    if Map.has_key?(attrs, :role) do
-      {:ok, user} =
-        HackScraper.Accounts.update_user(user, %{role: HackScraper.Accounts.roles()[attrs[:role]]})
-
-      user
-    else
-      user
-    end
+    user
   end
 
   def extract_user_token(fun) do
-    {:ok, captured_email} = fun.(&"[TOKEN]#{&1}[TOKEN]")
-    [_, token | _] = String.split(captured_email.text_body, "[TOKEN]")
-    token
+    {:ok, job} = fun.(& &1)
+    job.args[:url]
   end
 end

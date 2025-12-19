@@ -29,10 +29,13 @@
     <div class="sr-only">
       <.link navigate={~p"/users/#{user}"}>Show</.link>
     </div>
-    <.link patch={~p"/users/#{user}/edit"} class="link">Edit</.link>
+    <.link :if={@current_user.role >= user.role} patch={~p"/users/#{user}/edit"} class="link">
+      Edit
+    </.link>
   </:action>
   <:action :let={{id, user}}>
     <.link
+      :if={@current_user.role >= user.role}
       phx-click={JS.push("delete", value: %{id: user.id}) |> hide("##{id}")}
       data-confirm="Are you sure?"
     >
@@ -48,6 +51,7 @@
     title={@page_title}
     action={@live_action}
     user={@user}
+    current_user={@current_user}
     patch={~p"/users"}
   />
 </.modal>

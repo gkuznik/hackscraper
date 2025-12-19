@@ -15,16 +15,15 @@ admin_mail = System.get_env("ADMIN_MAIL")
 admin_pwd = System.get_env("ADMIN_PWD")
 
 if admin_mail && admin_pwd do
-  with {:ok, user} <-
-         HackScraper.Accounts.register_user(%{
-           name: "admin",
-           email: admin_mail,
-           password: admin_pwd
-         }),
-       {:ok, _user} <-
-         HackScraper.Accounts.update_user(user, %{role: HackScraper.Accounts.roles()[:admin]}) do
-    Logger.info("Created superuser: #{admin_mail}")
-  else
+  case HackScraper.Accounts.register_user_with_role(%{
+         name: "admin",
+         email: admin_mail,
+         password: admin_pwd,
+         role: :admin
+       }) do
+    {:ok, user} ->
+      Logger.info("Created superuser: #{admin_mail}")
+
     {:error, %{errors: [name: {"has already been taken", _}] ++ _}} ->
       Logger.info("User admin already exists")
 

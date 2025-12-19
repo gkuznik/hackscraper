@@ -50,6 +50,26 @@ defmodule HackScraper.Accounts.User do
     |> validate_name()
   end
 
+  def registration_with_role_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password, :name])
+    |> cast_role_to_integer(attrs)
+    |> validate_email(opts)
+    |> validate_password(opts)
+    |> validate_name()
+    |> validate_role()
+  end
+
+  defp cast_role_to_integer(changeset, attrs) do
+    case attrs[:role] do
+      role when is_atom(role) and not is_nil(role) ->
+        put_change(changeset, :role, HackScraper.Accounts.roles()[role])
+
+      role ->
+        add_error(changeset, :role, "Unrecognized type #{inspect(role)}")
+    end
+  end
+
   defp validate_email(changeset, opts) do
     changeset
     |> validate_required([:email])
