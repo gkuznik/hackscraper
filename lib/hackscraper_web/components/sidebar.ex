@@ -28,10 +28,10 @@ defmodule HackScraperWeb.Components.Sidebar do
 
     <div
       id="sidebar"
-      class={"#{@class} fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 text-white transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-all duration-300 ease-in-out lg:w-64"}
+      class={"#{@class} fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 text-white transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-all duration-300 ease-in-out lg:w-64 text-nowrap"}
       data-collapsed="false"
     >
-      <div class="flex items-center h-16 px-4 border-b border-gray-700">
+      <div class="flex justify-center items-center h-16 px-4 border-b border-gray-700">
         <!-- Desktop collapse button -->
         <button
           class="hidden lg:block text-gray-400 hover:text-white flex-shrink-0"
@@ -54,8 +54,8 @@ defmodule HackScraperWeb.Components.Sidebar do
           <span class="absolute inset-[-0.75em]"></span>
         </button>
 
-        <div class="flex flex-1 justify-center">
-          <.link href={~p"/"} class="flex items-center space-x-2 sidebar-text">
+        <div class="flex flex-1 justify-center sidebar-text">
+          <.link href={~p"/"} class="flex items-center space-x-2">
             <img src={~p"/images/logo.png"} width="32" height="32" alt="HackScraper" />
             <span class="text-xl font-semibold">HackScraper</span>
           </.link>

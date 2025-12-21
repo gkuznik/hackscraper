@@ -62,6 +62,9 @@ defmodule HackScraper.Accounts.User do
 
   defp cast_role_to_integer(changeset, attrs) do
     case attrs[:role] do
+      role when is_integer(role) ->
+        changeset
+
       role when is_atom(role) and not is_nil(role) ->
         put_change(changeset, :role, HackScraper.Accounts.roles()[role])
 

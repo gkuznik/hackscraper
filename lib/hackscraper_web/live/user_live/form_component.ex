@@ -48,7 +48,7 @@ defmodule HackScraperWeb.UserLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"user" => user_params}, socket) do
-    changeset = Accounts.admin_change_user(socket.assigns.user, user_params)
+    changeset = Accounts.admin_change_user(socket.assigns.user, user_params, socket.assigns.current_user.role)
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
@@ -57,7 +57,7 @@ defmodule HackScraperWeb.UserLive.FormComponent do
   end
 
   defp save_user(socket, :edit, user_params) do
-    case Accounts.update_user(socket.assigns.user, user_params) do
+    case Accounts.update_user(socket.assigns.user, user_params, socket.assigns.current_user.role) do
       {:ok, user} ->
         notify_parent({:saved, user})
 
@@ -72,7 +72,7 @@ defmodule HackScraperWeb.UserLive.FormComponent do
   end
 
   defp save_user(socket, :new, user_params) do
-    case Accounts.register_user_with_role(user_params) do
+    case Accounts.register_user_with_role(user_params, socket.assigns.current_user.role) do
       {:ok, user} ->
         notify_parent({:saved, user})
 

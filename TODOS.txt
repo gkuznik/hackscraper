@@ -1,7 +1,7 @@
 ✅ port/integrate all scrapers
 -> ✅ setup all scraper schedules
 
-don't hardcode urls for scraper, add luma edth series scraper
+don't hardcode urls for scraper
 add tests for scraper
 
 ✅ export series, hackathons
@@ -20,8 +20,6 @@ add tests for scraper
 forgot password with name? 
 
 ✅ about page
-
-is phoenix select validation good enough for roles?
 
 rate limit email changes?
 

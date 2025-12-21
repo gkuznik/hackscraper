@@ -34,6 +34,16 @@ defmodule HackScraper.Accounts do
     role >= @roles[required]
   end
 
+  def validate_role(changeset, user_role) when is_integer(user_role) do
+    case Ecto.Changeset.fetch_field(changeset, :role) do
+      {_, role} when role > user_role ->
+        Ecto.Changeset.add_error(changeset, :role, "Can't assign a role higher than your own")
+
+      _ ->
+        changeset
+    end
+  end
+
   ## Database getters
 
   def list_user, do: Repo.all(User)
@@ -44,18 +54,21 @@ defmodule HackScraper.Accounts do
     |> Repo.insert()
   end
 
-  def update_user(%User{} = user, attrs) do
+  def update_user(%User{} = user, attrs, role) do
     user
-    |> admin_change_user(attrs)
+    |> admin_change_user(attrs, role)
     |> Repo.update()
   end
 
-  def admin_change_user(%User{} = user, attrs \\ %{}) do
-    if Map.has_key?(attrs, :password) do
-      User.admin_changeset_with_passsword(user, attrs)
-    else
-      User.admin_changeset(user, attrs)
-    end
+  def admin_change_user(%User{} = user, attrs \\ %{}, role \\ 3) do
+    changeset =
+      if Map.has_key?(attrs, :password) do
+        User.admin_changeset_with_passsword(user, attrs)
+      else
+        User.admin_changeset(user, attrs)
+      end
+
+    validate_role(changeset, role)
   end
 
   def delete_user(%User{} = user) do
@@ -133,9 +146,10 @@ defmodule HackScraper.Accounts do
     |> Repo.insert()
   end
 
-  def register_user_with_role(attrs) do
+  def register_user_with_role(attrs, acting_role) do
     %User{}
     |> User.registration_with_role_changeset(attrs)
+    |> validate_role(acting_role)
     |> Repo.insert()
   end
 
