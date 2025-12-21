@@ -5,7 +5,7 @@ defmodule HackScraper.Worker.Dummy do
 
   @impl Oban.Worker
   def perform(%Oban.Job{args: %{"url" => url}}) do
-    Logger.info("Running dummy scraper", url: url)
+    Logger.info("Running dummy scraper: #{url}...")
 
     Process.sleep(1000)
 

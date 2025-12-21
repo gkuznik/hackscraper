@@ -5,13 +5,11 @@ defmodule HackScraper.Worker.Devpost do
 
   require Logger
 
-  @api_url "https://devpost.com/api/hackathons?open_to[]=public&search=munich&status[]=upcoming&status[]=open"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
+  def perform(%Oban.Job{args: %{"url" => url}}) do
     Logger.info("Running Devpost scraper...")
 
-    data = get!(@api_url).body["hackathons"]
+    data = get!(url).body["hackathons"]
     Logger.info("Found #{length(data)} hackathons")
 
     suggestions =

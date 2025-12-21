@@ -42,7 +42,9 @@ defmodule HackScraper.Events.Suggestion do
       :hackathon_id
     ])
     |> validate_required([:name, :url])
-    |> unsafe_validate_unique(:url, HackScraper.Repo)
-    |> unique_constraint(:url)
+    |> unsafe_validate_unique([:creator_id, :hackathon_id], HackScraper.Repo)
+    |> unique_constraint([:creator_id, :hackathon_id])
+    |> unsafe_validate_unique([:creator_id, :url, :start_date], HackScraper.Repo)
+    |> unique_constraint([:creator_id, :url, :start_date])
   end
 end

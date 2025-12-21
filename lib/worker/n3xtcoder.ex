@@ -5,13 +5,11 @@ defmodule HackScraper.Worker.N3xtcoder do
 
   require Logger
 
-  @api_url "https://n3xtcoder.org/api/event-cards?offset=0&sort=desc&pageSize=6&lang=en"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
+  def perform(%Oban.Job{args: %{"url" => url}}) do
     Logger.info("Running N3xtcoder scraper...")
 
-    cards = get!(@api_url).body["data"]["cards"]
+    cards = get!(url).body["data"]["cards"]
 
     hackathons =
       for card <- cards, card["typeOfEvent"] == "hackathon" do

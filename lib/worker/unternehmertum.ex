@@ -5,13 +5,11 @@ defmodule HackScraper.Worker.Unternehmertum do
 
   require Logger
 
-  @api_url "https://www.unternehmertum.de/events?filter%5B%5D=9511"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
+  def perform(%Oban.Job{args: %{"url" => url}}) do
     Logger.info("Running Unternehmertum scraper...")
 
-    html = get!(@api_url).body
+    html = get!(url).body
     {:ok, document} = Floki.parse_document(html)
 
     table_list = Floki.find(document, ".table-list")

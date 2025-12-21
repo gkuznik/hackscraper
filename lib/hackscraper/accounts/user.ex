@@ -93,7 +93,7 @@ defmodule HackScraper.Accounts.User do
     changeset
     |> validate_required([:name])
     |> validate_length(:name, min: 1, max: 100)
-    |> maybe_validate_unique_name()
+    |> validate_unique_name()
   end
 
   def validate_role(changeset) do
@@ -144,7 +144,7 @@ defmodule HackScraper.Accounts.User do
     end
   end
 
-  defp maybe_validate_unique_name(changeset) do
+  defp validate_unique_name(changeset) do
     changeset
     |> unsafe_validate_unique(:name, HackScraper.Repo)
     |> unique_constraint(:name)
@@ -155,7 +155,7 @@ defmodule HackScraper.Accounts.User do
     |> cast(attrs, [:name])
     |> validate_required([:name])
     |> validate_length(:name, min: 1, max: 100)
-    |> unsafe_validate_unique(:name, HackScraper.Repo)
+    |> validate_unique_name()
     |> case do
       %{changes: %{name: _}} = changeset -> changeset
       %{} = changeset -> add_error(changeset, :name, "did not change")

@@ -4,6 +4,9 @@ defmodule HackScraper.ScrapersFixtures do
   entities via the `HackScraper.Scrapers` context.
   """
 
+  def unique_scraper_name, do: "scraper#{System.unique_integer()}"
+  def unique_scraper_url, do: "http://example.com/scraper#{System.unique_integer()}"
+
   @doc """
   Generate a scraper.
   """
@@ -11,10 +14,11 @@ defmodule HackScraper.ScrapersFixtures do
     {:ok, scraper} =
       attrs
       |> Enum.into(%{
+        name: unique_scraper_name(),
         worker: "Dummy",
         paused: true,
         schedule: "@weekly",
-        url: "some url"
+        url: unique_scraper_url()
       })
       |> HackScraper.Scrapers.create_scraper()
 

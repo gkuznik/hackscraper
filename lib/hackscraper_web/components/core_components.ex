@@ -25,7 +25,7 @@ defmodule HackScraperWeb.CoreComponents do
 
   def external(assigns) do
     ~H"""
-    <.link target="_blank" rel="noopener" href={@url} class={[@class, "link"]} {@rest} phx-no-format>{assigns[:text] || @url}</.link>
+    <.link target="_blank" rel="noopener" href={@url} class={[@class, "link max-w-[80ch] truncate"]} {@rest} phx-no-format>{assigns[:text] || @url}</.link>
     """
   end
 

@@ -46,7 +46,7 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
         <.input field={@form[:url]} type="text" label="Url" />
         <.input field={@form[:image]} type="text" label="Image" />
         <.input field={@form[:description]} type="textarea" label="Description" />
-        <.input field={@form[:location]} type="text" label="Location" />
+        <.input field={@form[:location]} type="textarea" label="Location" />
 
         <noscript class="block p-3 text-sm bg-red-50 rounded border">
           Note: the server expects the dates in UTC. Enable JavaScript to convert them automatically from your local timezone.

@@ -5,13 +5,11 @@ defmodule HackScraper.Worker.LabLab do
 
   require Logger
 
-  @api_url "https://lablab.ai/_next/data/amtvrhqGU_ZE8AWyCNT5E/event.json"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
+  def perform(%Oban.Job{args: %{"url" => url}}) do
     Logger.info("Running Devpost scraper...")
 
-    data = get!(@api_url).body["pageProps"]["sortedEvents"]
+    data = get!(url).body["pageProps"]["sortedEvents"]
     Logger.info("Found #{length(data)} hackathons")
 
     hackathons =

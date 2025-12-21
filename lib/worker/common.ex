@@ -5,28 +5,31 @@ defmodule HackScraper.Worker.Common do
   # TODO setup bot accounts, use admin for now
   def user_id, do: 1
 
-  # TODO retry attempts to 3 for prod
-  def oban_opts, do: [queue: :scraper, priority: 2, max_attempts: 1]
+  def oban_opts, do: [queue: :scraper, priority: 2, max_attempts: 3]
 
   @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:hackscraper, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
 
   @workers %{
-    "Devpost" => HackScraper.Worker.Devpost,
-    "Direct" => HackScraper.Worker.Direct,
-    "Dummy" => HackScraper.Worker.Dummy,
-    "Get Links" => HackScraper.Worker.GetLinks,
-    "Huawei" => HackScraper.Worker.Huawei,
-    "LabLab" => HackScraper.Worker.LabLab,
-    "Luma" => HackScraper.Worker.Luma,
-    "N3xtcoder" => HackScraper.Worker.N3xtcoder,
-    "Taikai" => HackScraper.Worker.Taikai,
-    "TUM Venture Labs" => HackScraper.Worker.TUMVentureLabs,
-    "Unternehmertum" => HackScraper.Worker.Unternehmertum
+    "Devpost" => {HackScraper.Worker.Devpost, "https://devpost.com/api/hackathons?open_to[]=public&search=munich&status[]=upcoming&status[]=open"},
+    "Direct" => {HackScraper.Worker.Direct, ""},
+    "Dummy" => {HackScraper.Worker.Dummy, ""},
+    "Get Links" => {HackScraper.Worker.GetLinks, ""},
+    "Huawei" => {HackScraper.Worker.Huawei, "https://huawei.agorize.com/api/v2/challenges"},
+    "LabLab" => {HackScraper.Worker.LabLab, "https://lablab.ai/_next/data/amtvrhqGU_ZE8AWyCNT5E/event.json"},
+    "Luma" => {HackScraper.Worker.Luma, "https://api2.luma.com/discover/get-paginated-events?latitude=48.13743&longitude=11.57549&pagination_limit=30&slug=tech"},
+    "N3xtcoder" => {HackScraper.Worker.N3xtcoder, "https://n3xtcoder.org/api/event-cards?offset=0&sort=desc&pageSize=6&lang=en"},
+    "Taikai" => {HackScraper.Worker.Taikai, "https://api.taikai.network/api/graphql"},
+    "TUM Venture Labs" => {HackScraper.Worker.TUMVentureLabs, "https://www.tum-venture-labs.de/index.php?p=actions/sprig-core/components/render&eventFormats[]=66989&reset=false&search=&sprig:siteId=9a1761719fed643d2a9161f9bfa109521c7487343e041b2d3541f6f497b907ed1&sprig:id=18f5b0bbf1163c3ee576f32b2b84820f55e7f2099ee44df628295be00ca478d4s-events-list&sprig:component=7b3a1f07361ad5a76557bad89bff243735691e7103956a9201f2c2959b531556&sprig:template=49f84ea3b95926b92ef6f0545f1b9613962135886d4703c8e69d52dcaacc4088events/_event-list"},
+    "Unternehmertum" => {HackScraper.Worker.Unternehmertum, "https://www.unternehmertum.de/events?filter%5B%5D=9511"}
   }
   def workers, do: @workers
 
   def worker_module(name) when is_binary(name) do
-    @workers[name]
+    @workers[name] |> elem(0)
+  end
+
+  def worker_url(name) when is_binary(name) do
+    @workers[name] |> elem(1)
   end
 
   def get!(api_url) do
@@ -47,6 +50,10 @@ defmodule HackScraper.Worker.Common do
     description = if length(parts) > 1, do: parts |> List.last() |> String.trim(), else: nil
 
     {name, description}
+  end
+
+  def parse_date(date_string) when is_nil(date_string) or date_string == "" do
+    nil
   end
 
   def parse_date(date_string) do

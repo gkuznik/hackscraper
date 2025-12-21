@@ -5,13 +5,11 @@ defmodule HackScraper.Worker.Huawei do
 
   require Logger
 
-  @api_url "https://huawei.agorize.com/api/v2/challenges"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
+  def perform(%Oban.Job{args: %{"url" => url}}) do
     Logger.info("Running Huawei scraper...")
 
-    hackathons = get!(@api_url).body["data"]
+    hackathons = get!(url).body["data"]
     Logger.info("Found #{length(hackathons)} hackathons")
 
     hackathons =

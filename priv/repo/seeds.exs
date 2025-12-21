@@ -21,7 +21,7 @@ if admin_mail && admin_pwd do
          password: admin_pwd,
          role: :admin
        }) do
-    {:ok, user} ->
+    {:ok, _user} ->
       Logger.info("Created superuser: #{admin_mail}")
 
     {:error, %{errors: [name: {"has already been taken", _}] ++ _}} ->

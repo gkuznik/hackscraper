@@ -5,14 +5,15 @@ defmodule HackScraperWeb.ScraperLiveTest do
   import HackScraper.ScrapersFixtures
   import HackScraper.AccountsFixtures
 
-  @create_attrs %{worker: "Dummy", url: "some url", schedule: "@daily", paused: true}
+  @create_attrs %{name: "some name", worker: "Dummy", url: "some url", schedule: "@daily", paused: true}
   @update_attrs %{
+    name: "some updated name",
     worker: "Devpost",
     url: "some updated url",
     schedule: "@hourly",
     paused: false
   }
-  @invalid_attrs %{worker: "Dummy", url: nil, schedule: nil, paused: false}
+  @invalid_attrs %{name: nil, worker: "Dummy", url: nil, schedule: nil, paused: false}
 
   defp create_scraper(_) do
     scraper = scraper_fixture()

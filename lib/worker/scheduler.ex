@@ -19,7 +19,7 @@ defmodule HackScraper.Worker.Scheduler do
     Logger.info("Found #{length(scrapers)} scrapers")
 
     for scraper <- scrapers do
-      Logger.info("Scheduling scraper #{scraper.id} #{scraper.worker}...")
+      Logger.info("Scheduling scraper #{scraper.name}...")
       schedule_executions_for_period(scraper)
     end
 
@@ -42,7 +42,7 @@ defmodule HackScraper.Worker.Scheduler do
   ]
 
   def schedule_executions_for_period(%Scraper{paused: true} = scraper) do
-    Logger.debug("Skipping scheduling for paused scraper #{scraper.id} #{scraper.worker}")
+    Logger.debug("Skipping scheduling for paused scraper #{scraper.name}")
     {:ok, nil}
   end
 
@@ -53,7 +53,7 @@ defmodule HackScraper.Worker.Scheduler do
         end_time = DateTime.add(now, @schedule_days_ahead, :day)
 
         executions = get_execution_times(cron_expression, now, end_time, [])
-        Logger.info("Found #{length(executions)} executions for #{scraper.id} #{scraper.worker}")
+        Logger.info("Found #{length(executions)} executions for #{scraper.name}")
 
         module = worker_module(scraper.worker)
 
@@ -72,7 +72,7 @@ defmodule HackScraper.Worker.Scheduler do
 
       {:error, error} ->
         Logger.error(
-          "Failed to parse cron expression '#{scraper.schedule}' for #{scraper.id} #{scraper.worker}: #{error}"
+          "Failed to parse cron expression '#{scraper.schedule}' for #{scraper.name}: #{error}"
         )
 
         {:error, error}

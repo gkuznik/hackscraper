@@ -5,13 +5,11 @@ defmodule HackScraper.Worker.Luma do
 
   require Logger
 
-  @api_url "https://api2.luma.com/discover/get-paginated-events?latitude=48.13743&longitude=11.57549&pagination_limit=30&slug=tech"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
-    Logger.info("Running Luma scraper...")
+  def perform(%Oban.Job{args: %{"url" => url}}) do
+    Logger.info("Running Luma scraper on #{url}...")
 
-    events = get!(@api_url).body["entries"]
+    events = get!(url).body["entries"]
     hackathons = filter_hackathons(events)
     Logger.info("Found #{length(hackathons)}/#{length(events)} hackathons")
 
@@ -20,7 +18,7 @@ defmodule HackScraper.Worker.Luma do
         event = entry["event"]
 
         %{
-          url: "https://luma.com/#{event["url"]}",
+          url: URI.merge("https://luma.com", event["url"]) |> to_string(),
           name: event["name"],
           start_date: parse_date(event["start_at"]),
           end_date: parse_date(event["end_at"])
@@ -43,7 +41,7 @@ defmodule HackScraper.Worker.Luma do
     Enum.filter(entries, fn entry ->
       event = entry["event"]
       name = String.downcase(event["name"] || "")
-      String.contains?(name, ["hackathon", "hack ", "coding ", "hackfest", "tech challenge"])
+      String.contains?(name, ["hack", "coding", "tech challenge"])
     end)
   end
 end
@@ -60,10 +58,6 @@ defmodule HackScraper.Worker.Luma.AddInfo do
   def perform(%Oban.Job{args: %{"event" => event}}) do
     event =
       for({key, val} <- event, into: %{}, do: {String.to_existing_atom(key), val})
-
-    event =
-      Map.put(event, :start_date, parse_date(event[:start_date]))
-      |> Map.put(:end_date, parse_date(event[:end_date]))
 
     Logger.info("Running Luma AddInfo scraper: #{event.url}...")
 
@@ -109,6 +103,8 @@ defmodule HackScraper.Worker.Luma.AddInfo do
       |> Map.put(:description, description)
       |> Map.put(:location, location)
       |> Map.put(:image, image)
+      |> Map.put(:start_date, parse_date(event[:start_date] || json_ld["startDate"]))
+      |> Map.put(:end_date, parse_date(event[:end_date] || json_ld["endDate"]))
 
     num = upsert_hackathons([hackathon])
     Logger.info("Created/updated #{num} hackathon")

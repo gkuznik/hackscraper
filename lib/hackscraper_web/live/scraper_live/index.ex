@@ -24,7 +24,7 @@ defmodule HackScraperWeb.ScraperLive.Index do
     scraper = Scrapers.get_scraper!(id)
 
     socket
-    |> assign(:page_title, "Edit Scraper #{scraper.id}")
+    |> assign(:page_title, "Edit Scraper #{scraper.name}")
     |> assign(:scraper, scraper)
   end
 

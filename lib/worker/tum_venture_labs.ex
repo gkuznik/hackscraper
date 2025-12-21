@@ -5,13 +5,11 @@ defmodule HackScraper.Worker.TUMVentureLabs do
 
   require Logger
 
-  @url "https://www.tum-venture-labs.de/index.php?p=actions/sprig-core/components/render&eventFormats[]=66989&reset=false&search=&sprig:siteId=9a1761719fed643d2a9161f9bfa109521c7487343e041b2d3541f6f497b907ed1&sprig:id=18f5b0bbf1163c3ee576f32b2b84820f55e7f2099ee44df628295be00ca478d4s-events-list&sprig:component=7b3a1f07361ad5a76557bad89bff243735691e7103956a9201f2c2959b531556&sprig:template=49f84ea3b95926b92ef6f0545f1b9613962135886d4703c8e69d52dcaacc4088events/_event-list"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
+  def perform(%Oban.Job{args: %{"url" => url}}) do
     Logger.info("Running TUMVentureLabs scraper...")
 
-    html = get!(@url).body
+    html = get!(url).body
     cards = html |> Floki.parse_document!() |> Floki.find(".grid .sm\\:col-6")
 
     events =

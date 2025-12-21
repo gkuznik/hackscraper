@@ -4,10 +4,11 @@ defmodule HackScraper.Scrapers.Scraper do
 
   @derive {
     Flop.Schema,
-    filterable: [:worker, :url, :paused], sortable: [:worker, :url, :schedule]
+    filterable: [:name, :worker, :url, :paused], sortable: [:worker, :url, :schedule]
   }
 
   schema "scrapers" do
+    field :name, :string
     field :worker, :string
     field :url, :string
     field :schedule, :string
@@ -19,10 +20,14 @@ defmodule HackScraper.Scrapers.Scraper do
   @doc false
   def changeset(scraper, attrs) do
     scraper
-    |> cast(attrs, [:worker, :schedule, :url, :paused])
-    |> validate_required([:worker, :schedule])
+    |> cast(attrs, [:name, :worker, :schedule, :url, :paused])
+    |> validate_required([:name, :worker, :schedule])
     |> validate_worker()
     |> validate_schedule()
+    |> unsafe_validate_unique(:name, HackScraper.Repo)
+    |> unique_constraint(:name)
+    |> unsafe_validate_unique(:url, HackScraper.Repo)
+    |> unique_constraint(:url)
   end
 
   defp validate_worker(changeset) do

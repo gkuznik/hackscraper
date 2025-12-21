@@ -1,5 +1,5 @@
 <.header>
-  Scraper {@scraper.id}
+  Scraper {@scraper.name}
   <:actions>
     <.link tabindex="-1" patch={~p"/scrapers/#{@scraper}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit scraper</.button>
@@ -9,6 +9,7 @@
 
 <.list>
   <:item title="Worker">{@scraper.worker}</:item>
+  <:item title="Name">{@scraper.name}</:item>
   <:item title="Schedule">{@scraper.schedule}</:item>
   <:item title="Url">{@scraper.url}</:item>
   <:item title="Paused">{@scraper.paused}</:item>

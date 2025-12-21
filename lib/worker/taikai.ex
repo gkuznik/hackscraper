@@ -5,10 +5,8 @@ defmodule HackScraper.Worker.Taikai do
 
   require Logger
 
-  @api_url "https://api.taikai.network/api/graphql"
-
   @impl Oban.Worker
-  def perform(%Oban.Job{} = _job) do
+  def perform(%Oban.Job{args: %{"url" => url}}) do
     Logger.info("Running Taikai Network scraper...")
 
     query = %{
@@ -23,7 +21,7 @@ defmodule HackScraper.Worker.Taikai do
         "query ALL_CHALLENGES_QUERY($sortBy: ChallengeOrderByWithRelationInput, $page: Int) {  challenges(where: {publishInfo: {state: {equals: ACTIVE}}}, page: $page, orderBy: $sortBy) {\n    id\n    name\n    isClosed\n    shortDescription\n    cardImageFile {\n      id\n      url\n      __typename\n    }\n    organization {\n      id\n      name\n      slug\n      __typename\n    }\n    steps {\n      id\n      startDate\n      __typename\n    }\n    currentStep {\n      id\n      name\n      startDate\n      __typename\n    }\n    slug\n    order\n    __typename\n  }\n}"
     }
 
-    challenges = post_json!(@api_url, query).body["data"]["challenges"]
+    challenges = post_json!(url, query).body["data"]["challenges"]
 
     hackathons =
       Enum.map(challenges, fn hack ->

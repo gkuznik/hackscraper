@@ -16,7 +16,14 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:worker]} type="select" label="Worker" options={worker_options()} />
+        <.input
+          field={@form[:worker]}
+          type="select"
+          label="Worker"
+          options={worker_options()}
+          phx-change="set_defaults"
+        />
+        <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:schedule]} type="text" label="Schedule" />
         <.input field={@form[:url]} type="text" label="Url" />
         <.input field={@form[:paused]} type="checkbox" label="Paused" />
@@ -40,6 +47,19 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
      |> assign_new(:form, fn ->
        to_form(Scrapers.change_scraper(scraper))
      end)}
+  end
+
+  @impl true
+  def handle_event("set_defaults", %{"scraper" => %{"worker" => worker} = scraper_params}, socket) do
+    IO.inspect(scraper_params)
+    changeset = socket.assigns.form.data |> Scrapers.change_scraper(%{"worker" => worker})
+    default_url = HackScraper.Worker.Common.worker_url(worker)
+
+    changeset =
+      Ecto.Changeset.put_change(changeset, :url, default_url)
+      |> Ecto.Changeset.put_change(:name, worker)
+
+    {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
   @impl true
