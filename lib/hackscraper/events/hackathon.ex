@@ -4,8 +4,11 @@ defmodule HackScraper.Events.Hackathon do
 
   @derive {
     Flop.Schema,
-    filterable: [:name, :url, :description, :location],
-    sortable: [:name, :url, :location, :start_date, :end_date]
+    sortable: [:name, :start_date, :end_date],
+    filterable: [:name, :url, :description, :location, :text],
+    adapter_opts: [
+      compound_fields: [text: [:name, :url, :description, :location]]
+    ]
   }
 
   schema "hackathons" do
@@ -16,6 +19,7 @@ defmodule HackScraper.Events.Hackathon do
     field :url, :string
     field :start_date, :utc_datetime
     field :end_date, :utc_datetime
+    field :timezone, :string, default: "UTC"
     belongs_to :series, HackScraper.Events.Series
 
     has_many :suggestions, HackScraper.Events.Suggestion
@@ -32,11 +36,12 @@ defmodule HackScraper.Events.Hackathon do
       :image,
       :description,
       :location,
+      :timezone,
       :start_date,
       :end_date,
       :series_id
     ])
-    |> validate_required([:name, :url, :start_date, :end_date])
+    |> validate_required([:name, :url, :start_date, :end_date, :timezone])
     |> unsafe_validate_unique([:url, :start_date], HackScraper.Repo)
     |> unique_constraint([:url, :start_date])
   end

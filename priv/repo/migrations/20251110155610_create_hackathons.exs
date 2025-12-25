@@ -8,6 +8,7 @@ defmodule HackScraper.Repo.Migrations.CreateHackathons do
       add :image, :string
       add :description, :text
       add :location, :string
+      add :timezone, :string, default: "UTC", null: false
       add :start_date, :utc_datetime
       add :end_date, :utc_datetime
       add :series_id, references(:series, on_delete: :nilify_all)

@@ -44,6 +44,14 @@ Hooks.formatDate = {
     }
   },
 }
+Hooks.AutofillLocale = {
+  mounted() {
+    this.el.addEventListener("click", e => {
+      let locale = Intl.DateTimeFormat().resolvedOptions().timeZone
+      document.getElementById("timezone-input").value = locale
+    })
+  }
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {

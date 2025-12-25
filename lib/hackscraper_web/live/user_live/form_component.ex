@@ -48,7 +48,13 @@ defmodule HackScraperWeb.UserLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"user" => user_params}, socket) do
-    changeset = Accounts.admin_change_user(socket.assigns.user, user_params, socket.assigns.current_user.role)
+    changeset =
+      Accounts.admin_change_user(
+        socket.assigns.user,
+        user_params,
+        socket.assigns.current_user.role
+      )
+
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 

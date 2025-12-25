@@ -4,7 +4,11 @@ defmodule HackScraper.Events.Series do
 
   @derive {
     Flop.Schema,
-    filterable: [:name, :url, :description], sortable: [:name, :url]
+    sortable: [:name, :url],
+    filterable: [:name, :url, :description],
+    adapter_opts: [
+      compound_fields: [text: [:name, :url, :description]]
+    ]
   }
 
   schema "series" do

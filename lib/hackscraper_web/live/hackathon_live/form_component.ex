@@ -1,9 +1,4 @@
 defmodule HackScraperWeb.HackathonLive.FormComponent do
-  @moduledoc """
-  input hackathon or suggestion
-  sugg_hint
-  date_hint
-  """
   use HackScraperWeb, :live_component
 
   alias HackScraper.Events
@@ -41,12 +36,13 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
         phx-target={@myself}
         phx-change="validate"
         phx-submit="save"
+        phx-hook="DateTimeToUTC"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:url]} type="text" label="Url" />
+        <.input field={@form[:name]} type="text" label="Name" required />
+        <.input field={@form[:url]} type="text" label="Url" required />
         <.input field={@form[:image]} type="text" label="Image" />
         <.input field={@form[:description]} type="textarea" label="Description" />
-        <.input field={@form[:location]} type="textarea" label="Location" />
+        <.input field={@form[:location]} type="textarea" rows="1" label="Location" />
 
         <noscript class="block p-3 text-sm bg-red-50 rounded border">
           Note: the server expects the dates in UTC. Enable JavaScript to convert them automatically from your local timezone.
@@ -56,8 +52,26 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
           <span class="font-bold">Date information found:</span> {@date_hint}
         </div>
 
-        <.input field={@form[:start_date]} type="datetime-local" label="Start date" />
-        <.input field={@form[:end_date]} type="datetime-local" label="End date" />
+        <div class="flex">
+          <.input
+            field={@form[:timezone]}
+            type="search"
+            label="Timezone"
+            list="timezones"
+            id="timezone-input"
+            required
+          />
+          <datalist id="timezones">
+            <%= for {label, name} <- timezones() do %>
+              <option value={name}>
+                {label}
+              </option>
+            <% end %>
+          </datalist>
+          <.button id="autofill" type="button" phx-hook="AutofillLocale">Autofill</.button>
+        </div>
+        <.input field={@form[:start_date]} type="datetime-local" label="Start date" required />
+        <.input field={@form[:end_date]} type="datetime-local" label="End date" required />
 
         <.input
           field={@form[:series_id]}
@@ -78,6 +92,17 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
       for ser <- HackScraper.Events.list_series() do
         [key: ser.name, value: ser.id, selected: ser.id == series_id]
       end
+  end
+
+  def timezones() do
+    utc_now = DateTime.utc_now()
+
+    for tz <- TimeZoneInfo.time_zones(links: :ignore) do
+      {:ok, local_time} = DateTime.shift_zone(utc_now, tz)
+
+      {"#{tz |> String.replace("_", " ")} (#{local_time.zone_abbr}): #{Calendar.strftime(local_time, "%H:%M")}",
+       tz}
+    end
   end
 
   @impl true

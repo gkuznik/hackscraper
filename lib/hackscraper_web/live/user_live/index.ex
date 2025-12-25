@@ -39,12 +39,8 @@ defmodule HackScraperWeb.UserLive.Index do
     |> assign(:user, %User{})
   end
 
-  defp apply_action(socket, :index, params) do
-    {users, meta} = Flop.validate_and_run!(User, params, for: User, replace_invalid_params: true)
-
+  defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:meta, meta)
-    |> stream(:users, users, reset: true)
     |> assign(:page_title, "Listing Users")
     |> assign(:user, nil)
   end
@@ -52,6 +48,12 @@ defmodule HackScraperWeb.UserLive.Index do
   @impl true
   def handle_info({HackScraperWeb.UserLive.FormComponent, {:saved, user}}, socket) do
     {:noreply, stream_insert(socket, :users, user)}
+  end
+
+  @impl true
+  def handle_event("update-filter", params, socket) do
+    params = Map.delete(params, "_target")
+    {:noreply, push_patch(socket, to: ~p"/users?#{params}")}
   end
 
   @impl true

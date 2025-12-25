@@ -44,10 +44,10 @@ defmodule HackScraper.MixProject do
       {:lazy_html, ">= 0.1.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.4.1", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
-       tag: "v2.1.1",
+       tag: "v2.2.0",
        sparse: "optimized",
        app: false,
        compile: false,
@@ -58,14 +58,15 @@ defmodule HackScraper.MixProject do
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.1.1"},
+      {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
       {:flop, "~> 0.26.3"},
       {:flop_phoenix, "~> 0.25.3"},
       {:oban, "~> 2.19"},
       {:oban_web, "~> 2.11"},
       {:req, "~> 0.5.0"},
-      {:pythonx, "~> 0.4.0"}
+      {:pythonx, "~> 0.4.0"},
+      {:time_zone_info, "~> 0.7"}
     ]
   end
 

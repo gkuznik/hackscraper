@@ -21,7 +21,13 @@ defmodule HackScraper.ScrapersTest do
     end
 
     test "create_scraper/1 with valid data creates a scraper" do
-      valid_attrs = %{name: "some name", worker: "Dummy", url: "some url", schedule: "@daily", paused: true}
+      valid_attrs = %{
+        name: "some name",
+        worker: "Dummy",
+        url: "some url",
+        schedule: "@daily",
+        paused: true
+      }
 
       assert {:ok, %Scraper{} = scraper} = Scrapers.create_scraper(valid_attrs)
       assert scraper.name == "some name"
@@ -37,7 +43,14 @@ defmodule HackScraper.ScrapersTest do
 
     test "update_scraper/2 with valid data updates the scraper" do
       scraper = scraper_fixture()
-      update_attrs = %{name: "some updated name", worker: "Devpost", url: "some updated url", schedule: "@hourly", paused: false}
+
+      update_attrs = %{
+        name: "some updated name",
+        worker: "Devpost",
+        url: "some updated url",
+        schedule: "@hourly",
+        paused: false
+      }
 
       assert {:ok, %Scraper{} = scraper} = Scrapers.update_scraper(scraper, update_attrs)
       assert scraper.name == "some updated name"
