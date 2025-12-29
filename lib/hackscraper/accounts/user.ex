@@ -4,7 +4,7 @@ defmodule HackScraper.Accounts.User do
 
   @derive {
     Flop.Schema,
-    sortable: [:email, :name, :confirmed_at],
+    sortable: [:name, :email, :confirmed_at],
     filterable: [:role, :confirmed_at, :name_or_email],
     adapter_opts: [
       compound_fields: [name_or_email: [:name, :email]]
