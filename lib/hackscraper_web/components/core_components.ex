@@ -88,42 +88,40 @@ defmodule HackScraperWeb.CoreComponents do
       data-cancel={JS.exec(@on_cancel, "phx-remove")}
       class="relative z-50 hidden"
     >
-      <%!-- Backdrop - uses inset-0 for true full screen coverage --%>
+      <div id={"#{@id}-bg"} class="bg-zinc-50/90 fixed inset-0 transition-opacity" aria-hidden="true" />
       <div
-        id={"#{@id}-bg"}
-        class="fixed inset-0 z-50 bg-zinc-50/90 transition-opacity"
-        aria-hidden="true"
-      />
-      <%!-- Modal container - isolated from body, full viewport coverage --%>
-      <div
-        class="fixed inset-0 z-50 flex sm:items-center sm:justify-center sm:p-6 lg:p-8 sm:overflow-y-auto"
+        class="fixed inset-0 overflow-y-auto"
         aria-labelledby={"#{@id}-title"}
         aria-describedby={"#{@id}-description"}
         role="dialog"
         aria-modal="true"
         tabindex="0"
       >
-        <.focus_wrap
-          id={"#{@id}-container"}
-          phx-window-keydown={JS.exec("data-cancel", to: "##{@id}")}
-          phx-key="escape"
-          phx-click-away={JS.exec("data-cancel", to: "##{@id}")}
-          class="relative w-full h-full sm:w-auto sm:h-auto sm:max-w-3xl rounded-none sm:rounded-2xl bg-white overflow-y-auto flex flex-col p-4 sm:p-10 lg:p-14 shadow-none sm:shadow-xl ring-0 sm:ring-1 sm:ring-zinc-700/10 transition"
-        >
-          <div class="absolute top-3 right-3 sm:top-6 sm:right-6 z-10">
-            <button
-              phx-click={JS.exec("data-cancel", to: "##{@id}")}
-              type="button"
-              class="-m-3 flex-none p-3 opacity-90 hover:opacity-50"
-              aria-label="close"
+        <div class="flex min-h-full items-center justify-center">
+          <div class="w-full max-w-3xl sm:p-6 lg:py-8">
+            <.focus_wrap
+              id={"#{@id}-container"}
+              phx-window-keydown={JS.exec("data-cancel", to: "##{@id}")}
+              phx-key="escape"
+              phx-click-away={JS.exec("data-cancel", to: "##{@id}")}
+              class="shadow-zinc-700/10 ring-zinc-700/10 relative hidden rounded-2xl bg-white p-6 shadow-lg ring-1 transition"
             >
-              <.icon name="hero-x-mark-solid" class="h-5 w-5" />
-            </button>
+              <div class="absolute top-6 right-5">
+                <button
+                  phx-click={JS.exec("data-cancel", to: "##{@id}")}
+                  type="button"
+                  class="-m-3 flex-none p-3 opacity-90 hover:opacity-50"
+                  aria-label="close"
+                >
+                  <.icon name="hero-x-mark-solid" class="h-5 w-5" />
+                </button>
+              </div>
+              <div id={"#{@id}-content"}>
+                {render_slot(@inner_block)}
+              </div>
+            </.focus_wrap>
           </div>
-          <div id={"#{@id}-content"} class="overflow-x-hidden">
-            {render_slot(@inner_block)}
-          </div>
-        </.focus_wrap>
+        </div>
       </div>
     </div>
     """
@@ -241,9 +239,9 @@ defmodule HackScraperWeb.CoreComponents do
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
-      <div class="mt-4 space-y-4 bg-white">
+      <div class="mt-2 space-y-4 bg-white">
         {render_slot(@inner_block, f)}
-        <div :for={action <- @actions} class="flex items-stretch sm:items-center justify-between">
+        <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
           {render_slot(action, f)}
         </div>
       </div>
@@ -270,11 +268,10 @@ defmodule HackScraperWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg py-2.5 px-4 sm:py-2 sm:px-3",
+        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
         "text-sm font-semibold leading-6",
         "bg-zinc-900 hover:bg-zinc-700 text-white active:text-white/80",
         "disabled:bg-zinc-300 disabled:hover:bg-zinc-300 disabled:text-zinc-600 disabled:cursor-not-allowed",
-        "touch-manipulation",
         @class
       ]}
       {@rest}
@@ -397,7 +394,7 @@ defmodule HackScraperWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 text-base sm:text-sm leading-6 py-2.5 sm:py-2 px-3",
+          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
@@ -419,7 +416,7 @@ defmodule HackScraperWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 text-base sm:text-sm leading-6 py-2.5 sm:py-2 px-3",
+          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
@@ -751,7 +748,9 @@ defmodule HackScraperWeb.CoreComponents do
       time: 300,
       transition: {"transition-all transform ease-out duration-300", "opacity-0", "opacity-100"}
     )
-    |> show("##{id}-container")    |> JS.add_class("overflow-hidden", to: "html")    |> JS.add_class("overflow-hidden", to: "body")
+    |> show("##{id}-container")
+    |> JS.add_class("overflow-hidden", to: "html")
+    |> JS.add_class("overflow-hidden", to: "body")
     |> JS.focus_first(to: "##{id}-content")
   end
 
@@ -762,7 +761,9 @@ defmodule HackScraperWeb.CoreComponents do
       transition: {"transition-all transform ease-in duration-200", "opacity-100", "opacity-0"}
     )
     |> hide("##{id}-container")
-    |> JS.hide(to: "##{id}", transition: {"block", "block", "hidden"})    |> JS.remove_class("overflow-hidden", to: "html")    |> JS.remove_class("overflow-hidden", to: "body")
+    |> JS.hide(to: "##{id}", transition: {"block", "block", "hidden"})
+    |> JS.remove_class("overflow-hidden", to: "html")
+    |> JS.remove_class("overflow-hidden", to: "body")
     |> JS.pop_focus()
   end
 
