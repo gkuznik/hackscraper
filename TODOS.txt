@@ -4,22 +4,7 @@
 ✅ don't hardcode urls for scraper
 add tests for scraper
 
-✅ export series, hackathons
--> ✅ import series, then hackathons
-
-✅ suggestions have a hackathon and creator
-✅ ensure one suggestion per creator
-✅ redirect hackathon edit to suggestion review
-✅ display "suggestion pending"
-✅ add updating suggestions back (+test)
-✅ new hackathon -> suggestion
-
-✅ gate actions behind roles
-✅ disable/hide buttons
-
 forgot password with name? 
-
-✅ about page
 
 rate limit email changes?
 
