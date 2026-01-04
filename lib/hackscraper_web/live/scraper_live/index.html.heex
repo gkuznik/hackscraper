@@ -23,7 +23,7 @@
       class="block max-w-[40ch] truncate"
     />
   </:col>
-  <:col :let={{_id, scraper}} label="Paused">{scraper.paused}</:col>
+  <:col :let={{_id, scraper}} label="Paused" field={:paused}>{scraper.paused}</:col>
   <:action :let={{_id, scraper}}>
     <.button phx-click={JS.push("pause", value: %{id: scraper.id})}>
       {if scraper.paused, do: "Unpause", else: "Pause"}

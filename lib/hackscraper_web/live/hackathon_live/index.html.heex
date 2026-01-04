@@ -21,10 +21,10 @@
       class="block max-w-[40ch] truncate"
     />
   </:col>
-  <:col :let={{_id, hackathon}} label="Image">
+  <:col :let={{_id, hackathon}} label="Image" field={:image}>
     <img :if={hackathon.image} src={hackathon.image} class="h-12 w-12 object-cover rounded" />
   </:col>
-  <:col :let={{_id, hackathon}} label="Description">
+  <:col :let={{_id, hackathon}} label="Description" field={:description}>
     <div class="description-cell">{hackathon.description}</div>
   </:col>
   <:col :let={{_id, hackathon}} label="Location" field={:location}>{hackathon.location}</:col>

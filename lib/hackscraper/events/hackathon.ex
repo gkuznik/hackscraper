@@ -4,8 +4,11 @@ defmodule HackScraper.Events.Hackathon do
 
   @derive {
     Flop.Schema,
-    filterable: [:name, :url, :description, :location],
-    sortable: [:name, :url, :location, :start_date, :end_date]
+    filterable: [:text, :image],
+    sortable: [:name, :start_date, :end_date],
+    adapter_opts: [
+      compound_fields: [text: [:name, :url, :description, :location]]
+    ]
   }
 
   schema "hackathons" do
