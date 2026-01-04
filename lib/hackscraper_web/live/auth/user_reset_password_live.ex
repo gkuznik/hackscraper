@@ -1,40 +1,38 @@
 defmodule HackScraperWeb.UserResetPasswordLive do
-  use HackScraperWeb, :live_view_root_layout
+  use HackScraperWeb, :live_view_auth_layout
 
   alias HackScraper.Accounts
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm p-4">
-      <.header class="text-center">Reset Password</.header>
+    <.header class="text-center">Reset Password</.header>
 
-      <.simple_form
-        for={@form}
-        id="reset_password_form"
-        phx-submit="reset_password"
-        phx-change="validate"
-      >
-        <.error :if={@form.errors != []}>
-          Oops, something went wrong! Please check the errors below.
-        </.error>
+    <.simple_form
+      for={@form}
+      id="reset_password_form"
+      phx-submit="reset_password"
+      phx-change="validate"
+    >
+      <.error :if={@form.errors != []}>
+        Oops, something went wrong! Please check the errors below.
+      </.error>
 
-        <.input field={@form[:password]} type="password" label="New password" required />
-        <.input
-          field={@form[:password_confirmation]}
-          type="password"
-          label="Confirm new password"
-          required
-        />
-        <:actions>
-          <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
-        </:actions>
-      </.simple_form>
+      <.input field={@form[:password]} type="password" label="New password" required />
+      <.input
+        field={@form[:password_confirmation]}
+        type="password"
+        label="Confirm new password"
+        required
+      />
+      <:actions>
+        <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
+      </:actions>
+    </.simple_form>
 
-      <p class="text-center text-sm mt-4">
-        <.link href={~p"/user/register"} class="link">Register</.link>
-        | <.link href={~p"/user/log_in"} class="link">Log in</.link>
-      </p>
-    </div>
+    <p class="text-center text-sm mt-4">
+      <.link href={~p"/user/register"} class="link">Register</.link>
+      | <.link href={~p"/user/log_in"} class="link">Log in</.link>
+    </p>
     """
   end
 

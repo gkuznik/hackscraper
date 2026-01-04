@@ -57,9 +57,9 @@ defmodule HackScraperWeb do
     end
   end
 
-  def live_view_root_layout do
+  def live_view_auth_layout do
     quote do
-      use Phoenix.LiveView
+      use Phoenix.LiveView, layout: {HackScraperWeb.Layouts, :auth}
 
       unquote(html_helpers())
     end

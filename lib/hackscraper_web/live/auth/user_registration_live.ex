@@ -1,45 +1,43 @@
 defmodule HackScraperWeb.UserRegistrationLive do
-  use HackScraperWeb, :live_view_root_layout
+  use HackScraperWeb, :live_view_auth_layout
 
   alias HackScraper.Accounts
   alias HackScraper.Accounts.User
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm p-4">
-      <.header class="text-center">
-        Register for an account
-        <:subtitle>
-          Already registered?
-          <.link navigate={~p"/user/log_in"} class="link font-semibold">
-            Log in
-          </.link>
-          to your account now.
-        </:subtitle>
-      </.header>
+    <.header class="text-center">
+      Register for an account
+      <:subtitle>
+        Already registered?
+        <.link navigate={~p"/user/log_in"} class="link font-semibold">
+          Log in
+        </.link>
+        to your account now.
+      </:subtitle>
+    </.header>
 
-      <.simple_form
-        for={@form}
-        id="registration_form"
-        phx-submit="save"
-        phx-change="validate"
-        phx-trigger-action={@trigger_submit}
-        action={~p"/user/log_in?_action=registered"}
-        method="post"
-      >
-        <.error :if={@check_errors}>
-          Oops, something went wrong! Please check the errors below.
-        </.error>
+    <.simple_form
+      for={@form}
+      id="registration_form"
+      phx-submit="save"
+      phx-change="validate"
+      phx-trigger-action={@trigger_submit}
+      action={~p"/user/log_in?_action=registered"}
+      method="post"
+    >
+      <.error :if={@check_errors}>
+        Oops, something went wrong! Please check the errors below.
+      </.error>
 
-        <.input field={@form[:name]} type="text" label="Name" required />
-        <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:password]} type="password" label="Password" required />
+      <.input field={@form[:name]} type="text" label="Name" required />
+      <.input field={@form[:email]} type="email" label="Email" required />
+      <.input field={@form[:password]} type="password" label="Password" required />
 
-        <:actions>
-          <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
-        </:actions>
-      </.simple_form>
-    </div>
+      <:actions>
+        <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
+      </:actions>
+    </.simple_form>
     """
   end
 

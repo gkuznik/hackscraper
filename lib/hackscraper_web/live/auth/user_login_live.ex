@@ -1,37 +1,35 @@
 defmodule HackScraperWeb.UserLoginLive do
-  use HackScraperWeb, :live_view_root_layout
+  use HackScraperWeb, :live_view_auth_layout
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm p-4">
-      <.header class="text-center">
-        Log in to account
-        <:subtitle>
-          Don't have an account?
-          <.link navigate={~p"/user/register"} class="link font-semibold">
-            Sign up
-          </.link>
-          for an account now.
-        </:subtitle>
-      </.header>
+    <.header class="text-center">
+      Log in to account
+      <:subtitle>
+        Don't have an account?
+        <.link navigate={~p"/user/register"} class="link font-semibold">
+          Sign up
+        </.link>
+        for an account now.
+      </:subtitle>
+    </.header>
 
-      <.simple_form for={@form} id="login_form" action={~p"/user/log_in"} phx-update="ignore">
-        <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:password]} type="password" label="Password" required />
+    <.simple_form for={@form} id="login_form" action={~p"/user/log_in"} phx-update="ignore">
+      <.input field={@form[:email]} type="email" label="Email" required />
+      <.input field={@form[:password]} type="password" label="Password" required />
 
-        <:actions>
-          <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
-          <.link href={~p"/user/reset_password"} class="link text-sm font-semibold">
-            Forgot your password?
-          </.link>
-        </:actions>
-        <:actions>
-          <.button phx-disable-with="Logging in..." class="w-full">
-            Log in <span aria-hidden="true">→</span>
-          </.button>
-        </:actions>
-      </.simple_form>
-    </div>
+      <:actions>
+        <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
+        <.link href={~p"/user/reset_password"} class="link text-sm font-semibold">
+          Forgot your password?
+        </.link>
+      </:actions>
+      <:actions>
+        <.button phx-disable-with="Logging in..." class="w-full">
+          Log in <span aria-hidden="true">→</span>
+        </.button>
+      </:actions>
+    </.simple_form>
     """
   end
 
