@@ -14,7 +14,7 @@ defmodule HackScraper.Accounts.User do
   schema "users" do
     field :email, :string
     field :name, :string
-    field :role, :integer, default: 0
+    field :role, Ecto.Enum, values: [user: 0, editor: 1, mod: 2, admin: 3], default: :user
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :current_password, :string, virtual: true, redact: true
@@ -56,25 +56,11 @@ defmodule HackScraper.Accounts.User do
 
   def registration_with_role_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :name])
-    |> cast_role_to_integer(attrs)
+    |> cast(attrs, [:name, :email, :password, :role])
     |> validate_email(opts)
     |> validate_password(opts)
     |> validate_name()
     |> validate_role()
-  end
-
-  defp cast_role_to_integer(changeset, attrs) do
-    case attrs[:role] do
-      role when is_integer(role) ->
-        changeset
-
-      role when is_atom(role) and not is_nil(role) ->
-        put_change(changeset, :role, HackScraper.Accounts.roles()[role])
-
-      role ->
-        add_error(changeset, :role, "Unrecognized type #{inspect(role)}")
-    end
   end
 
   defp validate_email(changeset, opts) do
@@ -103,7 +89,6 @@ defmodule HackScraper.Accounts.User do
   def validate_role(changeset) do
     changeset
     |> validate_required([:role])
-    |> validate_inclusion(:role, 0..3)
   end
 
   if Application.compile_env(:hackscraper, :dev_routes) do
@@ -213,10 +198,10 @@ defmodule HackScraper.Accounts.User do
   """
   def admin_changeset(user, attrs) do
     user
-    |> cast(attrs, [:role, :name, :email])
-    |> validate_role()
+    |> cast(attrs, [:name, :email, :role])
     |> validate_name()
     |> validate_email([])
+    |> validate_role()
   end
 
   @doc """
@@ -224,11 +209,11 @@ defmodule HackScraper.Accounts.User do
   """
   def admin_changeset_with_passsword(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password, :role])
-    |> validate_email([])
-    |> validate_password([])
-    |> validate_role()
+    |> cast(attrs, [:name, :email, :role, :password])
     |> validate_name()
+    |> validate_email([])
+    |> validate_role()
+    |> validate_password([])
   end
 
   @doc """

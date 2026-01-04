@@ -23,7 +23,7 @@ defmodule HackScraper.AccountsFixtures do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
-      |> HackScraper.Accounts.register_user_with_role(HackScraper.Accounts.roles()[:admin])
+      |> HackScraper.Accounts.register_user_with_role(:admin)
 
     user
   end

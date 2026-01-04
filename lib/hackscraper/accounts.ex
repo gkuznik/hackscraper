@@ -8,22 +8,19 @@ defmodule HackScraper.Accounts do
 
   alias HackScraper.Accounts.{User, UserToken, UserNotifier}
 
-  @roles %{
-    user: 0,
-    editor: 1,
-    mod: 2,
-    admin: 3
-  }
+  defp roles, do: Ecto.Enum.mappings(HackScraper.Accounts.User, :role)
+  defp role_level(role) when is_atom(role), do: roles()[role]
 
-  @inv_roles Map.new(@roles, fn {key, val} -> {val, key} end)
+  def role_name(role) when is_atom(role) do
+    Atom.to_string(role) |> String.capitalize()
+  end
 
-  def roles, do: @roles
+  def role_options(current_role \\ :admin) do
+    current_level = role_level(current_role)
 
-  def role_name(level) when is_integer(level) do
-    case Map.fetch(@inv_roles, level) do
-      {:ok, role_atom} -> Atom.to_string(role_atom) |> String.capitalize()
-      :error -> "Unknown (#{level})"
-    end
+    roles()
+    |> Enum.filter(fn {_, level} -> level <= current_level end)
+    |> Enum.map(fn {name, _} -> {role_name(name), name} end)
   end
 
   def can_do?(nil, _) do
@@ -31,13 +28,19 @@ defmodule HackScraper.Accounts do
   end
 
   def can_do?(%User{role: role}, required) do
-    role >= @roles[required]
+    role_level(role) >= role_level(required)
   end
 
-  def validate_role(changeset, user_role) when is_integer(user_role) do
+  def validate_role(changeset, user_role) when is_atom(user_role) do
+    user_level = role_level(user_role)
+
     case Ecto.Changeset.fetch_field(changeset, :role) do
-      {_, role} when role > user_role ->
-        Ecto.Changeset.add_error(changeset, :role, "Can't assign a role higher than your own")
+      {_, role} when is_atom(role) ->
+        if role_level(role) > user_level do
+          Ecto.Changeset.add_error(changeset, :role, "Can't assign a role higher than your own")
+        else
+          changeset
+        end
 
       _ ->
         changeset
@@ -60,7 +63,7 @@ defmodule HackScraper.Accounts do
     |> Repo.update()
   end
 
-  def admin_change_user(%User{} = user, attrs \\ %{}, role \\ 3) do
+  def admin_change_user(%User{} = user, attrs \\ %{}, role \\ :admin) do
     changeset =
       if Map.has_key?(attrs, :password) do
         User.admin_changeset_with_passsword(user, attrs)
