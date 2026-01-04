@@ -17,7 +17,12 @@
 
 <.back navigate={~p"/scrapers"}>Back to scrapers</.back>
 
-<.modal :if={@live_action == :edit} id="scraper-modal" show on_cancel={JS.patch(~p"/scrapers/#{@scraper}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="scraper-modal"
+  show
+  on_cancel={JS.patch(~p"/scrapers/#{@scraper}")}
+>
   <.live_component
     module={HackScraperWeb.ScraperLive.FormComponent}
     id={@scraper.id}

@@ -40,7 +40,7 @@ defmodule HackScraperWeb.Components.Sidebar do
         >
           <.icon name="hero-bars-3" class="w-5 h-5" />
         </button>
-
+        
     <!-- Mobile close button -->
         <button
           class="lg:hidden text-gray-400 hover:text-white relative"

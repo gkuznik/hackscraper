@@ -30,13 +30,13 @@ defmodule HackScraper.EventsFixtures do
     {:ok, hackathon} =
       attrs
       |> Enum.into(%{
-        description: "some description",
-        end_date: ~U[2025-11-11 22:55:00Z],
-        image: "some image",
-        location: "some location",
         name: "some name",
+        description: "some description",
+        location: "some location",
+        image: "some image",
+        url: "some url",
         start_date: ~U[2025-11-11 22:55:00Z],
-        url: "some url"
+        end_date: ~U[2025-11-13 22:55:00Z]
       })
       |> HackScraper.Events.create_hackathon()
 

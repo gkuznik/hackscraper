@@ -21,7 +21,12 @@ defmodule HackScraper.EventsTest do
     end
 
     test "create_series/1 with valid data creates a series" do
-      valid_attrs = %{name: "some name", description: "some description", image: "some image", url: "some url"}
+      valid_attrs = %{
+        name: "some name",
+        description: "some description",
+        image: "some image",
+        url: "some url"
+      }
 
       assert {:ok, %Series{} = series} = Events.create_series(valid_attrs)
       assert series.name == "some name"
@@ -36,7 +41,13 @@ defmodule HackScraper.EventsTest do
 
     test "update_series/2 with valid data updates the series" do
       series = series_fixture()
-      update_attrs = %{name: "some updated name", description: "some updated description", image: "some updated image", url: "some updated url"}
+
+      update_attrs = %{
+        name: "some updated name",
+        description: "some updated description",
+        image: "some updated image",
+        url: "some updated url"
+      }
 
       assert {:ok, %Series{} = series} = Events.update_series(series, update_attrs)
       assert series.name == "some updated name"
@@ -68,7 +79,15 @@ defmodule HackScraper.EventsTest do
 
     import HackScraper.EventsFixtures
 
-    @invalid_attrs %{name: nil, description: nil, location: nil, image: nil, url: nil, start_date: nil, end_date: nil}
+    @invalid_attrs %{
+      name: nil,
+      description: nil,
+      location: nil,
+      image: nil,
+      url: nil,
+      start_date: nil,
+      end_date: nil
+    }
 
     test "list_hackathons/0 returns all hackathons" do
       hackathon = hackathon_fixture()
@@ -81,7 +100,15 @@ defmodule HackScraper.EventsTest do
     end
 
     test "create_hackathon/1 with valid data creates a hackathon" do
-      valid_attrs = %{name: "some name", description: "some description", location: "some location", image: "some image", url: "some url", start_date: ~U[2025-11-11 22:55:00Z], end_date: ~U[2025-11-11 22:55:00Z]}
+      valid_attrs = %{
+        name: "some name",
+        description: "some description",
+        location: "some location",
+        image: "some image",
+        url: "some url",
+        start_date: ~U[2025-11-11 22:55:00Z],
+        end_date: ~U[2025-11-11 22:55:00Z]
+      }
 
       assert {:ok, %Hackathon{} = hackathon} = Events.create_hackathon(valid_attrs)
       assert hackathon.name == "some name"
@@ -99,7 +126,16 @@ defmodule HackScraper.EventsTest do
 
     test "update_hackathon/2 with valid data updates the hackathon" do
       hackathon = hackathon_fixture()
-      update_attrs = %{name: "some updated name", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: ~U[2025-11-12 22:55:00Z], end_date: ~U[2025-11-12 22:55:00Z]}
+
+      update_attrs = %{
+        name: "some updated name",
+        description: "some updated description",
+        location: "some updated location",
+        image: "some updated image",
+        url: "some updated url",
+        start_date: ~U[2025-11-12 22:55:00Z],
+        end_date: ~U[2025-11-12 22:55:00Z]
+      }
 
       assert {:ok, %Hackathon{} = hackathon} = Events.update_hackathon(hackathon, update_attrs)
       assert hackathon.name == "some updated name"
@@ -135,7 +171,16 @@ defmodule HackScraper.EventsTest do
     import HackScraper.AccountsFixtures
     import HackScraper.EventsFixtures
 
-    @invalid_attrs %{name: nil, date_hint: nil, description: nil, location: nil, image: nil, url: nil, start_date: nil, end_date: nil}
+    @invalid_attrs %{
+      name: nil,
+      date_hint: nil,
+      description: nil,
+      location: nil,
+      image: nil,
+      url: nil,
+      start_date: nil,
+      end_date: nil
+    }
 
     test "list_suggestions/0 returns all suggestions" do
       suggestion = suggestion_fixture()
@@ -149,7 +194,18 @@ defmodule HackScraper.EventsTest do
 
     test "create_suggestion/1 with valid data creates a suggestion" do
       user = user_fixture()
-      valid_attrs = %{name: "some name", date_hint: "some date_hint", description: "some description", location: "some location", image: "some image", url: "some url", start_date: ~U[2025-11-16 16:50:00Z], end_date: ~U[2025-11-16 16:50:00Z], creator_id: user.id}
+
+      valid_attrs = %{
+        name: "some name",
+        date_hint: "some date_hint",
+        description: "some description",
+        location: "some location",
+        image: "some image",
+        url: "some url",
+        start_date: ~U[2025-11-16 16:50:00Z],
+        end_date: ~U[2025-11-16 16:50:00Z],
+        creator_id: user.id
+      }
 
       assert {:ok, %Suggestion{} = suggestion} = Events.create_suggestion(valid_attrs)
       assert suggestion.name == "some name"
@@ -168,9 +224,21 @@ defmodule HackScraper.EventsTest do
 
     test "update_suggestion/2 with valid data updates the suggestion" do
       suggestion = suggestion_fixture()
-      update_attrs = %{name: "some updated name", date_hint: "some updated date_hint", description: "some updated description", location: "some updated location", image: "some updated image", url: "some updated url", start_date: ~U[2025-11-17 16:50:00Z], end_date: ~U[2025-11-17 16:50:00Z]}
 
-      assert {:ok, %Suggestion{} = suggestion} = Events.update_suggestion(suggestion, update_attrs)
+      update_attrs = %{
+        name: "some updated name",
+        date_hint: "some updated date_hint",
+        description: "some updated description",
+        location: "some updated location",
+        image: "some updated image",
+        url: "some updated url",
+        start_date: ~U[2025-11-17 16:50:00Z],
+        end_date: ~U[2025-11-17 16:50:00Z]
+      }
+
+      assert {:ok, %Suggestion{} = suggestion} =
+               Events.update_suggestion(suggestion, update_attrs)
+
       assert suggestion.name == "some updated name"
       assert suggestion.date_hint == "some updated date_hint"
       assert suggestion.description == "some updated description"

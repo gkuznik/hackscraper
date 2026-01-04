@@ -243,11 +243,11 @@ defmodule HackScraperWeb.HackathonLiveTest do
       user = user_fixture()
 
       # Create a suggestion linked to this hackathon
-        suggestion_fixture(%{
-          creator_id: user.id,
-          hackathon_id: hackathon.id,
-          name: "Suggested edit"
-        })
+      suggestion_fixture(%{
+        creator_id: user.id,
+        hackathon_id: hackathon.id,
+        name: "Suggested edit"
+      })
 
       {:ok, show_live, _html} = log_in_user(conn, user) |> live(~p"/hackathons/#{hackathon}")
 
