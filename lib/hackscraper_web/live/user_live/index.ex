@@ -39,12 +39,8 @@ defmodule HackScraperWeb.UserLive.Index do
     |> assign(:user, %User{})
   end
 
-  defp apply_action(socket, :index, params) do
-    {users, meta} = Flop.validate_and_run!(User, params, for: User, replace_invalid_params: true)
-
+  defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:meta, meta)
-    |> stream(:users, users, reset: true)
     |> assign(:page_title, "Listing Users")
     |> assign(:user, nil)
   end

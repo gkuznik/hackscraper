@@ -42,11 +42,11 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:url]} type="text" label="Url" />
+        <.input field={@form[:url]} type="text" label="Url" required />
+        <.input field={@form[:name]} type="text" label="Name" required />
         <.input field={@form[:image]} type="text" label="Image" />
         <.input field={@form[:description]} type="textarea" label="Description" />
-        <.input field={@form[:location]} type="textarea" label="Location" />
+        <.input field={@form[:location]} type="textarea" rows="1" label="Location" />
 
         <noscript class="block p-3 text-sm bg-red-50 rounded border">
           Note: the server expects the dates in UTC. Enable JavaScript to convert them automatically from your local timezone.
@@ -106,10 +106,6 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
-  def handle_event("save", %{"hackathon" => hackathon_params}, socket) do
-    save_hackathon(socket, socket.assigns.action, hackathon_params)
-  end
-
   def handle_event("delete_suggestion", _, socket) do
     {:ok, _} = Events.delete_suggestion(socket.assigns.suggestion)
 
@@ -117,6 +113,10 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
      socket
      |> assign(:suggestion, nil)
      |> assign(:form, to_form(Events.change_hackathon(socket.assigns.hackathon)))}
+  end
+
+  def handle_event("save", %{"hackathon" => hackathon_params}, socket) do
+    save_hackathon(socket, socket.assigns.action, hackathon_params)
   end
 
   defp save_hackathon(socket, :edit, hackathon_params) do

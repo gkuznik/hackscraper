@@ -21,11 +21,18 @@ defmodule HackScraperWeb.CoreComponents do
   attr :url, :string, required: true
   attr :text, :string
   attr :class, :string, default: nil
-  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the span"
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the link"
 
   def external(assigns) do
     ~H"""
-    <.link target="_blank" rel="noopener" href={@url} class={[@class, "link max-w-[80ch] truncate"]} {@rest} phx-no-format>{assigns[:text] || @url}</.link>
+    <.link
+      target="_blank"
+      rel="noopener"
+      href={@url}
+      class={[@class, "link"]}
+      {@rest}
+      phx-no-format
+    >{assigns[:text] || @url}</.link>
     """
   end
 
@@ -37,11 +44,17 @@ defmodule HackScraperWeb.CoreComponents do
   def date(assigns) do
     assigns = assign_new(assigns, :id, fn -> "date-#{System.unique_integer()}" end)
 
-    ~H"""
-    <span id={@id} phx-hook="formatDate" data-format={@format} {@rest}>
-      {Calendar.strftime(@date, "%Y-%m-%d %H:%M UTC")}
-    </span>
-    """
+    if !assigns.date do
+      ~H"""
+      <span id={@id} {@rest}>N/A</span>
+      """
+    else
+      ~H"""
+      <span id={@id} phx-hook="formatDate" data-format={@format} {@rest}>
+        {Calendar.strftime(@date, "%Y-%m-%d %H:%M UTC")}
+      </span>
+      """
+    end
   end
 
   @doc """
@@ -380,8 +393,9 @@ defmodule HackScraperWeb.CoreComponents do
       <textarea
         id={@id}
         name={@name}
+        phx-update="ignore"
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6 min-h-[6rem]",
+          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
