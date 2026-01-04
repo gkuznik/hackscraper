@@ -35,6 +35,7 @@ defmodule HackScraper.EventsFixtures do
         location: "some location",
         image: "some image",
         url: "some url",
+        timezone: "Etc/UTC",
         start_date: ~U[2025-11-11 22:55:00Z],
         end_date: ~U[2025-11-13 22:55:00Z]
       })

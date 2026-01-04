@@ -18,8 +18,8 @@
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
 // Establish Phoenix Socket and LiveView configuration.
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
+import { Socket } from "phoenix"
+import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let Hooks = {}
@@ -44,7 +44,7 @@ Hooks.formatDate = {
     }
   },
 }
-Hooks.AutofillLocale = {
+Hooks.AutoTimezone = {
   mounted() {
     this.el.addEventListener("click", e => {
       let locale = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -53,15 +53,87 @@ Hooks.AutofillLocale = {
   }
 }
 
+Hooks.TimezoneSelector = {
+  mounted() {
+    const ua = navigator.userAgent.toLowerCase()
+    const needsFallback = (ua.includes('android') && ua.includes('firefox')) || ua.includes('opera mini')
+
+    if (needsFallback) {
+      this.enableFallback()
+    }
+  },
+
+  enableFallback() {
+    const input = this.el.querySelector('#timezone-input')
+    const fallbackList = this.el.querySelector('#timezone-fallback')
+
+    // Set up input filtering
+    input.addEventListener('input', (e) => {
+      this.filterOptions(e.target.value.toLowerCase(), fallbackList)
+    })
+
+    // Set up option click handlers
+    this.setupOptionHandlers(input, fallbackList)
+
+    // Show/hide list on focus/blur
+    input.addEventListener('focus', () => {
+      this.filterOptions(input.value.toLowerCase(), fallbackList)
+    })
+
+    // Delay blur to allow clicks to register
+    input.addEventListener('blur', () => {
+      setTimeout(() => {
+        fallbackList.style.display = 'none'
+      }, 200)
+    })
+  },
+
+  filterOptions(query, fallbackList) {
+    fallbackList.style.display = 'block'
+    const options = this.el.querySelectorAll('.timezone-option')
+    let visibleCount = 0
+
+    options.forEach(option => {
+      const text = option.textContent.toLowerCase()
+      const matches = text.includes(query)
+
+      option.style.display = matches ? 'block' : 'none'
+      if (matches) visibleCount++
+    })
+
+    // Show "no results" message if needed
+    const noResults = this.el.querySelector('#no-results')
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none'
+    }
+  },
+
+  setupOptionHandlers(input, fallbackList) {
+    const options = this.el.querySelectorAll('.timezone-option')
+
+    options.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault()
+        const value = option.dataset.value
+        input.value = value
+
+        input.dispatchEvent(new Event('input', { bubbles: true }))
+
+        fallbackList.style.display = 'none'
+      })
+    })
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
-  params: {_csrf_token: csrfToken},
+  params: { _csrf_token: csrfToken },
   hooks: Hooks
 })
 
 // Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
+topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 

@@ -36,7 +36,6 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
         phx-target={@myself}
         phx-change="validate"
         phx-submit="save"
-        phx-hook="DateTimeToUTC"
       >
         <.input field={@form[:url]} type="text" label="Url" required />
         <.input field={@form[:name]} type="text" label="Name" required />
@@ -44,31 +43,51 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
         <.input field={@form[:description]} type="textarea" label="Description" />
         <.input field={@form[:location]} type="textarea" rows="1" label="Location" />
 
-        <noscript class="block p-3 text-sm bg-red-50 rounded border">
-          Note: the server expects the dates in UTC. Enable JavaScript to convert them automatically from your local timezone.
-        </noscript>
-
         <div :if={assigns[:date_hint]} class="block p-3 text-sm bg-blue-50 rounded border">
           <span class="font-bold">Date information found:</span> {@date_hint}
         </div>
 
-        <div class="flex">
-          <.input
-            field={@form[:timezone]}
-            type="search"
-            label="Timezone"
-            list="timezones"
-            id="timezone-input"
-            required
-          />
-          <datalist id="timezones">
-            <%= for {label, name} <- timezones() do %>
-              <option value={name}>
-                {label}
-              </option>
-            <% end %>
-          </datalist>
-          <.button id="autofill" type="button" phx-hook="AutofillLocale">Autofill</.button>
+        <div class="flex items-start gap-2">
+          <div class="flex-1 relative" phx-hook="TimezoneSelector" id="timezone-selector">
+            <.input
+              field={@form[:timezone]}
+              label="Timezone"
+              list="timezones"
+              id="timezone-input"
+              required
+              autocomplete="off"
+              phx-debounce="300"
+            />
+            <datalist id="timezones">
+              <%= for {label, name} <- timezones() do %>
+                <option value={name}>
+                  {label}
+                </option>
+              <% end %>
+            </datalist>
+
+            <%!-- Fallback --%>
+            <div
+              phx-update="ignore"
+              id="timezone-fallback"
+              class="hidden absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto"
+            >
+              <div id="no-results" class="hidden p-3 text-sm text-gray-500">
+                No options match
+              </div>
+              <%= for {label, name} <- timezones() do %>
+                <div
+                  class="timezone-option px-3 py-2 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                  data-value={name}
+                >
+                  {label}
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <.button id="autofill" type="button" phx-hook="AutoTimezone" class="whitespace-nowrap mt-8">
+            From Browser
+          </.button>
         </div>
         <.input field={@form[:start_date]} type="datetime-local" label="Start date" required />
         <.input field={@form[:end_date]} type="datetime-local" label="End date" required />

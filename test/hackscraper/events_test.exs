@@ -85,6 +85,7 @@ defmodule HackScraper.EventsTest do
       location: nil,
       image: nil,
       url: nil,
+      timezone: nil,
       start_date: nil,
       end_date: nil
     }
@@ -106,8 +107,9 @@ defmodule HackScraper.EventsTest do
         location: "some location",
         image: "some image",
         url: "some url",
+        timezone: "Etc/UTC",
         start_date: ~U[2025-11-11 22:55:00Z],
-        end_date: ~U[2025-11-11 22:55:00Z]
+        end_date: ~U[2025-11-13 22:55:00Z]
       }
 
       assert {:ok, %Hackathon{} = hackathon} = Events.create_hackathon(valid_attrs)
@@ -116,12 +118,31 @@ defmodule HackScraper.EventsTest do
       assert hackathon.location == "some location"
       assert hackathon.image == "some image"
       assert hackathon.url == "some url"
+      assert hackathon.timezone == "Etc/UTC"
       assert hackathon.start_date == ~U[2025-11-11 22:55:00Z]
-      assert hackathon.end_date == ~U[2025-11-11 22:55:00Z]
+      assert hackathon.end_date == ~U[2025-11-13 22:55:00Z]
     end
 
     test "create_hackathon/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Events.create_hackathon(@invalid_attrs)
+    end
+
+    test "create_hackathon/1 converts dates to UTC" do
+      valid_attrs = %{
+        name: "some name",
+        description: "some description",
+        location: "some location",
+        image: "some image",
+        url: "some url",
+        timezone: "Europe/Berlin",
+        start_date: ~U[2025-11-11 01:00:00Z],
+        end_date: ~U[2025-11-11 13:00:00Z],
+      }
+
+      assert {:ok, %Hackathon{} = hackathon} = Events.create_hackathon(valid_attrs)
+      assert hackathon.timezone == "Europe/Berlin"
+      assert hackathon.start_date == ~U[2025-11-11 00:00:00Z]
+      assert hackathon.end_date == ~U[2025-11-11 12:00:00Z]
     end
 
     test "update_hackathon/2 with valid data updates the hackathon" do
@@ -133,8 +154,9 @@ defmodule HackScraper.EventsTest do
         location: "some updated location",
         image: "some updated image",
         url: "some updated url",
+        timezone: "Europe/Berlin",
         start_date: ~U[2025-11-12 22:55:00Z],
-        end_date: ~U[2025-11-12 22:55:00Z]
+        end_date: ~U[2025-11-14 22:55:00Z]
       }
 
       assert {:ok, %Hackathon{} = hackathon} = Events.update_hackathon(hackathon, update_attrs)
@@ -143,8 +165,9 @@ defmodule HackScraper.EventsTest do
       assert hackathon.location == "some updated location"
       assert hackathon.image == "some updated image"
       assert hackathon.url == "some updated url"
-      assert hackathon.start_date == ~U[2025-11-12 22:55:00Z]
-      assert hackathon.end_date == ~U[2025-11-12 22:55:00Z]
+      assert hackathon.timezone == "Europe/Berlin"
+      assert hackathon.start_date == ~U[2025-11-12 21:55:00Z]
+      assert hackathon.end_date == ~U[2025-11-14 21:55:00Z]
     end
 
     test "update_hackathon/2 with invalid data returns error changeset" do
@@ -202,6 +225,7 @@ defmodule HackScraper.EventsTest do
         location: "some location",
         image: "some image",
         url: "some url",
+        timezone: "Etc/UTC",
         start_date: ~U[2025-11-16 16:50:00Z],
         end_date: ~U[2025-11-16 16:50:00Z],
         creator_id: user.id
