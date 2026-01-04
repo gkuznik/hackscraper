@@ -8,7 +8,9 @@ defmodule HackScraper.Events.Hackathon do
     sortable: [:name, :start_date, :end_date],
     adapter_opts: [
       compound_fields: [text: [:name, :url, :description, :location]]
-    ]
+    ],
+    max_limit: 50,
+    default_limit: 30
   }
 
   schema "hackathons" do

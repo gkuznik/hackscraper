@@ -8,7 +8,9 @@ defmodule HackScraper.Events.Series do
     sortable: [:name, :url],
     adapter_opts: [
       compound_fields: [text: [:name, :url, :description]]
-    ]
+    ],
+    max_limit: 30,
+    default_limit: 15
   }
 
   schema "series" do

@@ -4,8 +4,13 @@ defmodule HackScraper.Events.Suggestion do
 
   @derive {
     Flop.Schema,
-    filterable: [:name, :url, :description, :location],
-    sortable: [:name, :url, :start_date, :end_date]
+    filterable: [:text, :image],
+    sortable: [:name, :start_date, :end_date],
+    adapter_opts: [
+      compound_fields: [text: [:name, :url, :description, :location]]
+    ],
+    max_limit: 50,
+    default_limit: 30
   }
 
   schema "suggestions" do
@@ -22,7 +27,7 @@ defmodule HackScraper.Events.Suggestion do
     belongs_to :creator, HackScraper.Accounts.User
     belongs_to :hackathon, HackScraper.Events.Hackathon
 
-    timestamps(type: :utc_datetime, updated_at: false)
+    timestamps(type: :utc_datetime)
   end
 
   @doc false

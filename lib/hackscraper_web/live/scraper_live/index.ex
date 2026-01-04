@@ -68,4 +68,15 @@ defmodule HackScraperWeb.ScraperLive.Index do
 
     {:noreply, redirect(socket, to: ~p"/oban/jobs/#{job.id}")}
   end
+
+  @impl true
+  def handle_event("clear-filter", _params, socket) do
+    {:noreply, push_patch(socket, to: ~p"/scrapers")}
+  end
+
+  @impl true
+  def handle_event("update-filter", params, socket) do
+    params = Map.delete(params, "_target")
+    {:noreply, push_patch(socket, to: ~p"/scrapers?#{params}")}
+  end
 end

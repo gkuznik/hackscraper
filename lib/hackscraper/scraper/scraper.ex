@@ -4,7 +4,11 @@ defmodule HackScraper.Scrapers.Scraper do
 
   @derive {
     Flop.Schema,
-    filterable: [:name, :worker, :url, :paused], sortable: [:worker, :url, :schedule]
+    filterable: [:text, :paused],
+    sortable: [:worker, :name, :schedule],
+    adapter_opts: [
+      compound_fields: [text: [:name, :worker, :url]]
+    ]
   }
 
   schema "scrapers" do

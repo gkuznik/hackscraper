@@ -63,4 +63,15 @@ defmodule HackScraperWeb.UserLive.Index do
       {:noreply, stream_delete(socket, :users, user)}
     end
   end
+
+  @impl true
+  def handle_event("clear-filter", _params, socket) do
+    {:noreply, push_patch(socket, to: ~p"/users")}
+  end
+
+  @impl true
+  def handle_event("update-filter", params, socket) do
+    params = Map.delete(params, "_target")
+    {:noreply, push_patch(socket, to: ~p"/users?#{params}")}
+  end
 end

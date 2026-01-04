@@ -21,19 +21,18 @@ defmodule HackScraperWeb.UserLive.FormComponent do
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:email]} type="text" label="Email" />
         <.input field={@form[:password]} type="password" label="Password" />
-        <.input field={@form[:role]} type="select" label="Role" options={role_options(@current_user)} />
+        <.input
+          field={@form[:role]}
+          type="select"
+          label="Role"
+          options={Accounts.role_options(@current_user.role)}
+        />
         <:actions>
           <.button phx-disable-with="Saving...">Save User</.button>
         </:actions>
       </.simple_form>
     </div>
     """
-  end
-
-  defp role_options(current_user) do
-    Accounts.roles()
-    |> Enum.filter(fn {_, value} -> value <= current_user.role end)
-    |> Enum.map(fn {_, value} -> {Accounts.role_name(value), value} end)
   end
 
   @impl true

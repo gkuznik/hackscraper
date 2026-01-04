@@ -7,6 +7,15 @@
   </:actions>
 </.header>
 
+<.filter_form
+  id="series-filter-form"
+  meta={@meta}
+  fields={[
+    text: [label: "Search", op: :ilike_and],
+    image: [label: "Has Image"] ++ boolean_filter()
+  ]}
+/>
+
 <.flopTable
   meta={@meta}
   path={~p"/series"}
@@ -14,16 +23,13 @@
   row_click={fn {_id, series} -> JS.navigate(~p"/series/#{series}") end}
 >
   <:col :let={{_id, series}} label="Name" field={:name}>{series.name}</:col>
-
   <:col :let={{_id, series}} label="Url" field={:url}>
-    <.external
-      url={series.url}
-      phx-click={JS.exec("event.stopPropagation()")}
-      class="block max-w-[40ch] truncate"
-    />
+    <.external url={series.url} phx-click={JS.exec("event.stopPropagation()")} class="url" />
   </:col>
   <:col :let={{_id, series}} label="Image" field={:image}><img src={series.image} /></:col>
-  <:col :let={{_id, series}} label="Description" field={:description}>{series.description}</:col>
+  <:col :let={{_id, series}} label="Description" field={:description}>
+    <div class="text">{series.description}</div>
+  </:col>
   <:action :let={{_id, series}}>
     <div class="sr-only">
       <.link navigate={~p"/series/#{series}"}>Show</.link>

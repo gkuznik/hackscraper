@@ -65,4 +65,15 @@ defmodule HackScraperWeb.SeriesLive.Index do
       {:noreply, stream_delete(socket, :series, series)}
     end
   end
+
+  @impl true
+  def handle_event("clear-filter", _params, socket) do
+    {:noreply, push_patch(socket, to: ~p"/series")}
+  end
+
+  @impl true
+  def handle_event("update-filter", params, socket) do
+    params = Map.delete(params, "_target")
+    {:noreply, push_patch(socket, to: ~p"/series?#{params}")}
+  end
 end

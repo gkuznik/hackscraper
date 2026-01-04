@@ -393,7 +393,7 @@ defmodule HackScraperWeb.CoreComponents do
       <textarea
         id={@id}
         name={@name}
-        phx-update="ignore"
+        phx-mounted={JS.ignore_attributes(["style"])}
         class={[
           "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
@@ -636,6 +636,61 @@ defmodule HackScraperWeb.CoreComponents do
         </div>
       </:next>
     </Flop.Phoenix.pagination>
+    """
+  end
+
+  def boolean_filter(),
+    do: [type: "select", prompt: "Any", options: [{"Yes", true}, {"No", false}], op: :not_empty]
+
+  attr :fields, :list, required: true
+  attr :meta, Flop.Meta, required: true
+  attr :id, :string, default: nil
+  attr :on_change, :string, default: "update-filter"
+  attr :target, :string, default: nil
+
+  def filter_form(%{meta: meta} = assigns) do
+    assigns = assign(assigns, form: Phoenix.Component.to_form(meta))
+
+    ~H"""
+    <details class="w-full mx-auto mb-2 mt-1" phx-mounted={JS.ignore_attributes(["open"])}>
+      <summary class="cursor-pointer select-none py-2 px-4 bg-zinc-100 hover:bg-zinc-200 rounded-lg text-sm font-semibold text-zinc-800 flex items-center gap-2">
+        <.icon name="hero-funnel" class="w-4 h-4" /> Filter
+      </summary>
+      <div class="mt-1 px-2">
+        <.form
+          for={@form}
+          id={@id}
+          phx-target={@target}
+          phx-change={@on_change}
+          phx-submit={@on_change}
+          class="flex flex-col sm:flex-row sm:flex-wrap gap-3 items-stretch sm:items-end justify-center"
+        >
+          <Flop.Phoenix.filter_fields :let={i} form={@form} fields={@fields}>
+            <.input
+              phx-debounce={120}
+              field={i.field}
+              label={i.label}
+              type={i.type}
+              {i.rest}
+            />
+          </Flop.Phoenix.filter_fields>
+
+          <.input
+            id="filter-form-page-size"
+            label="Per Page"
+            name="page_size"
+            value={@meta.page_size}
+            type="number"
+            min="1"
+            max={Flop.Schema.max_limit(struct(@meta.schema)) || Flop.get_option(:max_limit, [])}
+          />
+
+          <.button type="button" phx-click="clear-filter">
+            Clear
+          </.button>
+        </.form>
+      </div>
+    </details>
     """
   end
 

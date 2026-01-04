@@ -76,4 +76,15 @@ defmodule HackScraperWeb.HackathonLive.Index do
       {:noreply, stream_delete(socket, :hackathons, hackathon)}
     end
   end
+
+  @impl true
+  def handle_event("clear-filter", _params, socket) do
+    {:noreply, push_patch(socket, to: ~p"/hackathons")}
+  end
+
+  @impl true
+  def handle_event("update-filter", params, socket) do
+    params = Map.delete(params, "_target")
+    {:noreply, push_patch(socket, to: ~p"/hackathons?#{params}")}
+  end
 end

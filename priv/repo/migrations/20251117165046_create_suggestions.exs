@@ -16,7 +16,7 @@ defmodule HackScraper.Repo.Migrations.CreateSuggestions do
       add :creator_id, references(:users, on_delete: :delete_all), null: false
       add :hackathon_id, references(:hackathons, on_delete: :delete_all)
 
-      timestamps(type: :utc_datetime, updated_at: false)
+      timestamps(type: :utc_datetime)
     end
 
     create unique_index(:suggestions, [:creator_id, :hackathon_id])

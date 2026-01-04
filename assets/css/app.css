@@ -2,8 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
-
 table img {
     max-width: 100px;
     max-height: 100px;
@@ -14,10 +12,20 @@ td {
     padding: 5px;
 }
 
-.description-cell {
+table .url {
+    display: inline-block;
+    max-width: min(20vw, 60ch);
+    max-height: 100px;
+    overflow: hidden;
+    line-height: 1.4;
+    font-size: small;
+}
+
+table .text {
     max-height: 100px;
     overflow-y: auto;
     line-height: 1.4;
+    font-size: small;
 }
 
 .link {

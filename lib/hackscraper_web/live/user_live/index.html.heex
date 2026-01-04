@@ -7,6 +7,16 @@
   </:actions>
 </.header>
 
+<.filter_form
+  id="user-filter-form"
+  meta={@meta}
+  fields={[
+    text: [label: "Search", op: :ilike_and],
+    role: [type: "select", prompt: "Any", options: HackScraper.Accounts.role_options()],
+    confirmed_at: [label: "Confirmed"] ++ boolean_filter()
+  ]}
+/>
+
 <.flopTable
   meta={@meta}
   path={~p"/users"}
