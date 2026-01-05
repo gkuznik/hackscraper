@@ -113,7 +113,7 @@ defmodule HackScraperWeb.CoreComponents do
                   class="-m-3 flex-none p-3 opacity-90 hover:opacity-50"
                   aria-label="close"
                 >
-                  <.icon name="hero-x-mark-solid" class="h-5 w-5" />
+                  <.icon name="hero-x-mark" class="h-5 w-5" />
                 </button>
               </div>
               <div id={"#{@id}-content"}>

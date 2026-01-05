@@ -31,3 +31,7 @@ table .text {
 .link {
     @apply text-blue-600 hover:text-purple-600 hover:underline;
 }
+
+.phx-drop-target-active {
+    @apply bg-blue-50 border-blue-500 border-[3px];
+}

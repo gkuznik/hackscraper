@@ -24,9 +24,8 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
             </p>
           </div>
           <.button
-            type="button"
             phx-target={@myself}
-            phx-click="delete_suggestion"
+            phx-click="delete-suggestion"
             data-confirm="Are you sure you want to delete this suggestion?"
             class="!bg-red-600 hover:!bg-red-800 "
           >
@@ -44,11 +43,94 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
       >
         <.input field={@form[:url]} type="text" label="Url" required />
         <.input field={@form[:name]} type="text" label="Name" required />
-        <.input field={@form[:image]} type="text" label="Image" />
+
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold leading-6 text-zinc-800"> Image </label>
+
+          <.input
+            field={@form[:image]}
+            type="text"
+            label=""
+            placeholder="Paste image URL here..."
+            class="mb-2"
+          />
+
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+              <div class="w-full border-t border-zinc-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="bg-white px-2 text-zinc-500">or</span>
+            </div>
+          </div>
+
+          <%!-- Drag & Drop Zone --%>
+          <label
+            phx-drop-target={@uploads.image.ref}
+            class="relative flex flex-col items-center justify-center w-full p-6 transition-all duration-200 border-2 border-dashed rounded-lg cursor-pointer group hover:border-zinc-500 hover:bg-zinc-50 border-zinc-300 bg-white"
+          >
+            <.live_file_input upload={@uploads.image} class="sr-only" />
+
+            <div :if={Enum.empty?(@uploads.image.entries)} class="text-center pointer-events-none">
+              <.icon
+                name="hero-cloud-arrow-up"
+                class="w-12 h-12 mb-1 text-zinc-400 group-hover:text-zinc-500"
+              />
+              <div class="flex flex-col items-center text-sm text-zinc-600">
+                <span class="font-semibold text-blue-500 group-hover:text-blue-600">
+                  Click to upload
+                </span>
+                <p class="mt-1">or drag and drop</p>
+              </div>
+            </div>
+
+            <%!-- Preview with Upload Progress --%>
+            <div :for={entry <- @uploads.image.entries} class="w-full">
+              <.live_img_preview entry={entry} class="max-h-32 mx-auto rounded-lg shadow-sm" />
+
+              <div class="mt-2 space-y-1">
+                <%!-- Progress Bar --%>
+                <div class="flex items-center gap-3">
+                  <div class="flex-1">
+                    <div class="w-full bg-zinc-200 rounded-full h-2 overflow-hidden">
+                      <div
+                        class="bg-blue-600 h-2 transition-all duration-300 rounded-full"
+                        style={"width: #{entry.progress}%"}
+                      >
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-sm font-medium text-zinc-700">
+                    {entry.progress}%
+                  </span>
+                  <button
+                    type="button"
+                    phx-target={@myself}
+                    phx-click="cancel-upload"
+                    phx-value-ref={entry.ref}
+                    class="p-1 text-zinc-400 hover:text-red-600 transition-colors"
+                    aria-label="Remove image"
+                  >
+                    <.icon name="hero-x-mark" class="h-5 w-5" />
+                  </button>
+                </div>
+
+                <p
+                  :for={err <- upload_errors(@uploads.image, entry)}
+                  class="text-sm text-red-600 flex items-center gap-1"
+                >
+                  <.icon name="hero-x-circle-mini" class="h-5 w-5" />
+                  {error_to_string(err)}
+                </p>
+              </div>
+            </div>
+          </label>
+        </div>
+
         <.input field={@form[:description]} type="textarea" label="Description" />
         <.input field={@form[:location]} type="textarea" rows="1" label="Location" />
 
-        <noscript class="block p-3 text-sm bg-red-50 rounded border">
+        <noscript class="block p-3 text-sm bg-blue-50 rounded border">
           Note: the server expects the dates in UTC. Enable JavaScript to convert them automatically from your local timezone.
         </noscript>
 
@@ -73,11 +155,21 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
     """
   end
 
+  defp error_to_string(:too_large), do: "file is too large"
+  defp error_to_string(:not_accepted), do: "unacceptable file type"
+
   def series_opts(series_id) do
     [[key: "No Series", value: nil, selected: is_nil(series_id)]] ++
       for ser <- HackScraper.Events.list_series() do
         [key: ser.name, value: ser.id, selected: ser.id == series_id]
       end
+  end
+
+  @impl true
+  def mount(socket) do
+    {:ok,
+     socket
+     |> allow_upload(:image, accept: ["image/*"])}
   end
 
   @impl true
@@ -106,7 +198,11 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
-  def handle_event("delete_suggestion", _, socket) do
+  def handle_event("cancel-upload", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :image, ref)}
+  end
+
+  def handle_event("delete-suggestion", _, socket) do
     {:ok, _} = Events.delete_suggestion(socket.assigns.suggestion)
 
     {:noreply,
@@ -116,6 +212,18 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
   end
 
   def handle_event("save", %{"hackathon" => hackathon_params}, socket) do
+    uploads =
+      consume_uploaded_entries(socket, :image, fn %{path: path}, _entry ->
+        dest = Path.join([:code.priv_dir(:hackscraper), "static", "uploads", Path.basename(path)])
+        File.rename!(path, dest)
+        {:ok, ~p"/uploads/#{Path.basename(dest)}"}
+      end)
+
+    hackathon_params =
+      if image = List.first(uploads),
+        do: Map.put(hackathon_params, "image", image),
+        else: hackathon_params
+
     save_hackathon(socket, socket.assigns.action, hackathon_params)
   end
 
