@@ -7,9 +7,15 @@ defmodule HackScraper.Worker.LabLab do
 
   @impl Oban.Worker
   def perform(%Oban.Job{args: %{"url" => url}}) do
-    Logger.info("Running Devpost scraper...")
+    Logger.info("Running Lablab.ai scraper...")
 
-    data = get!(url).body["pageProps"]["sortedEvents"]
+    json =
+      get!(url).body
+      |> Floki.parse_document!()
+      |> Floki.find("script#__NEXT_DATA__")
+      |> Floki.text(deep: false, js: true)
+
+    data = Jason.decode!(json)["props"]["pageProps"]["sortedEvents"]
     Logger.info("Found #{length(data)} hackathons")
 
     hackathons =

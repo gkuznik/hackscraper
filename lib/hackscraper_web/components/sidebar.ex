@@ -10,6 +10,7 @@ defmodule HackScraperWeb.Components.Sidebar do
   """
   attr :current_user, :any, default: nil
   attr :class, :string, default: ""
+  attr :dev_mode, :boolean, default: Application.compile_env(:hackscraper, :dev_routes)
 
   def sidebar(assigns) do
     ~H"""
@@ -106,8 +107,8 @@ defmodule HackScraperWeb.Components.Sidebar do
                 <span class="sidebar-text">Dashboard</span>
               </.nav_link>
 
-              <.nav_link href="/mailbox" icon="hero-envelope">
-                <span class="sidebar-text">Mailbox (dev)</span>
+              <.nav_link :if={@dev_mode} href="/mailbox" icon="hero-envelope">
+                <span class="sidebar-text">Mailbox</span>
               </.nav_link>
             <% end %>
           </div>
