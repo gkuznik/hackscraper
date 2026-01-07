@@ -1,14 +1,8 @@
-✅ port/integrate all scrapers
--> ✅ setup all scraper schedules
-
 ✅ don't hardcode urls for scraper
 add tests for scraper
 
-forgot password with name? 
+toggle user registration with env var
 
 rate limit email changes?
-
-allow image upload next to url
-set url to uploaded image
 
 maybe add https://tumthinktank.de again, website was reworked

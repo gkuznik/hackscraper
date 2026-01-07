@@ -96,6 +96,7 @@ defmodule HackScraper.Worker.Common do
         new_suggestions,
         fn s ->
           Map.put(s, :inserted_at, {:placeholder, :timestamp})
+          |> Map.put(:updated_at, {:placeholder, :timestamp})
           |> Map.put(:creator_id, user_id())
         end
       )

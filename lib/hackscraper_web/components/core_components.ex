@@ -639,8 +639,11 @@ defmodule HackScraperWeb.CoreComponents do
     """
   end
 
-  def boolean_filter(),
+  def not_empty_filter(),
     do: [type: "select", prompt: "Any", options: [{"Yes", true}, {"No", false}], op: :not_empty]
+
+  def boolean_filter(),
+    do: [type: "select", prompt: "Any", options: [{"Yes", true}, {"No", false}]]
 
   attr :fields, :list, required: true
   attr :meta, Flop.Meta, required: true

@@ -12,7 +12,7 @@
   meta={@meta}
   fields={[
     text: [label: "Search", op: :ilike_and],
-    image: [label: "Has Image"] ++ boolean_filter()
+    image: [label: "Has Image"] ++ not_empty_filter()
   ]}
 />
 

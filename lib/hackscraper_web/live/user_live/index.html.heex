@@ -13,7 +13,7 @@
   fields={[
     text: [label: "Search", op: :ilike_and],
     role: [type: "select", prompt: "Any", options: HackScraper.Accounts.role_options()],
-    confirmed_at: [label: "Confirmed"] ++ boolean_filter()
+    confirmed_at: [label: "Confirmed"] ++ not_empty_filter()
   ]}
 />
 

@@ -33,7 +33,7 @@ defmodule HackScraper.Worker.TUMVentureLabs do
     |> Enum.with_index()
     |> Enum.reduce(Ecto.Multi.new(), fn {event, index}, multi ->
       job =
-        HackScraper.Worker.TUMVentureLabs.AddInfo.new(%{event: event}, schedule_in: index * 60)
+        HackScraper.Worker.TUMVentureLabs.AddInfo.new(%{event: event}, schedule_in: index * 180)
 
       Oban.insert(multi, "addinfo-#{index}", job)
     end)
@@ -46,7 +46,8 @@ end
 defmodule HackScraper.Worker.TUMVentureLabs.AddInfo do
   use Oban.Worker,
     priority: 3,
-    unique: [period: {60, :days}, states: :all, fields: [:queue, :args], keys: [:url]]
+    unique: [period: {60, :days}, states: :all, fields: [:queue, :args], keys: [:url]],
+    max_attempts: 2
 
   require Logger
   import HackScraper.Worker.Common
