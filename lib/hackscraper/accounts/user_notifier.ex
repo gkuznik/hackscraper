@@ -20,10 +20,8 @@ defmodule HackScraper.Accounts.UserNotifier do
       email =
         new()
         |> to(recipient)
-        |> from({"HackScraper", Application.get_env(:hackscraper, HackScraperWeb)[:sender_mail]})
-        |> reply_to(
-          {"HackScraper", Application.get_env(:hackscraper, HackScraperWeb)[:contact_mail]}
-        )
+        |> from({"HackScraper", Application.get_env(:hackscraper, :sender_mail)})
+        |> reply_to({"HackScraper", Application.get_env(:hackscraper, :contact_mail)})
         |> subject(subject)
         |> text_body(body)
 

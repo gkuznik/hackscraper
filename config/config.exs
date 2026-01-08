@@ -59,9 +59,6 @@ config :hackscraper, HackScraperWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :hackscraper, HackScraper.Mailer, adapter: Swoosh.Adapters.Local
 
-config :hackscraper, HackScraperWeb, sender_mail: "donotreply@example.com"
-config :hackscraper, HackScraperWeb, contact_mail: "contact@example.com"
-
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",

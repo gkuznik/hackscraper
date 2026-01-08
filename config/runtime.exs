@@ -20,6 +20,14 @@ if System.get_env("PHX_SERVER") do
   config :hackscraper, HackScraperWeb.Endpoint, server: true
 end
 
+config :hackscraper, sender_mail: System.get_env("SENDER_MAIL", "donotreply@example.com")
+config :hackscraper, contact_mail: System.get_env("CONTACT_MAIL", "contact@example.com")
+
+config :hackscraper,
+  uploads_dir:
+    System.get_env("UPLOADS_DIR") ||
+      Path.join([:code.priv_dir(:hackscraper), "static", "uploads"])
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
@@ -129,7 +137,4 @@ if config_env() == :prod do
   config :swoosh,
     api_client: Swoosh.ApiClient.Finch,
     finch_name: HackScraper.Finch
-
-  config :hackscraper, HackScraperWeb, sender_mail: System.get_env("SENDER_MAIL")
-  config :hackscraper, HackScraperWeb, contact_mail: System.get_env("CONTACT_MAIL")
 end

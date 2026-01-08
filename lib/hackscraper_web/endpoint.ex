@@ -23,7 +23,15 @@ defmodule HackScraperWeb.Endpoint do
     at: "/",
     from: :hackscraper,
     gzip: false,
-    only: HackScraperWeb.static_paths()
+    only: HackScraperWeb.static_paths() -- ["uploads"]
+
+  plug Plug.Static,
+    at: "/uploads",
+    from: {Application, :fetch_env!, [:hackscraper, :uploads_dir]},
+    headers: [
+      {"cache-control", "public, max-age=31536000"},
+      {"content-security-policy", "sandbox"}
+    ]
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

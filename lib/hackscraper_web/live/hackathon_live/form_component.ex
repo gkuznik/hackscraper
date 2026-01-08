@@ -169,7 +169,7 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
   def mount(socket) do
     {:ok,
      socket
-     |> allow_upload(:image, accept: ["image/*"])}
+     |> allow_upload(:image, auto_upload: true, accept: ["image/*"])}
   end
 
   @impl true
@@ -213,10 +213,13 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
 
   def handle_event("save", %{"hackathon" => hackathon_params}, socket) do
     uploads =
-      consume_uploaded_entries(socket, :image, fn %{path: path}, _entry ->
-        dest = Path.join([:code.priv_dir(:hackscraper), "static", "uploads", Path.basename(path)])
+      consume_uploaded_entries(socket, :image, fn %{path: path}, %{uuid: uuid, client_name: client_name} ->
+        #{extension, _} = System.cmd("file", ["-b", "--extension", path])
+        Path.extname(client_name)
+        filename = "#{uuid}.#{Path.extname(client_name)}"
+        dest = Path.join(Application.fetch_env!(:hackscraper, :uploads_dir), filename)
         File.rename!(path, dest)
-        {:ok, ~p"/uploads/#{Path.basename(dest)}"}
+        {:ok, ~p"/uploads/#{filename}"}
       end)
 
     hackathon_params =
