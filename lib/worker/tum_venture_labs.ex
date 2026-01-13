@@ -46,7 +46,7 @@ end
 defmodule HackScraper.Worker.TUMVentureLabs.AddInfo do
   use Oban.Worker,
     priority: 3,
-    unique: [period: {60, :days}, states: :all, fields: [:queue, :args], keys: [:url]],
+    unique: [period: {60, :days}, states: :all, fields: [:queue, :args], keys: [:event]],
     max_attempts: 2
 
   require Logger
