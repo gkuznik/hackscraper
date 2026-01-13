@@ -17,6 +17,7 @@ defmodule HackScraper.Scrapers.Scraper do
     field :url, :string
     field :schedule, :string
     field :paused, :boolean, default: false
+    belongs_to :series, HackScraper.Events.Series
 
     timestamps(type: :utc_datetime)
   end
@@ -24,7 +25,7 @@ defmodule HackScraper.Scrapers.Scraper do
   @doc false
   def changeset(scraper, attrs) do
     scraper
-    |> cast(attrs, [:name, :worker, :schedule, :url, :paused])
+    |> cast(attrs, [:name, :worker, :schedule, :url, :paused, :series_id])
     |> validate_required([:name, :worker, :schedule])
     |> validate_worker()
     |> validate_schedule()

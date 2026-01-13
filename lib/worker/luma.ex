@@ -6,7 +6,7 @@ defmodule HackScraper.Worker.Luma do
   require Logger
 
   @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def perform(%Oban.Job{args: %{"url" => url, "series_id" => series_id}}) do
     Logger.info("Running Luma scraper on #{url}...")
 
     events = get!(url).body["entries"]
@@ -21,7 +21,8 @@ defmodule HackScraper.Worker.Luma do
           url: URI.merge("https://luma.com", event["url"]) |> to_string(),
           name: event["name"],
           start_date: parse_date(event["start_at"]),
-          end_date: parse_date(event["end_at"])
+          end_date: parse_date(event["end_at"]),
+          series_id: series_id
         }
       end
 

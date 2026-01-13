@@ -29,7 +29,7 @@ defmodule HackScraper.Worker.Scheduler do
   def schedule_job(%Scraper{} = scraper) do
     module = worker_module(scraper.worker)
 
-    %{url: scraper.url}
+    %{url: scraper.url, series_id: scraper.series_id}
     |> module.new(oban_opts() ++ [schedule_in: 1, unique: false])
     |> Oban.insert()
   end
@@ -61,7 +61,7 @@ defmodule HackScraper.Worker.Scheduler do
           meta = %{scraper_id: scraper.id, scheduled_at: scheduled_at}
 
           job =
-            %{url: scraper.url}
+            %{url: scraper.url, series_id: scraper.series_id}
             |> module.new(
               oban_opts() ++ [unique: @unique, scheduled_at: scheduled_at, meta: meta]
             )

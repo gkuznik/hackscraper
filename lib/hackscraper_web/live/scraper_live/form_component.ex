@@ -27,6 +27,12 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
         <.input field={@form[:schedule]} type="text" label="Schedule" />
         <.input field={@form[:url]} type="text" label="Url" />
         <.input field={@form[:paused]} type="checkbox" label="Paused" />
+        <.input
+          field={@form[:series_id]}
+          type="select"
+          label="Series"
+          options={series_opts(@form[:series_id])}
+        />
         <:actions>
           <.button phx-disable-with="Saving...">Save Scraper</.button>
         </:actions>
@@ -37,6 +43,13 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
 
   defp worker_options do
     HackScraper.Worker.Common.workers() |> Map.keys()
+  end
+
+  defp series_opts(series_id) do
+    [[key: "No Series", value: nil, selected: is_nil(series_id)]] ++
+      for ser <- HackScraper.Events.list_series() do
+        [key: ser.name, value: ser.id, selected: ser.id == series_id]
+      end
   end
 
   @impl true

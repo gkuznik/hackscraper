@@ -130,9 +130,9 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
         <.input field={@form[:description]} type="textarea" label="Description" />
         <.input field={@form[:location]} type="textarea" rows="1" label="Location" />
 
-        <noscript class="block p-3 text-sm bg-blue-50 rounded border">
-          Note: the server expects the dates in UTC. Enable JavaScript to convert them automatically from your local timezone.
-        </noscript>
+        <div class="block p-3 text-sm bg-blue-50 rounded border">
+          Note: Date and time is in your local timezone.
+        </div>
 
         <div :if={assigns[:date_hint]} class="block p-3 text-sm bg-blue-50 rounded border">
           <span class="font-bold">Date information found:</span> {@date_hint}
@@ -158,7 +158,7 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
   defp error_to_string(:too_large), do: "file is too large"
   defp error_to_string(:not_accepted), do: "unacceptable file type"
 
-  def series_opts(series_id) do
+  defp series_opts(series_id) do
     [[key: "No Series", value: nil, selected: is_nil(series_id)]] ++
       for ser <- HackScraper.Events.list_series() do
         [key: ser.name, value: ser.id, selected: ser.id == series_id]
