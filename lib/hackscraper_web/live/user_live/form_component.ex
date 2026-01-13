@@ -18,9 +18,9 @@ defmodule HackScraperWeb.UserLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:email]} type="text" label="Email" />
-        <.input field={@form[:password]} type="password" label="Password" />
+        <.input field={@form[:name]} type="text" label="Name" required />
+        <.input field={@form[:email]} type="text" label="Email" required />
+        <.input field={@form[:password]} type="password" label="Password" required />
         <.input
           field={@form[:role]}
           type="select"

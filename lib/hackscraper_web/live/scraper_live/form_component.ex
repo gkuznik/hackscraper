@@ -23,9 +23,9 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
           options={worker_options()}
           phx-change="set_defaults"
         />
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:schedule]} type="text" label="Schedule" />
+        <.input field={@form[:name]} type="text" label="Name" required />
         <.input field={@form[:url]} type="text" label="Url" />
+        <.input field={@form[:schedule]} type="text" label="Schedule" required />
         <.input field={@form[:paused]} type="checkbox" label="Paused" />
         <.input
           field={@form[:series_id]}

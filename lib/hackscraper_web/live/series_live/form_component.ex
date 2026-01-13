@@ -16,10 +16,10 @@ defmodule HackScraperWeb.SeriesLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
+        <.input field={@form[:name]} type="text" label="Name" required />
         <.input field={@form[:url]} type="text" label="Url" />
+        <.input field={@form[:description]} type="textarea" label="Description" required />
         <.input field={@form[:image]} type="text" label="Image" />
-        <.input field={@form[:description]} type="textarea" label="Description" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Series</.button>
         </:actions>

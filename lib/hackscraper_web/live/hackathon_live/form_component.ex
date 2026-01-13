@@ -138,8 +138,8 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
           <span class="font-bold">Date information found:</span> {@date_hint}
         </div>
 
-        <.input field={@form[:start_date]} type="datetime-local" label="Start date" />
-        <.input field={@form[:end_date]} type="datetime-local" label="End date" />
+        <.input field={@form[:start_date]} type="datetime-local" label="Start date" required />
+        <.input field={@form[:end_date]} type="datetime-local" label="End date" required />
 
         <.input
           field={@form[:series_id]}

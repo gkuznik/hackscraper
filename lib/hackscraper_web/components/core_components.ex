@@ -370,7 +370,7 @@ defmodule HackScraperWeb.CoreComponents do
   def input(%{type: "select"} = assigns) do
     ~H"""
     <div>
-      <.label for={@id}>{@label}</.label>
+      <.label for={@id} required={@rest[:required]}>{@label}</.label>
       <select
         id={@id}
         name={@name}
@@ -389,7 +389,7 @@ defmodule HackScraperWeb.CoreComponents do
   def input(%{type: "textarea"} = assigns) do
     ~H"""
     <div>
-      <.label for={@id}>{@label}</.label>
+      <.label for={@id} required={@rest[:required]}>{@label}</.label>
       <textarea
         id={@id}
         name={@name}
@@ -410,7 +410,7 @@ defmodule HackScraperWeb.CoreComponents do
   def input(assigns) do
     ~H"""
     <div>
-      <.label for={@id}>{@label}</.label>
+      <.label for={@id} required={@rest[:required]}>{@label}</.label>
       <input
         type={@type}
         name={@name}
@@ -432,12 +432,14 @@ defmodule HackScraperWeb.CoreComponents do
   Renders a label.
   """
   attr :for, :string, default: nil
+  attr :required, :boolean, default: false
   slot :inner_block, required: true
 
   def label(assigns) do
     ~H"""
     <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
       {render_slot(@inner_block)}
+      <span :if={@required} class="text-rose-600 ml-1" aria-label="required">*</span>
     </label>
     """
   end
