@@ -7,7 +7,11 @@ defmodule HackScraper.Worker.Common do
 
   def oban_opts, do: [queue: :scraper, priority: 2, max_attempts: 3]
 
-  @user_agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{Application.spec(:hackscraper, :vsn)}; hack.gabriels.cloud) Chrome/134.0.0.0 Safari/537.3"
+  defp user_agent do
+    host = Application.get_env(:hackscraper, HackScraperWeb.Endpoint)[:url][:host]
+    version = Application.spec(:hackscraper, :vsn)
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{version}; #{host}) Chrome/134.0.0.0 Safari/537.3"
+  end
 
   @workers %{
     "Devpost" =>
@@ -44,11 +48,11 @@ defmodule HackScraper.Worker.Common do
   end
 
   def get!(api_url) do
-    Req.get!(api_url, http_errors: :raise, user_agent: @user_agent)
+    Req.get!(api_url, http_errors: :raise, user_agent: user_agent())
   end
 
   def post_json!(api_url, json) do
-    Req.post!(api_url, json: json, http_errors: :raise, user_agent: @user_agent)
+    Req.post!(api_url, json: json, http_errors: :raise, user_agent: user_agent())
   end
 
   def split_title(title) do
