@@ -6,6 +6,10 @@ defmodule HackScraper.Events.Hackathon do
     Flop.Schema,
     filterable: [:text, :image],
     sortable: [:name, :start_date, :end_date],
+    default_order: %{
+      order_by: [:start_date],
+      order_directions: [:desc]
+    },
     adapter_opts: [
       compound_fields: [text: [:name, :url, :description, :location]]
     ],

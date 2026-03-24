@@ -35,7 +35,8 @@ config :pythonx, :uv_init,
   requires-python = ">=3.10"
   dependencies = [
     "beautifulsoup4>=4.14",
-    "trafilatura>=2.0"
+    "trafilatura>=2.0",
+    "nextjs-hydration-parser>=0.4.0"
   ]
   """
 

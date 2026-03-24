@@ -117,8 +117,22 @@ defmodule HackScraper.Events do
     Repo.all(Hackathon) |> Repo.preload(:series)
   end
 
-  def list_hackathons_for_home_page(limit) do
-    Repo.all(from h in Hackathon, order_by: [desc: h.start_date], limit: ^limit)
+  @doc """
+  Returns the next `limit` hackathons in the future, ordered by soonest first.
+
+  Example:
+
+      iex> upcoming_hackathons(5)
+      [%Hackathon{}, ...]
+
+  """
+  def upcoming_hackathons(limit \\ 12) do
+    Repo.all(
+      from h in Hackathon,
+        where: h.start_date >= fragment("NOW()"),
+        order_by: [asc: h.start_date],
+        limit: ^limit
+    )
     |> Repo.preload(:series)
   end
 

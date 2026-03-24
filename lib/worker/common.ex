@@ -10,6 +10,7 @@ defmodule HackScraper.Worker.Common do
   defp user_agent do
     host = Application.get_env(:hackscraper, HackScraperWeb.Endpoint)[:url][:host]
     version = Application.spec(:hackscraper, :vsn)
+
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{version}; #{host}) Chrome/134.0.0.0 Safari/537.3"
   end
 
@@ -21,8 +22,7 @@ defmodule HackScraper.Worker.Common do
     "Dummy" => {HackScraper.Worker.Dummy, ""},
     "Get Links" => {HackScraper.Worker.GetLinks, ""},
     "Huawei" => {HackScraper.Worker.Huawei, "https://huawei.agorize.com/api/v2/challenges"},
-    "LabLab" =>
-      {HackScraper.Worker.LabLab, "https://lablab.ai/_next/data/amtvrhqGU_ZE8AWyCNT5E/event.json"},
+    "LabLab" => {HackScraper.Worker.LabLab, "https://lablab.ai/"},
     "Luma" =>
       {HackScraper.Worker.Luma,
        "https://api2.luma.com/discover/get-paginated-events?latitude=48.13743&longitude=11.57549&pagination_limit=30&slug=tech"},

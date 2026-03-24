@@ -26,7 +26,7 @@
           <.link
             href={~p"/user/log_out"}
             method="delete"
-            class="flex items-center gap-2 px-3 py-2 hover:bg-red-600/20 rounded-md transition-colors"
+            class="flex items-center gap-2 px-3 py-2 hover:bg-red-600/60 rounded-md transition-colors"
           >
             <.icon name="hero-arrow-right-on-rectangle" class="w-5 h-5" />
             <span class="hidden sm:inline">Log out</span>
@@ -77,7 +77,7 @@
   <div class="max-w-7xl mx-auto py-6 lg:py-12 px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-6 lg:mb-12">
       <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-br from-blue-400 to-green-400 bg-clip-text text-transparent ">
-        Latest Hackathons
+        Upcoming Hackathons
       </h2>
     </div>
 
@@ -151,16 +151,14 @@
         <% end %>
       </div>
 
-      <%= if length(@hackathons) > 12 do %>
-        <div class="text-center mt-12">
-          <.link
-            navigate={~p"/hackathons"}
-            class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-semibold transition-colors inline-flex items-center"
-          >
-            View All {@count} Hackathons <.icon name="hero-arrow-right" class="ml-2 h-5 w-5" />
-          </.link>
-        </div>
-      <% end %>
+      <div class="text-center mt-12">
+        <.link
+          navigate={~p"/hackathons"}
+          class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-semibold transition-colors inline-flex items-center"
+        >
+          View All {@count} Hackathons <.icon name="hero-arrow-right" class="ml-2 h-5 w-5" />
+        </.link>
+      </div>
     <% else %>
       <div class="text-center py-16">
         <div class="mx-auto h-24 w-24 text-gray-300 mb-6">

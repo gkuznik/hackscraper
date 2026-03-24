@@ -4,7 +4,7 @@ defmodule HackScraperWeb.PageController do
   alias HackScraper.Events
 
   def home(conn, _params) do
-    hackathons = Events.list_hackathons_for_home_page(12 + 1)
+    hackathons = Events.upcoming_hackathons(12)
     count = Events.count_hackathons()
 
     render(conn, :home, layout: false, hackathons: hackathons, count: count)
