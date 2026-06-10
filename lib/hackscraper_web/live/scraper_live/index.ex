@@ -2,14 +2,14 @@ defmodule HackScraperWeb.ScraperLive.Index do
   use HackScraperWeb, :live_view
 
   alias HackScraper.Scrapers
-  alias HackScraper.Scrapers.Scraper
+  alias HackScraper.Scrapers.Scheduled
 
   on_mount {HackScraperWeb.LiveAuth, :admin}
 
   @impl true
   def handle_params(params, _url, socket) do
     {scrapers, meta} =
-      Flop.validate_and_run!(Scraper, params, for: Scraper, replace_invalid_params: true)
+      Flop.validate_and_run!(Scheduled, params, for: Scheduled, replace_invalid_params: true)
 
     socket =
       socket
@@ -31,7 +31,7 @@ defmodule HackScraperWeb.ScraperLive.Index do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Scraper")
-    |> assign(:scraper, %Scraper{})
+    |> assign(:scraper, %Scheduled{})
   end
 
   defp apply_action(socket, :index, _params) do

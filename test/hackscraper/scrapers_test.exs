@@ -4,7 +4,7 @@ defmodule HackScraper.ScrapersTest do
   alias HackScraper.Scrapers
 
   describe "scrapers" do
-    alias HackScraper.Scrapers.Scraper
+    alias HackScraper.Scrapers.Scheduled
 
     import HackScraper.ScrapersFixtures
 
@@ -29,7 +29,7 @@ defmodule HackScraper.ScrapersTest do
         paused: true
       }
 
-      assert {:ok, %Scraper{} = scraper} = Scrapers.create_scraper(valid_attrs)
+      assert {:ok, %Scheduled{} = scraper} = Scrapers.create_scraper(valid_attrs)
       assert scraper.name == "some name"
       assert scraper.worker == "Dummy"
       assert scraper.url == "some url"
@@ -52,7 +52,7 @@ defmodule HackScraper.ScrapersTest do
         paused: false
       }
 
-      assert {:ok, %Scraper{} = scraper} = Scrapers.update_scraper(scraper, update_attrs)
+      assert {:ok, %Scheduled{} = scraper} = Scrapers.update_scraper(scraper, update_attrs)
       assert scraper.name == "some updated name"
       assert scraper.worker == "Devpost"
       assert scraper.url == "some updated url"
@@ -68,7 +68,7 @@ defmodule HackScraper.ScrapersTest do
 
     test "delete_scraper/1 deletes the scraper" do
       scraper = scraper_fixture()
-      assert {:ok, %Scraper{}} = Scrapers.delete_scraper(scraper)
+      assert {:ok, %Scheduled{}} = Scrapers.delete_scraper(scraper)
       assert_raise Ecto.NoResultsError, fn -> Scrapers.get_scraper!(scraper.id) end
     end
 

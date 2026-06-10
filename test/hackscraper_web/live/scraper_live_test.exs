@@ -47,11 +47,11 @@ defmodule HackScraperWeb.ScraperLiveTest do
       assert_patch(index_live, ~p"/scrapers/new")
 
       assert index_live
-             |> form("#scraper-form", scraper: @invalid_attrs)
+             |> form("#scraper-form", scheduled: @invalid_attrs)
              |> render_change() =~ "can&#39;t be blank"
 
       assert index_live
-             |> form("#scraper-form", scraper: @create_attrs)
+             |> form("#scraper-form", scheduled: @create_attrs)
              |> render_submit()
 
       assert_patch(index_live, ~p"/scrapers")
@@ -71,11 +71,11 @@ defmodule HackScraperWeb.ScraperLiveTest do
       assert_patch(index_live, ~p"/scrapers/#{scraper}/edit")
 
       assert index_live
-             |> form("#scraper-form", scraper: @invalid_attrs)
+             |> form("#scraper-form", scheduled: @invalid_attrs)
              |> render_change() =~ "can&#39;t be blank"
 
       assert index_live
-             |> form("#scraper-form", scraper: @update_attrs)
+             |> form("#scraper-form", scheduled: @update_attrs)
              |> render_submit()
 
       assert_patch(index_live, ~p"/scrapers")
@@ -115,11 +115,11 @@ defmodule HackScraperWeb.ScraperLiveTest do
       assert_patch(show_live, ~p"/scrapers/#{scraper}/show/edit")
 
       assert show_live
-             |> form("#scraper-form", scraper: @invalid_attrs)
+             |> form("#scraper-form", scheduled: @invalid_attrs)
              |> render_change() =~ "can&#39;t be blank"
 
       assert show_live
-             |> form("#scraper-form", scraper: @update_attrs)
+             |> form("#scraper-form", scheduled: @update_attrs)
              |> render_submit()
 
       assert_patch(show_live, ~p"/scrapers/#{scraper}")

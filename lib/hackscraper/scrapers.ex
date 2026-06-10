@@ -7,7 +7,7 @@ defmodule HackScraper.Scrapers do
   alias HackScraper.Worker.Scheduler
   alias HackScraper.Repo
 
-  alias HackScraper.Scrapers.Scraper
+  alias HackScraper.Scrapers.Scheduled
 
   @doc """
   Returns the list of scrapers.
@@ -19,11 +19,11 @@ defmodule HackScraper.Scrapers do
 
   """
   def list_scrapers do
-    Repo.all(Scraper)
+    Repo.all(Scheduled)
   end
 
   def list_scrapers_for_scheduling do
-    Repo.all(Scraper |> where([s], s.paused == false))
+    Repo.all(Scheduled |> where([s], s.paused == false))
   end
 
   @doc """
@@ -40,7 +40,7 @@ defmodule HackScraper.Scrapers do
       ** (Ecto.NoResultsError)
 
   """
-  def get_scraper!(id), do: Repo.get!(Scraper, id)
+  def get_scraper!(id), do: Repo.get!(Scheduled, id)
 
   @doc """
   Creates a scraper.
@@ -57,8 +57,8 @@ defmodule HackScraper.Scrapers do
   def create_scraper(attrs \\ %{}) do
     Repo.transaction(fn ->
       with {:ok, scraper} <-
-             %Scraper{}
-             |> Scraper.changeset(attrs)
+             %Scheduled{}
+             |> Scheduled.changeset(attrs)
              |> Repo.insert(),
            {:ok, _} <-
              Scheduler.schedule_executions_for_period(scraper) do
@@ -81,11 +81,11 @@ defmodule HackScraper.Scrapers do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_scraper(%Scraper{} = scraper, attrs) do
+  def update_scraper(%Scheduled{} = scraper, attrs) do
     Repo.transaction(fn ->
       with {:ok, updated_scraper} <-
              scraper
-             |> Scraper.changeset(attrs)
+             |> Scheduled.changeset(attrs)
              |> Repo.update(),
            {:ok, _count} <- delete_jobs(scraper),
            {:ok, _} <- Scheduler.schedule_executions_for_period(updated_scraper) do
@@ -108,7 +108,7 @@ defmodule HackScraper.Scrapers do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_scraper(%Scraper{} = scraper) do
+  def delete_scraper(%Scheduled{} = scraper) do
     Repo.transaction(fn ->
       with {:ok, deleted_scraper} <- Repo.delete(scraper),
            {:ok, _count} <- delete_jobs(scraper) do
@@ -128,11 +128,11 @@ defmodule HackScraper.Scrapers do
       %Ecto.Changeset{data: %Scraper{}}
 
   """
-  def change_scraper(%Scraper{} = scraper, attrs \\ %{}) do
-    Scraper.changeset(scraper, attrs)
+  def change_scraper(%Scheduled{} = scraper, attrs \\ %{}) do
+    Scheduled.changeset(scraper, attrs)
   end
 
-  def delete_jobs(%Scraper{id: id}) when is_integer(id) do
+  def delete_jobs(%Scheduled{id: id}) when is_integer(id) do
     Oban.Job
     |> Ecto.Query.where(state: "scheduled")
     |> Ecto.Query.where(
