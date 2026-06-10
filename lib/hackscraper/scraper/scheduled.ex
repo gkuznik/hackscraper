@@ -1,4 +1,4 @@
-defmodule HackScraper.Scrapers.Scraper do
+defmodule HackScraper.Scrapers.Scheduled do
   use Ecto.Schema
   import Ecto.Changeset
 

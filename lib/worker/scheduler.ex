@@ -3,7 +3,7 @@ defmodule HackScraper.Worker.Scheduler do
 
   import HackScraper.Worker.Common, only: [oban_opts: 0, worker_module: 1]
   alias HackScraper.Scrapers
-  alias HackScraper.Scrapers.Scraper
+  alias HackScraper.Scrapers.Scheduled
 
   require Logger
 
@@ -26,7 +26,7 @@ defmodule HackScraper.Worker.Scheduler do
     Logger.info("Scheduling scrapers completed")
   end
 
-  def schedule_job(%Scraper{} = scraper) do
+  def schedule_job(%Scheduled{} = scraper) do
     module = worker_module(scraper.worker)
 
     %{url: scraper.url, series_id: scraper.series_id}
@@ -41,12 +41,12 @@ defmodule HackScraper.Worker.Scheduler do
     keys: [:scraper_id, :scheduled_at]
   ]
 
-  def schedule_executions_for_period(%Scraper{paused: true} = scraper) do
+  def schedule_executions_for_period(%Scheduled{paused: true} = scraper) do
     Logger.debug("Skipping scheduling for paused scraper #{scraper.name}")
     {:ok, nil}
   end
 
-  def schedule_executions_for_period(%Scraper{} = scraper) do
+  def schedule_executions_for_period(%Scheduled{} = scraper) do
     case Oban.Plugins.Cron.parse(scraper.schedule) do
       {:ok, cron_expression} ->
         now = DateTime.utc_now()
