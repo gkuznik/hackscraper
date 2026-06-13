@@ -148,13 +148,15 @@ defmodule HackScraperWeb.Components.Sidebar do
               <.icon name="hero-arrow-left-on-rectangle" class="w-5 h-5 flex-shrink-0" />
               <span class="sidebar-text">Log in</span>
             </.link>
-            <.link
-              navigate={~p"/user/register"}
-              class="nav-link flex items-center px-3 py-2 gap-3 text-sm font-medium text-white bg-zinc-600 hover:bg-zinc-700 rounded-md transition-colors justify-center"
-            >
-              <.icon name="hero-user-plus" class="w-5 h-5 flex-shrink-0" />
-              <span class="sidebar-text">Register</span>
-            </.link>
+            <%= if HackScraper.Accounts.registration_enabled?() do %>
+              <.link
+                navigate={~p"/user/register"}
+                class="nav-link flex items-center px-3 py-2 gap-3 text-sm font-medium text-white bg-zinc-600 hover:bg-zinc-700 rounded-md transition-colors justify-center"
+              >
+                <.icon name="hero-user-plus" class="w-5 h-5 flex-shrink-0" />
+                <span class="sidebar-text">Register</span>
+              </.link>
+            <% end %>
           </div>
         <% end %>
       </nav>

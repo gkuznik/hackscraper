@@ -5,7 +5,7 @@ defmodule HackScraperWeb.UserLoginLive do
     ~H"""
     <.header class="text-center">
       Log in to account
-      <:subtitle>
+      <:subtitle :if={HackScraper.Accounts.registration_enabled?()}>
         Don't have an account?
         <.link navigate={~p"/user/register"} class="link font-semibold">
           Sign up

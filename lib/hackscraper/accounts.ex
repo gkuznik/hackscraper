@@ -129,7 +129,12 @@ defmodule HackScraper.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
   def get_user(id), do: Repo.get(User, id)
 
-  ## User registration
+  def registration_enabled? do
+    case Application.get_env(:hackscraper, :registration) do
+      [enabled: enabled] -> enabled
+      _ -> true
+    end
+  end
 
   @doc """
   Registers a user.
@@ -144,9 +149,18 @@ defmodule HackScraper.Accounts do
 
   """
   def register_user(attrs) do
-    %User{}
-    |> User.registration_changeset(attrs)
-    |> Repo.insert()
+    if registration_enabled?() do
+      %User{}
+      |> User.registration_changeset(attrs)
+      |> Repo.insert()
+    else
+      changeset =
+        %User{}
+        |> User.registration_changeset(attrs)
+        |> Ecto.Changeset.add_error(:email, "registration is currently disabled")
+
+      {:error, changeset}
+    end
   end
 
   def register_user_with_role(attrs, acting_role) do

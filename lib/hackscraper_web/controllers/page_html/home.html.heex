@@ -39,13 +39,15 @@
             <.icon name="hero-arrow-left-on-rectangle" class="w-5 h-5" />
             <span>Log in</span>
           </.link>
-          <.link
-            navigate={~p"/user/register"}
-            class="flex items-center gap-2 px-4 py-2 hover:bg-white/20 rounded-md transition-colors"
-          >
-            <.icon name="hero-user-plus" class="w-5 h-5" />
-            <span class="hidden sm:inline">Register</span>
-          </.link>
+          <%= if HackScraper.Accounts.registration_enabled?() do %>
+            <.link
+              navigate={~p"/user/register"}
+              class="flex items-center gap-2 px-4 py-2 hover:bg-white/20 rounded-md transition-colors"
+            >
+              <.icon name="hero-user-plus" class="w-5 h-5" />
+              <span class="hidden sm:inline">Register</span>
+            </.link>
+          <% end %>
         <% end %>
       </div>
     </nav>

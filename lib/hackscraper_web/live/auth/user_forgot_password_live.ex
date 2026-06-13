@@ -19,8 +19,11 @@ defmodule HackScraperWeb.UserForgotPasswordLive do
       </:actions>
     </.simple_form>
     <p class="text-center text-sm mt-4">
-      <.link href={~p"/user/register"} class="link">Register</.link>
-      | <.link href={~p"/user/log_in"} class="link">Log in</.link>
+      <.link :if={HackScraper.Accounts.registration_enabled?()} href={~p"/user/register"} class="link">
+        Register
+      </.link>
+      <span :if={HackScraper.Accounts.registration_enabled?()}>|</span>
+      <.link href={~p"/user/log_in"} class="link">Log in</.link>
     </p>
     """
   end
