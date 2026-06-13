@@ -43,6 +43,14 @@ defmodule HackScraper.Worker.ScrapersTest do
       type: :hackathon
     },
     %{
+      name: "TUM Think Tank",
+      module: HackScraper.Worker.TUMThinkTank,
+      url: "https://tumthinktank.de/events/",
+      input: "test/worker/input/tumthinktank.de.html",
+      output: "test/worker/output/tumthinktank.de.json",
+      type: :suggestion
+    },
+    %{
       name: "Unternehmertum",
       module: HackScraper.Worker.Unternehmertum,
       url: "https://www.unternehmertum.de/events?filter%5B%5D=9511",
