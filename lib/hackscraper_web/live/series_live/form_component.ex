@@ -19,13 +19,20 @@ defmodule HackScraperWeb.SeriesLive.FormComponent do
         <.input field={@form[:name]} type="text" label="Name" required />
         <.input field={@form[:url]} type="text" label="Url" />
         <.input field={@form[:description]} type="textarea" label="Description" required />
-        <.input field={@form[:image]} type="text" label="Image" />
+        <.image_upload_input field={@form[:image]} upload={@uploads.image} target={@myself} />
         <:actions>
           <.button phx-disable-with="Saving...">Save Series</.button>
         </:actions>
       </.simple_form>
     </div>
     """
+  end
+
+  @impl true
+  def mount(socket) do
+    {:ok,
+     socket
+     |> allow_upload(:image, auto_upload: true, accept: ["image/*"])}
   end
 
   @impl true
@@ -44,7 +51,25 @@ defmodule HackScraperWeb.SeriesLive.FormComponent do
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
+  def handle_event("cancel-upload", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :image, ref)}
+  end
+
   def handle_event("save", %{"series" => series_params}, socket) do
+    uploads =
+      consume_uploaded_entries(socket, :image, fn %{path: path},
+                                                  %{uuid: uuid, client_name: client_name} ->
+        filename = "#{uuid}.#{Path.extname(client_name)}"
+        dest = Path.join(Application.fetch_env!(:hackscraper, :uploads_dir), filename)
+        File.rename!(path, dest)
+        {:ok, ~p"/uploads/#{filename}"}
+      end)
+
+    series_params =
+      if image = List.first(uploads),
+        do: Map.put(series_params, "image", image),
+        else: series_params
+
     save_series(socket, socket.assigns.action, series_params)
   end
 
