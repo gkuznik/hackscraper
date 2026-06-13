@@ -42,14 +42,21 @@ defmodule HackScraperWeb.UserRegistrationLive do
   end
 
   def mount(_params, _session, socket) do
-    changeset = Accounts.change_user_registration(%User{})
+    if Accounts.registration_enabled?() do
+      changeset = Accounts.change_user_registration(%User{})
 
-    socket =
-      socket
-      |> assign(trigger_submit: false, check_errors: false)
-      |> assign_form(changeset)
+      socket =
+        socket
+        |> assign(trigger_submit: false, check_errors: false)
+        |> assign_form(changeset)
 
-    {:ok, socket, temporary_assigns: [form: nil]}
+      {:ok, socket, temporary_assigns: [form: nil]}
+    else
+      {:ok,
+       socket
+       |> put_flash(:error, "Registration is currently disabled.")
+       |> redirect(to: ~p"/")}
+    end
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do

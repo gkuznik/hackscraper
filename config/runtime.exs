@@ -23,6 +23,9 @@ end
 config :hackscraper, sender_mail: System.get_env("SENDER_MAIL", "donotreply@example.com")
 config :hackscraper, contact_mail: System.get_env("CONTACT_MAIL", "contact@example.com")
 
+config :hackscraper, :registration,
+  enabled: String.downcase(System.get_env("REGISTRATION_ENABLED", "true")) in ~w(true 1)
+
 config :hackscraper,
   uploads_dir:
     System.get_env("UPLOADS_DIR") ||
