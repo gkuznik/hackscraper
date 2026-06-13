@@ -7,6 +7,14 @@ defmodule HackScraper.Application do
 
   @impl true
   def start(_type, _args) do
+    :ok =
+      :telemetry.attach(
+        "oban-scraper-failure-handler",
+        [:oban, :job, :exception],
+        &HackScraper.ObanTelemetryHandler.handle_event/4,
+        nil
+      )
+
     children = [
       HackScraperWeb.Telemetry,
       HackScraper.Repo,
