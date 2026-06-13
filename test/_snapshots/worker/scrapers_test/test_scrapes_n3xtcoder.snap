@@ -1,0 +1,19 @@
+{:hackathons,
+ [
+   %{
+     name: "The 6th CASSINI Hackathon in Munich",
+     description: nil,
+     image: "/images/n3xtcoder.png",
+     url: "https://n3xtcoder.org/events/ij12gt00y_the-6th-cassini-hackathon",
+     start_date: ~U[2023-11-03 16:00:24Z],
+     end_date: ~U[2023-11-05 17:00:24Z]
+   },
+   %{
+     name: "re:think Circular Economy",
+     description: "The AI Innovation Programme",
+     image: "/images/n3xtcoder.png",
+     url: "https://n3xtcoder.org/events/mrm6uinhp_re-publica-festival-2023-berlin-recycling-and-n3xtcoder-join-forces-for-artificial-intelligence-and-circular-economy",
+     start_date: ~U[2023-06-07 07:00:11Z],
+     end_date: ~U[2023-06-07 16:30:00Z]
+   }
+ ]}

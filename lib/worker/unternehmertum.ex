@@ -1,12 +1,8 @@
 defmodule HackScraper.Worker.Unternehmertum do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def scrape(%{"url" => url}) do
     Logger.info("Running Unternehmertum scraper...")
 
     html = get!(url).body
@@ -27,7 +23,6 @@ defmodule HackScraper.Worker.Unternehmertum do
         %{url: url, name: name, description: description, date_hint: date_hint}
       end
 
-    num = upsert_suggestions(suggestions)
-    Logger.info("Created/updated #{num} suggestions")
+    {:suggestions, suggestions}
   end
 end

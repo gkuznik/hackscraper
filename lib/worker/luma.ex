@@ -1,41 +1,46 @@
 defmodule HackScraper.Worker.Luma do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url, "series_id" => series_id}}) do
+  def scrape(%{"url" => url} = args) do
     Logger.info("Running Luma scraper on #{url}...")
 
     events = get!(url).body["entries"]
     hackathons = filter_hackathons(events)
     Logger.info("Found #{length(hackathons)}/#{length(events)} hackathons")
 
-    hackathons =
-      for entry <- hackathons do
+    series_id = args["series_id"]
+
+    jobs =
+      hackathons
+      |> Enum.with_index()
+      |> Enum.map(fn {entry, index} ->
         event = entry["event"]
 
         %{
-          url: URI.merge("https://luma.com", event["url"]) |> to_string(),
-          name: event["name"],
-          start_date: parse_date(event["start_at"]),
-          end_date: parse_date(event["end_at"]),
-          series_id: series_id
+          "worker_name" => "Luma.AddInfo",
+          "event" => %{
+            "url" => URI.merge("https://luma.com", event["url"]) |> to_string(),
+            "name" => event["name"],
+            "start_date" => event["start_at"],
+            "end_date" => event["end_at"],
+            "series_id" => series_id
+          }
         }
-      end
+        |> HackScraper.Worker.ScraperRunner.new(
+          schedule_in: index * 180,
+          priority: 3,
+          max_attempts: 2,
+          unique: [
+            period: {60, :days},
+            states: :all,
+            fields: [:queue, :args],
+            keys: [:event]
+          ]
+        )
+      end)
 
-    hackathons
-    |> Enum.with_index()
-    |> Enum.reduce(Ecto.Multi.new(), fn {event, index}, multi ->
-      job = HackScraper.Worker.Luma.AddInfo.new(%{event: event}, schedule_in: index * 180)
-
-      Oban.insert(multi, "addinfo-#{index}", job)
-    end)
-    |> HackScraper.Repo.transaction()
-
-    Logger.info("Queued AddInfo jobs")
+    {:jobs, jobs}
   end
 
   defp filter_hackathons(entries) do
@@ -48,20 +53,11 @@ defmodule HackScraper.Worker.Luma do
 end
 
 defmodule HackScraper.Worker.Luma.AddInfo do
-  use Oban.Worker,
-    priority: 3,
-    unique: [period: {60, :days}, states: :all, fields: [:queue, :args], keys: [:event]],
-    max_attempts: 2
-
-  require Logger
   import HackScraper.Worker.Common
+  require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"event" => event}}) do
-    event =
-      for({key, val} <- event, into: %{}, do: {String.to_existing_atom(key), val})
-
-    Logger.info("Running Luma AddInfo scraper: #{event.url}...")
+  def scrape(%{"event" => %{"url" => url} = event}) do
+    Logger.info("Running Luma AddInfo scraper: #{url}...")
 
     html = get!(event.url).body |> Floki.parse_document!()
 
@@ -100,15 +96,19 @@ defmodule HackScraper.Worker.Luma.AddInfo do
         _ -> nil
       end
 
+    event_atoms =
+      for {key, val} <- event,
+          into: %{},
+          do: {String.to_existing_atom(key), val}
+
     hackathon =
-      event
+      event_atoms
       |> Map.put(:description, description)
       |> Map.put(:location, location)
       |> Map.put(:image, image)
-      |> Map.put(:start_date, parse_date(event[:start_date] || json_ld["startDate"]))
-      |> Map.put(:end_date, parse_date(event[:end_date] || json_ld["endDate"]))
+      |> Map.put(:start_date, parse_date(event_atoms[:start_date] || json_ld["startDate"]))
+      |> Map.put(:end_date, parse_date(event_atoms[:end_date] || json_ld["endDate"]))
 
-    num = upsert_hackathons([hackathon])
-    Logger.info("Created/updated #{num} hackathon")
+    {:hackathons, [hackathon]}
   end
 end

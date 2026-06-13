@@ -1,0 +1,115 @@
+{:hackathons,
+ [
+   %{
+     name: "2024 France Tech Arena",
+     description: "EUR 28,000 of cash prizes, trip to China, and many more!\n\nLightChaser (Optical Networks)\r\nor\r\nPacketPiper (Data Communications) ",
+     image: "https://cdn.fs.agorize.com/k93c51tLT7eXWs4O1A15",
+     url: "https://huawei.agorize.com/challenges/2024-francetecharena",
+     start_date: ~U[2024-07-01 00:00:00Z],
+     end_date: ~U[2024-10-25 21:55:00Z]
+   },
+   %{
+     name: "Huawei Cloud Startup Ignite Competition 2023",
+     description: "Up to US$125K of Huawei Cloud Credits, admission to Huawei Cloud Program “Accelerate” Tier , and more!\n\nCalling all growth startups in the APAC region. Do you have what it takes to bring your startup to new heights with Huawei? We want you!",
+     image: "https://cdn.fs.agorize.com/8tIcMDPTtuUYmdpzYrQt",
+     url: "https://huawei.agorize.com/challenges/cloud-startup-ignite-competition-2023",
+     start_date: ~U[2023-05-08 00:00:00Z],
+     end_date: ~U[2023-08-14 16:00:00Z]
+   },
+   %{
+     name: "HUAWEI CLOUD SPARK Hackathon Singapore 2022",
+     description: "Up to USD15,000 per team, fast-track to final-stage interviews for dedicated job opportunities within Huawei and their Spark Program portfolio startups!\n\nBuild your industry-transforming innovations empowered by HUAWEI CLOUD and Huawei experts!",
+     image: "https://cdn.fs.agorize.com/X1HVXFVVTfeFs3FDghHE",
+     url: "https://huawei.agorize.com/challenges/hackathonsg2022",
+     start_date: ~U[2021-11-15 09:00:00Z],
+     end_date: ~U[2022-01-30 16:00:00Z]
+   },
+   %{
+     name: "Huawei Spark Malaysia - Tech Competition",
+     description: "Up to USD $125k in Cloud Credit and exclusive business development opportunities\n\nFire up your company and take it to new heights with Huawei! Compete for the chance to win up to USD $125k in Cloud Credit and exclusive business development opportunities.",
+     image: "https://cdn.fs.agorize.com/OJZz0cqMTYqTwbQJmOMo",
+     url: "https://huawei.agorize.com/challenges/huawei-spark-malaysia",
+     start_date: ~U[2020-11-09 18:00:00Z],
+     end_date: ~U[2021-03-08 15:59:00Z]
+   },
+   %{
+     name: "Huawei Spark 2020 - Global Startup Competition",
+     description: "Up to US$125K of Huawei Cloud Credits and Admission to Huawei Spark Accelerator Program\n\nFire up your startup and take it to new heights with Huawei!",
+     image: "https://cdn.fs.agorize.com/bj32ZnXSOeqVTfGxVgAg",
+     url: "https://huawei.agorize.com/challenges/huaweispark2020",
+     start_date: ~U[2020-08-10 04:00:00Z],
+     end_date: ~U[2021-03-24 15:59:00Z]
+   },
+   %{
+     name: " Huawei Spark Ignite 2021 - Global Startup Competition",
+     description: "Up to US$125K of Huawei Cloud Credits and Admission to Huawei Spark Accelerator Program\n\nFire up your startup and take it to new heights with Huawei!",
+     image: "https://cdn.fs.agorize.com/hbNDsVmnRnS2ZW4t0wvM",
+     url: "https://huawei.agorize.com/challenges/huaweispark2021",
+     start_date: ~U[2021-05-07 02:00:00Z],
+     end_date: ~U[2021-08-18 15:55:00Z]
+   },
+   %{
+     name: "Huawei Spark Ignite 2021 - Thailand Startup Competition",
+     description: "Up to USD$125K of Huawei Cloud Credits and Admission to Huawei Spark Accelerator Programs\n\nFire up your startup and take it to new heights with Huawei!",
+     image: "https://cdn.fs.agorize.com/bdBOoEnQQBe71UjOS07A",
+     url: "https://huawei.agorize.com/challenges/huaweisparkthailand",
+     start_date: ~U[2021-05-13 00:00:00Z],
+     end_date: ~U[2021-07-31 23:55:00Z]
+   },
+   %{
+     name: "Huawei Spark Ignite 2022 - Thailand Startup Competition",
+     description: "Up to US$125K of Huawei Cloud Credits, admission to Huawei Spark programs, and more!\n\nScaling is the name of the game; ambition is a must. Do you have what it takes to bring your startup to new heights with Huawei? We want you!",
+     image: "https://cdn.fs.agorize.com/sQmda2CfSCGmbJpX9VJa",
+     url: "https://huawei.agorize.com/challenges/ignite-thailand-2022",
+     start_date: ~U[2022-06-16 05:00:00Z],
+     end_date: ~U[2022-08-16 00:00:00Z]
+   },
+   %{
+     name: "2023 Tech Arena Ireland ",
+     description: "USD 10,000 of cash prizes, mentorship from Huawei in Ireland, a trip to China, internship opportunities and many more!\n\nBuild Your AI Assistant! \r\n--- Reliable and Trustworthy",
+     image: "https://cdn.fs.agorize.com/rsohMyycSdKcIQ74GuFT",
+     url: "https://huawei.agorize.com/challenges/irchack2023",
+     start_date: ~U[2023-05-15 10:40:00Z],
+     end_date: ~U[2023-09-23 15:55:00Z]
+   },
+   %{
+     name: "Ireland Tech Arena- AI for Cloud X",
+     description: "EUR 13,000 of cash prizes, mentorship from Huawei in Ireland, a trip to China, internship opportunities and many more!\n\nServer Fleet Management At Scale",
+     image: "https://cdn.filestackcontent.com/uTjgheR6SVKbxbIBwdBM",
+     url: "https://huawei.agorize.com/challenges/irelandrc2024",
+     start_date: ~U[2024-05-22 15:45:00Z],
+     end_date: ~U[2024-08-30 23:55:00Z]
+   },
+   %{
+     name: "HUAWEI Developer Competition LATAM 2022",
+     description: "\n\nBuild your industry-transforming innovations empowered by HUAWEI CLOUD and Huawei experts!",
+     image: "https://cdn.fs.agorize.com/vSWGjWWvRFafdPqYCUk2",
+     url: "https://huawei.agorize.com/challenges/latam-developer-competition",
+     start_date: ~U[2022-08-10 11:00:00Z],
+     end_date: ~U[2022-10-17 05:00:00Z]
+   },
+   %{
+     name: "Huawei Spark Ignite 2022 - Global Startup Competition",
+     description: "Up to US$125K of Huawei Cloud Credits, up to US$40K in grant prize, admission to Huawei Spark programs, and more!\n\nScaling is the name of the game; ambition is a must. Do you have what it takes to bring your startup to new heights with Huawei? We want you!",
+     image: "https://cdn.fs.agorize.com/5hvPtSpRA5hGrErnosAl",
+     url: "https://huawei.agorize.com/challenges/sparkignite2022",
+     start_date: ~U[2022-05-05 08:00:00Z],
+     end_date: ~U[2022-08-07 16:00:00Z]
+   },
+   %{
+     name: "2024 Munich Tech Arena",
+     description: "EUR 18,000 of cash prizes, mentorship from Huawei in Ireland, a trip to China, internship opportunities and many more!\n\nMedia Technology",
+     image: "https://cdn.fs.agorize.com/IYE9ipGPRui0gbdpclj5",
+     url: "https://huawei.agorize.com/challenges/techarena-munich2024",
+     start_date: ~U[2024-09-29 12:20:00Z],
+     end_date: ~U[2024-11-30 23:55:00Z]
+   },
+   %{
+     name: "UK Tech Arena 2024",
+     description: "GBP28,000 of cash prizes, mentorship from Huawei in the UK, a trip to China, internship opportunities and many more!\n\nEmbark on an exciting journey in the realms of Computer Architecture and Fundamental Software.",
+     image: "https://cdn.fs.agorize.com/oeiXgqiFRlOw06H7Ii8X",
+     url: "https://huawei.agorize.com/challenges/techarena-uk2024",
+     start_date: ~U[2024-09-24 13:25:00Z],
+     end_date: ~U[2024-11-25 23:55:00Z]
+   }
+ ]}

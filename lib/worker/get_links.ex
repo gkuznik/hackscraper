@@ -1,18 +1,13 @@
 defmodule HackScraper.Worker.GetLinks do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def scrape(%{"url" => url}) do
     Logger.info("Running links scraper: #{url}...")
-
-    html = get!(url).body
+    body = get!(url).body
 
     links =
-      html
+      body
       |> Floki.parse_document!()
       |> Floki.find("a[href]")
       |> Floki.attribute("href")
@@ -24,5 +19,6 @@ defmodule HackScraper.Worker.GetLinks do
 
     # TODO filter against already known links
     # then schedule workers
+    {:suggestions, []}
   end
 end

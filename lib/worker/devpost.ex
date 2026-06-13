@@ -1,14 +1,8 @@
 defmodule HackScraper.Worker.Devpost do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
-    Logger.info("Running Devpost scraper...")
-
+  def scrape(%{"url" => url}) do
     data = get!(url).body["hackathons"]
     Logger.info("Found #{length(data)} hackathons")
 
@@ -24,7 +18,6 @@ defmodule HackScraper.Worker.Devpost do
         }
       end
 
-    num = upsert_suggestions(suggestions)
-    Logger.info("Created/updated #{num} suggestions")
+    {:suggestions, suggestions}
   end
 end

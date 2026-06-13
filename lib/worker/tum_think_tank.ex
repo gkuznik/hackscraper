@@ -1,12 +1,8 @@
 defmodule HackScraper.Worker.TUMThinkTank do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def scrape(%{"url" => url}) do
     Logger.info("Running TUM Think Tank scraper...")
 
     html = get!(url).body
@@ -60,10 +56,7 @@ defmodule HackScraper.Worker.TUMThinkTank do
       end
 
     Logger.info("Found #{length(suggestions)} hackathon suggestions")
-
-    num = upsert_suggestions(suggestions)
-    Logger.info("Created/updated #{num} suggestions")
-    :ok
+    {:suggestions, suggestions}
   end
 
   defp is_hackathon?(event) do

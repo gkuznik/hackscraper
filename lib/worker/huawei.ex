@@ -1,19 +1,15 @@
 defmodule HackScraper.Worker.Huawei do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def scrape(%{"url" => url}) do
     Logger.info("Running Huawei scraper...")
 
-    hackathons = get!(url).body["data"]
-    Logger.info("Found #{length(hackathons)} hackathons")
+    data = get!(url).body["data"]
+    Logger.info("Found #{length(data)} hackathons")
 
     hackathons =
-      for item <- hackathons do
+      for item <- data do
         hack = item["attributes"]
 
         %{
@@ -26,7 +22,6 @@ defmodule HackScraper.Worker.Huawei do
         }
       end
 
-    num = upsert_hackathons(hackathons)
-    Logger.info("Created/updated #{num} hackathons")
+    {:hackathons, hackathons}
   end
 end
