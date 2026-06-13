@@ -1,8 +1,5 @@
 defmodule HackScraper.Worker.Direct do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
   @date_pattern [
@@ -29,10 +26,8 @@ defmodule HackScraper.Worker.Direct do
     |> Enum.join(" | ")
   end
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def scrape(%{"url" => url}) do
     Logger.info("Running direct scraper: #{url}...")
-
     html = get!(url).body
 
     {_result, globals} =
@@ -70,7 +65,6 @@ defmodule HackScraper.Worker.Direct do
       date_hint: extract_dates(text)
     }
 
-    num = upsert_suggestions([suggestion])
-    Logger.info("Created/updated #{num} suggestion")
+    {:suggestions, [suggestion]}
   end
 end

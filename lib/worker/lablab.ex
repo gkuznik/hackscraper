@@ -1,12 +1,8 @@
 defmodule HackScraper.Worker.LabLab do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def scrape(%{"url" => url}) do
     Logger.info("Running Lablab.ai scraper...")
 
     html = get!(url).body
@@ -43,7 +39,6 @@ defmodule HackScraper.Worker.LabLab do
         }
       end
 
-    num = upsert_hackathons(hackathons)
-    Logger.info("Created/updated #{num} hackathons")
+    {:hackathons, hackathons}
   end
 end

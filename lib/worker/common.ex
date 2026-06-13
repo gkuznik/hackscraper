@@ -38,10 +38,18 @@ defmodule HackScraper.Worker.Common do
       {HackScraper.Worker.Unternehmertum,
        "https://www.unternehmertum.de/events?filter%5B%5D=9511"}
   }
+  @internal_workers %{
+    "Luma.AddInfo" => HackScraper.Worker.Luma.AddInfo,
+    "TUMVentureLabs.AddInfo" => HackScraper.Worker.TUMVentureLabs.AddInfo
+  }
+
   def workers, do: @workers
 
   def worker_module(name) when is_binary(name) do
-    @workers[name] |> elem(0)
+    case Map.fetch(@workers, name) do
+      {:ok, {module, _url}} -> module
+      :error -> Map.fetch!(@internal_workers, name)
+    end
   end
 
   def worker_url(name) when is_binary(name) do

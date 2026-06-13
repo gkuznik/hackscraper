@@ -1,0 +1,11 @@
+{:suggestions,
+ [
+   %{
+     name: "Agora Hacks_26ª",
+     description: "Realistische, umsetzbare Prototypen entwickeln, die Zuhören, Verstehen und Deliberation in demokratischen Gesellschaften verbessern.",
+     location: "Café Luitpold",
+     image: "https://tumthinktank.de/wp-content/uploads/1774297497894.jpeg",
+     url: "https://tumthinktank.de/event/agora-hacks_26a/",
+     date_hint: "10. — 12. Apr 2026"
+   }
+ ]}

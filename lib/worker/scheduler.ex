@@ -1,7 +1,7 @@
 defmodule HackScraper.Worker.Scheduler do
   use Oban.Worker
 
-  import HackScraper.Worker.Common, only: [oban_opts: 0, worker_module: 1]
+  import HackScraper.Worker.Common, only: [oban_opts: 0]
   alias HackScraper.Scrapers
   alias HackScraper.Scrapers.Scheduled
 
@@ -27,10 +27,8 @@ defmodule HackScraper.Worker.Scheduler do
   end
 
   def schedule_job(%Scheduled{} = scraper) do
-    module = worker_module(scraper.worker)
-
-    %{url: scraper.url, series_id: scraper.series_id}
-    |> module.new(oban_opts() ++ [schedule_in: 1, unique: false])
+    %{worker_name: scraper.worker, url: scraper.url, series_id: scraper.series_id}
+    |> HackScraper.Worker.ScraperRunner.new(oban_opts() ++ [schedule_in: 1, unique: false])
     |> Oban.insert()
   end
 
@@ -55,14 +53,12 @@ defmodule HackScraper.Worker.Scheduler do
         executions = get_execution_times(cron_expression, now, end_time, [])
         Logger.info("Found #{length(executions)} executions for #{scraper.name}")
 
-        module = worker_module(scraper.worker)
-
         Enum.reduce(executions, Ecto.Multi.new(), fn scheduled_at, multi ->
           meta = %{scraper_id: scraper.id, scheduled_at: scheduled_at}
 
           job =
-            %{url: scraper.url, series_id: scraper.series_id}
-            |> module.new(
+            %{worker_name: scraper.worker, url: scraper.url, series_id: scraper.series_id}
+            |> HackScraper.Worker.ScraperRunner.new(
               oban_opts() ++ [unique: @unique, scheduled_at: scheduled_at, meta: meta]
             )
 

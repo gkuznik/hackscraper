@@ -1,12 +1,8 @@
 defmodule HackScraper.Worker.Taikai do
-  use Oban.Worker
-
   import HackScraper.Worker.Common
-
   require Logger
 
-  @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"url" => url}}) do
+  def scrape(%{"url" => url}) do
     Logger.info("Running Taikai Network scraper...")
 
     query = %{
@@ -45,8 +41,6 @@ defmodule HackScraper.Worker.Taikai do
       end)
 
     Logger.info("Found #{length(hackathons)} hackathons")
-
-    num = upsert_hackathons(hackathons)
-    Logger.info("Created/updated #{num} hackathons")
+    {:hackathons, hackathons}
   end
 end

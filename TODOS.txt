@@ -1,8 +1,0 @@
-✅ don't hardcode urls for scraper
-add tests for scraper
-
-toggle user registration with env var
-
-rate limit email changes?
-
-maybe add https://tumthinktank.de again, website was reworked

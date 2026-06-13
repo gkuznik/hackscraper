@@ -65,7 +65,8 @@ defmodule HackScraper.MixProject do
       {:oban, "~> 2.19"},
       {:oban_web, "~> 2.11"},
       {:req, "~> 0.5.0"},
-      {:pythonx, "~> 0.4.0"}
+      {:pythonx, "~> 0.4.0"},
+      {:exposure, "~> 1.1", only: [:dev, :test]}
     ]
   end
 
