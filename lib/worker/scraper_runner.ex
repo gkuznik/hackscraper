@@ -27,13 +27,14 @@ defmodule HackScraper.Worker.ScraperRunner do
       {:jobs, jobs} ->
         Logger.info("Queuing #{length(jobs)} sub-jobs for #{worker_name}")
 
-        Enum.reduce(jobs, Ecto.Multi.new(), fn job, multi ->
-          name = "job-#{System.unique_integer([:positive])}"
-          Oban.insert(multi, name, job)
-        end)
-        |> HackScraper.Repo.transaction()
-
-        :ok
+        case Enum.reduce(jobs, Ecto.Multi.new(), fn job, multi ->
+               name = "job-#{System.unique_integer([:positive])}"
+               Oban.insert(multi, name, job)
+             end)
+             |> HackScraper.Repo.transaction() do
+          {:ok, _changes} -> :ok
+          {:error, _name, error, _changes} -> {:error, error}
+        end
     end
   end
 end

@@ -100,12 +100,6 @@ defmodule HackScraper.Worker.ScrapersTest do
     }
   ]
 
-  setup do
-    # Configure Req to use a single shared stub globally to avoid overrides
-    Req.default_options(plug: {Req.Test, HackScraper.Worker.ScrapersTest})
-    :ok
-  end
-
   # Dynamically generate a test for each scraper
   for scraper <- @scrapers do
     @scraper scraper
@@ -126,7 +120,7 @@ defmodule HackScraper.Worker.ScrapersTest do
         end
 
       # Stub the shared Req.Test module to return the input data
-      Req.Test.stub(HackScraper.Worker.ScrapersTest, fn conn ->
+      Req.Test.stub(HackScraper, fn conn ->
         if is_binary(input_data) do
           Req.Test.html(conn, input_data)
         else

@@ -864,12 +864,10 @@ defmodule HackScraperWeb.CoreComponents do
   def image_upload_input(assigns) do
     ~H"""
     <div class="space-y-3">
-      <.label for={@field.id}>{@label}</.label>
-
       <.input
         field={@field}
         type="text"
-        label=""
+        label={@label}
         placeholder="Paste image URL here..."
         class="mb-2"
       />
