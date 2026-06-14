@@ -7,6 +7,15 @@
     <.live_title default="Find your next Hackathon" suffix=" · HackScraper">
       {assigns[:page_title]}
     </.live_title>
+    <meta :if={assigns[:og_title]} property="og:title" content={@og_title} />
+    <meta :if={assigns[:og_description]} property="og:description" content={@og_description} />
+    <meta :if={assigns[:og_image]} property="og:image" content={@og_image} />
+    <meta :if={assigns[:og_title]} property="og:url" content={@og_url} />
+    <meta :if={assigns[:og_title]} property="og:type" content={assigns[:og_type] || "website"} />
+    <meta :if={assigns[:og_title]} name="twitter:title" content={@og_title} />
+    <meta :if={assigns[:og_description]} name="twitter:description" content={@og_description} />
+    <meta :if={assigns[:og_image]} name="twitter:image" content={@og_image} />
+    <meta :if={assigns[:og_title]} name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/x-icon" href="/images/logo.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />

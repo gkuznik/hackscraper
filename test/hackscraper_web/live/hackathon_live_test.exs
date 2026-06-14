@@ -210,6 +210,24 @@ defmodule HackScraperWeb.HackathonLiveTest do
 
       assert html =~ "Hackathon: "
       assert html =~ hackathon.name
+
+      assert html =~ ~s(<meta property="og:title" content="#{hackathon.name}")
+      assert html =~ ~s(<meta property="og:description" content="#{hackathon.description}")
+
+      assert html =~
+               ~s(<meta property="og:image" content="#{HackScraperWeb.Endpoint.url()}/#{hackathon.image}")
+
+      assert html =~
+               ~s(<meta property="og:url" content="#{HackScraperWeb.Endpoint.url()}/hackathons/#{hackathon.id}")
+
+      assert html =~ ~s(<meta property="og:type" content="website")
+      assert html =~ ~s(<meta name="twitter:title" content="#{hackathon.name}")
+      assert html =~ ~s(<meta name="twitter:description" content="#{hackathon.description}")
+
+      assert html =~
+               ~s(<meta name="twitter:image" content="#{HackScraperWeb.Endpoint.url()}/#{hackathon.image}")
+
+      assert html =~ ~s(<meta name="twitter:card" content="summary_large_image")
     end
 
     test "updates hackathon within modal", %{conn: conn, hackathon: hackathon} do
