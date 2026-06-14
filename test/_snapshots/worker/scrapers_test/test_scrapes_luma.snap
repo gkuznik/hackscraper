@@ -1,0 +1,53 @@
+{:jobs,
+ [
+   %{
+     args: %{
+       "event" => %{
+         "end_date" => "2026-02-15T17:00:00.000Z",
+         "name" => "European Defense Tech Hackathon – Munich",
+         "series_id" => nil,
+         "start_date" => "2026-02-12T11:00:00.000Z",
+         "url" => "https://luma.com/edth-2026-munich"
+       },
+       "worker_name" => "Luma.AddInfo"
+     },
+     priority: 3,
+     state: "scheduled",
+     max_attempts: 2,
+     queue: "scraper",
+     worker: "HackScraper.Worker.ScraperRunner",
+     unique: %{
+       timestamp: :inserted_at,
+       keys: [:event],
+       period: 5184000,
+       fields: [:queue, :args],
+       states: [:scheduled, :available, :executing, :retryable, :completed,
+        :discarded, :cancelled]
+     }
+   },
+   %{
+     args: %{
+       "event" => %{
+         "end_date" => "2025-12-13T19:00:00.000Z",
+         "name" => "Build different (Hackathon)",
+         "series_id" => nil,
+         "start_date" => "2025-12-13T14:00:00.000Z",
+         "url" => "https://luma.com/tsohl33j"
+       },
+       "worker_name" => "Luma.AddInfo"
+     },
+     priority: 3,
+     state: "scheduled",
+     max_attempts: 2,
+     queue: "scraper",
+     worker: "HackScraper.Worker.ScraperRunner",
+     unique: %{
+       timestamp: :inserted_at,
+       keys: [:event],
+       period: 5184000,
+       fields: [:queue, :args],
+       states: [:scheduled, :available, :executing, :retryable, :completed,
+        :discarded, :cancelled]
+     }
+   }
+ ]}

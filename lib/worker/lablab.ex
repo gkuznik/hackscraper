@@ -18,7 +18,7 @@ defmodule HackScraper.Worker.LabLab do
         extractor = NextJSHydrationDataExtractor()
         chunks = extractor.parse(html)
         results = extractor.find_data_by_pattern(chunks, 'events')
-        [v for v in results if v['key'] == 'events'][0]['value']
+        [v for v in results if v['key'] in ('events', 'sortedEvents')][0]['value']
         """,
         %{"html" => html}
       )

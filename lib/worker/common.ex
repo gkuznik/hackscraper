@@ -22,7 +22,7 @@ defmodule HackScraper.Worker.Common do
     "Dummy" => {HackScraper.Worker.Dummy, ""},
     "Get Links" => {HackScraper.Worker.GetLinks, ""},
     "Huawei" => {HackScraper.Worker.Huawei, "https://huawei.agorize.com/api/v2/challenges"},
-    "LabLab" => {HackScraper.Worker.LabLab, "https://lablab.ai/"},
+    "LabLab" => {HackScraper.Worker.LabLab, "https://lablab.ai/ai-hackathons"},
     "Luma" =>
       {HackScraper.Worker.Luma,
        "https://api2.luma.com/discover/get-paginated-events?latitude=48.13743&longitude=11.57549&pagination_limit=30&slug=tech"},

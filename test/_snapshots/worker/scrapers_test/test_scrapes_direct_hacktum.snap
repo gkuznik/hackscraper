@@ -1,0 +1,10 @@
+{:suggestions,
+ [
+   %{
+     name: "hackaTUM",
+     description: "hackaTUM is the official hackathon of the Department of Computer Science of the Technical University of Munich.",
+     image: "https://hack.tum.de/wp-content/uploads/2022/10/2022-Promotion-Banner.png",
+     url: "https://hack.tum.de/",
+     date_hint: "17.11.2018 | 17.11.2018 | 17.11.2018 | 18.11.2018 | November 22-24, 2024 | November 17-19, 2023"
+   }
+ ]}

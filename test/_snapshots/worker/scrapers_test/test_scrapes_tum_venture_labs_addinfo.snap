@@ -1,0 +1,12 @@
+{:suggestions,
+ [
+   %{
+     name: "AEC Hackathon - Munich Edition",
+     description: "We are thrilled to announce the AEC Hackathon in Munich,\u00A0\n\n\nJoin us a thrilling event where the brightest minds in Architecture, Engineering, and Construction (AEC) come together to innovate and collaborate.\u00A0\n\nFrom November 22-24, 2024, experience a weekend filled with creative problem-solving, hands-on workshops, and opportunities to network with top professionals and enthusiasts from around the globe.\nThe last hackathon in Zurich from our event partner opensource.construction was a huge success with over 250 attendees, and we are excited to bring the same energy and innovation to Munich and the TUM Venture Labs.\u00A0\n\n\nWhether you're a passionate student or a seasoned professional this hackathon is your chance to shape the future of the AEC industry. Public Keynotes, tech talks, regular networking breaks and a variety of workspaces ensure a unique atmosphere. All this makes our hackathon an ideal innovation, networking and collaboration event.\n\n\nEvent Agenda\nDay 1: November 22\n16:00 – 17:00: Registration and Welcome\n17:00 – 18:00: Keynote Speeches\n18:00 – 21:00: Team Formation and Brainstorming Sessions\n\n\u00A0\nDay 2: November 23\n09:00 – 12:00: Hacking and Workshops\n12:00 – 13:00: Lunch Break\n13:00 – 18:00: Tech-Talks & Hacking\n18:00 – 20:00: Dinner and Networking\n\n\u00A0\nDay 3: November 24\n09:00 – 12:00: Final Hacking Session\n12:00 – 13:00: Lunch Break\n13:00 – 16:00: Project Presentations and Judging\n16:00 – 17:00: Award Ceremony\n17:00 – 18:00: Closing Remarks and Networking\n\n\n\nParticipation for TUM students is also possible in this semester\n (3 ECTS):\n\nPlease register via TUM Online: TUM Chair of Architectural Informatics (Prof. Petzold): 0000005541, Fast Track Design Method\n\n\nFor all other participants \nTickets are available via Eventbrite:\u00A0\n\nhttps://www.eventbrite.de/e/aec-hackathon-munich-edition-tickets-953378860837",
+     location: "Arcisstr, 21, Munich",
+     image: "https://www.tum-venture-labs.de/transforms/images/Events/_1450x1450_crop_center-center_90_none/96900/241105_AEC-Hackathon-website.webp?v=1763990341",
+     url: "https://www.eventbrite.de/e/aec-hackathon-munich-edition-tickets-953378860837",
+     series_id: nil,
+     date_hint: "Jun 20 - 22, 2025"
+   }
+ ]}
