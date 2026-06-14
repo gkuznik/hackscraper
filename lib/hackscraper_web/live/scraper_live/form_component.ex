@@ -65,10 +65,9 @@ defmodule HackScraperWeb.ScraperLive.FormComponent do
   @impl true
   def handle_event(
         "set_defaults",
-        %{"scheduled" => %{"worker" => worker} = scraper_params},
+        %{"scheduled" => %{"worker" => worker}},
         socket
       ) do
-    IO.inspect(scraper_params)
     changeset = socket.assigns.form.data |> Scrapers.change_scraper(%{"worker" => worker})
     default_url = HackScraper.Worker.Common.worker_url(worker)
 

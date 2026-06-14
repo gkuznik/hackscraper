@@ -131,9 +131,7 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
     uploads =
       consume_uploaded_entries(socket, :image, fn %{path: path},
                                                   %{uuid: uuid, client_name: client_name} ->
-        # {extension, _} = System.cmd("file", ["-b", "--extension", path])
-        Path.extname(client_name)
-        filename = "#{uuid}.#{Path.extname(client_name)}"
+        filename = "#{uuid}#{Path.extname(client_name)}"
         dest = Path.join(Application.fetch_env!(:hackscraper, :uploads_dir), filename)
         File.rename!(path, dest)
         {:ok, ~p"/uploads/#{filename}"}

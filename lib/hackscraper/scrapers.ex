@@ -15,7 +15,7 @@ defmodule HackScraper.Scrapers do
   ## Examples
 
       iex> list_scrapers()
-      [%Scraper{}, ...]
+      [%Scheduled{}, ...]
 
   """
   def list_scrapers do
@@ -34,7 +34,7 @@ defmodule HackScraper.Scrapers do
   ## Examples
 
       iex> get_scraper!(123)
-      %Scraper{}
+      %Scheduled{}
 
       iex> get_scraper!(456)
       ** (Ecto.NoResultsError)
@@ -48,7 +48,7 @@ defmodule HackScraper.Scrapers do
   ## Examples
 
       iex> create_scraper(%{field: value})
-      {:ok, %Scraper{}}
+      {:ok, %Scheduled{}}
 
       iex> create_scraper(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
@@ -75,7 +75,7 @@ defmodule HackScraper.Scrapers do
   ## Examples
 
       iex> update_scraper(scraper, %{field: new_value})
-      {:ok, %Scraper{}}
+      {:ok, %Scheduled{}}
 
       iex> update_scraper(scraper, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
@@ -102,7 +102,7 @@ defmodule HackScraper.Scrapers do
   ## Examples
 
       iex> delete_scraper(scraper)
-      {:ok, %Scraper{}}
+      {:ok, %Scheduled{}}
 
       iex> delete_scraper(scraper)
       {:error, %Ecto.Changeset{}}
@@ -125,7 +125,7 @@ defmodule HackScraper.Scrapers do
   ## Examples
 
       iex> change_scraper(scraper)
-      %Ecto.Changeset{data: %Scraper{}}
+      %Ecto.Changeset{data: %Scheduled{}}
 
   """
   def change_scraper(%Scheduled{} = scraper, attrs \\ %{}) do
