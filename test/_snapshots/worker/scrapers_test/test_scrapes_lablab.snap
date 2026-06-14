@@ -1,0 +1,1227 @@
+{:hackathons,
+ [
+   %{
+     name: "24h Claude Hackathon",
+     description: "🕒 24 hours to complete the challenge\n💡 Create apps with enhanced vision and increased trustworthiness from Claude 3 Opus\n🤝 Take part alone or form a team with other participants\n🚀 The final project can be used for your portfolio, and the startup application to the Slingshot accelerator",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clth7m4dm00133b6rxln6qm4l/undefined_imageLink_gs99ki0uwm.jpg",
+     url: "https://lablab.ai/event/24h-claude-hackathon",
+     start_date: ~U[2024-03-15 17:00:00Z],
+     end_date: ~U[2024-03-16 17:00:00Z]
+   },
+   %{
+     name: "3D AI Models Hackathon",
+     description: "⌚ 60-hour Hackathon to build AI apps with cutting-edge 3D generative models by OpenAI, Nvidia and Stable Diffusion\n💡 Experiment with Point-e, Sharp-e, GET3D, Stable Diffusion's Dreamfusion\n🚀 Build a fully functional AI app under the hackathon's tight timeline!\n👥 Find teammates and get mentor support throughout the event",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclkryt9zn000c356q6n5psyi0%2Fclkryt9zn000c356q6n5psyi0_llo338e_imageLink.jpg",
+     url: "https://lablab.ai/event/3d-ai-models-hackathon",
+     start_date: ~U[2023-08-11 16:00:00Z],
+     end_date: ~U[2023-08-14 10:00:00Z]
+   },
+   %{
+     name: "Accelerate & Innovate: 2023 Year-End Hackathon",
+     description: "🚀 Join our 2023 WrapUp Hackathon to turn your AI ideas into reality!\n\n🌟 The 5 finalists will be eligible for an interview with the accelerator's team for the evaluation of their product and to define the next steps\n💡 Utilize the technology of any of the providers we collaborated with over 2023 to enhance your creations.\n⏳ 2 weeks of intensive building for your Proof of Concept.\n🔄 We welcome projects from 2023 Hackathons to be improved and accelerated with lablab.ai!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clq6lvzxp000i357ehlq07diz/undefined_imageLink_b92q60en0.jpg",
+     url: "https://lablab.ai/event/accelerate-and-innovate-2023-year-end-hackathon",
+     start_date: ~U[2023-12-27 17:00:00Z],
+     end_date: ~U[2024-01-10 17:00:00Z]
+   },
+   %{
+     name: "Advanced RAG Hackathon",
+     description: "👩\u200D💻Explore Vectara, the trusted platform for building innovative AI applications with advanced datasets.\n🚀 One week of intensive online development with workshops and mentorship sessions!          \n🏆15,000 USD prize pool (including 7,000 USD in cash) with special prizes from LlamaIndex, Unstructured, Vectara, and Together.ai\n🤝 Opportunities for networking with developers and startup enthusiasts.\n💡 Create applications that help create a positive change in the world and drive impact!\n🕵️Create Vectara account to be eligible for hackathon participation and fill out the application form to be accepted. ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cltegpyj8000p3b6rj4ur3dsk/undefined_imageLink_0wape0zy6.jpg",
+     url: "https://lablab.ai/event/advanced-rag-hackathon",
+     start_date: ~U[2024-04-12 16:00:00Z],
+     end_date: ~U[2024-04-19 16:00:00Z]
+   },
+   %{
+     name: "Agentic AI Hackathon with IBM watsonx Orchestrate",
+     description: "Leverage Orchestrate’s digital skills to design solutions that automate repetitive tasks, orchestrate workflows across tools, and empower employees to focus on high-value work. \n\n⏳ Complete your project in just 48 hours and showcase your innovation. \n\n🚀 Gain hands-on experience building with IBM watsonx Orchestrate. \n\n💡 Develop practical AI agents that reshape the way teams and organizations operate.\n\n⭐ Learn directly from experts who will support you throughout the event.\n\n🤝 Team up or work independently to bring your vision to life. \n\n💰 Prizes: $10,000\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream and start shaping the future with IBM watsonx Orchestrate!  ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cmfqx77uw000e357i7h3waw9n/cmfqx77uw000e357i7h3waw9n_imageLink_36c4v0wzf.jpg",
+     url: "https://lablab.ai/event/agentic-ai-hackathon-ibm-watsonx-orchestrate",
+     start_date: ~U[2025-11-21 15:00:00Z],
+     end_date: ~U[2025-11-23 18:37:00Z]
+   },
+   %{
+     name: "Agentic Commerce on Arc",
+     description: "$25",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/i0vk9hz4f3zx7trp5qy0v8y2/i0vk9hz4f3zx7trp5qy0v8y2_imageLink_e5qndbvisu18px43fzx8sf1i.jpg",
+     url: "https://lablab.ai/event/agentic-commerce-on-arc",
+     start_date: ~U[2026-01-09 18:00:00Z],
+     end_date: ~U[2026-01-24 01:00:00Z]
+   },
+   %{
+     name: "AI Agents on Arc with USDC",
+     description: "$27",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cmffpz0bc000t357gufgffug3/cmffpz0bc000t357gufgffug3_imageLink_vo7gq0t8h.jpg",
+     url: "https://lablab.ai/event/ai-agents-arc-usdc",
+     start_date: ~U[2025-10-27 21:00:00Z],
+     end_date: ~U[2025-11-08 23:30:00Z]
+   },
+   %{
+     name: "AI Agents Hack with LabLab and MindsDB",
+     description: "Build a productive AI Agent and compete in this challenge.\n\n💰 $10,000 prize pool for the winners!\n🚀 Take your chance and build a proactive AI Agent.\n🌟 Expert mentors will guide you every step of the way.\n🤝 Work alone or form a team to build something extraordinary.\n🌉 Join us online or in person in San Francisco for an unforgettable experience!\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clyo3ojcg000r3b6vhsr9v8p1/clyo3ojcg000r3b6vhsr9v8p1_imageLink_m3420t27.jpg",
+     url: "https://lablab.ai/event/ai-agents-hack-with-lablab-and-mindsdb",
+     start_date: ~U[2024-09-14 01:00:00Z],
+     end_date: ~U[2024-09-16 01:00:00Z]
+   },
+   %{
+     name: "AI Agents Hackathon",
+     description: "🔥 48-hours AI Challenge\n🦾 Build your AI agent, or agent simulation, in 1 day\n🚀 Use the LangChain framework to power up your coding!\n🤝 You can find co-founders and mentors here",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclhtl4jq30000356mx5id3ccp%2Fclhtl4jq30000356mx5id3ccp_ly93mu7_imageLink.jpg",
+     url: "https://lablab.ai/event/ai-agents-hackathon",
+     start_date: ~U[2023-06-09 17:00:00Z],
+     end_date: ~U[2023-06-12 09:59:00Z]
+   },
+   %{
+     name: "AI Agents Hackathon 2.0",
+     description: "🗓️ 48-hour AI Challenge - Build your own AI agent or agent simulation over the weekend\n🦜 Power up your coding with the LangChain framework!\n🤝 Connect with potential co-founders and mentors at the event",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcljscjt9r0000356om968xnvk%2Fcljscjt9r0000356om968xnvk_9l13odi_imageLink.jpg",
+     url: "https://lablab.ai/event/ai-agents-hackathon-2",
+     start_date: ~U[2023-07-21 16:00:00Z],
+     end_date: ~U[2023-07-24 10:00:00Z]
+   },
+   %{
+     name: "AI Challenge with GPT-3.5, Codex, DALL-E, and Whisper API",
+     description: "🗓️ Join us for a week of innovation and excitement on October 16\n💻 Harness the power of cutting-edge AI tools to create groundbreaking applications.\n💡 Learn from industry-leading AI experts.\n⚒️ Combine the power of GPT-3.5, Codex, DALL-E 2, and Whisper to craft your AI masterpiece.\n🐱\u200D💻 Register now to embark on this AI journey with us!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clmajorvq0000357and4ti8b6/clmajorvq0000357and4ti8b6_imageLink_tyjn1pyf.jpg",
+     url: "https://lablab.ai/event/ai-challenge-with-gpt-3-5-codex-dall-e-and-whisper-api",
+     start_date: ~U[2023-10-13 16:00:00Z],
+     end_date: ~U[2023-10-16 10:00:00Z]
+   },
+   %{
+     name: "AI for connectivity hackathon ",
+     description: "🔍Create AI-driven solutions using open-source technologies to optimize public sector network management—planning, procurement, and maintenance—for scalable, sustainable school connectivity in underserved regions.\n\n📅 Join us January 24-26: Participate online or in person in Geneva to develop innovative solutions with peers globally.\n\n👨\u200D🏫 Work alongside industry mentors for insights and guidance on your projects.\n\n🏆 Compete for a chance to join the Lablab NEXT incubator program!\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm48fgskd000b356zv4ebb0pv/cm48fgskd000b356zv4ebb0pv_imageLink_ss4ze20y2r.jpg",
+     url: "https://lablab.ai/event/ai-for-connectivity-hackathon",
+     start_date: ~U[2025-01-24 17:00:00Z],
+     end_date: ~U[2025-01-26 16:40:00Z]
+   },
+   %{
+     name: "AI for Connectivity Hackathon II: Building Resilient Networks ",
+     description: "🔍Create AI-driven, open-source solutions to optimize public sector network management in critical areas like predictive maintenance, total cost optimization (TOC), and energy efficiency—enhancing public sector networks' scalability, efficiency, and sustainability in underserved regions.\n\n📅 Join us February 28–March 2, 2025: Participate online or in person in vibrant Barcelona, on the sidelines of MWC 2025, to collaborate with peers worldwide and shape the future of public sector connectivity.\n\n👨\u200D🏫 Work alongside experienced industry mentors who will provide guidance and insights to elevate your solutions.\n\n💰 $5,000 prize pool for the winners!\n\n🏆 Compete for a chance to join the lablab NEXT incubator program!\n\n🧑🏻\u200D💻 Don’t wait! Sign up now to secure your spot before the Kick-Off!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm69dj4ya000d357oi9a3hgks/cm69dj4ya000d357oi9a3hgks_imageLink_gdni20w6z.jpg",
+     url: "https://lablab.ai/event/ai-for-connectivity-hackathon-building-resilient-networks",
+     start_date: ~U[2025-02-28 15:00:00Z],
+     end_date: ~U[2025-03-02 15:20:00Z]
+   },
+   %{
+     name: "AI Genesis",
+     description: "$26",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cmd66fi3u000r357go6m4qhno/cmd66fi3u000r357go6m4qhno_imageLink_oxcgqh884t1ok4oyqlmzlh3h.jpg",
+     url: "https://lablab.ai/event/ai-genesis",
+     start_date: ~U[2025-11-14 15:00:00Z],
+     end_date: ~U[2025-11-19 04:00:00Z]
+   },
+   %{
+     name: "AI GENESIS",
+     description: "AI Genesis is a global hybrid hackathon that brings AI builders together from around the world — starting online and culminating live at /function1 AI Conference & Exhibition 2026 in Dubai.\n\n📅Oct 26 – Nov 3, 2026\n• Oct 26 – Nov 2: Online build & collaboration\nAll projects must be submitted by end of day on November 2. \n• Nov 2 (Online + Dubai): An exclusive on-site build day in Dubai for selected participants.\n• Nov 3 (Dubai): Live on-stage pitching & winners announcement at the /function1 Conference.\n\n🌟 Get support from expert mentors throughout.\n\n👥 Go solo or team up.\n\n📍 Please note: If approved for the on-site experience, you’ll also have the opportunity to showcase your project live. Travel and accommodation will not be covered.\n\n🧑🏻\u200D💻 Secure your spot now, sign up before the Kick-Off Stream! ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/t84j70bfvoaxxegy1s0pof6c/t84j70bfvoaxxegy1s0pof6c_imageLink_zqyq06r86vj6yqr4bwy4cv3m.jpg",
+     url: "https://lablab.ai/event/ai-genesis-2026",
+     start_date: ~U[2026-10-26 15:00:00Z],
+     end_date: ~U[2026-11-02 15:00:00Z]
+   },
+   %{
+     name: "AI NFT Deep Learning Labs Hackathon",
+     description: "Do you want to learn how to create art with artificial intelligence? Join us for a 3-week hackathon where we will create NFT art using AI.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl56ntai80000356zvy3jjj26%2FNFT%2520hackaton%2520banner.png",
+     url: "https://lablab.ai/event/ai-nft-deep-learning-labs-hackathon",
+     start_date: ~U[2022-08-27 15:00:00Z],
+     end_date: ~U[2022-09-25 21:59:00Z]
+   },
+   %{
+     name: "AI Startup Hackathon",
+     description: "🛠️ Build your MVP in 7 days\n🤝 Find your team on the platform\n📈 Hours of educational context\n🦾 Generative AI tools to build with\n🏅 Further support for winners",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcldkmgixx0000356i279hzk6t%2Fcldkmgixx0000356i279hzk6t_wi03i59_imageLink.jpg",
+     url: "https://lablab.ai/event/ai-startup-hackathon",
+     start_date: ~U[2023-02-17 17:00:00Z],
+     end_date: ~U[2023-02-24 22:59:00Z]
+   },
+   %{
+     name: "Build your AI Startup Hackathon. Episode 2",
+     description: "🛠️ 7 days of Learning and Building\n🤝 Come with your team or find one during the Hackathon\n🦾 Free access to Generative AI models and Tech Tutorials\n🏅 Win a place in the Early Stage StartUp Accelerator program\n🚀 Join community of AI experts",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclexa142q0000356t63ip74vn%2Fclexa142q0000356t63ip74vn_mxu3nqq_imageLink.jpg",
+     url: "https://lablab.ai/event/ai-startup-hackathon-episode-2",
+     start_date: ~U[2023-03-31 13:00:00Z],
+     end_date: ~U[2023-04-07 21:59:00Z]
+   },
+   %{
+     name: "Build your AI Startup Hackathon. Episode 3",
+     description: "🛠️ Dive into 7 days of immersive learning and building 🤝 Come with your team or find one during the Hackathon🦾 Free access to Generative AI models and Tech Tutorials🏅 Win a place in the Early Stage StartUp Accelerator program🚀 Get support from mentors and best experts in the industry🌎 Join the community of AI creators around the Globe",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclgxkyoda0000356kg54zzkta%2Fclgxkyoda0000356kg54zzkta_e2c3k0k_imageLink.jpg",
+     url: "https://lablab.ai/event/ai-startup-hackathon-episode-3",
+     start_date: ~U[2023-05-12 16:00:00Z],
+     end_date: ~U[2023-05-19 21:59:00Z]
+   },
+   %{
+     name: "Build Your AI StartUp. Episode 4",
+     description: "🔧 Three days of creating your own startup!\n🤜 Team up with others or build solo during the Hackathon.\n🤖 Free access to educational materials on Generative AI models, AI Agents and more.\n🚀 Discover startUp opportunities for Hackathon teams.\n🌍 Join and build with a global AI community!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clm33wbft0000356zzhvauh83/clm33wbft0000356zzhvauh83_imageLink_a526b01gwi.jpg",
+     url: "https://lablab.ai/event/ai-startup-hackathon-episode-4",
+     start_date: ~U[2023-10-06 16:00:00Z],
+     end_date: ~U[2023-10-09 10:00:00Z]
+   },
+   %{
+     name: "AI Trading Agents",
+     description: "⏱️ Design, build, and deploy trustless AI trading agents.\n\n📅 March 30 – April 12, 2026\n\n🌐 Build AI trading agents that execute strategies using ERC-8004 or  Kraken CLI.\n\n🤝 Build solo or in teams to create autonomous trading, risk, yield, or protection agents.\n\n💰 $55,000 prize pool, allocated and shared via Surge and Kraken.\n\nYour team should have registered project at early.surge.xyz in order to be eligible for the prize.\n\nGet access in your team profile or our discord\n\n🔑 Access to early.surge.xyz \nIf prompted for login credentials, use:\n• Username: admin\n• Password: JBRv2xWG7AzwVrLz88",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/y995zcsch2bzk7mz9c98g9b4/y995zcsch2bzk7mz9c98g9b4_imageLink_rndn66s0zi6f0i90r4nvi7q4.jpg",
+     url: "https://lablab.ai/event/ai-trading-agents",
+     start_date: ~U[2026-03-30 16:00:00Z],
+     end_date: ~U[2026-04-12 16:15:00Z]
+   },
+   %{
+     name: "AI21 Labs Hackathon",
+     description: "🗓️ This will be a 7-day virtual hackathon from 13-20 January\n💻 Access AI21 Labs' state-of-the-art language models to build innovative applications\n🏆 Prizes and awards of up to $9000 API credits + $3500 cash \n💡 Meet and learn from AI21 Labs and Lablab experts \n👥 Join the community and find your team\n✔️ All levels are welcome\n📖 AI tutorials and mentors to help you\n⭐ Receive a certificate of completion and Wordtune premium for submission\n🐱\u200D💻 Sign up now! It’s free!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl9il1i0k0000356hbtlrlj1r%2Fcl9il1i0k0000356hbtlrlj1r_r403i4l_imageLink.jpg",
+     url: "https://lablab.ai/event/ai21-labs-hackathon",
+     start_date: ~U[2023-01-13 17:00:00Z],
+     end_date: ~U[2023-01-22 22:59:00Z]
+   },
+   %{
+     name: "AI21 Labs Hackathon #2",
+     description: "🗓️ This will be a 7-day virtual hackathon on 21 - 28 April\n💻 Access AI21 Labs' state-of-the-art language models to build innovative applications\n💡 Meet and learn from AI21 Labs and Lablab experts\n👥 Join the community and find your team\n✔️ All levels are welcome, AI tutorials and mentors are there to help you\n🏆 Prizes and awards of up to $9000 API credits + $3500 cash\n⭐ Receive a certificate of completion and Wordtune premium for submission\n🐱\u200D💻 Sign up now! It's free!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclfqnj7i70000356jatl87to8%2Fclfqnj7i70000356jatl87to8_g613j48_imageLink.jpg",
+     url: "https://lablab.ai/event/ai21-labs-hackathon-2",
+     start_date: ~U[2023-04-21 16:00:00Z],
+     end_date: ~U[2023-04-28 21:59:00Z]
+   },
+   %{
+     name: "AIstronauts: Space Agents on a mission",
+     description: "🕒 2 days to innovate and build groundbreaking applications using the latest generative AI tools\n\n🌟 Expert mentors will guide you every step of the way.\n\n🤝 Work alone or form a team to build something extraordinary.\n\n🏆 Win an opportunity to participate in the Lablab NEXT acceleration program.\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm5xsfsfx000q357q5hktprpp/cm5xsfsfx000q357q5hktprpp_imageLink_xm1pbz0a98.jpg",
+     url: "https://lablab.ai/event/aistronauts-space-agents-on-a-mission",
+     start_date: ~U[2025-02-07 17:00:00Z],
+     end_date: ~U[2025-02-09 17:00:00Z]
+   },
+   %{
+     name: "AMD Developer Hackathon",
+     description: "Grab your ideas, spin up compute, and start building what’s next!\n\nStart with $100 in AMD Developer Cloud credits and begin building right away. \n\nGet access to hands-on tutorials, workshops, and curated learning resources to help you build faster and go further.\n \nTo unlock credits and join the hackathon, sign up for the AMD AI Developer Program. \n\n🤝 Go solo or team up — ship something real.\n\n💰 $21,500+ total prize pool & 1 × AMD Radeon™ AI PRO R9700 GPU up for grabs. \n\n📍 On-site Venue (May 9-10):\nMindsDB SF AI Collective\n3154 17th St, San Francisco, California, USA\n\n📍On-site participation is by invitation only.\nTravel and accommodation expenses will not be covered.  \n\n🧑\u200D💻 Developers, builders, and innovators - bring your boldest ideas  and let’s turn them into real AI systems on AMD. ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/n3v922wai9khqi5gs2jctlap/n3v922wai9khqi5gs2jctlap_imageLink_gzq2ads92vzkylo0duucxcwe.jpg",
+     url: "https://lablab.ai/event/amd-developer",
+     start_date: ~U[2026-05-04 14:00:00Z],
+     end_date: ~U[2026-05-10 19:20:00Z]
+   },
+   %{
+     name: "AMD Developer Hackathon: ACT II",
+     description: "Grab your ideas, spin up compute, and start building what’s next!\n\nStart with $100 in AMD Developer Cloud credits and begin building right away. \n\nGet access to hands-on tutorials, workshops, and curated learning resources to help you build faster and go further. \n\nTo unlock credits and join the hackathon, sign up for the AMD AI Developer Program.\n\n💰 $10,000 total prize pool \n\nDevelopers, builders, and innovators - bring your boldest ideas and let’s turn them into real AI systems on AMD.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/pn62mtt8xm33vu67q8z0673s/pn62mtt8xm33vu67q8z0673s_imageLink_umycxvz5p4m8x12h7wast5tt.jpg",
+     url: "https://lablab.ai/event/amd-developer-hackathon-act-ii",
+     start_date: ~U[2026-07-06 15:00:00Z],
+     end_date: ~U[2026-07-11 15:00:00Z]
+   },
+   %{
+     name: "Anthropic AI Hackathon",
+     description: "👥 Only 3000 spots available\n🔥 Join the 7-day Hackathon\n🚀 Get access to the Claude API, AI assistant for your tasks - no waiting list needed\n🤝 Find your team in the community or work solo\n🧙\u200D♂️ Have an opportunity to connect with creators of technology directly\n",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclgw8gvkj0000356kfqbc9u0q%2Fclgw8gvkj0000356kfqbc9u0q_g513kg2_imageLink.jpg",
+     url: "https://lablab.ai/event/anthropic-ai-hackathon",
+     start_date: ~U[2023-05-26 16:00:00Z],
+     end_date: ~U[2023-06-04 21:59:00Z]
+   },
+   %{
+     name: "Aria & Allegro Multimodal Hackathon ",
+     description: "🌟 Be one of the 10 teams: gain exclusive access to Aria’s API and explore Allegro’s text-to-video capabilities!\n\n🚀 Take on the challenge to innovate using Aria, Rhymes AI’s open-source multimodal model.\n\n🤖 Build applications by integrating text, images, video, code, and more with Aria’s AI or create stunning video content with Allegro.\n\n🌍 Collaborate with a team (up to 4 members) or take on the challenge individually!\n\n🎓 Gain insights from industry experts through workshops and sessions designed to fast-track your project.\n\n🏆 Compete for a chance to win $5,000 in prizes!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm23dwhon001n3b6y6aaqbaom/cm23dwhon001n3b6y6aaqbaom_imageLink_4917l80iby.jpg",
+     url: "https://lablab.ai/event/aria-multimodal-hackathon",
+     start_date: ~U[2024-11-01 17:00:00Z],
+     end_date: ~U[2024-11-04 17:00:00Z]
+   },
+   %{
+     name: "Assistants API and Trulens Hackathon",
+     description: "Harness the power of Assistants API and Trulens technology to build cutting-edge apps!\n\n👩\u200D💻Unleash your creativity by integrating the power of Trulens and Assistants API in your app.\n🚀 7 days of online development with workshop sessions from experts in LLM!          \n🤝 Connect with developers and startup enthusiasts for future opportunities.\n💡 Develop impactful apps for meaningful and positive change in the world with strategic approach!\n",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clu2gm6os00053b6rjbvm70st/undefined_imageLink_ay795r0bma.jpg",
+     url: "https://lablab.ai/event/assistants-api-llamaindex-mongodb-battle",
+     start_date: ~U[2024-04-26 16:00:00Z],
+     end_date: ~U[2024-05-03 16:00:00Z]
+   },
+   %{
+     name: "AudioCraft 24-hours Hackathon",
+     description: "Introducing AudioCraft: Dive into the cutting-edge of audio processing and generation with deep learning! Empower your audio applications with AudioCraft for richer, more versatile soundscapes.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cllm5penb0000356qtesrymzk/cllm5penb0000356qtesrymzk_imageLink_xe11sk2.jpg",
+     url: "https://lablab.ai/event/audiocraft-24-hours-hackathon",
+     start_date: ~U[2023-08-30 16:00:00Z],
+     end_date: ~U[2023-08-31 16:00:00Z]
+   },
+   %{
+     name: "AutoGen 24-hours Hackathon",
+     description: "Join the AutoGen 24-hours Hackathon to explore AutoGen, a framework for developing customizable LLM applications using conversational agents that seamlessly integrate human input. Discover endless possibilities by combining LLMs, human interaction, and tools. Your innovation starts here!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clnt0anfw0000356x05jvzrou/undefined_imageLink_2m4qs413an.jpg",
+     url: "https://lablab.ai/event/autogen-24-hours-hackathon",
+     start_date: ~U[2023-11-02 17:00:00Z],
+     end_date: ~U[2023-11-03 17:00:00Z]
+   },
+   %{
+     name: "AutoGPT Arena Hacks",
+     description: "🤖 You have 4 weeks to build. Join in at any point!\n🌐 Connect with a global tech community.\n🎉 Win from a $30,000 cash prize pool.\n💾 The winning agent will become the AutoGPT in the 150000 star repository!\n🚀 You may continue your startup journey after the Hackathon!\n🖥️  Utilize Weaviate as the vector database for your agent with open access.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cll6p5cxj0000356zslac05gg/undefined_imageLink_du6lg024e.jpg",
+     url: "https://lablab.ai/event/autogpt-arena-hacks",
+     start_date: ~U[2023-09-29 14:00:00Z],
+     end_date: ~U[2023-10-26 08:00:00Z]
+   },
+   %{
+     name: "Autonomous Agents Hackathon",
+     description: "🏗️ Build projects with Autonomous Agents, using cutting-edge frameworks like SuperAGI, AutoGPT, BabyAGI, Langchain, and more!\n🏆 Register now and stand a chance to win up to $10,000 and a place on the SuperAGI team.\n🏁 3-days to complete your solution!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcll22l3qb000035748kv3v7h3%2Fcll22l3qb000035748kv3v7h3_yx033ll_imageLink.jpg",
+     url: "https://lablab.ai/event/autonomous-agents-hackathon",
+     start_date: ~U[2023-08-18 16:00:00Z],
+     end_date: ~U[2023-08-21 13:00:00Z]
+   },
+   %{
+     name: "Langchain x Autonomous GPT Agents Hackathon",
+     description: "🔥 Join 24-hour AI Challenge\n🦾 Create your very own AI agent, or agent simulation, in 1 day\n🛠️ Work with open source AI models to solve real world problems\n🚀 Join the community of AI creators to shape the future together!\n🤝 Find your co-founders and mentors at the event",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclgm8ykyc0000356rd0ya63cj%2Fclgm8ykyc0000356rd0ya63cj_kk03kd7_imageLink.jpg",
+     url: "https://lablab.ai/event/autonomous-gpt-agents-hackathon",
+     start_date: ~U[2023-04-29 16:00:00Z],
+     end_date: ~U[2023-04-30 21:59:00Z]
+   },
+   %{
+     name: "Aya Weekend Challenge ",
+     description: "Build with Aya to accelerate multilingual AI progress!\n\n🕒 48 hours to complete the challenge\n💡 Create apps with fine-tuning multilingual instructions from Aya.\n🤝 Take part alone or form a team with other participants\n🚀 The final project can be used for your portfolio, and the startup application to the Slingshot accelerator",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clsuhyh4e00133b6rus6ykq46/undefined_imageLink_vy6tma0s78.jpg",
+     url: "https://lablab.ai/event/aya-weekend-challenge",
+     start_date: ~U[2024-02-24 17:00:00Z],
+     end_date: ~U[2024-02-26 17:00:00Z]
+   },
+   %{
+     name: "Band of Agents Hackathon",
+     description: "📅 June 12–19, 2026\n• June 12: Kick-off Stream \n• June 12–19: Online Build Phase \n• June 19: Project Submissions Ends\n\n🌍 Fully online hackathon. Join and build from anywhere in the world.\n\n🤝 Build practical enterprise workflows where AI agents communicate, coordinate, exchange context, and complete work together.\n\n🧠 Powered by Band and Codeband, built for collaborative AI systems and agent orchestration.\n\n🏆 Prize Pool: $10,000+\n\n🧑\u200D💻 Apply now to build the next generation of enterprise multi-agent systems. ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/w2qbolodctcvil38mrvosg2x/w2qbolodctcvil38mrvosg2x_imageLink_fuyiibx1x3wq0jqs7ermhaae.jpg",
+     url: "https://lablab.ai/event/band-of-agents-hackathon",
+     start_date: ~U[2026-06-12 15:00:00Z],
+     end_date: ~U[2026-06-19 15:00:00Z]
+   },
+   %{
+     name: "Benin Multimodal AI Hackathon",
+     description: "Explore Innovations in Language Processing and Image Generation!\n\n🕒 72 hours to complete the challenge\n💡 Create revolutionary tourism and culture apps\n🤝 Take part alone or form a team with other participants\n🚀 The final project can be used for your portfolio, and the startup application to the Slingshot accelerator\n🏆 Win cash prizes, cloud credits, incubation & collaboration opportunities to develop your project further!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clv2h2zf7000c357g4dtk3g89/undefined_imageLink_lk8u20gm3.jpg",
+     url: "https://lablab.ai/event/benin-multimodal-ai-hackathon",
+     start_date: ~U[2024-05-13 16:00:00Z],
+     end_date: ~U[2024-05-16 19:00:00Z]
+   },
+   %{
+     name: "Web Data UNLOCKED Hackathon",
+     description: "🌍 Hybrid Hackathon | 💻 Online Build: May 25–30,2026 | 📍 SF Onsite Finale: May 30–31,2026 \n\nWe’ve unlocked the web for your AI. Now build what wasn’t possible before. \n\nBuild AI agents with live web data, then join the SF onsite finale at Bright Data’s new Web Data Loft. \n\n🚀 The onsite experience will take place during the opening of Bright Data’s new SF space, The Web Data Loft.\n\n📍 On-site Venue (May 30–31):\nThe Web Data Loft\n625 2nd St, San Francisco, CA\n\n🏆 $18,300 cash prize + Bright Data AI Startup Program opportunities \n\n🍕 Free food, drinks, networking, workshops, mentorship, and live demos\n\n🎁 Onsite attendees are automatically entered into a live giveaway for 4 × $100 Amazon gift cards.\n\n🧑\u200D💻 Apply now to build AI agents powered by real-time web access.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/fvnh186wdgbnmjz29joe369z/fvnh186wdgbnmjz29joe369z_imageLink_vlhe5nv71t354cidk3fzoecc.jpg",
+     url: "https://lablab.ai/event/brightdata-ai-agents-web-data-hackathon",
+     start_date: ~U[2026-05-25 17:00:00Z],
+     end_date: ~U[2026-05-31 01:00:00Z]
+   },
+   %{
+     name: "ChatGPT API & Whisper API Global Hackathon",
+     description: "🗓️ 48 hours of building (24-26th March)\n💻 Create innovative new apps with OpenAI's latest ChatGPT and Whisper APIs\n💡 Learn from top AI professionals\n⚒️ Combine new GPT 3,5 Turbo and Whisper APIs to build your AI app\n🐱\u200D💻 Now is the time to register and let's get started!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclexa6z2p0000356jf6xoq273%2Fclexa6z2p0000356jf6xoq273_kd13jry_imageLink.jpg",
+     url: "https://lablab.ai/event/chatgpt-api-and-whisper-api-global-hackathon",
+     start_date: ~U[2023-03-24 17:00:00Z],
+     end_date: ~U[2023-03-26 21:59:00Z]
+   },
+   %{
+     name: "Co-Creating with GPT-5",
+     description: "\n🕒 6 days to explore the full potential of GPT-5\n\n💡 Build next-gen AI apps\n\n🤝 Compete solo or form a dream team\n\n🚀 Connect with global innovators\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cme70pof40007356rwkhyj2jo/cme70pof40007356rwkhyj2jo_imageLink_819o60k7w.jpg",
+     url: "https://lablab.ai/event/co-creating-with-gpt-5",
+     start_date: ~U[2025-08-18 15:00:00Z],
+     end_date: ~U[2025-08-24 15:15:00Z]
+   },
+   %{
+     name: "Trae AI IDE: Zero Limits Hackathon",
+     description: "🕒 Complete the challenge within 48 hours and unlock incredible prizes!\n\n📅 June 13 - June 15 – Participate online, collaborating with innovators and builders to explore a new way of software development.\n\n🌟 Expert mentors will guide you every step of the way.\n\n🤝 Work alone or form a team to build something extraordinary.\n\n💰 $80,000 in credits and prizes!\n\n⏳ Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm9fp7ws500073570dswtb0bu/cm9fp7ws500073570dswtb0bu_imageLink_sa27404my.jpg",
+     url: "https://lablab.ai/event/code-craft-ai-x-dev-hackathon",
+     start_date: ~U[2025-06-13 08:00:00Z],
+     end_date: ~U[2025-06-15 15:00:00Z]
+   },
+   %{
+     name: "Codestral Hackathon: 24 Hours Challenge",
+     description: "Create your product using Codestral, Mistral's first-ever open-weight generative AI model for code generation.\n\n🕒 24 hours to complete the challenge.\n\n💡 Implement any idea that uses Codestral at its core.\n\n🤝 Take part alone or form a team with other participants.\n\n🏆 Win an opportunity to participate in LabLab NEXT acceleration program",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clx946f7a001d356uto1jgy67/clx946f7a001d356uto1jgy67_imageLink_1os5t0v4h.jpg",
+     url: "https://lablab.ai/event/codestral-ai-hackathon",
+     start_date: ~U[2024-07-16 16:00:00Z],
+     end_date: ~U[2024-07-17 16:00:00Z]
+   },
+   %{
+     name: "CogX Fest Online Hackathon ",
+     description: "Create promising apps of the future with support of CogX, the festival of ideas. \n\n🕒 72 hours to complete the challenge\n💡 Create revolutionary apps in health, finance, work, space & creative industries \n🤝 Take part alone or form a team with other participants\n🚀 The final project can be used for your portfolio, and the startup application to the Slingshot accelerator\n🏆 Win cash prizes and discover breakthroughs in technology, AI, and innovation.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clvb3nctg00163b7570l5k5rm/undefined_imageLink_o21r770asx.jpg",
+     url: "https://lablab.ai/event/cogx-festival-hackathon",
+     start_date: ~U[2024-05-04 16:00:00Z],
+     end_date: ~U[2024-05-06 19:00:00Z]
+   },
+   %{
+     name: "Cohere AI Hackathon #3",
+     description: "It is our pleasure to welcome you to the third Cohere AI Hackathon! Our collaboration with Cohere gives lablab.ai community members access to one of the most powerful artificial intelligence language models available. Let's build a better future together! Join us and innovate!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl795br9k0000356hqulypa9s%2Fcohere%2520ep%25203.jpg",
+     url: "https://lablab.ai/event/cohere-ai-hackathon-classify",
+     start_date: ~U[2022-09-30 17:00:00Z],
+     end_date: ~U[2022-10-02 21:59:00Z]
+   },
+   %{
+     name: "Cohere AI Hackathon #2",
+     description: "We are excited to welcome you to the second episode of the Cohere AI Hackathon! In partnership with Cohere, we are giving lablab.ai community access to one of the most powerful AI language models on the market. Join us and innovate to build a better future for everyone!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl6um6dyw00013b6gub83nmz7%2Fcohere%2520ep%25202.png",
+     url: "https://lablab.ai/event/cohere-ai-hackathon-embed",
+     start_date: ~U[2022-09-02 14:15:00Z],
+     end_date: ~U[2022-09-05 21:59:00Z]
+   },
+   %{
+     name: "Cohere AI Hackathon",
+     description: "We welcome you to join us for episode one of Cohere Online Hackathon! We're partnering with Cohere to give the LabLab community the opportunity to build with one of the world's most powerful artificial intelligence language models.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl5v3st3100003b6glov50p5k%2F27.png",
+     url: "https://lablab.ai/event/cohere-ai-hackathon-generate",
+     start_date: ~U[2022-08-19 16:00:00Z],
+     end_date: ~U[2022-08-21 15:45:00Z]
+   },
+   %{
+     name: "Cohere Coral Hackathon",
+     description: "🔐 Exclusive Access: Only 1,000 slots available for Coral model use.\n💡 Spotlight Your Idea: Showcase in this limited-entry event.\n💰 Win Big: Cash prizes and Cohere credits up for grabs.\n🌐 Collaborate Globally: Team up with AI enthusiasts worldwide.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cllmbfis60000356qrtyxxr5r/undefined_imageLink_d2468q0pwv.jpg",
+     url: "https://lablab.ai/event/cohere-coral-hackathon",
+     start_date: ~U[2023-11-10 17:00:00Z],
+     end_date: ~U[2023-11-18 15:00:00Z]
+   },
+   %{
+     name: "Cohere Hackathon",
+     description: "🗓️ This 7-day virtual hackathon from January 27 to February 3 will be your time to shine!\n💻 Construct AI apps with the latest LLM-powered technology from Cohere and try the newly released Multilingual Text Understanding model\n✔️ There's no prerequisite level. Just starting out with AI? Or perhaps you're a veteran Data Scientist? A Designer? A Business Developer? We want you and your domain expertise!\n🐱\u200D💻 Sign up now for free and let's get going!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclc0qp53h0000356j4iileamg%2Fclc0qp53h0000356j4iileamg_u013jgr_imageLink.jpg",
+     url: "https://lablab.ai/event/cohere-hackathon",
+     start_date: ~U[2023-01-27 17:00:00Z],
+     end_date: ~U[2023-02-03 22:59:00Z]
+   },
+   %{
+     name: "Cohere Thanksgiving Hackathon",
+     description: "Come to the Cohere Thanksgiving Hackathon and let's build, create, and innovate together! This is a perfect opportunity to use your skills and creativity to support a cause or make a difference. You could build a business idea or a social cause project – it's up to you! 👉 There is not only incredible prizes up for grabs, this is also a perfect opportunity to get into the absolute 🔥🔥🔥 hottest 🔥🔥🔥 trend in technology. <b> <br/><br/>Sign up now and let's make a difference this <u>Thanksgiving!</u></b> Both seasoned AI / Tech pros as well as people with other domain knowledge are welcome, our team matchmaking system will make sure you find a team to work with, or create your own and invite your friends / colleagues.  ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcla18g51p0000356jomdqhth9%2Fcla18g51p0000356jomdqhth9_ds13jf9_imageLink.jpg",
+     url: "https://lablab.ai/event/cohere-thanksgiving-hackathon",
+     start_date: ~U[2022-11-18 17:00:00Z],
+     end_date: ~U[2022-11-21 13:00:00Z]
+   },
+   %{
+     name: "Complete AI Hackathon",
+     description: "Teams work together with multiple AI agents in shared workspaces to design, build, and launch complete AI products — from initial idea to market-ready app. \n\n📅 February 23– March 1, 2026 \n\n⏱️ 6 days to build and ship an end-to-end agentic AI product \n\n🤝 Work together in shared AI workspaces where your team and AI agents collaborate in real time\n\n🔧 Build with multiple AI agents that handle development, design, testing, and documentation together \n\n🎯 Create everything in one place — from ideation to product to marketing materials, all by prompting and observing\n\n🚀 Focus on real-world products that teams could actually ship and use \n\n🏆 $3,500 in prizes + premium 3-month Complete.dev access for top teams \n\n🧑\u200D💻 Join your team workspace and start building together",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/q36m6onhz59t2m786flsz2cf/q36m6onhz59t2m786flsz2cf_imageLink_h06baj1aax086noealtiz2ol.jpg",
+     url: "https://lablab.ai/event/complete-ai-agent-hackathon",
+     start_date: ~U[2026-02-23 17:00:00Z],
+     end_date: ~U[2026-03-02 17:00:00Z]
+   },
+   %{
+     name: "Custom GPTs 48-hours Hackathon",
+     description: "Join the world’s first Custom GPTs Hackathon to create your own AI tools!\nInnovate with GPTs: Explore the possibilities of creating custom versions of ChatGPT for specific tasks or purposes.\nNo Coding Required: Anyone can build their own GPT; coding skills are not necessary.\nHands-on Experience: The primary benefit of this Hackathon is the opportunity to gain practical, hands-on experience with OpenAI's GPT technology.\nEducational Focus: Use this event as an educational journey to understand the capabilities and applications of GPTs.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clox8w1zi00003573wt3ju69d/undefined_imageLink_jb1aqm06ei.jpg",
+     url: "https://lablab.ai/event/custom-gpts-48-hours-hackathon",
+     start_date: ~U[2023-11-22 17:00:00Z],
+     end_date: ~U[2023-11-24 17:00:00Z]
+   },
+   %{
+     name: "Deriv AI Talent Sprint",
+     description: "$24",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/samf9un63imeruy3slk0e7vs/samf9un63imeruy3slk0e7vs_imageLink_dtruo00bf61ke9k5laxrwoz3.jpg",
+     url: "https://lablab.ai/event/deriv-ai-talent-sprint",
+     start_date: ~U[2026-02-06 13:00:00Z],
+     end_date: ~U[2026-02-07 17:15:00Z]
+   },
+   %{
+     name: "DOGE Hackathon",
+     description: "\n🚀 Revolutionize Government Efficiency with xAI & Grok: Embrace the Future of Public Service.\n\n⚡ Build intelligent tools to streamline government processes, cut costs, and drive impactful change.\n\n🤖 Harness the power of Grok, xAI’s advanced AI model, to automate tasks and empower citizens.\n\n🌐 Collaborate with innovative developers and create solutions that reshape public administration.\n\n📅 Register now and be part of the movement for a leaner, smarter government!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm3j29bp4000c357syh9kanc3/cm3j29bp4000c357syh9kanc3_imageLink_8a2zq20cdl.jpg",
+     url: "https://lablab.ai/event/doge-ai-hackathon",
+     start_date: ~U[2024-12-13 17:00:00Z],
+     end_date: ~U[2024-12-15 17:00:00Z]
+   },
+   %{
+     name: "Edge Runners 3.2",
+     description: "⌚ Take on a 48-hour challenge packed with creativity.\n\n🚀 Build an app powered by Llama 3.2’s capabilities.\n\n🎓 Get advice and support from industry experts along every step of the way.\n\n🏆 Win an opportunity to participate in the Lablab NEXT acceleration program\n\n💰 Stand a chance to win $5,000 in prizes.\n\n🌟 Win the opportunity to be invited, with transport and accommodation covered, to our upcoming Giga Hackathons in Barcelona or Geneva in partnership with UNICEF.\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to lock in your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm1tpq36f000d356yet13wsk2/cm1tpq36f000d356yet13wsk2_imageLink_hx1d40gks.jpg",
+     url: "https://lablab.ai/event/edge-runners-3-point-2",
+     start_date: ~U[2024-10-18 16:00:00Z],
+     end_date: ~U[2024-10-20 16:00:00Z]
+   },
+   %{
+     name: "Eleven Labs AI Hackathon",
+     description: "👅 Generate realistic, captivating speech in a wide range of languages\n🗓️ Join an exciting 3-day online hackathon from July 28 - 31\n💡 Get full mentors support at lablab.ai platform\n👥 Form Solo or Build Your Team\n🐱\u200D💻 Registration ends on July 28th morning, so don't miss out! Sign up Now!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcljh21tkq000035715n61ieja%2Fcljh21tkq000035715n61ieja_zq033em_imageLink.jpg",
+     url: "https://lablab.ai/event/eleven-labs-ai-hackathon",
+     start_date: ~U[2023-07-28 16:00:00Z],
+     end_date: ~U[2023-08-01 10:00:00Z]
+   },
+   %{
+     name: "ElevenLabs AI Audio Challenge",
+     description: "\n🕒 Challenge submission deadline is October 11th\n\n🚀 Develop groundbreaking AI audio solutions using ElevenLabs technology.\n\n💰 $6,666 prize pool for the winners.\n\n📅 Finalists present at the ML in PL conference in Warsaw on November 7th\n\n🎁 Get a promo code worth $15 of AI/ML API credits",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm0e26um30009357dhwedfmmt/cm0e26um30009357dhwedfmmt_imageLink_ep100v0zi9.jpg",
+     url: "https://lablab.ai/event/elevenlabs-ai-audio-challenge",
+     start_date: ~U[2024-09-11 09:11:00Z],
+     end_date: ~U[2024-10-12 21:59:00Z]
+   },
+   %{
+     name: "/execute: AI Genesis",
+     description: "Join us for an exclusive hackathon leading up to the /function1 AI Conference & Exhibition in Dubai (May 2, 2025) - a conference with one pivotal notion: to create a #1 platform for startups and founders of the AI field; to give them the spotlight they often lack, and represent the countless possibilities of Artificial Intelligence.\n\n📅 April 25 – May 1, 2025 – Join us online and collaborate with global AI enthusiasts.\n\n🌟 Expert mentors will guide you every step of the way.\n\n🤝 Work alone or form a team to build something extraordinary.\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm8resu8w000a3573af0dznrd/cm8resu8w000a3573af0dznrd_imageLink_hb3d5k0ejb.jpg",
+     url: "https://lablab.ai/event/execute-ai-genesis",
+     start_date: ~U[2025-04-25 16:00:00Z],
+     end_date: ~U[2025-05-01 16:00:00Z]
+   },
+   %{
+     name: " Falcon Hackathon",
+     description: "🌟 Explore new AI capabilities\n🤝 Collaborate and build something extraordinary.\n👥 Take part alone or form a team with other participants.\n🎓 Receive guidance from expert mentors.\n🏆 Compete for $20,000 in Prizes.\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clxosrgnm00133b6tlf0k5cgc/clxosrgnm00133b6tlf0k5cgc_imageLink_432k5j08gx.jpg",
+     url: "https://lablab.ai/event/falcon-hackathon",
+     start_date: ~U[2024-07-26 16:00:00Z],
+     end_date: ~U[2024-08-07 16:00:00Z]
+   },
+   %{
+     name: "Falcon LLMs 24-hours Hackathon",
+     description: "Join us for a 24-hour hackathon centered around Falcon LLMs, a powerful language model. Collaborate, innovate, and compete to create impressive solutions.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clmoyvjji0000356sejcyc95x/clmoyvjji0000356sejcyc95x_imageLink_g21vy1zop.jpg",
+     url: "https://lablab.ai/event/falcon-llms-24-hours-hackathon",
+     start_date: ~U[2023-09-23 16:00:00Z],
+     end_date: ~U[2023-09-24 16:00:00Z]
+   },
+   %{
+     name: "Falcon LLMs Hackathon sponsored by GAIA",
+     description: "Join us for an exhilarating 4-days hackathon centered around Falcon LLMs, a cutting-edge language model. The hackathon is sponsored by GAIA, the leading startup acceleration program, providing participants with the opportunity to apply for the next cohort and build innovative companies in Saudi Arabia.\n",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clnc206520000356tcair7fbp/undefined_imageLink_7191231rgz.jpg",
+     url: "https://lablab.ai/event/falcon-llms-hackathon-with-gaia",
+     start_date: ~U[2023-10-26 16:00:00Z],
+     end_date: ~U[2023-10-30 11:00:00Z]
+   },
+   %{
+     name: "Fall in Love with Deepseek",
+     description: "\n⏱️ 2 days to explore and create innovative applications powered by DeepSeek's advanced AI search capabilities.\n\n🌟 Receive guidance from expert mentors who will support you throughout the challenge.\n\n🤝 Collaborate with others or work independently to bring your groundbreaking ideas to life.\n\n🏆 Compete for an opportunity to participate in the prestigious lablab NEXT acceleration program.\n\n🧑\u200D💻 Secure your spot now and dive into the transformative world of AI-driven insights with DeepSeek!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm6ifrxgc000535720vhskc3x/cm6ifrxgc000535720vhskc3x_imageLink_zpbrq0ogw.jpg",
+     url: "https://lablab.ai/event/fall-in-love-with-deepseek",
+     start_date: ~U[2025-02-14 16:00:00Z],
+     end_date: ~U[2025-02-16 17:00:00Z]
+   },
+   %{
+     name: "Fine-Tuning 24-hours Challenge",
+     description: "Fine-tuning is a technique that empowers pre-trained models to perform specific tasks or behaviors, opening up a world of possibilities for customization and specialization. Dive into the details of this cutting-edge technology and showcase your skills in this fast-paced hackathon!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clm99g3av0000356wwlv2honr/clm99g3av0000356wwlv2honr_imageLink_hohxa13zp.jpg",
+     url: "https://lablab.ai/event/fine-tuning-24-hours-challenge",
+     start_date: ~U[2023-09-14 16:00:00Z],
+     end_date: ~U[2023-09-15 16:00:00Z]
+   },
+   %{
+     name: "Gemini AI Hackathon",
+     description: "Step into the future of AI: Experience and innovate with the cutting-edge Gemini AI model.\nFirst-hand Experience: Dive into the latest AI technology with Gemini AI, right after its release.\nElevate your AI knowledge and coding prowess in a stimulating and supportive atmosphere.\nTeam up with like-minded innovators and tech enthusiasts. You can work solo, or in a team of up to 6 members.\nEnhance your LLM apps with TruLens: Use sophisticated evaluation and performance tracking tools for superior output quality.\nNote: Dates may change if the Gemini AI model release is postponed by Google Cloud.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clpwpj3og000f357f0vttkxzm/undefined_imageLink_aaeo0jgn.jpg",
+     url: "https://lablab.ai/event/gemini-ai-hackathon",
+     start_date: ~U[2023-12-15 17:00:00Z],
+     end_date: ~U[2023-12-22 17:00:00Z]
+   },
+   %{
+     name: "Gemini Ultra 1.0 Hackathon",
+     description: "Embrace app creation with a game-changing mobile app from Google! \n👊 Try new true competitor of ChatGPT 4\n💡 Create app with intuitive support fr0m Gemini Ultra 1.0\n🤝 Take part alone or form a team with other participants\n",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clskgr1nl00123b7epmp436t8/undefined_imageLink_of20k0306.jpg",
+     url: "https://lablab.ai/event/gemini-ultra-hackathon",
+     start_date: ~U[2024-03-22 17:00:00Z],
+     end_date: ~U[2024-03-25 17:00:00Z]
+   },
+   %{
+     name: "Gemma 2 AI Challenge",
+     description: "It’s a great opportunity to:\n\n🚀 Leverage Google’s advanced Gemma 2 models to create cutting-edge solutions.\n\n💰 Access resources to support your project development.\n\n🌟 Receive guidance from expert mentors throughout the hackathon.\n\n🤝 Work solo or in teams to bring your ideas to life.\n\n🏆 Compete for a chance to choose from unique Google swag and enjoy an opportunity to meet the Gemma team for the best solutions!\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!\n\n🗓️ On-site Workshops: Join us in-person at Google Cloud Space in London on 28th November from 5:00 PM to 9:00 PM UK time (GMT) for  hands-on workshops",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm2522pig0005357l0fb5t6y7/cm2522pig0005357l0fb5t6y7_imageLink_np1hq0gt8.jpg",
+     url: "https://lablab.ai/event/gemma-2-ai-challenge",
+     start_date: ~U[2024-11-28 17:00:00Z],
+     end_date: ~U[2024-12-01 17:00:00Z]
+   },
+   %{
+     name: "Generative AI Hackathon",
+     description: "🗓️ This will be a 48-Hour Virtual Hackathon from 2 - 4 December\n💻 Technology: You will build applications with generative AI supplied by Cohere\n✔️ Level: All levels are welcome\n😊 For whom?: Builders, creators & innovators!\n 💲 The Event is totally free!\n 🏆 $2000 cash prize pool!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclagsyb1o0000356hwul2ycbn%2Fclagsyb1o0000356hwul2ycbn_zp03not_imageLink.jpg",
+     url: "https://lablab.ai/event/generative-ai-hackathon",
+     start_date: ~U[2022-12-02 17:00:00Z],
+     end_date: ~U[2022-12-05 22:59:00Z]
+   },
+   %{
+     name: "Generative AI Hackathon with IBM Granite",
+     description: "Drive efficiency, automation, and innovation by streamlining workflows and integrating seamless processes.\n\n⏳ You have 48 hours to complete the challenge and compete for prizes.\n\n🚀 Learn and build AI solutions with IBM Granite.\n\n💡 Create impactful solutions that drive smarter business operations.\n\n⭐ Gain expert guidance throughout the hackathon.\n\n🤝 Collaborate or work solo to bring your ideas to life.\n\n💰 $10,000 prize pool for the winners!\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream and start shaping the future with IBM Granite!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm6rtr6pf000c356ytb4y55ol/cm6rtr6pf000c356ytb4y55ol_imageLink_hv3320ir6.jpg",
+     url: "https://lablab.ai/event/generative-ai-hackathon-with-ibm-granite",
+     start_date: ~U[2025-02-21 17:00:00Z],
+     end_date: ~U[2025-02-23 17:00:00Z]
+   },
+   %{
+     name: "Google Vertex AI Hackathon",
+     description: "🚀💻 Be the first to build an AI App on Google's models! Hackathon on July 7-10.\n🔬🌐 Try new Vertex AI features from Google Cloud Platform.\n🤝🌍 Learn from AI leaders and connect with like-minded people.\n🛠️📱 Build apps with the world's best AI tools!\n💡🌍 Solve real-world problems with Generative AI models",
+     location: "Online",
+     image: "https://imagedelivery.net/K11gkZF3xaVyYzFESMdWIQ/dbf3d147-60b0-4dce-d5e2-3e5168e8f500/full",
+     url: "https://lablab.ai/event/google-vertex-ai-hackathon",
+     start_date: ~U[2023-07-07 16:00:00Z],
+     end_date: ~U[2023-07-10 14:00:00Z]
+   },
+   %{
+     name: "GPT-4 Powered App Creation and Evals Hackathon",
+     description: "🚀 Tap into OpenAI's models for diverse app needs: text and image generation, text-to-speech, vision, and more!\n🧑🏻\u200D💻 Go one step further. Get your application ready for production using TruLens evaluations!\n🤝 Work in teams of 1 to 6 members, fostering community connections!\n🏆 Prize Pool: $2,500 in Cash and $2,500 in Portkey Credits!\n💡 Extend beyond the Hackathon—build your startup with support and opportunities beyond the initial project.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clrkn589j000h357e5ceuxdb2/undefined_imageLink_6r10c0m5q.jpg",
+     url: "https://lablab.ai/event/gpt-4-powered-app-creation-hackathon",
+     start_date: ~U[2024-02-16 17:00:00Z],
+     end_date: ~U[2024-02-23 17:00:00Z]
+   },
+   %{
+     name: "OpenAI GPT-3 Online Hackathon 2022 #1",
+     description: "Explore GPT-3's capabilities including Files, Answers, and Fine-tuning at our upcoming event",
+     location: "Online",
+     image: "https://imagedelivery.net/K11gkZF3xaVyYzFESMdWIQ/10e98070-30e7-4323-26e2-f1df21feb600/full",
+     url: "https://lablab.ai/event/gpt3-online",
+     start_date: ~U[2022-06-24 14:00:00Z],
+     end_date: ~U[2022-06-26 12:00:00Z]
+   },
+   %{
+     name: "HACK THE LOOP",
+     description: "🕒 15 days to complete the challenge.\n\nIt's an amazing opportunity to:\n\n🌟 Explore new AI capabilities\n\n🤝 Collaborate and build something extraordinary.\n\n👥 Take part alone or form a team with other participants.\n\n🎓 Receive guidance from expert mentors.\n\n🏆 Compete for $32,500 in Prizes and a Full-Time Job Opportunity!\n\n🎓 Exclusive job offers for top participants.\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clwhnjjy00016356y6jewpy5c/undefined_imageLink_kt4wa06bj.jpg",
+     url: "https://lablab.ai/event/hack-the-loop",
+     start_date: ~U[2024-06-15 16:00:00Z],
+     end_date: ~U[2024-07-02 16:00:00Z]
+   },
+   %{
+     name: "Llama Impact Pan-LATAM Hackathon-es",
+     description: "🔍 Aprovechar la implementación de IA para transformar la educación, impulsar el crecimiento económico y extender los beneficios de la IA a áreas vulnerables.\n\n🧑🏻\u200D💻 Este hackathon es exclusivamente para participantes de toda América Latina.\n\n📅 Únete del 22 al 25 de noviembre: Colabora virtualmente con colegas de todo LATAM para innovar soluciones para tus comunidades.\n\n👨\u200D🏫 Trabaja junto a mentores de Meta AI y LabLab, obteniendo conocimientos para fortalecer tu proyecto.\n\n🌍 El evento se llevará a cabo con partes en inglés y partes en español. Cada participante podrá decidir si presenta su proyecto en inglés o en español.\n\n🏆 Compite por tu parte de $5,000 dólares en premios y la oportunidad de escalar tu proyecto para lograr un impacto social.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm3btx1r2000o3b7f7iwmxltj/cm3btx1r2000o3b7f7iwmxltj_imageLink_pj1pe00ln.jpg",
+     url: "https://lablab.ai/event/hackathon-llama-impact-pan-latam-es",
+     start_date: ~U[2024-11-22 13:00:00Z],
+     end_date: ~U[2024-11-25 19:00:00Z]
+   },
+   %{
+     name: "Hackathon Llama Impatto Roma",
+     description: "$28",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm37csg0j000r357l7r0sqvih/cm37csg0j000r357l7r0sqvih_imageLink_ep2p00km8.jpg",
+     url: "https://lablab.ai/event/hackathon-llama-impatto-roma",
+     start_date: ~U[2024-11-29 17:00:00Z],
+     end_date: ~U[2024-12-01 16:15:00Z]
+   },
+   %{
+     name: "Hello GPT-4o AI Challenge ",
+     description: "Create noteworthy apps with advanced reasoning across audio, vision, and text in real time with GPT-4o.\n🕒 72 hours to complete the challenge\n💡 Create revolutionary apps which use GPT-4o advanced features\n🤝 Take part alone or form a team with other participants\n🚀 Engage in a 3-day virtual development marathon and network with tech and business leaders\n🏆 Win opportunity to participate in LabLab NEXT acceleration program ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clw7myukj00013b6tq6iubd0r/undefined_imageLink_iu6w770ytv.jpg",
+     url: "https://lablab.ai/event/hello-gpt-4o-ai-challenge",
+     start_date: ~U[2024-05-31 16:00:00Z],
+     end_date: ~U[2024-06-02 19:00:00Z]
+   },
+   %{
+     name: "IBM Bob Hackathon",
+     description: "Build solutions that improve how software is built.\nWork with an AI that understands your codebase, helping you reduce repetitive work and build with real context.\n\n⏳ Build your project in 48 hours. \n🚀 Get hands-on with IBM Bob and explore how AI fits into real development workflows before it becomes standard.\n💡 Build tools and workflows that developers would actually use. \n⭐ Learn directly from experts throughout the event.\n🤝 Join a team or build solo.\n💰 Prize pool: $10,000\n🧑🏻\u200D💻 Register before the Kick-Off Stream and start building with Bob.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/z55p8ld1kzke3m7wpiw7t9p1/z55p8ld1kzke3m7wpiw7t9p1_imageLink_a99n4zxv8d7ho8yq7lhbus34.jpg",
+     url: "https://lablab.ai/event/ibm-bob-hackathon",
+     start_date: ~U[2026-05-15 15:00:00Z],
+     end_date: ~U[2026-05-17 15:35:00Z]
+   },
+   %{
+     name: "IBM watsonx Assistant",
+     description: "🕒 Complete the challenge within 48 hours and unlock incredible prizes and unique opportunities!\n\nIt's an amazing opportunity to:\n\n🚀 Learn, design, and build an intelligent conversational AI assistant utilizing IBM watsonx Assistant.\n\n💰 Receive the necessary resources to kick off your solution development.\n\n🌟 Expert mentors will guide you every step of the way.\n\n🤝 Work alone or form a team to build something extraordinary.\n\n💰 $14,500 prize pool for the winners!\n\n🏆 Win an opportunity to participate in the Lablab NEXT acceleration program.\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm24smi6m000p357jz9qo304x/cm24smi6m000p357jz9qo304x_imageLink_7vfw702cg.jpg",
+     url: "https://lablab.ai/event/ibm-watsonx-assistant",
+     start_date: ~U[2024-11-15 17:00:00Z],
+     end_date: ~U[2024-11-18 17:00:00Z]
+   },
+   %{
+     name: "Generative AI Hackathon with IBM watsonx",
+     description: "🕒You have 2 days to complete the challenge. Compete for exciting prizes and exclusive opportunities.\n\nIt's an amazing opportunity to:\n\n🚀 Compete to craft an app supercharged by IBM’s advanced AI models.\n\n💰 Receive the necessary resources to kick off your app development.\n\n🌟 Expert mentors will guide you every step of the way.\n\n🤝 Work alone or form a team to build something extraordinary.\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clyyg9s36000f357erj4ytsnm/clyyg9s36000f357erj4ytsnm_imageLink_143zw03r1.jpg",
+     url: "https://lablab.ai/event/ibm-watsonx-challenge",
+     start_date: ~U[2024-08-23 16:00:00Z],
+     end_date: ~U[2024-08-26 16:00:00Z]
+   },
+   %{
+     name: "The INTERNET OF AGENTS HACKATHON @SOLANA SKYLINE",
+     description: "Join the Internet of Agents Hackathon to build real-world, rentable agents using Coral Protocol and Solana-powered payments.\n\n📅 September 14–21, 2025\n\nSept 14–21: Build online with global innovators. Submit projects by the deadline.\nSept 20 (NYC): On-site build day at Solana Skyline (invitation only).\nSept 21 (NYC): Live pitches, networking, and winner announcements.\n🧠 Mentorship from experts and Coral specialists throughout.\n\n 🤝 Participate solo or in teams.\n\n 📍 Travel and accommodation not covered.\n\n🚀 Sign up now to secure your spot before the Kick-Off Stream!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cmdqo8hk1000f3572ulnerdh0/cmdqo8hk1000f3572ulnerdh0_imageLink_t517a0ly7.jpg",
+     url: "https://lablab.ai/event/internet-of-agents",
+     start_date: ~U[2025-09-14 21:00:00Z],
+     end_date: ~U[2025-09-21 19:40:00Z]
+   },
+   %{
+     name: "LabLab Next Hackathon",
+     description: "🔧 Spend 10 days launching your startup!\n\n🚀 Improve your prototype previously developed at hackathons.\n\n🤜 Collaborate with peers or work independently throughout the Hackathon.\n\n🤖 Gain complimentary access to learning resources about Generative AI models, AI Agents, and beyond.\n\n🚀 Explore opportunities with GAIA Startup Accelerator for Hackathon victors.\n\n🌍 Connect and innovate alongside a worldwide AI community!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clvv6kryz001g3b6tv4lte82a/undefined_imageLink_68lwe087o.jpg",
+     url: "https://lablab.ai/event/lablab-next-create-your-startup",
+     start_date: ~U[2024-06-28 16:00:00Z],
+     end_date: ~U[2024-07-04 16:00:00Z]
+   },
+   %{
+     name: " Build with Low-Code: Langflow Hack",
+     description: "⌚ Jump into a 48-hour journey of app creation and creativity.\n\n🚀 Use Langflow API to build innovative applications.\n\n🎓 Get support and insights from mentors throughout the event.\n\n🏆  Develop the best app using Langflow and compete for a share of the $5,000 total prize pool!\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clxnphmj200153b6tn0cpmvzb/clxnphmj200153b6tn0cpmvzb_imageLink_f11e203ww.jpg",
+     url: "https://lablab.ai/event/langflow-hackathon",
+     start_date: ~U[2024-07-12 16:00:00Z],
+     end_date: ~U[2024-07-15 19:00:00Z]
+   },
+   %{
+     name: "Launch and Fund Your Own Startup-Edition 1",
+     description: "$23",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/qqm4r3l7ugompbq37mgd2l94/qqm4r3l7ugompbq37mgd2l94_imageLink_rc187nnji0mlkzkc4fzqxkka.jpg",
+     url: "https://lablab.ai/event/launch-fund-ai-meets-robotics",
+     start_date: ~U[2026-02-06 18:00:00Z],
+     end_date: ~U[2026-02-15 01:15:00Z]
+   },
+   %{
+     name: "LEAP 2024 Hackathon ",
+     description: "🚀 72 hours of intensive development online and onsite, with workshops and mentorship sessions!          \n🏆 Around 200,000 USD in awards for top innovations, including cash prizes, incubation support, and opportunities for pilot projects with partner organizations (see below for more details).\n🪙Additional cash prizes on offer!\n🤝 Opportunities to connect with industry leaders, potential investors, and fellow innovators (at LEAP).  \n💡 Extend beyond the Hackathon—build your startup with support and opportunities beyond the initial project.\n🖥️ Join offline at LEAP 2024. Fill out the form when you register to secure your spot. Limited spots available. ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clsvwsh8m000x3b6rhvbmf7cf/undefined_imageLink_xbaa800rg.jpg",
+     url: "https://lablab.ai/event/leap-2024-hackathon",
+     start_date: ~U[2024-03-04 09:00:00Z],
+     end_date: ~U[2024-03-07 15:45:00Z]
+   },
+   %{
+     name: "Legal AI Challenge",
+     description: "Craft an inventive application, tool, or interactive feature that utilizes Legal AI to address legal challenges and revolutionize the industry!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clneypg6l0000356tdo9bvcff/undefined_imageLink_1346p51mqg.jpg",
+     url: "https://lablab.ai/event/legaltech-ai-hackathon",
+     start_date: ~U[2023-10-24 16:00:00Z],
+     end_date: ~U[2023-10-25 16:00:00Z]
+   },
+   %{
+     name: "Llama 2 Hackathon with Clarifai",
+     description: "⌚ 3-day AI Hackathon\n🚀 Compete to build an AI app powered by Llama 2\n💡 Learn how to extend your capabilities with Clarifai!\n🎓 Mentors are available to support you during your creative journey",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcll4v0uea0000356q0qn98sla%2Fcll4v0uea0000356q0qn98sla_87c33r8_imageLink.jpg",
+     url: "https://lablab.ai/event/llama-2-hackathon-with-clarifai",
+     start_date: ~U[2023-08-25 16:00:00Z],
+     end_date: ~U[2023-08-28 10:00:00Z]
+   },
+   %{
+     name: "Llama 3 Hackathon",
+     description: "⌚ Dive into a 48-hour journey of creativity.\n\n🚀 Compete to craft an app supercharged by Llama 3.\n\n🎓 Expert mentors will guide you every step of the way.\n\n🏆 Win an opportunity to participate in the Lablab NEXT acceleration program, exciting cash prizes, credits, and gear from LlamaIndex, Together AI & Zilliz\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clw13vm5r001k356t6lox3ahz/clw13vm5r001k356t6lox3ahz_imageLink_9u464f0y6t.jpg",
+     url: "https://lablab.ai/event/llama-3-ai-hackathon",
+     start_date: ~U[2024-07-19 16:00:00Z],
+     end_date: ~U[2024-07-21 16:00:00Z]
+   },
+   %{
+     name: "Llama Impact Hackathon",
+     description: "🚀 Take your chance and build a proactive AI solution.\n\n🌟 Expert mentors will guide you every step of the way.\n\n🤝 Work alone or form a team to build something extraordinary.\n\n💰 $22,250 prize pool for the winners!\n\n🌉 Join us online or in person in San Francisco for an unforgettable experience!\n\n🧑🏻\u200D💻 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm221rb2b001w3573lng7elz4/cm221rb2b001w3573lng7elz4_imageLink_jsbjp0x0a.jpg",
+     url: "https://lablab.ai/event/llama-impact-hackathon",
+     start_date: ~U[2024-11-09 05:00:00Z],
+     end_date: ~U[2024-11-11 00:45:00Z]
+   },
+   %{
+     name: "Lokahi Innovation in Healthcare ",
+     description: "🕒 2 days to dive into this transformative healthcare technology challenge!\n\n🏝️ Join us onsite in Honolulu, Hawaii for an exciting hybrid hackathon experience! If you can't be with us in person, no worries—you can still participate and contribute online.\n\n💡 Leverage AI, data analytics, and cloud computing to create innovative solutions that improve healthcare outcomes in Hawaii and beyond.\n\n🤝 Compete solo or team up with diverse healthcare, tech, and academia innovators.\n\n🏆 Stand a chance to win amazing prizes and make an impact!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clxafvp21001m356ylkui7lgb/clxafvp21001m356ylkui7lgb_imageLink_av2za0o4m.jpg",
+     url: "https://lablab.ai/event/lokahi-innovation-in-healthcare",
+     start_date: ~U[2024-12-07 05:00:00Z],
+     end_date: ~U[2024-12-11 17:00:00Z]
+   },
+   %{
+     name: "AI Agent Olympics Hackathon",
+     description: "⏱️ Build the next generation of Autonomous Agents in the heart of Europe’s AI Revolution. \n\n📅 May 13 – 20, 2026 \nMay 13 – 19: Online Build Phase.\nMay 19: An exclusive on-site build day at Milan AI Week for selected participants. \nMay 20:  Awards Ceremony. \n\n📍On-site Venue (May 19–20): Fiera Milano (Rho), Milan, Italy\n\n🤝 Join solo or with a team.\n\n🎟 FREE Milan AI Week conference ticket included for participants.\n\n💰 $32,000+ prize pool\n\n🧑\u200D💻 Apply now to turn your autonomous agent into a market-ready enterprise solution.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/dk0pq00fw88uufuvi1p1u928/dk0pq00fw88uufuvi1p1u928_imageLink_u1p62xx6sqmib3zs6bugipt3.jpg",
+     url: "https://lablab.ai/event/milan-ai-week-hackathon",
+     start_date: ~U[2026-05-13 15:00:00Z],
+     end_date: ~U[2026-05-19 14:35:00Z]
+   },
+   %{
+     name: "Mistral 7B 24-Hours Hackathon",
+     description: "🚀 Join us for an exhilarating 24-hour coding marathon, where you'll harness the power of the Mistral 7B model, a true game-changer in natural language processing.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clnbp5sla0000356t6zs038tp/undefined_imageLink_uv5ji1sti.jpg",
+     url: "https://lablab.ai/event/mistral-7b-24-hours-hackathon",
+     start_date: ~U[2023-10-19 16:00:00Z],
+     end_date: ~U[2023-10-20 16:00:00Z]
+   },
+   %{
+     name: "Mixtral 8x7B: 24 Hours Challenge",
+     description: "At this event, you are challenged to create your own product with the Mixtral 8x7B LLM that overperformed GPT 3.5, and Llama 2 70B on most of the benchmarks.\n\n🕒 24 hours to complete the challenge\n💡 Implement any idea that uses Mixtral 8x7B in its core\n🤝 Take part alone or form a team with other participants\n🚀 The final project can be used for your portfolio, and the startup application to the Slingshot accelerator",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clqgrilce0007357efdiaaraq/undefined_imageLink_agcmu0jdf.jpg",
+     url: "https://lablab.ai/event/mixtral-8x7b-24-hours-challenge",
+     start_date: ~U[2024-01-11 17:00:00Z],
+     end_date: ~U[2024-01-12 17:00:00Z]
+   },
+   %{
+     name: "The monday.com AI app hackathon",
+     description: "🔥 3 days to create your app\n🌐 Join the hack in London, Tel Aviv and virtual on lablab.ai\n🤝 Build alone, or create your team on lablab.ai\n🚀 Have the opportunity to go-to-market and grow your product on the monday app marketplace\n📌 Each team member must register individually. Please note that space is limited for our in-person hackathons. Spots will be allocated on a first-come, first-approved basis.\n",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcli8zqf7l0000356rodc2fbb3%2Fcli8zqf7l0000356rodc2fbb3_vm2r3oi0_imageLink.jpg",
+     url: "https://lablab.ai/event/monday-ai-app-hackathon",
+     start_date: ~U[2023-06-20 11:00:00Z],
+     end_date: ~U[2023-06-23 07:00:00Z]
+   },
+   %{
+     name: "Cohere and Qdrant Multilingual Semantic Search Hackathon",
+     description: "🗓️ Take part in this 7-day virtual hackathon from March 10 to March 17!\n💻 Create AI applications utilizing Cohere's LLM-powered Multilingual Text Understanding model and Qdrant's vector search engine.\n✔️ Are you new to AI or an experienced data scientist? Designer, or business developer? Regardless of your experience and background, we welcome you and value your domain expertise.\n🐱\u200D💻 Join us for free and let's get started!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclect7lts0000356kwijsh28b%2Fclect7lts0000356kwijsh28b_6s13kpw_imageLink.jpg",
+     url: "https://lablab.ai/event/multilingual-semantic-search-hackathon",
+     start_date: ~U[2023-03-10 19:00:00Z],
+     end_date: ~U[2023-03-17 22:59:00Z]
+   },
+   %{
+     name: "Multimodal Hackathon",
+     description: "Welcome to the 3-day event that brings together developers, data scientists, and AI enthusiasts to explore the capabilities of Fuyu-8B and LLaVA, two cutting-edge models in the world of multimodal AI.\n\n🤖 Fuyu-8B: Unleash the potential of Fuyu-8B, a multi-modal transformer, to tackle image-related tasks and fine-grained image understanding with rapid response times.\n🤯 LLaVA: Dive deep into LLaVA, a chatbot with a focus on language and vision, excelling in science question-answering and versatile applications in multimodal AI.\n💡 Challenge: Choose any industry, identify unique business challenges, and create innovative AI prototypes.\n🌟 Startup Opportunity: Top performers may secure entry into prestigious startup accelerator programs like GAIA and Slingshot.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clogya8e50000356qn8xmsfei/undefined_imageLink_2j62bv0key.jpg",
+     url: "https://lablab.ai/event/multimodal-hackathon",
+     start_date: ~U[2023-11-17 17:00:00Z],
+     end_date: ~U[2023-11-20 11:00:00Z]
+   },
+   %{
+     name: "Agentic Economy on Arc",
+     description: "$22",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cokcujybyg4odzqbqri0vgsy/cokcujybyg4odzqbqri0vgsy_imageLink_xtqn6zyn74jo0vl174qxboqo.jpg",
+     url: "https://lablab.ai/event/nano-payments-arc",
+     start_date: ~U[2026-04-20 16:00:00Z],
+     end_date: ~U[2026-04-26 00:15:00Z]
+   },
+   %{
+     name: "Build Your AI Startup #2: Edge Runners",
+     description: "🚀 Elevate Your Hackathon Prototype into a Startup.\n🤜 Find Teammates from a 150k+ Builder Community.\n🏆 Win an opportunity to participate in the Lablab NEXT accelerator.\n🌍 Connect with a Global AI Community and Innovate Together.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clz9s4wyq000p3b6z3veminw4/clz9s4wyq000p3b6z3veminw4_imageLink_gp9uar0j1k.jpg",
+     url: "https://lablab.ai/event/next2-edge-runners",
+     start_date: ~U[2024-08-16 16:00:00Z],
+     end_date: ~U[2024-08-23 16:00:00Z]
+   },
+   %{
+     name: "NextGen GPT AI Hackathon",
+     description: "🚀 Access Models with Clarifai Get access to advanced models released by OpenAI recently through Clarifai platform!\n\nBuild with the Latest Technology Today - GPT-4(Vision),  Assistants API, Text to Speech, GPT-4 Turbo, Image Generation DALL·E API!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cloyj02dk00003571jvvywu4n/undefined_imageLink_6s3izi0enn.jpg",
+     url: "https://lablab.ai/event/nextgen-gpt-ai-hackathon",
+     start_date: ~U[2024-01-12 18:00:00Z],
+     end_date: ~U[2024-01-22 12:00:00Z]
+   },
+   %{
+     name: "Open Interpreter Hackathon",
+     description: "Open Interpreter is a locally running implementation of OpenAI's Code Interpreter, Open Interpreter lets you run code (Python, Javascript, Shell, etc.) through a natural-language interface in your terminal, empowering you to automate tasks, analyze data, create content, and more with ease.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cln09wa9h000035788pwdkscn/undefined_imageLink_zg1fs01xyl.jpg",
+     url: "https://lablab.ai/event/open-interpreter-hackathon",
+     start_date: ~U[2023-10-12 16:00:00Z],
+     end_date: ~U[2023-10-14 16:00:00Z]
+   },
+   %{
+     name: "Open Source AI Hackathon",
+     description: "🔥 48 hours of creation\n🦾 Build with Open Source AI models\n🚀 Tutorials and mentors to support you\n🤝 Collaborate with the community of AI creators!\n",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclguy2sq10000356rmcakh2wl%2Fclguy2sq10000356rmcakh2wl_ta213mrn_imageLink.jpg",
+     url: "https://lablab.ai/event/open-source-ai-hackathon",
+     start_date: ~U[2023-05-05 16:00:00Z],
+     end_date: ~U[2023-05-08 21:59:00Z]
+   },
+   %{
+     name: "OpenAI Codex",
+     description: "The event is for those that have access to OpenAI Codex. (we exploring possibilities to grant users without access, access..)",
+     location: "Online",
+     image: "https://nextgrid.ai/wp-content/uploads/2021/09/openai-codex-deep-learning-labs-5-scaled.jpg",
+     url: "https://lablab.ai/event/openai-codex",
+     start_date: ~U[2021-10-09 09:40:59Z],
+     end_date: ~U[2021-10-10 22:40:59Z]
+   },
+   %{
+     name: "OpenAI GPT-3",
+     description: "This event we will focus on GPT-3 functions such as Files, Answers & Fine-tuning",
+     location: "Online",
+     image: "https://nextgrid.ai/wp-content/uploads/2021/08/dll_16_9_NEW-scaled.jpg",
+     url: "https://lablab.ai/event/openai-gpt-3",
+     start_date: ~U[2021-09-04 09:40:59Z],
+     end_date: ~U[2021-09-05 09:40:59Z]
+   },
+   %{
+     name: "OpenAI GPT-3 Weekend Hackathon",
+     description: "Join us for a weekend and build most powerful production ready NLP model",
+     location: "Online",
+     image: "https://nextgrid.ai/wp-content/uploads/2021/11/openai-codex-deep-learning-labs-6-2.jpg",
+     url: "https://lablab.ai/event/openai-gpt-3-12-14",
+     start_date: ~U[2021-11-19 11:40:59Z],
+     end_date: ~U[2021-11-21 23:40:59Z]
+   },
+   %{
+     name: "OpenAI Stack Hack",
+     description: "🗓️ This will be a week of hacking and fun from 24 February to 3 March\n💻 Create innovative new apps with OpenAI's latest AI tools\n💡 Learn from top AI professionals\n⚒️ Combine GPT-3, Codex, Dalle-2, and Whisper to build your AI app\n🐱\u200D💻 Now is the time to register and let's get started!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclbqrbp1w0000356j88fvai67%2Fclbqrbp1w0000356j88fvai67_qi03kyf_imageLink.jpg",
+     url: "https://lablab.ai/event/openai-hackathon",
+     start_date: ~U[2023-02-24 17:00:00Z],
+     end_date: ~U[2023-03-04 01:59:00Z]
+   },
+   %{
+     name: "OpenAI Whisper, GPT3, Codex &  DALL-E 2 Hackathon",
+     description: "🗓️ This will be a 7-days of hacking and fun from 9-16 December\n💻 Build with the latest AI tools from OpenAI to create innovative new apps\n💡 Work with top AI professionals and learn from them\n⚒️ Create your AI app by combining GPT-3, Codex, Dalle-2, and Whisper\n🐱\u200D💻 Register now and let's get started!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclar54a4a0000356n3mordhvt%2Fclar54a4a0000356n3mordhvt_0f03n15_imageLink.jpg",
+     url: "https://lablab.ai/event/openai-whisper-gpt3-codex-dalle2-hackathon",
+     start_date: ~U[2022-12-09 17:00:00Z],
+     end_date: ~U[2022-12-17 22:59:00Z]
+   },
+   %{
+     name: "OpenAI Whisper Hackathon",
+     description: "Join us for a hackathon where we will be using OpenAI Whisper to create innovative solutions! Whisper is a neural net that has been trained to approach human level robustness and accuracy for English speech recognition. We will be using this tool to create applications that can transcribe in multiple languages, as well as translate from those languages into English. This will be a great opportunity for you to learn more about speech processing and to create some useful applications!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl8d363k40000356hkpklwxno%2Fopenai%2520whisper%2520hackathon%2520social.png",
+     url: "https://lablab.ai/event/openai-whisper-hackathon",
+     start_date: ~U[2022-10-14 16:00:00Z],
+     end_date: ~U[2022-10-17 02:00:00Z]
+   },
+   %{
+     name: "SURGE × OpenClaw Hackathon",
+     description: "⏱️ 4 weeks to design and ship a working Web3 product or AI agent.  \n\n📅 February 4 to March 1, 2026 \n\n• Feb 4 – Hackathon opens.\nTeams can start building and submitting.\n• Feb 5 to March 1 – Build, test, and iterate.\n• March 1 – Final submissions due.\n\n🚨 Important eligibility reminder\nTo be eligible for prizes, teams must post their submission video on X and tag @lablabai and @Surgexyz_.\n\n🤝 Build solo or with a team.\n\n💰 $50,000 prize pool in $SURGE Token.\n\n⚠️ Self-service hackathon \nThis is a fully self-service hackathon. \nThere are no live streams, kickoff sessions, or scheduled workshops.  \nParticipants can register, build, and submit at any time before the submission deadline.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/dwckjgknb4z88x4lplcuxorq/dwckjgknb4z88x4lplcuxorq_imageLink_ge98jmsfyf0viz7v0z6htcwv.jpg",
+     url: "https://lablab.ai/event/openclaw-surge-hackathon",
+     start_date: ~U[2026-02-04 23:00:00Z],
+     end_date: ~U[2026-02-28 23:00:00Z]
+   },
+   %{
+     name: "Phi-2 Technology: 24 Hours Challenge",
+     description: "Build with Phi-2, Microsoft’s new language model powered by impressive NLP which gained recognition from over 300k users 🔥\n\n🕒 24 hours to complete the challenge\n💡 Implement any idea that uses Phi-2 in its core\n🤝 Take part alone or form a team with other participants\n🚀 The final project can be used for your portfolio, and the startup application to the Slingshot accelerator",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clrkyxgi00003357es6gnd0dm/undefined_imageLink_7681y0tlb.jpg",
+     url: "https://lablab.ai/event/phi-2-technology-24-hours-challenge",
+     start_date: ~U[2024-02-01 17:00:00Z],
+     end_date: ~U[2024-02-02 17:00:00Z]
+   },
+   %{
+     name: "Plug into AI with AI21",
+     description: "🗓️ This will be a 10-day virtual hackathon from June 28 to July 7\n💻 Access AI21 Labs' state-of-the-art language models to build innovative applications\n💡 Meet and learn from AI21 Labs and Lablab experts\n👥 Join the community and find your team\n🏆 Prizes and awards of up to $9500 API credits + $3500 cash\n⭐ Receive a certificate of completion for submission\n🐱\u200D💻 Sign up now! It's free!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcli32q5ob0000356kg7jmze8v%2Fcli32q5ob0000356kg7jmze8v_6b23k1j_imageLink.jpg",
+     url: "https://lablab.ai/event/plug-into-ai-with-ai21",
+     start_date: ~U[2023-06-28 16:00:00Z],
+     end_date: ~U[2023-07-07 09:59:00Z]
+   },
+   %{
+     name: "PrivateGPT & GPT4All Hackathon",
+     description: "🚀Have fun and build with LLMs💻 Available offline, private and secure!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclht315oz0000356m98sq0uy7%2Fclht315oz0000356m98sq0uy7_pb13myo_imageLink.jpg",
+     url: "https://lablab.ai/event/privategpt-and-gpt4all-hackathon",
+     start_date: ~U[2023-05-24 15:00:00Z],
+     end_date: ~U[2023-05-25 21:59:00Z]
+   },
+   %{
+     name: "ExecuTorch Hackathon",
+     description: "$21",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/events/Main_Banner_qualcomm_Hackathon_8--1-_z7iq12ad5fssb0hz99jczx9p.jpg",
+     url: "https://lablab.ai/event/qualcomm-x-meta-executorch-hackathon",
+     start_date: ~U[2026-06-27 20:00:00Z],
+     end_date: ~U[2026-06-28 20:00:00Z]
+   },
+   %{
+     name: "Qubic | Hack the Future",
+     description: "\n⏱️ You’ve got 48 hours - create, build, and launch!   \n\n🌟 Get direct access to Qubic, mentors, and ecosystem support.  \n\n💰 Compete for your share of $44,550 in prizes across two tracks.  \n\n🤝 Work solo or team up to design the next wave of blockchain innovation.\n\n🧑\u200D💻 Sign up and start building on one of the world’s fastest decentralized networks..",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/rzon20nieqe8aw5u349q93ir/rzon20nieqe8aw5u349q93ir_imageLink_koy2mthxig8vv6hr3tq2nl2q.jpg",
+     url: "https://lablab.ai/event/qubic-hack-the-future",
+     start_date: ~U[2025-12-05 18:00:00Z],
+     end_date: ~U[2025-12-07 19:15:00Z]
+   },
+   %{
+     name: "RAG: LLMs with your data",
+     description: "Discover RAG: Enhance LLMs with fresh, trusted data using Retrieval-Augmented Generation (RAG).\nVectara's Power: Explore Vectara, the all-in-one platform for innovative AI integration.\nGet Started: Dive into the week-long Hackathon Challenge and craft RAG-based applications.\nChoose Your Challenge: Opt for Customer Support, Legal Space, Financial Services, or Healthcare to showcase your skills.\nJoin us in taking AI innovation to new heights.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clnxevogc00003574egffqeo9/undefined_imageLink_c71zef0ssi.jpg",
+     url: "https://lablab.ai/event/rag-llms-with-your-data",
+     start_date: ~U[2023-11-03 17:00:00Z],
+     end_date: ~U[2023-11-09 20:00:00Z]
+   },
+   %{
+     name: "RAISE YOUR HACK",
+     description: "This is your chance to push boundaries, solve real-world challenges, and create impact at the official hackathon of the RAISE Summit 2025 at one of Paris's most iconic venues: Le Carrousel du Louvre.\n\n📅 July 4–8, 2025 — Collaborate online with a global community of innovators.\n\n🏛️ July 8–9, 2025 — Limited on-site access to the RAISE Summit in Paris (300 participants), exclusively for selected teams.\n\n🏆 July 9, 2025 — Winners will be announced live on stage during the RAISE Summit.\n\n🌟 Expert mentors will guide you throughout your hackathon journey.\n\n🤝 Work solo or build your dream team to create something extraordinary.\n\n💰 Compete for a share of up to $150,000 in prizes.\n\n🔒 Sign up before the Kick-Off Stream to secure your spot!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cma163h37000l3570kmqcvfec/cma163h37000l3570kmqcvfec_imageLink_ij2aoz0r0n.jpg",
+     url: "https://lablab.ai/event/raise-your-hack",
+     start_date: ~U[2025-07-04 15:00:00Z],
+     end_date: ~U[2025-07-08 15:50:00Z]
+   },
+   %{
+     name: "Reinforcement Learning OpenAI Gym",
+     description: "Are you interested in learning more about reinforcement learning in artificial intelligence, but you are not sure where to start? If this sounds like something that interests you, then this hackathon event is for you!  ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl5ihksz50000376t0be0xd44%2FNFT%2520hackaton%2520banner%2520July%252023.png",
+     url: "https://lablab.ai/event/reinforcement-learning-openai-gym",
+     start_date: ~U[2022-07-23 08:00:00Z],
+     end_date: ~U[2022-07-23 17:00:00Z]
+   },
+   %{
+     name: "Build fast Ship fast with Replit & Cursor Hackathon ",
+     description: "🚀 Unleash 10x Dev Speed with Replit & Cursor: Welcome to the Future of Coding.\n\n⚡ Turbocharge your builds, prototypes, and launches with cutting-edge AI integration.\n\n🤖 Master the power of Claude Sonnet’s LLM to streamline every step of your workflow.\n\n🌌 Team up with visionary developers and create something extraordinary together.\n\n📅 Secure your spot now and unlock the key to unstoppable efficiency!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm0xwenu0001k3b6vn8zvoveq/cm0xwenu0001k3b6vn8zvoveq_imageLink_6s29j00w29.jpg",
+     url: "https://lablab.ai/event/replit-and-cursor-hackathon",
+     start_date: ~U[2024-10-11 16:00:00Z],
+     end_date: ~U[2024-10-13 16:00:00Z]
+   },
+   %{
+     name: "Salz21 AI Hackathon",
+     description: "🗓️ This will be a 5-days of hacking and fun from 10-14 March\n💻 Build with the latest AI tools to create innovative new apps and solutions\n💡 Work with top AI professionals and learn from them\n⚒️ Create your AI app by combining different generative AI models\n🎟️ 100 Free tickets to salz21 conference in Salzburg Austria - get them below\n✅ Register now and let's get started!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcldinuo5n0000356pqzbd5iwb%2Fcldinuo5n0000356pqzbd5iwb_f203inf_imageLink.jpg",
+     url: "https://lablab.ai/event/salz21-ai-hackathon",
+     start_date: ~U[2023-03-10 17:00:00Z],
+     end_date: ~U[2023-03-14 22:59:00Z]
+   },
+   %{
+     name: "Salzburg AI Hackathon",
+     description: "This event we will focus on GPT-3 functions such as Files, Answers & Fine-tuning",
+     location: "Online",
+     image: "https://imagedelivery.net/K11gkZF3xaVyYzFESMdWIQ/62a12ed0-8f07-470e-f55e-d77b22247f00/full",
+     url: "https://lablab.ai/event/salzburg-ai-hack",
+     start_date: ~U[2022-04-22 09:40:59Z],
+     end_date: ~U[2022-04-23 09:40:59Z]
+   },
+   %{
+     name: "SeamlessM4T 24-hours Hackathon",
+     description: "SeamlessM4T is a breakthrough multilingual AI model 😮 enabling real-time speech-to-speech translation across 100+ languages. This allows for seamless communication 👥 between speakers of different languages.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clm0rplfh0000356qz1lvzwq9/clm0rplfh0000356qz1lvzwq9_imageLink_m41i0f19l4.jpg",
+     url: "https://lablab.ai/event/seamlessm4t-24-hours-hackathon",
+     start_date: ~U[2023-09-07 16:00:00Z],
+     end_date: ~U[2023-09-08 16:00:00Z]
+   },
+   %{
+     name: "Semantic Search AI Hackathon",
+     description: "🗓️ This will be a 7-day virtual hackathon from 16-23 December \n💻 Build AI application with the latest large language model-powered technology by Cohere\n💡 Get the chance to work with the best AI professionals in the industry and learn from them\n✔️Entry level = 0. You’ve just started with AI? Are you an experienced Data Scientist? Or maybe you are a Designer or Business Developer? Join us! We need your domain knowledge!\n🐱\u200D💻 Register now and let's get started! It’s free!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclb6icbc80000356h55tly7kr%2Fclb6icbc80000356h55tly7kr_fm13hh1_imageLink.jpg",
+     url: "https://lablab.ai/event/semantic-search-hackathon",
+     start_date: ~U[2022-12-16 18:15:00Z],
+     end_date: ~U[2022-12-24 22:59:00Z]
+   },
+   %{
+     name: "Stable Diffusion 2.0 AI Hackathon",
+     description: "🔥 7 days Hackathon\n🦾 The first Stable Diffusion XL hackathon\n✨ Even more models available! Use GPT-4, ChatGPT, Whisper, Cohere and AI21 and more!\n🛠️ Incorporate Stable Diffusion 2.0 and Vercel software to your projects\n🚀 Create your complete product MVP\n🤝 Find co-founders and mentors on the lablab.ai platform",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclfmgte7a0000356qrpfk3isj%2Fclfmgte7a0000356qrpfk3isj_pg13quz_imageLink.jpg",
+     url: "https://lablab.ai/event/stable-diffusion-ai-hackathon",
+     start_date: ~U[2023-04-14 16:00:00Z],
+     end_date: ~U[2023-04-21 21:59:00Z]
+   },
+   %{
+     name: "Stable Diffusion Hackathon",
+     description: "A new text-to-image model called Stable Diffusion is set to change the game once again ⚡️. Stable Diffusion is a latent diffusion model that is capable of generating detailed images from text descriptions. It can also be used for tasks such as inpainting, outpainting, and image-to-image translations. Join us for a epic stable diffusion makers event 11-13 November 👊",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl9mxudd80000356hrvk2woo1%2Fcl9mxudd80000356hrvk2woo1_1v03hxw_imageLink.jpg",
+     url: "https://lablab.ai/event/stable-diffusion-hackathon",
+     start_date: ~U[2022-11-11 17:00:00Z],
+     end_date: ~U[2022-11-14 09:00:00Z]
+   },
+   %{
+     name: "Stable LM 3B 24-hours Hackathon",
+     description: "Stable LM 3B is a revolutionary language model with 3 billion parameters that brings high-performance AI to smart devices. Test the model yourself in the listed challenge categories!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clo2nt9r70000356xuxwoogln/undefined_imageLink_oe5o71xrp.jpg",
+     url: "https://lablab.ai/event/stable-lm-3b-24-hours-hackathon",
+     start_date: ~U[2023-11-09 17:00:00Z],
+     end_date: ~U[2023-11-10 17:00:00Z]
+   },
+   %{
+     name: "Stable Video 24-hours Hackathon",
+     description: "The Future of Video Creation with Stable Video!\n🚀 Creative Possibilities: Stable Video empowers you to transform text and images into dynamic video content.\n⏱️ Fast and Efficient: Generate videos in minutes, not hours.\n🌐 Versatile Applications: Explore various fields, from entertainment to marketing.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clpmf6lc0000c357fadqpnly3/undefined_imageLink_ad5dg0vjq.jpg",
+     url: "https://lablab.ai/event/stable-video-24-hours-hackathon",
+     start_date: ~U[2023-12-21 17:00:00Z],
+     end_date: ~U[2023-12-22 17:00:00Z]
+   },
+   %{
+     name: "StableCode 24-hours Hackathon",
+     description: "Unveiling StableCode: The pinnacle of coding aid by Stability AI! Seamlessly integrate StableCode for efficient, smarter coding.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cllkrcthj0000356zlp5edowx/cllkrcthj0000356zlp5edowx_imageLink_f721wev.jpg",
+     url: "https://lablab.ai/event/stablecode-24-hours-hackathon",
+     start_date: ~U[2023-08-24 16:00:00Z],
+     end_date: ~U[2023-08-25 16:00:00Z]
+   },
+   %{
+     name: "Startup AI Tools Set Online Hackathon, Deep Learning Labs",
+     description: "Working in a startup? Need to automate your life and make your team go 140% faster? You can change your life in less than 48 Hours. ",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl4cwn26s00000bthm1193e7k%2Fstartup%2520ai%2520hackathon.png",
+     url: "https://lablab.ai/event/startup-ai-tools-set-1",
+     start_date: ~U[2022-07-08 08:00:00Z],
+     end_date: ~U[2022-07-10 16:00:00Z]
+   },
+   %{
+     name: "Reasoning with o1",
+     description: "🕒 7 days to be among the first to experiment and build with OpenAI o1\n\n💡 Build innovative applications utilizing o1's advanced features\n\n🤝 Compete solo or collaborate with teammates\n\n🚀 Dive into a 1-week virtual coding marathon, connecting with industry leaders\n\n🏆 A chance to join the Lablab NEXT acceleration program and fast-track your innovation",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cm10tscso0007356vztoxtsrn/cm10tscso0007356vztoxtsrn_imageLink_gn1als0cv2.jpg",
+     url: "https://lablab.ai/event/strawberry-reasoning-with-o1",
+     start_date: ~U[2024-10-04 16:00:00Z],
+     end_date: ~U[2024-10-11 16:00:00Z]
+   },
+   %{
+     name: "Sustainable AI Hackathon (Swiss AI)",
+     description: "Are you ready to put your coding skills to the test for the global cause?",
+     location: "Online",
+     image: "https://imagedelivery.net/K11gkZF3xaVyYzFESMdWIQ/974d2a80-c589-46a7-cdc3-34562c4a1c00/full",
+     url: "https://lablab.ai/event/swissai",
+     start_date: ~U[2022-06-10 09:40:59Z],
+     end_date: ~U[2022-06-12 15:45:00Z]
+   },
+   %{
+     name: " Transforming Enterprise Through AI",
+     description: "📅 May 11–19, 2026\n• May 11 – 19: Online Build Phase. \n• May 18 (Hybrid Build Day – Online & Onsite)  \n• May 19 (Demos & Awards – Online & Onsite) \n\n🌍 Hybrid event. Join online from anywhere or build onsite at the venue.\n\n🏆 Winners will be announced live on stage at the AI & Big Data Expo North America on May 19\n\n📍 On-site Venue (May 18–19): \nSan Jose McEnery Convention Center, CA, USA \n\n🤝 Join solo or with a team.  \n\n🎟 FREE AI & Big Data Expo North America ticket included for participants that are able to join the on-site phase. \n\n🏆Compete for a $10,000 prize pool\n\n🧑\u200D💻 Apply now to design, prototype, and showcase enterprise-ready innovation.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/mo83rq6y28xa14ceg51kzzht/mo83rq6y28xa14ceg51kzzht_imageLink_nqqmkvvr447fr6qjsst54ctw.jpg",
+     url: "https://lablab.ai/event/techex-intelligent-enterprise-solutions-hackathon",
+     start_date: ~U[2026-05-11 17:00:00Z],
+     end_date: ~U[2026-05-19 01:10:00Z]
+   },
+   %{
+     name: "Transformers AI Online Hackathon",
+     description: "Transformers are context-learning neural networks. They learn by tracking relationships in sequential data, for example, words in sentences. You might know them as some of the best AI models in the market - OpenAI’s GPT-3 and Cohere\n\nIn our 3-day Hackathon, organized along with the Swiss AI Association, you’ll use context-learning neural networks to build solutions with people from all around the globe and have an opportunity to pitch your AI Prototypes worldwide. Jump in to learn more about harnessing the power of Transformers!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl8sz03sx0000356h9sde8b7j%2Fcl8sz03sx0000356h9sde8b7j_ha03h1y_imageLink.jpg",
+     url: "https://lablab.ai/event/transforming-with-transformers",
+     start_date: ~U[2022-10-28 14:00:00Z],
+     end_date: ~U[2022-10-31 08:00:00Z]
+   },
+   %{
+     name: "TruEra Challenge: Build LLM Applications",
+     description: "Revolutionize AI with TruLens by TruEra - Your Gateway to Building Better LLM Applications!\n\nBuild with TruLens, LLMs development and explainability tool by TruEra\nLeverage AI observability for dynamic app enhancement\nCollaborate with like-minded individuals! For the Hackathon you can work in a team from 1 to 6 members.\n\nIn this Hackathon, you can also join with a project from the TruLens 48-Hours Hackathon, provided you adhere to the following rules. Consider it a warm-up, and explore the world of technology by participating in the TruLens 48-Hours Hackathon.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clo7314tx0000356s9cz19w41/undefined_imageLink_jh3crl0x40.jpg",
+     url: "https://lablab.ai/event/truera-challenge-build-llm-applications",
+     start_date: ~U[2023-12-01 17:00:00Z],
+     end_date: ~U[2023-12-11 17:00:00Z]
+   },
+   %{
+     name: "TruLens Hackathon",
+     description: "TruLens provides a robust suite of tools for neural network development and monitoring, including LLMs. You can utilize TruLens-Eval for evaluation and TruLens-Explain for deep learning explainability, independently. Explore these valuable tools while taking on the challenge!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clo2xnjm6000u356x799miju5/undefined_imageLink_soimy0owp.jpg",
+     url: "https://lablab.ai/event/trulens-hackathon",
+     start_date: ~U[2023-11-16 20:00:00Z],
+     end_date: ~U[2023-11-18 20:00:00Z]
+   },
+   %{
+     name: "Twelve Labs Weekend Hackathon",
+     description: "Unlock the future of video understanding with Twelve Labs!\n\n🕒 48 hours to complete the challenge\n💡 Create revolutionary sport apps with Twelve Labs' text-to-video synthesis!\n🤝 Take part alone or form a team with other participants\n🚀 The final project can be used for your portfolio, and the startup application to the Slingshot accelerator\n🏆 Win up to 50 hours of Twelve Labs video credits to develop further!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clur1n87600163b6q1gkfludi/undefined_imageLink_c7b960s5l.jpg",
+     url: "https://lablab.ai/event/twelve-labs-weekend-hackathon",
+     start_date: ~U[2024-05-03 16:00:00Z],
+     end_date: ~U[2024-05-05 16:00:00Z]
+   },
+   %{
+     name: "Unhallucinate Challenge: 24 Hours Fight",
+     description: "Build a flawless RAG based app w/o any hallucinations by using the newest Vectara’s HHEM model and win up to $1500!\n\n🕒 24 hours to complete the challenge\n💡 Implement RAG based app by utilizing HHEM model \n🤝 Take part alone or form a team with other participants\n🚀 3 finalists will share the Vectara’s credits worth of $4000",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/cls97my24000c357e6s8gxpxf/undefined_imageLink_gi4si0npy.jpg",
+     url: "https://lablab.ai/event/unhallucinate-challenge-24-hours-fight",
+     start_date: ~U[2024-02-12 17:00:00Z],
+     end_date: ~U[2024-02-13 17:00:00Z]
+   },
+   %{
+     name: "WebGPU Hackathon",
+     description: "🔴 An advanced-level hackathon\n⏱ The one-day challenge\n🧑\u200D💻 Build with the next-gen technology\n🏁 Complete your app by the end!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fclkwdo4ky0000356xcmewk8dh%2Fclkwdo4ky0000356xcmewk8dh_0a13xbx_imageLink.jpg",
+     url: "https://lablab.ai/event/webgpu-hackathon",
+     start_date: ~U[2023-08-10 16:00:00Z],
+     end_date: ~U[2023-08-11 16:00:00Z]
+   },
+   %{
+     name: "WeWork GPT-3 & Codex",
+     description: "This event we will focus on GPT-3 functions such as Files, Answers & Fine-tuning",
+     location: "Online",
+     image: "https://imagedelivery.net/K11gkZF3xaVyYzFESMdWIQ/a1a07e71-91b9-4246-2b1c-b770a1ffe000/full",
+     url: "https://lablab.ai/event/wework-gpt3-codex",
+     start_date: ~U[2022-05-20 09:40:59Z],
+     end_date: ~U[2022-05-05 09:40:59Z]
+   },
+   %{
+     name: "Wolves Summit AI Hackathon",
+     description: "It is our pleasure to welcome you to the Wolves Summit AI Hackathon. In partnership with Wolves Summit, we are giving the lablab.ai community an opportunity to develop an application to fight for a great cause - Saving Planet Earth. This is a preliminary event of the Wolves Summit conference that will take place in Vienna, Austria on 20-21 October 2022. Current world events show us that actions towards environmental safety are necessary. Do you have what it takes to protect the planet using Artificial Intelligence? Join us and innovate to build a better future for everyone!",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images%2Fevents%2Fcl7ogwj0x00002a693j689qap%2Fwolvessummit.png",
+     url: "https://lablab.ai/event/wolves-summit-ai-hackathon",
+     start_date: ~U[2022-10-06 16:00:00Z],
+     end_date: ~U[2022-10-09 07:59:00Z]
+   },
+   %{
+     name: "Yi 200k context window LLMs Hackathon",
+     description: "Explore the power of Yi series models in the Yi-6B and Yi-34B variations, featuring a context window of 200K for innovative language-based applications.",
+     location: "Online",
+     image: "https://storage.googleapis.com/lablab-static-eu/images/events/clozlvg420000356qdubx5xuz/undefined_imageLink_g53vg0kj1.jpg",
+     url: "https://lablab.ai/event/yi-llms-24-hours-hackathon",
+     start_date: ~U[2023-11-30 17:00:00Z],
+     end_date: ~U[2023-12-01 17:00:00Z]
+   }
+ ]}

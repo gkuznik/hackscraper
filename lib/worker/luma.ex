@@ -59,7 +59,7 @@ defmodule HackScraper.Worker.Luma.AddInfo do
   def scrape(%{"event" => %{"url" => url} = event}) do
     Logger.info("Running Luma AddInfo scraper: #{url}...")
 
-    html = get!(event.url).body |> Floki.parse_document!()
+    html = get!(url).body |> Floki.parse_document!()
 
     json_ld =
       html
