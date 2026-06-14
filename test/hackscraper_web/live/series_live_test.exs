@@ -99,6 +99,24 @@ defmodule HackScraperWeb.SeriesLiveTest do
 
       assert html =~ "Series: "
       assert html =~ series.name
+
+      assert html =~ ~s(<meta property="og:title" content="#{series.name}")
+      assert html =~ ~s(<meta property="og:description" content="#{series.description}")
+
+      assert html =~
+               ~s(<meta property="og:image" content="#{HackScraperWeb.Endpoint.url()}/#{series.image}")
+
+      assert html =~
+               ~s(<meta property="og:url" content="#{HackScraperWeb.Endpoint.url()}/series/#{series.id}")
+
+      assert html =~ ~s(<meta property="og:type" content="website")
+      assert html =~ ~s(<meta name="twitter:title" content="#{series.name}")
+      assert html =~ ~s(<meta name="twitter:description" content="#{series.description}")
+
+      assert html =~
+               ~s(<meta name="twitter:image" content="#{HackScraperWeb.Endpoint.url()}/#{series.image}")
+
+      assert html =~ ~s(<meta name="twitter:card" content="summary_large_image")
     end
 
     test "updates series within modal", %{conn: conn, series: series} do
