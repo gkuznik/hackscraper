@@ -43,8 +43,9 @@
   </:action>
   <:action :let={{id, suggestion}}>
     <.link
+      class="link"
       phx-click={JS.push("delete", value: %{id: suggestion.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm={"Delete suggestion '#{suggestion.name}'?"}
     >
       Delete
     </.link>

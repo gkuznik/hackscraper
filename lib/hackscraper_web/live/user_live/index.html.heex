@@ -42,8 +42,9 @@
   <:action :let={{id, user}}>
     <.link
       :if={@current_user.role >= user.role}
+      class="link"
       phx-click={JS.push("delete", value: %{id: user.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm={"Delete user '#{user.name}'?"}
     >
       Delete
     </.link>

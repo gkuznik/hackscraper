@@ -45,8 +45,9 @@
   </:action>
   <:action :let={{id, scraper}}>
     <.link
+      class="link"
       phx-click={JS.push("delete", value: %{id: scraper.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm={"Delete scraper '#{scraper.name}'?"}
     >
       Delete
     </.link>

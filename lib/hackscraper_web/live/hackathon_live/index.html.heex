@@ -47,8 +47,9 @@
   </:action>
   <:action :let={{id, hackathon}} :if={@is_editor}>
     <.link
+      class="link"
       phx-click={JS.push("delete", value: %{id: hackathon.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm={"Delete hackathon '#{hackathon.name}'?"}
     >
       Delete
     </.link>

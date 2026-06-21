@@ -29,7 +29,8 @@ table .text {
 }
 
 .link {
-    @apply text-blue-600 hover:text-purple-600 hover:underline;
+    @apply hover:underline;
+    color: revert;
 }
 
 .phx-drop-target-active {
