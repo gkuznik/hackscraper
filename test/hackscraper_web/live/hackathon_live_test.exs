@@ -304,4 +304,81 @@ defmodule HackScraperWeb.HackathonLiveTest do
       assert html =~ "can&#39;t be blank"
     end
   end
+
+  describe "Scraper Autocomplete" do
+    test "automatically scrapes URL and offers autofill", %{conn: conn} do
+      # Mock HTML response for the URL
+      mock_html = """
+      <html>
+        <head>
+          <title>Super Hackathon 2026 - The Tech Event</title>
+          <meta name="description" content="A coding marathon for developers.">
+          <meta property="og:image" content="https://example.com/logo.png">
+        </head>
+        <body>
+          <p>Join us on 2026-07-20!</p>
+        </body>
+      </html>
+      """
+
+      Req.Test.stub(HackScraper, fn conn ->
+        Req.Test.html(conn, mock_html)
+      end)
+
+      {:ok, new_live, _html} =
+        log_in_user(conn, user_fixture(%{role: :editor})) |> live(~p"/hackathons/new")
+
+      # Fill in URL and trigger validation
+      assert new_live
+             |> form("#hackathon-form", hackathon: %{url: "https://example.com/super-hack"})
+             |> render_change()
+
+      # Wait for scraping to complete (up to 5 seconds)
+      html =
+        eventually(fn ->
+          html = render(new_live)
+
+          if html =~ "Scraping URL information..." do
+            Process.sleep(100)
+            :retry
+          else
+            html
+          end
+        end)
+
+      assert html =~ "We found details for this hackathon"
+      assert html =~ "Super Hackathon 2026"
+      assert html =~ "A coding marathon for developers."
+      assert html =~ "https://example.com/logo.png"
+
+      # Click the Autofill button
+      assert new_live
+             |> element("button", "Autofill")
+             |> render_click()
+
+      # Now check if the form inputs are updated with the scraped values
+      assert new_live |> element("input[name=\"hackathon[name]\"]") |> render() =~
+               "value=\"Super Hackathon 2026\""
+
+      assert new_live |> element("textarea[name=\"hackathon[description]\"]") |> render() =~
+               "A coding marathon for developers."
+
+      assert new_live |> element("input[name=\"hackathon[image]\"]") |> render() =~
+               "value=\"https://example.com/logo.png\""
+
+      # The date hint box should also be visible
+      assert render(new_live) =~ "Date information found:"
+      assert render(new_live) =~ "2026-07-20"
+    end
+  end
+
+  defp eventually(fun, attempts \\ 50) do
+    case fun.() do
+      :retry when attempts > 0 ->
+        eventually(fun, attempts - 1)
+
+      res ->
+        res
+    end
+  end
 end
