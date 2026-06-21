@@ -8,7 +8,7 @@ defmodule HackScraper.Worker.Common do
   def oban_opts, do: [queue: :scraper, priority: 2, max_attempts: 3]
 
   defp user_agent do
-    host = Application.get_env(:hackscraper, HackScraperWeb.Endpoint)[:url][:host]
+    host = HackScraperWeb.Endpoint.host()
     version = Application.spec(:hackscraper, :vsn)
 
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; HackScraper/#{version}; #{host}) Chrome/134.0.0.0 Safari/537.3"

@@ -20,7 +20,8 @@ config :hackscraper, Oban,
     {Oban.Plugins.Pruner, max_age: 365 * one_day, interval: one_day * 1000},
     {Oban.Plugins.Cron,
      crontab: [
-       {"@weekly", HackScraper.Worker.Scheduler}
+       {"@weekly", HackScraper.Worker.Scheduler},
+       {"@daily", HackScraper.Worker.UploadCleaner}
      ]}
   ],
   repo: HackScraper.Repo

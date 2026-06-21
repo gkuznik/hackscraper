@@ -133,7 +133,8 @@ defmodule HackScraperWeb.HackathonLive.FormComponent do
                                                   %{uuid: uuid, client_name: client_name} ->
         filename = "#{uuid}#{Path.extname(client_name)}"
         dest = Path.join(Application.fetch_env!(:hackscraper, :uploads_dir), filename)
-        File.rename!(path, dest)
+        File.cp!(path, dest)
+        File.rm!(path)
         {:ok, ~p"/uploads/#{filename}"}
       end)
 

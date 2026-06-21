@@ -7,6 +7,8 @@ defmodule HackScraper.Application do
 
   @impl true
   def start(_type, _args) do
+    File.mkdir_p!(Application.fetch_env!(:hackscraper, :uploads_dir))
+
     :ok =
       :telemetry.attach(
         "oban-scraper-failure-handler",
