@@ -130,12 +130,17 @@ if config_env() == :prod do
     relay: System.get_env("SMTP_HOST"),
     username: System.get_env("SMTP_USER"),
     password: System.get_env("SMTP_PASSWORD"),
-    ssl: false,
-    tls: :always,
     auth: :always,
+    ssl: true,
+    tls: :never,
     port: 465,
-    retries: 0,
-    no_mx_lookups: true
+    retries: 1,
+    no_mx_lookups: true,
+    sockopts: [
+      verify: :verify_peer,
+      cacerts: :public_key.cacerts_get(),
+      depth: 3
+    ]
 
   config :swoosh,
     api_client: Swoosh.ApiClient.Finch,
